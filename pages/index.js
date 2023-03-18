@@ -9,7 +9,7 @@ export default function Home() {
     <main>
       <Form />
       {/* Temporary solution to show movies under the form. 
-      Will be placed else where in upcoming user stories. */}
+      Will be placed elsewhere in upcoming user stories. */}
       <section>
         {movies.map((movie) => {
           return (
