@@ -13,20 +13,6 @@ export default function Form() {
         <input type="text" name="search" id="search" required />
         <button type="submit">Submit</button>
       </form>
-      <section>
-        {movies.map((movie) => {
-          return (
-            <div key={movie.id}>
-              <Image
-                src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                alt={movie.title}
-                width={130}
-                height={180}
-              />
-            </div>
-          );
-        })}
-      </section>
     </>
   );
 }
