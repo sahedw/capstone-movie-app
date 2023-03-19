@@ -9,7 +9,7 @@ export default function Home() {
     <main>
       <Form onSubmit={handleFormSubmit} />
       {/* Temporary solution to show movies under the form. 
-      Will be placed elsewhere in upcoming user stories. */}
+      Will be placed elsewhere in upcoming user stories.. */}
       <section>
         {movies.map((movie) => {
           return (
