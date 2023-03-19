@@ -17,16 +17,24 @@ export default function Form() {
           throw new Error("Something went wrong");
         }
       } catch (error) {
-        console.log(error);
+        console.log(`Error: ${error.message}`);
       }
     }
     fetchData();
   }, [url]);
 
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    setSearch(data.search);
+  }
+
   return (
-    <form>
+    <form onSubmit={handleFormSubmit}>
       <label htmlFor="search">Search a movie:</label>
       <input type="text" name="search" id="search" required />
+      <button type="submit">Submit</button>
     </form>
   );
 }
