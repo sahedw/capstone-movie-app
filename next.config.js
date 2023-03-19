@@ -12,7 +12,6 @@ const nextConfig = {
       //   hostname: 'images.unsplash.com'
       // },
     ],
-    domains: ["image.tmdb.org"],
   },
 };
 

@@ -1,10 +1,10 @@
-import Form from "../components/Form";
+import Home from "../pages";
 import { render, screen } from "@testing-library/react";
-import { useContext } from "react";
-import { DataContext } from "../pages/_app";
 
 test("test", () => {
-  render(<Form />);
-  const element = screen.getByLabelText("Search a movie:");
+  render(<Home />);
+  const element = screen.getByRole("heading", {
+    name: /🔱/,
+  });
   expect(element).toBeInTheDocument();
 });
