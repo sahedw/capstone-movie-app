@@ -10,20 +10,6 @@ export default function Home() {
       <Form onSubmit={handleFormSubmit} />
       {/* Temporary solution to show movies under the form. 
       Will be placed elsewhere in upcoming user stories. */}
-      <section>
-        {movies.map((movie) => {
-          return (
-            <div key={movie.id}>
-              <Image
-                src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                alt={movie.title}
-                width={130}
-                height={180}
-              />
-            </div>
-          );
-        })}
-      </section>
     </main>
   );
 }
