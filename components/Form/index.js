@@ -1,32 +1,14 @@
 import React from "react";
 import Image from "next/image";
-import { useContext } from "react";
-import { DataContext } from "../../pages/_app";
 
-export default function Form() {
-  const { handleFormSubmit, movies } = useContext(DataContext);
-
+export default function Form({ onSubmit }) {
   return (
     <>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={onSubmit}>
         <label htmlFor="search">Search a movie:</label>
         <input type="text" name="search" id="search" required />
         <button type="submit">Submit</button>
       </form>
-      <section>
-        {movies.map((movie) => {
-          return (
-            <div key={movie.id}>
-              <Image
-                src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                alt={movie.title}
-                width={130}
-                height={180}
-              />
-            </div>
-          );
-        })}
-      </section>
     </>
   );
 }
