@@ -1,10 +1,12 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-const router = useRouter();
-
 export default function Form({ onSubmit }) {
-  function handleChangePage() {}
+  const router = useRouter();
+
+  function handleChangePage() {
+    router.push("/search-results");
+  }
   return (
     <>
       <form onSubmit={onSubmit}>
