@@ -9,14 +9,12 @@ export default function Form({ onSubmit }) {
   }
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="search">Search a movie:</label>
-        <input type="text" name="search" id="search" required />
-        <button type="submit" onClick={handleChangePage}>
-          Submit
-        </button>
-      </form>
-    </>
+    <form onSubmit={onSubmit}>
+      <label htmlFor="search">Search a movie:</label>
+      <input type="text" name="search" id="search" required />
+      <button type="submit" onClick={handleChangePage}>
+        Submit
+      </button>
+    </form>
   );
 }
