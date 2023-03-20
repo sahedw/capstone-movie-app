@@ -42,6 +42,16 @@ export default function Movie() {
 
             <section>
               <h3>{movie.title}</h3>
+              {movie.genre_ids[1] ? (
+                <>
+                  <p>
+                    {findGenre(movie.genre_ids[0]).name},{" "}
+                    {findGenre(movie.genre_ids[1]).name}
+                  </p>
+                </>
+              ) : (
+                <p>{findGenre(movie.genre_ids[0]).name}</p>
+              )}
             </section>
           </StyledSection>
         );
