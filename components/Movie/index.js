@@ -21,6 +21,7 @@ const StyledSection = styled.section`
 
 export default function Movie() {
   const { movies } = useContext(DataContext);
+
   return (
     <>
       <section>
