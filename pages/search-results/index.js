@@ -9,7 +9,9 @@ export default function SearchResultsPage() {
       <section>
         <h2>Your search results:</h2>
       </section>
-      <Movie />
+      <section>
+        <Movie />
+      </section>
     </>
   );
 }
