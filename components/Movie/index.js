@@ -4,6 +4,7 @@ import { DataContext } from "../../pages/_app";
 import Image from "next/image";
 import styled from "styled-components";
 import genres from "../../pages/api/genres";
+import { useState, useEffect } from "react";
 
 const StyledDiv = styled.div`
   height: 180px;
@@ -17,7 +18,7 @@ const StyledSection = styled.section`
 `;
 
 export default function Movie() {
-  const { movies, handleRuntimeFetch, runtime } = useContext(DataContext);
+  const { movies, runtime, handleRuntimeFetch } = useContext(DataContext);
 
   function findGenre(id) {
     const targetGenre = genres.find((genre) => genre.id === id);
@@ -43,6 +44,7 @@ export default function Movie() {
   return (
     <>
       {movies.map((movie) => {
+        handleRuntimeFetch(movie.id);
         return (
           <StyledSection key={movie.id}>
             <StyledDiv>

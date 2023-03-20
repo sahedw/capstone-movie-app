@@ -10,7 +10,9 @@ export default function App({ Component, pageProps }) {
   const [movies, setMovies] = useLocalStorageState("newMovies", {
     defaultValue: [],
   });
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useLocalStorageState("newSearch", {
+    defaultValue: "",
+  });
 
   const url = `https://api.themoviedb.org/3/search/movie?api_key=657b6c5e2a2ab2cafa267e54252ca1a7&language=eng-US&query=${search}`;
 
@@ -34,18 +36,19 @@ export default function App({ Component, pageProps }) {
   const [runtime, setRuntime] = useState("");
   const [movieId, setMovieId] = useState("");
 
+  const runtimeUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=657b6c5e2a2ab2cafa267e54252ca1a7&language=eng-US`;
+
   function handleRuntimeFetch(id) {
     setMovieId(id);
   }
 
-  const urlId = `https://api.themoviedb.org/3/movie/${movieId}?api_key=657b6c5e2a2ab2cafa267e54252ca1a7&language=eng-US`;
-
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(urlId);
+        const response = await fetch(runtimeUrl);
         if (response.ok) {
           const data = await response.json();
+          console.log(data);
           setRuntime(data.runtime);
         } else {
           throw new Error("Something went wrong");
@@ -55,7 +58,9 @@ export default function App({ Component, pageProps }) {
       }
     }
     fetchData();
-  }, [urlId]);
+  }, [runtimeUrl]);
+
+  console.log(runtime);
 
   function handleFormSubmit(event) {
     event.preventDefault();
@@ -73,7 +78,6 @@ export default function App({ Component, pageProps }) {
       <DataContext.Provider
         value={{
           handleRuntimeFetch,
-          setMovieId,
           runtime,
           DataContext,
           handleFormSubmit,
