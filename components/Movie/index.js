@@ -24,22 +24,20 @@ export default function Movie() {
 
   return (
     <>
-      <section>
-        {movies.map((movie) => {
-          return (
-            <StyledSection key={movie.id}>
-              <StyledDiv>
-                <Image
-                  src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                  alt={movie.title}
-                  width={130}
-                  height={180}
-                />
-              </StyledDiv>
-            </StyledSection>
-          );
-        })}
-      </section>
+      {movies.map((movie) => {
+        return (
+          <StyledSection key={movie.id}>
+            <StyledDiv>
+              <Image
+                src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                alt={movie.title}
+                width={130}
+                height={180}
+              />
+            </StyledDiv>
+          </StyledSection>
+        );
+      })}
     </>
   );
 }
