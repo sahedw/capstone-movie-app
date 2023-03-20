@@ -17,7 +17,7 @@ const StyledSection = styled.section`
 `;
 
 export default function Movie() {
-  const { movies } = useContext(DataContext);
+  const { movies, handleRuntimeFetch, runtime } = useContext(DataContext);
 
   function findGenre(id) {
     const targetGenre = genres.find((genre) => genre.id === id);
@@ -58,8 +58,8 @@ export default function Movie() {
               <h5>
                 {movie.title} - {movie.release_date.slice(0, 4)}
               </h5>
-
-              {handleRenderGenres(movie)}
+              <p>{handleRenderGenres(movie)}</p>
+              <p>{runtime}</p>
             </section>
           </StyledSection>
         );

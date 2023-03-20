@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
   });
   const [search, setSearch] = useState("");
 
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=657b6c5e2a2ab2cafa267e54252ca1a7&language=de-GER&query=${search}`;
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=657b6c5e2a2ab2cafa267e54252ca1a7&language=eng-US&query=${search}`;
 
   useEffect(() => {
     async function fetchData() {
@@ -31,6 +31,32 @@ export default function App({ Component, pageProps }) {
     fetchData();
   }, [url]);
 
+  const [runtime, setRuntime] = useState("");
+  const [movieId, setMovieId] = useState("");
+
+  function handleRuntimeFetch(id) {
+    setMovieId(id);
+  }
+
+  const urlId = `https://api.themoviedb.org/3/movie/${movieId}?api_key=657b6c5e2a2ab2cafa267e54252ca1a7&language=eng-US`;
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(urlId);
+        if (response.ok) {
+          const data = await response.json();
+          setRuntime(data.runtime);
+        } else {
+          throw new Error("Something went wrong");
+        }
+      } catch (error) {
+        console.log(`Error: ${error.message}`);
+      }
+    }
+    fetchData();
+  }, [urlId]);
+
   function handleFormSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -44,7 +70,16 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>Saheds Movie App</title>
       </Head>
-      <DataContext.Provider value={{ DataContext, handleFormSubmit, movies }}>
+      <DataContext.Provider
+        value={{
+          handleRuntimeFetch,
+          setMovieId,
+          runtime,
+          DataContext,
+          handleFormSubmit,
+          movies,
+        }}
+      >
         <Component {...pageProps} />
       </DataContext.Provider>
     </>
