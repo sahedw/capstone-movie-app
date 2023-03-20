@@ -10,9 +10,6 @@ const StyledDiv = styled.div`
   width: 130px;
 `;
 
-/* The lightgray background is temporarily used for display purposes.
-Will be changed in the future. */
-
 const StyledSection = styled.section`
   display: flex;
   justify-content: center;
@@ -27,8 +24,9 @@ export default function Movie() {
     return targetGenre;
   }
 
+  if (!movies) return <h1>Loading...</h1>;
+
   const originalMovie = movies[0].release_date;
-  console.log(originalMovie.slice(0, 4));
 
   return (
     <>
@@ -48,6 +46,8 @@ export default function Movie() {
               <h5>
                 {movie.title} - {originalMovie.slice(0, 4)}
               </h5>
+              {!movie.genre_ids[0] ? <p>Missing, Genre</p> : null}
+
               {movie.genre_ids[1] ? (
                 <>
                   <p>
@@ -55,9 +55,7 @@ export default function Movie() {
                     {findGenre(movie.genre_ids[1]).name}
                   </p>
                 </>
-              ) : (
-                <p>{findGenre(movie.genre_ids[0]).name}</p>
-              )}
+              ) : null}
             </section>
           </StyledSection>
         );
