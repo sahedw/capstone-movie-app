@@ -45,7 +45,9 @@ export default function Movie() {
             </StyledDiv>
 
             <section>
-              <h3>{movie.title}</h3>
+              <h5>
+                {movie.title} - {originalMovie.slice(0, 4)}
+              </h5>
               {movie.genre_ids[1] ? (
                 <>
                   <p>
