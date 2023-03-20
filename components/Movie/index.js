@@ -24,6 +24,20 @@ export default function Movie() {
     return targetGenre;
   }
 
+  function handleRenderGenres(movie) {
+    if (movie.genre_ids[1]) {
+      return (
+        findGenre(movie.genre_ids[0]).name +
+        ", " +
+        findGenre(movie.genre_ids[1]).name
+      );
+    } else if (movie.genre_ids[0]) {
+      return findGenre(movie.genre_ids[0]).name;
+    } else {
+      return "Missing, Genre";
+    }
+  }
+
   if (!movies) return <h1>Loading...</h1>;
 
   return (
@@ -44,16 +58,8 @@ export default function Movie() {
               <h5>
                 {movie.title} - {movie.release_date.slice(0, 4)}
               </h5>
-              {!movie.genre_ids[0] ? <p>Missing, Genre</p> : null}
 
-              {movie.genre_ids[1] ? (
-                <>
-                  <p>
-                    {findGenre(movie.genre_ids[0]).name},{" "}
-                    {findGenre(movie.genre_ids[1]).name}
-                  </p>
-                </>
-              ) : null}
+              {handleRenderGenres(movie)}
             </section>
           </StyledSection>
         );
