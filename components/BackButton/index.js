@@ -6,9 +6,5 @@ export default function BackButton() {
   function handleChangePage() {
     router.push("/");
   }
-  return (
-    <section>
-      <button onClick={handleChangePage}>Back to Search</button>
-    </section>
-  );
+  return <button onClick={handleChangePage}>Back to Search</button>;
 }
