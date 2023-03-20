@@ -6,12 +6,8 @@ export default function SearchResultsPage() {
   return (
     <>
       <BackButton />
-      <section>
-        <h2>Your search results:</h2>
-      </section>
-      <section>
-        <Movie />
-      </section>
+      <h2>Your search results:</h2>
+      <Movie />
     </>
   );
 }
