@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { DataContext } from "../../pages/_app";
 import Image from "next/image";
 import styled from "styled-components";
+import genres from "../../pages/api/genres";
 
 const StyledDiv = styled.div`
   height: 180px;
@@ -25,6 +26,9 @@ export default function Movie() {
     const targetGenre = genres.find((genre) => genre.id === id);
     return targetGenre;
   }
+
+  const originalMovie = movies[0].release_date;
+  console.log(originalMovie.slice(0, 4));
 
   return (
     <>
