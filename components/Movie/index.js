@@ -10,6 +10,9 @@ const StyledDiv = styled.div`
   background-color: lightgray;
 `;
 
+/* The lightgray background is temporarily used for display purposes.
+Will be changed in the future. */
+
 const StyledSection = styled.section`
   display: flex;
   justify-content: center;
