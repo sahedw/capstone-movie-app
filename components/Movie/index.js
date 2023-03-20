@@ -26,8 +26,6 @@ export default function Movie() {
 
   if (!movies) return <h1>Loading...</h1>;
 
-  const originalMovie = movies[0].release_date;
-
   return (
     <>
       {movies.map((movie) => {
@@ -44,7 +42,7 @@ export default function Movie() {
 
             <section>
               <h5>
-                {movie.title} - {originalMovie.slice(0, 4)}
+                {movie.title} - {movie.release_date.slice(0, 4)}
               </h5>
               {!movie.genre_ids[0] ? <p>Missing, Genre</p> : null}
 
