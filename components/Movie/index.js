@@ -7,8 +7,8 @@ import getGenreFrom from "../../utils/getGenreFrom";
 import Link from "next/link";
 
 const StyledDiv = styled.div`
-  height: 180px;
-  width: 130px;
+  height: 200px;
+  width: 135px;
 `;
 
 const StyledSection = styled.section`
@@ -53,8 +53,8 @@ export default function Movie({ movie }) {
             <Image
               src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
               alt={movie.title}
-              width={130}
-              height={180}
+              width={135}
+              height={200}
             />
           </StyledDiv>
           <section>
