@@ -4,7 +4,7 @@ import getGenreFrom from "../../utils/getGenreFrom";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import { useState, useEffect } from "react";
 import getPopularityDecimal from "../../utils/getPopularityDecimal";
-import BackButton from "../BackButton";
+import PushButton from "../PushButton";
 import showWatchProviders from "../../utils/showWatchProviders";
 
 export default function MovieDetail({ movie }) {
@@ -55,7 +55,7 @@ export default function MovieDetail({ movie }) {
 
   return (
     <>
-      <BackButton route={"/search-results"} />
+      <PushButton name={"Back to search"} route={"/search-results"} />
       <br />
       <Image
         src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
