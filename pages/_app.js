@@ -33,35 +33,6 @@ export default function App({ Component, pageProps }) {
     fetchData();
   }, [url]);
 
-  const [runtime, setRuntime] = useState("");
-  const [movieId, setMovieId] = useState("");
-
-  const runtimeUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=657b6c5e2a2ab2cafa267e54252ca1a7&language=eng-US`;
-
-  function handleRuntimeFetch(id) {
-    setMovieId(id);
-  }
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(runtimeUrl);
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data);
-          setRuntime(data.runtime);
-        } else {
-          throw new Error("Something went wrong");
-        }
-      } catch (error) {
-        console.log(`Error: ${error.message}`);
-      }
-    }
-    fetchData();
-  }, [runtimeUrl]);
-
-  console.log(runtime);
-
   function handleFormSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -77,8 +48,6 @@ export default function App({ Component, pageProps }) {
       </Head>
       <DataContext.Provider
         value={{
-          handleRuntimeFetch,
-          runtime,
           DataContext,
           handleFormSubmit,
           movies,

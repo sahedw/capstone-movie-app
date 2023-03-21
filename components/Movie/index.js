@@ -1,6 +1,4 @@
 import React from "react";
-import { useContext } from "react";
-import { DataContext } from "../../pages/_app";
 import Image from "next/image";
 import styled from "styled-components";
 import genres from "../../pages/api/genres";
