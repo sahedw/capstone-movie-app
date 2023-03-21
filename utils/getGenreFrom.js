@@ -1,6 +1,6 @@
 import findGenre from "./findGenre";
 
-export default function getRenderGenres(movie) {
+export default function getGenreFrom(movie) {
   if (movie.genre_ids[1]) {
     return (
       findGenre(movie.genre_ids[0]).name +

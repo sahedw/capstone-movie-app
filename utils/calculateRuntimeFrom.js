@@ -1,4 +1,4 @@
-export default function handleRuntimeConversion(runtime) {
+export default function calculateRuntimeFrom(runtime) {
   if (runtime >= 180) {
     const remaining = runtime % 180;
     return `3h ${remaining}m`;

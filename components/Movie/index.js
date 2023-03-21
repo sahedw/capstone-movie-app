@@ -2,8 +2,8 @@ import React from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import handleRuntimeConversion from "../../utils/handleRuntimeConversion";
-import getRenderGenres from "../../utils/getRenderGenres";
+import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
+import getGenreFrom from "../../utils/getGenreFrom";
 
 const StyledDiv = styled.div`
   height: 180px;
@@ -53,8 +53,8 @@ export default function Movie({ movie }) {
           <h5>
             {movie.title} - {movie.release_date.slice(0, 4)}
           </h5>
-          <p>{getRenderGenres(movie)}</p>
-          <p>{handleRuntimeConversion(runtime)}</p>
+          <p>{getGenreFrom(movie)}</p>
+          <p>{calculateRuntimeFrom(runtime)}</p>
         </section>
       </StyledSection>
     </>
