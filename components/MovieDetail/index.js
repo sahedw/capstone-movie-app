@@ -12,7 +12,7 @@ export default function MovieDetail({ movie }) {
   const [movieDetails, setMovieDetails] = useState(null);
   const [watchProvider, setWatchProvider] = useState("");
 
-  const streamingProvider = watchProvider.flatrate;
+  const streamingProvider = watchProvider?.flatrate;
 
   useEffect(() => {
     async function fetchData() {
