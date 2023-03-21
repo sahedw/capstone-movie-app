@@ -4,6 +4,7 @@ import getGenreFrom from "../../utils/getGenreFrom";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import { useState, useEffect } from "react";
 import getPopularityDecimal from "../../utils/getPopularityDecimal";
+import BackButton from "../BackButton";
 
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
@@ -31,12 +32,8 @@ export default function MovieDetail({ movie }) {
 
   return (
     <>
-      {/*       <Image
-        src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-        alt={movie.title}
-        width={600}
-        height={350}
-      /> */}
+      <BackButton route={"/search-results"} />
+      <br />
       <Image
         src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
         alt={movie.title}

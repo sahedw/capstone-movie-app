@@ -7,7 +7,7 @@ export default function SearchResultsPage() {
   const { movies } = useContext(DataContext);
   return (
     <>
-      <BackButton />
+      <BackButton route={"/"} />
       <h2>Your search results:</h2>
       {movies.map((movie) => (
         <Movie key={movie.id} movie={movie} />
