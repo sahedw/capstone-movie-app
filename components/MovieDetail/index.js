@@ -53,6 +53,8 @@ export default function MovieDetail({ movie }) {
     fetchData();
   }, []);
 
+  console.log(streamingProvider);
+
   return (
     <>
       <PushButton name={"Back to search"} route={"/search-results"} />
