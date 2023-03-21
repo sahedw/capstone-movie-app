@@ -44,7 +44,7 @@ test("Should render the Movie components genres", () => {
   expect(genres).toBeInTheDocument();
 });
 
-test("Should render 'Missing, Genre' because no genre id's are provided", () => {
+test("Should render 'Missing, Genre' because no genre ids are provided", () => {
   render(<Movie key={brokenMovie.id} movie={brokenMovie} />);
   const genres = screen.getByText("Missing, Genre");
   expect(genres).toBeInTheDocument();
