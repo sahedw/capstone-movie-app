@@ -3,6 +3,7 @@ import MovieDetail from "../../components/MovieDetail";
 import { useContext } from "react";
 import { DataContext } from "../_app";
 import { useRouter } from "next/router";
+import BackButton from "../../components/BackButton";
 
 export default function MovieDetailPage() {
   const { movies } = useContext(DataContext);
@@ -15,6 +16,7 @@ export default function MovieDetailPage() {
   if (!currentMovie)
     return (
       <>
+        <BackButton route={"/"} />
         <h1>We're quite sorry about this!</h1>
         <p>{`The movie id ${router.query.id} seems to be not in out database.`}</p>
       </>

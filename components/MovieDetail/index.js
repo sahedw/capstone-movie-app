@@ -9,6 +9,7 @@ import BackButton from "../BackButton";
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
   const [movieDetails, setMovieDetails] = useState(null);
+  const [watchProvider, setWatchProvider] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -29,6 +30,27 @@ export default function MovieDetail({ movie }) {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movie.id}/watch/providers?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setWatchProvider(data.results);
+        } else {
+          throw new Error("Something went wrong");
+        }
+      } catch (error) {
+        console.log(`Error: ${error.message}`);
+      }
+    }
+    fetchData();
+  }, []);
+
+  console.log(watchProvider);
 
   return (
     <>
