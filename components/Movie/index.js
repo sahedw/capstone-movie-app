@@ -26,7 +26,6 @@ export default function Movie({ movie }) {
         );
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
           setRuntime(data.runtime);
         } else {
           throw new Error("Something went wrong");
@@ -75,8 +74,6 @@ export default function Movie({ movie }) {
       }
     }
   }
-
-  console.log(runtime);
 
   return (
     <>
