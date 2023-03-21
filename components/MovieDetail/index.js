@@ -1,5 +1,9 @@
 import React from "react";
 
-export default function MovieDetail() {
-  return <div>Klappt</div>;
+export default function MovieDetail({ movie }) {
+  return (
+    <>
+      <h1>{movie.title}</h1>
+    </>
+  );
 }
