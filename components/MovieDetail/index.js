@@ -3,6 +3,7 @@ import Image from "next/image";
 import getGenreFrom from "../../utils/getGenreFrom";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import { useState, useEffect } from "react";
+import getPopularityDecimal from "../../utils/getPopularityDecimal";
 
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
@@ -28,14 +29,6 @@ export default function MovieDetail({ movie }) {
     fetchData();
   }, []);
 
-  console.log(movie);
-  console.log(movieDetails);
-
-  function getPopularityDecimal(number) {
-    const finalNumber = Math.round(number * 10) / 10;
-    return finalNumber;
-  }
-
   return (
     <>
       {/*       <Image
@@ -53,7 +46,7 @@ export default function MovieDetail({ movie }) {
       {/* Currently votes from the community of the api. In the 
         future trying to use the IMDB vote. */}
 
-      <p>{getPopularityDecimal(movieDetails.vote_average)}/10 Popularity</p>
+      <p>{getPopularityDecimal(movieDetails?.vote_average)}/10 Rating</p>
       <p>{getGenreFrom(movie)}</p>
       <h2>{movie.title} - </h2>
       <p>{calculateRuntimeFrom(runtime)}</p>
