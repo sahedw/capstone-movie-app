@@ -5,11 +5,14 @@ import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import { useState, useEffect } from "react";
 import getPopularityDecimal from "../../utils/getPopularityDecimal";
 import BackButton from "../BackButton";
+import showWatchProviders from "../../utils/showWatchProviders";
 
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
   const [movieDetails, setMovieDetails] = useState(null);
   const [watchProvider, setWatchProvider] = useState("");
+
+  const streamingProvider = watchProvider.flatrate;
 
   useEffect(() => {
     async function fetchData() {
@@ -39,7 +42,7 @@ export default function MovieDetail({ movie }) {
         );
         if (response.ok) {
           const data = await response.json();
-          setWatchProvider(data.results);
+          setWatchProvider(data.results.DE);
         } else {
           throw new Error("Something went wrong");
         }
@@ -49,8 +52,6 @@ export default function MovieDetail({ movie }) {
     }
     fetchData();
   }, []);
-
-  console.log(watchProvider);
 
   return (
     <>
@@ -72,6 +73,7 @@ export default function MovieDetail({ movie }) {
       </h2>
       <p>{calculateRuntimeFrom(runtime)}</p>
       <p>{movie.overview}</p>
+      <p>{`${showWatchProviders(streamingProvider)}`}</p>
     </>
   );
 }
