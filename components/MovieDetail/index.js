@@ -48,7 +48,9 @@ export default function MovieDetail({ movie }) {
 
       <p>{getPopularityDecimal(movieDetails?.vote_average)}/10 Rating</p>
       <p>{getGenreFrom(movie)}</p>
-      <h2>{movie.title} - </h2>
+      <h2>
+        {movie.title} - {movie.release_date.slice(0, 4)}
+      </h2>
       <p>{calculateRuntimeFrom(runtime)}</p>
       <p>{movie.overview}</p>
     </>
