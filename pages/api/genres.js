@@ -53,7 +53,7 @@ const genres = [
   },
   {
     id: 10749,
-    name: "Love",
+    name: "Romance",
   },
   {
     id: 878,
