@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }) {
     defaultValue: "",
   });
 
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=657b6c5e2a2ab2cafa267e54252ca1a7&language=eng-US&query=${search}`;
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}`;
 
   useEffect(() => {
     async function fetchData() {

@@ -22,7 +22,7 @@ export default function Movie({ movie }) {
     async function fetchData() {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${movie.id}?api_key=657b6c5e2a2ab2cafa267e54252ca1a7&language=eng-US`
+          `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US`
         );
         if (response.ok) {
           const data = await response.json();
