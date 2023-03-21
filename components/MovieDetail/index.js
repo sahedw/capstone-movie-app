@@ -73,6 +73,9 @@ export default function MovieDetail({ movie }) {
       </h2>
       <p>{calculateRuntimeFrom(runtime)}</p>
       <p>{movie.overview}</p>
+      {/* Currently only able to show where a movie can be streamed with a flatrate.
+      The api also is able to show where its rentable or buyable.
+      For future features also display these informations */}
       <p>{`${showWatchProviders(streamingProvider)}`}</p>
     </>
   );

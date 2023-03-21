@@ -4,6 +4,6 @@ export default function showWatchProviders(streamingProvider) {
   } else if (streamingProvider?.length === 2) {
     return `Available on ${streamingProvider[0].provider_name}, ${streamingProvider[1].provider_name}`;
   } else {
-    return "Currently not available for streaming";
+    return "Not available for streaming with a flatrate";
   }
 }
