@@ -31,6 +31,11 @@ export default function MovieDetail({ movie }) {
   console.log(movie);
   console.log(movieDetails);
 
+  function getPopularityDecimal(number) {
+    const finalNumber = Math.round(number * 10) / 10;
+    return finalNumber;
+  }
+
   return (
     <>
       {/*       <Image
@@ -45,6 +50,10 @@ export default function MovieDetail({ movie }) {
         width={202.5}
         height={300}
       />
+      {/* Currently votes from the community of the api. In the 
+        future trying to use the IMDB vote. */}
+
+      <p>{getPopularityDecimal(movieDetails.vote_average)}/10 Popularity</p>
       <p>{getGenreFrom(movie)}</p>
       <h2>{movie.title} - </h2>
       <p>{calculateRuntimeFrom(runtime)}</p>
