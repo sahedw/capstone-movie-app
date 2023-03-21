@@ -40,7 +40,7 @@ export default function Movie({ movie }) {
 
   return (
     <>
-      <StyledSection key={movie.id}>
+      <StyledSection>
         <StyledDiv>
           <Image
             src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
