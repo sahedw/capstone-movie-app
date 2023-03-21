@@ -17,8 +17,28 @@ const StyledSection = styled.section`
   margin-bottom: 20px;
 `;
 
-export default function Movie() {
-  const { movies, runtime, handleRuntimeFetch } = useContext(DataContext);
+export default function Movie({ movie }) {
+  const [runtime, setRuntime] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movie.id}?api_key=657b6c5e2a2ab2cafa267e54252ca1a7&language=eng-US`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          setRuntime(data.runtime);
+        } else {
+          throw new Error("Something went wrong");
+        }
+      } catch (error) {
+        console.log(`Error: ${error.message}`);
+      }
+    }
+    fetchData();
+  }, []);
 
   function findGenre(id) {
     const targetGenre = genres.find((genre) => genre.id === id);
@@ -39,33 +59,26 @@ export default function Movie() {
     }
   }
 
-  if (!movies) return <h1>Loading...</h1>;
-
   return (
     <>
-      {movies.map((movie) => {
-        handleRuntimeFetch(movie.id);
-        return (
-          <StyledSection key={movie.id}>
-            <StyledDiv>
-              <Image
-                src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                alt={movie.title}
-                width={130}
-                height={180}
-              />
-            </StyledDiv>
+      <StyledSection key={movie.id}>
+        <StyledDiv>
+          <Image
+            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+            alt={movie.title}
+            width={130}
+            height={180}
+          />
+        </StyledDiv>
 
-            <section>
-              <h5>
-                {movie.title} - {movie.release_date.slice(0, 4)}
-              </h5>
-              <p>{handleRenderGenres(movie)}</p>
-              <p>{runtime}</p>
-            </section>
-          </StyledSection>
-        );
-      })}
+        <section>
+          <h5>
+            {movie.title} - {movie.release_date.slice(0, 4)}
+          </h5>
+          <p>{handleRenderGenres(movie)}</p>
+          <p>{runtime}</p>
+        </section>
+      </StyledSection>
     </>
   );
 }
