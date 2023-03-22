@@ -78,6 +78,8 @@ export default function MovieDetail({ movie }) {
     fetchData();
   }, []);
 
+  console.log(watchedList);
+
   return (
     <>
       <PushButton name={"Back to search"} route={"/search-results"} />
@@ -94,7 +96,9 @@ export default function MovieDetail({ movie }) {
           handleToggleWatchList(movie);
         }}
       >
-        Mark as watched
+        {JSON.stringify(watchedList).includes(JSON.stringify(movie))
+          ? "Remove from Watchlist"
+          : "Add to Watchlist"}
       </button>
       {/* Currently votes from the community of the api. In the 
         future trying to use the IMDB vote. */}
