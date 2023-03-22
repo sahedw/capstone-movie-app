@@ -2,6 +2,7 @@ import Form from "../components/Form";
 import { render, screen } from "@testing-library/react";
 import Movie from "../components/Movie";
 import MovieDetail from "../components/MovieDetail";
+import Actors from "../components/Actors";
 
 jest.mock("next/router", () => ({
   useRouter() {
@@ -25,6 +26,10 @@ const fullMovie = {
   genre_ids: [12, 18],
   overview: "Plot",
   flatrate: [{ provider_name: "Netflix" }, { provider_name: "Amazon Video" }],
+  actors: [
+    { name: "John Doe", poster_path: "falselink.jpg" },
+    { name: "Jane Doe" },
+  ],
 };
 
 const brokenMovie = {
@@ -78,3 +83,17 @@ test("Should render the MovieDetail component and the availability if not availa
   const element = screen.getByText("Netflix");
   expect(element).toBeInTheDocument();
 }); */
+
+test("Should render the Actors component with actor name", () => {
+  render(<Actors actors={fullMovie.actors} />);
+  const actorOne = screen.getByText("John Doe");
+  const actorTwo = screen.getByText("Jane Doe");
+  expect(actorOne).toBeInTheDocument();
+  expect(actorTwo).toBeInTheDocument();
+});
+
+test("Should render the Actors component alt text for missing portrait", () => {
+  render(<Actors actors={fullMovie.actors} />);
+  const element = screen.getByAltText(`${fullMovie.actors[0].name}`);
+  expect(element).toBeInTheDocument();
+});

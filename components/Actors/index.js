@@ -20,7 +20,7 @@ export default function Actors({ actors }) {
 
   return (
     <StyledList>
-      {actors.map((actor) => {
+      {actors?.map((actor) => {
         return (
           <li key={actor.cast_id}>
             <Image
