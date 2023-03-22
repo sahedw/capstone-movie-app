@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import getPopularityDecimal from "../../utils/getPopularityDecimal";
 import PushButton from "../PushButton";
 import showWatchProviders from "../../utils/showWatchProviders";
+import Actors from "../Actors";
 
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
@@ -14,6 +15,7 @@ export default function MovieDetail({ movie }) {
   const [castActors, setCastActors] = useState("");
 
   const streamingProvider = watchProvider?.flatrate;
+  const shownActors = castActors.slice(0, 4);
 
   useEffect(() => {
     async function fetchData() {
@@ -73,7 +75,7 @@ export default function MovieDetail({ movie }) {
     fetchData();
   }, []);
 
-  console.log(castActors);
+  console.log(shownActors);
 
   return (
     <>
@@ -98,6 +100,7 @@ export default function MovieDetail({ movie }) {
       {/* Currently only able to show where a movie can be streamed with a flatrate.
       The api also is able to show where its rentable or buyable.
       For future features also display these informations */}
+      <Actors actors={shownActors} />
       <p>{`${showWatchProviders(streamingProvider)}`}</p>
     </>
   );
