@@ -2,11 +2,13 @@ import React from "react";
 import MovieDetail from "../../components/MovieDetail";
 import { useContext } from "react";
 import { DataContext } from "../_app";
+
 import { useRouter } from "next/router";
 import BackButton from "../../components/PushButton";
 
 export default function MovieDetailPage() {
   const { movies } = useContext(DataContext);
+
   const router = useRouter();
 
   const currentMovie = movies.find(

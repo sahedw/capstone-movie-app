@@ -5,14 +5,20 @@ import { createContext } from "react";
 import useLocalStorageState from "use-local-storage-state";
 
 export const DataContext = createContext();
+export const WatchedContext = createContext();
 
 export default function App({ Component, pageProps }) {
   const [movies, setMovies] = useLocalStorageState("newMovies", {
     defaultValue: [],
   });
-  const [favorites, setFavorites] = useLocalStorageState("newFavorites", {
+  const [watchedList, setWatchedList] = useLocalStorageState("newWatched", {
     defaultValue: [],
   });
+
+  function handleAddWatchList(newMovie) {
+    setWatchedList([...watchedList, newMovie]);
+  }
+
   const [search, setSearch] = useState("");
 
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}`;
@@ -47,15 +53,17 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>Saheds Movie App</title>
       </Head>
-      <DataContext.Provider
-        value={{
-          DataContext,
-          handleFormSubmit,
-          movies,
-        }}
-      >
-        <Component {...pageProps} />
-      </DataContext.Provider>
+      <WatchedContext.Provider value={{ handleAddWatchList, watchedList }}>
+        <DataContext.Provider
+          value={{
+            DataContext,
+            handleFormSubmit,
+            movies,
+          }}
+        >
+          <Component {...pageProps} />
+        </DataContext.Provider>
+      </WatchedContext.Provider>
     </>
   );
 }
