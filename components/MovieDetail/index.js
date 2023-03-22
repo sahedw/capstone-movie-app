@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+
 import getGenreFrom from "../../utils/getGenreFrom";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import { useState, useEffect } from "react";
@@ -7,6 +8,7 @@ import getPopularityDecimal from "../../utils/getPopularityDecimal";
 import PushButton from "../PushButton";
 import showWatchProviders from "../../utils/showWatchProviders";
 import Actors from "../Actors";
+import styled from "styled-components";
 
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
@@ -75,8 +77,6 @@ export default function MovieDetail({ movie }) {
     fetchData();
   }, []);
 
-  console.log(shownActors);
-
   return (
     <>
       <PushButton name={"Back to search"} route={"/search-results"} />
@@ -87,9 +87,9 @@ export default function MovieDetail({ movie }) {
         width={202.5}
         height={300}
       />
+
       {/* Currently votes from the community of the api. In the 
         future trying to use the IMDB vote. */}
-
       <p>{getPopularityDecimal(movieDetails?.vote_average)}/10 Rating</p>
       <p>{getGenreFrom(movie)}</p>
       <h2>

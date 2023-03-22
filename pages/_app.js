@@ -10,6 +10,9 @@ export default function App({ Component, pageProps }) {
   const [movies, setMovies] = useLocalStorageState("newMovies", {
     defaultValue: [],
   });
+  const [favorites, setFavorites] = useLocalStorageState("newFavorites", {
+    defaultValue: [],
+  });
   const [search, setSearch] = useState("");
 
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}`;
