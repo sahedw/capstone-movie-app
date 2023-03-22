@@ -11,6 +11,7 @@ export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
   const [movieDetails, setMovieDetails] = useState(null);
   const [watchProvider, setWatchProvider] = useState("");
+  const [castActors, setCastActors] = useState("");
 
   const streamingProvider = watchProvider?.flatrate;
 
@@ -53,7 +54,26 @@ export default function MovieDetail({ movie }) {
     fetchData();
   }, []);
 
-  console.log(streamingProvider);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setCastActors(data.cast);
+        } else {
+          throw new Error("Something went wrong");
+        }
+      } catch (error) {
+        console.log(`Error: ${error.message}`);
+      }
+    }
+    fetchData();
+  }, []);
+
+  console.log(castActors);
 
   return (
     <>
