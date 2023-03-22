@@ -10,12 +10,12 @@ import showWatchProviders from "../../utils/showWatchProviders";
 import Actors from "../Actors";
 import { useContext } from "react";
 
-export default function MovieDetail({ movie, onWatched, watchList }) {
+export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
   const [movieDetails, setMovieDetails] = useState(null);
   const [watchProvider, setWatchProvider] = useState("");
   const [castActors, setCastActors] = useState("");
-  const { handleAddWatchList, watchedList } = useContext(WatchedContext);
+  const { handleToggleWatchList, watchedList } = useContext(WatchedContext);
 
   const streamingProvider = watchProvider?.flatrate;
   const shownActors = castActors.slice(0, 4);
@@ -77,7 +77,7 @@ export default function MovieDetail({ movie, onWatched, watchList }) {
     }
     fetchData();
   }, []);
-  console.log(watchedList);
+
   return (
     <>
       <PushButton name={"Back to search"} route={"/search-results"} />
@@ -91,7 +91,7 @@ export default function MovieDetail({ movie, onWatched, watchList }) {
       <br />
       <button
         onClick={() => {
-          handleAddWatchList(movie);
+          handleToggleWatchList(movie);
         }}
       >
         Mark as watched

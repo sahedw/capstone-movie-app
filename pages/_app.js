@@ -15,10 +15,6 @@ export default function App({ Component, pageProps }) {
     defaultValue: [],
   });
 
-  function handleAddWatchList(newMovie) {
-    setWatchedList([...watchedList, newMovie]);
-  }
-
   const [search, setSearch] = useState("");
 
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}`;
@@ -47,13 +43,27 @@ export default function App({ Component, pageProps }) {
     setSearch(data.search);
   }
 
+  function handleToggleWatchList(newMovie) {
+    if (
+      !watchedList.some(
+        (movie) => JSON.stringify(movie) === JSON.stringify(newMovie)
+      )
+    ) {
+      setWatchedList([...watchedList, newMovie]);
+    } else {
+      setWatchedList(
+        watchedList.filter((watchedMovie) => watchedMovie.id !== newMovie.id)
+      );
+    }
+  }
+
   return (
     <>
       <GlobalStyle />
       <Head>
         <title>Saheds Movie App</title>
       </Head>
-      <WatchedContext.Provider value={{ handleAddWatchList, watchedList }}>
+      <WatchedContext.Provider value={{ handleToggleWatchList, watchedList }}>
         <DataContext.Provider
           value={{
             DataContext,
