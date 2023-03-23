@@ -54,20 +54,20 @@ const StyledParagraphText = styled.p`
 export default function Navigation() {
   const router = useRouter();
 
-  function setCurrentNavSearchIcon(router, rightPath, wrongPath, icon) {
-    if (router.asPath.includes(rightPath)) {
+  function setCurrentNavSearchIcon(router, whenCurrent, whenIdle, icon) {
+    if (router.asPath.includes(whenCurrent)) {
       return require(`/icons/${icon}-current.png`);
-    } else if (router.asPath.includes(wrongPath)) {
+    } else if (router.asPath.includes(whenIdle)) {
       return require(`/icons/${icon}.png`);
     } else {
       return null;
     }
   }
 
-  function setCurrentNavSearchText(router) {
-    if (router.asPath.includes("/search-results")) {
+  function setCurrentNavSearchText(router, whenCurrent, whenIdle) {
+    if (router.asPath.includes(`${whenCurrent}`)) {
       return "current";
-    } else if (router.asPath.includes("/")) {
+    } else if (router.asPath.includes(`${whenIdle}`)) {
       return "idle";
     } else {
       return null;
@@ -92,7 +92,13 @@ export default function Navigation() {
                   width={25}
                   height={25}
                 />
-                <StyledParagraphText value={setCurrentNavSearchText(router)}>
+                <StyledParagraphText
+                  value={setCurrentNavSearchText(
+                    router,
+                    "/search-results",
+                    "/"
+                  )}
+                >
                   Search
                 </StyledParagraphText>
               </StyledDiv>
