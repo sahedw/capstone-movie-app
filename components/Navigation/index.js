@@ -48,7 +48,7 @@ const StyledImage = styled(Image)`
 const StyledParagraphText = styled.p`
   margin: 0;
   font-size: 15px;
-  color: ${({ value }) => (value === "current" ? "red" : "black")};
+  color: ${({ value }) => (value === "current" ? "#F97B7B" : "black")};
 `;
 
 export default function Navigation() {
