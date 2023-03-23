@@ -39,12 +39,6 @@ const StyledDiv = styled.div`
   align-items: center;
 `;
 
-const StyledParagraphIcon = styled.p`
-  margin: 0;
-  font-size: 25px;
-  text-align: center;
-`;
-
 const StyledImage = styled(Image)`
   margin-bottom: 5px;
   font-size: 25px;
@@ -54,16 +48,27 @@ const StyledImage = styled(Image)`
 const StyledParagraphText = styled.p`
   margin: 0;
   font-size: 15px;
+  color: ${({ value }) => (value === "current" ? "red" : "black")};
 `;
 
 export default function Navigation() {
   const router = useRouter();
 
-  function setCurrentSearchIcon(router) {
+  function setCurrentNavSearchIcon(router) {
     if (router.asPath.includes("/search-results")) {
       return require("/icons/search-current.png");
     } else if (router.asPath.includes("/")) {
       return require("/icons/search.png");
+    } else {
+      return null;
+    }
+  }
+
+  function setCurrentNavSearchText(router) {
+    if (router.asPath.includes("/search-results")) {
+      return "current";
+    } else if (router.asPath.includes("/")) {
+      return "idle";
     } else {
       return null;
     }
@@ -77,12 +82,14 @@ export default function Navigation() {
             <StyledListItem>
               <StyledDiv>
                 <StyledImage
-                  src={setCurrentSearchIcon(router)}
+                  src={setCurrentNavSearchIcon(router)}
                   alt="icon"
                   width={25}
                   height={25}
                 />
-                <StyledParagraphText>Search</StyledParagraphText>
+                <StyledParagraphText value={setCurrentNavSearchText(router)}>
+                  Search
+                </StyledParagraphText>
               </StyledDiv>
             </StyledListItem>
           </StyledLink>
