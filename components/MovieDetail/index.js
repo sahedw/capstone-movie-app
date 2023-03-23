@@ -9,6 +9,7 @@ import PushButton from "../PushButton";
 import showWatchProviders from "../../utils/showWatchProviders";
 import Actors from "../Actors";
 import { useContext } from "react";
+import { useRouter } from "next/router";
 
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
@@ -78,7 +79,18 @@ export default function MovieDetail({ movie }) {
     fetchData();
   }, []);
 
-  console.log(watchedList);
+  const router = useRouter();
+
+  function handleRemoveInWatchedPage(movie) {
+    if (!router.asPath.includes("my-watchlist")) {
+      handleToggleWatchList(movie);
+    } else {
+      handleToggleWatchList(movie);
+      router.push("/my-watchlist");
+    }
+  }
+
+  console.log(watchedList.length);
 
   return (
     <>
@@ -93,7 +105,7 @@ export default function MovieDetail({ movie }) {
       <br />
       <button
         onClick={() => {
-          handleToggleWatchList(movie);
+          handleRemoveInWatchedPage(movie);
         }}
       >
         {JSON.stringify(watchedList).includes(JSON.stringify(movie))
