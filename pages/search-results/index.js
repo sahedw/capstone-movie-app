@@ -4,6 +4,7 @@ import PushButton from "../../components/PushButton";
 import { DataContext } from "../_app";
 import Link from "next/link";
 import styled from "styled-components";
+import Navigation from "../../components/Navigation";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -14,7 +15,7 @@ const StyledLink = styled(Link)`
 export default function SearchResultsPage() {
   const { movies } = useContext(DataContext);
   return (
-    <>
+    <main>
       <PushButton name={"Back to Home"} route={"/"} />
       <h2>Your search results:</h2>
       {movies.map((movie) => (
@@ -22,6 +23,6 @@ export default function SearchResultsPage() {
           <Movie movie={movie} />
         </StyledLink>
       ))}
-    </>
+    </main>
   );
 }

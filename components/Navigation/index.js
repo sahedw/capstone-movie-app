@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 
 const StyledFooter = styled.footer`
+  background-color: white;
   position: fixed;
   width: 100%;
   height: 80px;
