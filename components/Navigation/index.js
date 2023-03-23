@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import setCurrentNavSearchIcon from "../../utils/setCurrentNavSearchIcon";
+import setCurrentNavSearchText from "../../utils/setCurrentNavSearchText";
 
 const StyledFooter = styled.footer`
   background-color: white;
@@ -53,26 +55,6 @@ const StyledParagraphText = styled.p`
 
 export default function Navigation() {
   const router = useRouter();
-
-  function setCurrentNavSearchIcon(router, whenCurrent, whenIdle, icon) {
-    if (router.asPath.includes(whenCurrent)) {
-      return require(`/icons/${icon}-current.png`);
-    } else if (router.asPath.includes(whenIdle)) {
-      return require(`/icons/${icon}.png`);
-    } else {
-      return null;
-    }
-  }
-
-  function setCurrentNavSearchText(router, whenCurrent, whenIdle) {
-    if (router.asPath.includes(`${whenCurrent}`)) {
-      return "current";
-    } else if (router.asPath.includes(`${whenIdle}`)) {
-      return "idle";
-    } else {
-      return null;
-    }
-  }
 
   return (
     <StyledFooter>
