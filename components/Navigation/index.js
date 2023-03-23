@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import Image from "next/image";
 
 const StyledFooter = styled.footer`
   background-color: white;
@@ -34,10 +35,17 @@ const StyledLink = styled(Link)`
 const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const StyledParagraphIcon = styled.p`
   margin: 0;
+  font-size: 25px;
+  text-align: center;
+`;
+
+const StyledImage = styled(Image)`
+  margin-bottom: 5px;
   font-size: 25px;
   text-align: center;
 `;
@@ -55,7 +63,25 @@ export default function Navigation() {
           <StyledLink href={"/"}>
             <StyledListItem>
               <StyledDiv>
-                <StyledParagraphIcon>🔍</StyledParagraphIcon>
+                <StyledImage
+                  src={require("/icons/search.png")}
+                  alt="icon"
+                  width={25}
+                  height={25}
+                />
+                <StyledParagraphText>Search</StyledParagraphText>
+              </StyledDiv>
+            </StyledListItem>
+          </StyledLink>
+          <StyledLink href={"/"}>
+            <StyledListItem>
+              <StyledDiv>
+                <StyledImage
+                  src={require("/icons/search.png")}
+                  alt="icon"
+                  width={25}
+                  height={25}
+                />
                 <StyledParagraphText>Search</StyledParagraphText>
               </StyledDiv>
             </StyledListItem>
@@ -63,7 +89,12 @@ export default function Navigation() {
           <StyledLink href={"/my-watchlist"}>
             <StyledListItem>
               <StyledDiv>
-                <StyledParagraphIcon>📝</StyledParagraphIcon>
+                <StyledImage
+                  src={require("/icons/search.png")}
+                  alt="icon"
+                  width={25}
+                  height={25}
+                />
                 <StyledParagraphText>Watchlist</StyledParagraphText>
               </StyledDiv>
             </StyledListItem>
