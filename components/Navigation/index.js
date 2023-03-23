@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Link from "next/link";
 
 const StyledFooter = styled.footer`
   position: fixed;
@@ -21,13 +22,21 @@ const StyledListItem = styled.li`
   font-size: 30px;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
 export default function Navigation() {
   return (
     <StyledFooter>
       <StyledNavBar>
         <StyledList>
-          <StyledListItem>🔍</StyledListItem>
-          <StyledListItem>📝</StyledListItem>
+          <StyledLink href={"/"}>
+            <StyledListItem>🔍</StyledListItem>
+          </StyledLink>
+          <StyledLink href={"/my-watchlist"}>
+            <StyledListItem>📝</StyledListItem>
+          </StyledLink>
         </StyledList>
       </StyledNavBar>
     </StyledFooter>
