@@ -1,18 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledList = styled.ul`
-  list-style-type: none;
-  display: flex;
-  padding-inline-start: 0;
+const StyledFooter = styled.footer`
+  position: fixed;
+  width: 100%;
+  height: 70px;
+  bottom: 0;
 `;
 
 const StyledNavBar = styled.nav``;
 
-const StyledFooter = styled.footer`
-  width: 100%;
-  position: fixed;
-  bottom: 0;
+const StyledList = styled.ul`
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  padding-inline-start: 0;
+`;
+
+const StyledListItem = styled.li`
+  font-size: 30px;
 `;
 
 export default function Navigation() {
@@ -20,13 +26,8 @@ export default function Navigation() {
     <StyledFooter>
       <StyledNavBar>
         <StyledList>
-          <li style={{ height: 70, width: "50%", backgroundColor: "beige" }}>
-            Home
-          </li>
-
-          <li style={{ height: 70, width: "50%", backgroundColor: "beige" }}>
-            Watchlist
-          </li>
+          <StyledListItem>🔍</StyledListItem>
+          <StyledListItem>📝</StyledListItem>
         </StyledList>
       </StyledNavBar>
     </StyledFooter>
