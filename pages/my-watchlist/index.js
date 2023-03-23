@@ -18,7 +18,7 @@ export default function MyWatchlistPage() {
   if (watchedList.length === 0)
     return (
       <>
-        <h2>Nothing to see here.</h2>
+        <h2>Nothing to 👀 here.</h2>
         <p>Why dont you add some? </p>
         <PushButton name={"Back to Home"} route={"/"} />
       </>
