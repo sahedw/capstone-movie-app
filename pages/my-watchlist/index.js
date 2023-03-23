@@ -5,6 +5,7 @@ import Movie from "../../components/Movie";
 import styled from "styled-components";
 import Link from "next/link";
 import PushButton from "../../components/PushButton";
+import Navigation from "../../components/Navigation";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -17,15 +18,16 @@ export default function MyWatchlistPage() {
 
   if (watchedList.length === 0)
     return (
-      <>
+      <main>
         <h2>Nothing to 👀 here.</h2>
         <p>Why dont you add some? </p>
         <PushButton name={"Back to Home"} route={"/"} />
-      </>
+        <Navigation />
+      </main>
     );
 
   return (
-    <>
+    <main>
       <h2>My Watchlist:</h2>
       <section>
         {watchedList.map((movie) => {
@@ -36,6 +38,7 @@ export default function MyWatchlistPage() {
           );
         })}
       </section>
-    </>
+      <Navigation />
+    </main>
   );
 }

@@ -10,6 +10,7 @@ import showWatchProviders from "../../utils/showWatchProviders";
 import Actors from "../Actors";
 import { useContext } from "react";
 import { useRouter } from "next/router";
+import handlePushButtonRoute from "../../utils/handlePushButtonRoute";
 
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
@@ -90,11 +91,9 @@ export default function MovieDetail({ movie }) {
     }
   }
 
-  console.log(watchedList.length);
-
   return (
     <>
-      <PushButton name={"Back to search"} route={"/search-results"} />
+      <PushButton name={"Back"} route={handlePushButtonRoute(router)} />
       <br />
       <Image
         src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
