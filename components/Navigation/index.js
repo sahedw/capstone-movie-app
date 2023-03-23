@@ -54,11 +54,11 @@ const StyledParagraphText = styled.p`
 export default function Navigation() {
   const router = useRouter();
 
-  function setCurrentNavSearchIcon(router) {
-    if (router.asPath.includes("/search-results")) {
-      return require("/icons/search-current.png");
-    } else if (router.asPath.includes("/")) {
-      return require("/icons/search.png");
+  function setCurrentNavSearchIcon(router, rightPath, wrongPath, icon) {
+    if (router.asPath.includes(rightPath)) {
+      return require(`/icons/${icon}-current.png`);
+    } else if (router.asPath.includes(wrongPath)) {
+      return require(`/icons/${icon}.png`);
     } else {
       return null;
     }
@@ -82,7 +82,12 @@ export default function Navigation() {
             <StyledListItem>
               <StyledDiv>
                 <StyledImage
-                  src={setCurrentNavSearchIcon(router)}
+                  src={setCurrentNavSearchIcon(
+                    router,
+                    "/search-results",
+                    "/",
+                    "search"
+                  )}
                   alt="icon"
                   width={25}
                   height={25}
