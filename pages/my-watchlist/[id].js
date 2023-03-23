@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { WatchedContext } from "../_app";
 
 import { useRouter } from "next/router";
-import BackButton from "../../components/PushButton";
+import PushButton from "../../components/PushButton";
 
 export default function MovieDetailPage() {
   const { watchedList } = useContext(WatchedContext);
@@ -18,7 +18,7 @@ export default function MovieDetailPage() {
   if (!currentMovie)
     return (
       <>
-        <BackButton name={"Back to Watchlist"} route={"/my-watchlist"} />
+        <PushButton name={"Back to Watchlist"} route={"/my-watchlist"} />
         <h1>{`We're quite sorry about this!`}</h1>
         <p>{`The movie id ${router.query.id} seems to be not in your watchlist.`}</p>
       </>
