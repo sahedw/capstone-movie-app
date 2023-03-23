@@ -104,16 +104,25 @@ export default function Navigation() {
               </StyledDiv>
             </StyledListItem>
           </StyledLink>
-          <StyledLink href={"/"}>
+          <StyledLink href={"/my-watchlist"}>
             <StyledListItem>
               <StyledDiv>
                 <StyledImage
-                  src={require("/icons/watchlist.png")}
+                  src={setCurrentNavSearchIcon(
+                    router,
+                    "/my-watchlist",
+                    "/",
+                    "watchlist"
+                  )}
                   alt="icon"
                   width={25}
                   height={25}
                 />
-                <StyledParagraphText>Watchlist</StyledParagraphText>
+                <StyledParagraphText
+                  value={setCurrentNavSearchText(router, "/my-watchlist", "/")}
+                >
+                  Watchlist
+                </StyledParagraphText>
               </StyledDiv>
             </StyledListItem>
           </StyledLink>
