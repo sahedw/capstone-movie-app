@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const StyledFooter = styled.footer`
   background-color: white;
@@ -56,6 +57,18 @@ const StyledParagraphText = styled.p`
 `;
 
 export default function Navigation() {
+  const router = useRouter();
+
+  function setCurrentSearchIcon(router) {
+    if (router.asPath.includes("/search-results")) {
+      return require("/icons/search-current.png");
+    } else if (router.asPath.includes("/")) {
+      return require("/icons/search.png");
+    } else {
+      return null;
+    }
+  }
+
   return (
     <StyledFooter>
       <StyledNavBar>
@@ -64,7 +77,7 @@ export default function Navigation() {
             <StyledListItem>
               <StyledDiv>
                 <StyledImage
-                  src={require("/icons/search.png")}
+                  src={setCurrentSearchIcon(router)}
                   alt="icon"
                   width={25}
                   height={25}
@@ -77,20 +90,7 @@ export default function Navigation() {
             <StyledListItem>
               <StyledDiv>
                 <StyledImage
-                  src={require("/icons/search.png")}
-                  alt="icon"
-                  width={25}
-                  height={25}
-                />
-                <StyledParagraphText>Search</StyledParagraphText>
-              </StyledDiv>
-            </StyledListItem>
-          </StyledLink>
-          <StyledLink href={"/my-watchlist"}>
-            <StyledListItem>
-              <StyledDiv>
-                <StyledImage
-                  src={require("/icons/search.png")}
+                  src={require("/icons/watchlist.png")}
                   alt="icon"
                   width={25}
                   height={25}
