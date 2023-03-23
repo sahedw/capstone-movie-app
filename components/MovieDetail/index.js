@@ -79,6 +79,19 @@ export default function MovieDetail({ movie }) {
     fetchData();
   }, []);
 
+  const router = useRouter();
+
+  function handleRemoveInWatchedPage(movie) {
+    if (!router.asPath.includes("my-watchlist")) {
+      handleToggleWatchList(movie);
+    } else {
+      handleToggleWatchList(movie);
+      router.push("/my-watchlist");
+    }
+  }
+
+  console.log(watchedList.length);
+
   return (
     <>
       <PushButton name={"Back to search"} route={"/search-results"} />
@@ -92,15 +105,7 @@ export default function MovieDetail({ movie }) {
       <br />
       <button
         onClick={() => {
-          if (
-            !router.asPath.includes("my-watchlist") &&
-            JSON.stringify(!watchedList).includes(JSON.stringify(movie))
-          ) {
-            handleToggleWatchList(movie);
-          } else {
-            handleToggleWatchList(movie);
-            router.push("/my-watchlist");
-          }
+          handleRemoveInWatchedPage(movie);
         }}
       >
         {JSON.stringify(watchedList).includes(JSON.stringify(movie))

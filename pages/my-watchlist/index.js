@@ -4,6 +4,7 @@ import { WatchedContext } from "../_app";
 import Movie from "../../components/Movie";
 import styled from "styled-components";
 import Link from "next/link";
+import PushButton from "../../components/PushButton";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -13,6 +14,15 @@ const StyledLink = styled(Link)`
 
 export default function MyWatchlistPage() {
   const { watchedList } = useContext(WatchedContext);
+
+  if (watchedList.length === 0)
+    return (
+      <>
+        <h2>Nothing to see here.</h2>
+        <p>Why dont you add some? </p>
+        <PushButton name={"Back to Home"} route={"/"} />
+      </>
+    );
 
   return (
     <>
