@@ -12,6 +12,6 @@ export default createGlobalStyle`
   }
 
   main {
-    margin-bottom: 85px;
+    margin-bottom: 100px;
   }
 `;
