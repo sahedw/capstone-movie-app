@@ -29,7 +29,7 @@ export default function Actors({ actors }) {
               width={70}
               height={100}
             />
-            <StyledName>{actor.name}</StyledName>
+            <StyledName key={actor.name}>{actor.name}</StyledName>
           </li>
         );
       })}
