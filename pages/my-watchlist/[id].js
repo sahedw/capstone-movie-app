@@ -20,7 +20,7 @@ export default function MovieDetailPage() {
       <>
         <PushButton name={"Back to Watchlist"} route={"/my-watchlist"} />
         <h1>{`We're quite sorry about this!`}</h1>
-        <p>{`The movie id ${router.query.id} seems to be not in your watchlist.`}</p>
+        <p>{`The movie id '${router.query.id}' seems to be not in your watchlist.`}</p>
       </>
     );
 
