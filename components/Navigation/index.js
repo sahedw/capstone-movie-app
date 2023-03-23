@@ -7,8 +7,6 @@ const StyledFooter = styled.footer`
   width: 100%;
   height: 80px;
   bottom: 0;
-  border-top: 1px solid lightgrey;
-  border-radius: 15px;
 `;
 
 const StyledNavBar = styled.nav``;
