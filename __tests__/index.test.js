@@ -3,6 +3,23 @@ import { render, screen } from "@testing-library/react";
 import Movie from "../components/Movie";
 import MovieDetail from "../components/MovieDetail";
 import Actors from "../components/Actors";
+import { WatchedContext } from "../pages/_app";
+
+function handleToggleWatchList(newMovie) {
+  if (
+    !watchedList.some(
+      (movie) => JSON.stringify(movie) === JSON.stringify(newMovie)
+    )
+  ) {
+    setWatchedList([...watchedList, newMovie]);
+  } else {
+    setWatchedList(
+      watchedList.filter((watchedMovie) => watchedMovie.id !== newMovie.id)
+    );
+  }
+}
+
+const watchedList = [];
 
 jest.mock("next/router", () => ({
   useRouter() {
@@ -59,19 +76,31 @@ test("Should render 'Missing, Genre' because no genre ids are provided", () => {
 });
 
 test("Should render the MovieDetail component with the right heading", () => {
-  render(<MovieDetail movie={fullMovie} />);
+  render(
+    <WatchedContext.Provider value={{ handleToggleWatchList, watchedList }}>
+      <MovieDetail movie={fullMovie} />
+    </WatchedContext.Provider>
+  );
   const element = screen.getByRole("heading", { name: "The Batman - 2023" });
   expect(element).toBeInTheDocument();
 });
 
 test("Should render the MovieDetail component with the right plot", () => {
-  render(<MovieDetail movie={fullMovie} />);
+  render(
+    <WatchedContext.Provider value={{ handleToggleWatchList, watchedList }}>
+      <MovieDetail movie={fullMovie} />
+    </WatchedContext.Provider>
+  );
   const element = screen.getByText("Plot");
   expect(element).toBeInTheDocument();
 });
 
 test("Should render the MovieDetail component and the availability if not available", () => {
-  render(<MovieDetail movie={brokenMovie} />);
+  render(
+    <WatchedContext.Provider value={{ handleToggleWatchList, watchedList }}>
+      <MovieDetail movie={brokenMovie} />
+    </WatchedContext.Provider>
+  );
   const element = screen.getByText(
     "Not available for streaming with a flatrate"
   );

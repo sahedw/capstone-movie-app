@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { WatchedContext } from "../../pages/_app";
 import getGenreFrom from "../../utils/getGenreFrom";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import { useState, useEffect } from "react";
@@ -7,12 +8,14 @@ import getPopularityDecimal from "../../utils/getPopularityDecimal";
 import PushButton from "../PushButton";
 import showWatchProviders from "../../utils/showWatchProviders";
 import Actors from "../Actors";
+import { useContext } from "react";
 
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
   const [movieDetails, setMovieDetails] = useState(null);
   const [watchProvider, setWatchProvider] = useState("");
   const [castActors, setCastActors] = useState("");
+  const { handleToggleWatchList, watchedList } = useContext(WatchedContext);
 
   const streamingProvider = watchProvider?.flatrate;
   const shownActors = castActors.slice(0, 4);
@@ -75,7 +78,7 @@ export default function MovieDetail({ movie }) {
     fetchData();
   }, []);
 
-  console.log(shownActors);
+  console.log(watchedList);
 
   return (
     <>
@@ -87,9 +90,18 @@ export default function MovieDetail({ movie }) {
         width={202.5}
         height={300}
       />
+      <br />
+      <button
+        onClick={() => {
+          handleToggleWatchList(movie);
+        }}
+      >
+        {JSON.stringify(watchedList).includes(JSON.stringify(movie))
+          ? "Remove from Watchlist"
+          : "Add to Watchlist"}
+      </button>
       {/* Currently votes from the community of the api. In the 
         future trying to use the IMDB vote. */}
-
       <p>{getPopularityDecimal(movieDetails?.vote_average)}/10 Rating</p>
       <p>{getGenreFrom(movie)}</p>
       <h2>

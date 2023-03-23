@@ -5,11 +5,16 @@ import { createContext } from "react";
 import useLocalStorageState from "use-local-storage-state";
 
 export const DataContext = createContext();
+export const WatchedContext = createContext();
 
 export default function App({ Component, pageProps }) {
   const [movies, setMovies] = useLocalStorageState("newMovies", {
     defaultValue: [],
   });
+  const [watchedList, setWatchedList] = useLocalStorageState("newWatched", {
+    defaultValue: [],
+  });
+
   const [search, setSearch] = useState("");
 
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}`;
@@ -38,21 +43,37 @@ export default function App({ Component, pageProps }) {
     setSearch(data.search);
   }
 
+  function handleToggleWatchList(newMovie) {
+    if (
+      !watchedList.some(
+        (movie) => JSON.stringify(movie) === JSON.stringify(newMovie)
+      )
+    ) {
+      setWatchedList([...watchedList, newMovie]);
+    } else {
+      setWatchedList(
+        watchedList.filter((watchedMovie) => watchedMovie.id !== newMovie.id)
+      );
+    }
+  }
+
   return (
     <>
       <GlobalStyle />
       <Head>
         <title>Saheds Movie App</title>
       </Head>
-      <DataContext.Provider
-        value={{
-          DataContext,
-          handleFormSubmit,
-          movies,
-        }}
-      >
-        <Component {...pageProps} />
-      </DataContext.Provider>
+      <WatchedContext.Provider value={{ handleToggleWatchList, watchedList }}>
+        <DataContext.Provider
+          value={{
+            DataContext,
+            handleFormSubmit,
+            movies,
+          }}
+        >
+          <Component {...pageProps} />
+        </DataContext.Provider>
+      </WatchedContext.Provider>
     </>
   );
 }
