@@ -93,15 +93,18 @@ export default function MovieDetail({ movie }) {
 
   return (
     <>
-      <PushButton name={"Back"} route={handlePushButtonRoute(router)} />
-      <br />
-      <Image
-        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-        alt={movie.title}
-        width={202.5}
-        height={300}
-      />
-      <br />
+      <section>
+        {" "}
+        <PushButton name={"Back"} route={handlePushButtonRoute(router)} />
+      </section>
+      <section>
+        <Image
+          src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+          alt={movie.title}
+          width={202.5}
+          height={300}
+        />
+      </section>
       <button
         onClick={() => {
           handleRemoveInWatchlistPage(movie);
