@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { WatchedContext } from "../../pages/_app";
+import { WatchlistContext } from "../../pages/_app";
 import getGenreFrom from "../../utils/getGenreFrom";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import { useState, useEffect } from "react";
@@ -10,13 +10,14 @@ import showWatchProviders from "../../utils/showWatchProviders";
 import Actors from "../Actors";
 import { useContext } from "react";
 import { useRouter } from "next/router";
+import handlePushButtonRoute from "../../utils/handlePushButtonRoute";
 
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
   const [movieDetails, setMovieDetails] = useState(null);
   const [watchProvider, setWatchProvider] = useState("");
   const [castActors, setCastActors] = useState("");
-  const { handleToggleWatchList, watchedList } = useContext(WatchedContext);
+  const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
 
   const streamingProvider = watchProvider?.flatrate;
   const shownActors = castActors.slice(0, 4);
@@ -81,7 +82,7 @@ export default function MovieDetail({ movie }) {
 
   const router = useRouter();
 
-  function handleRemoveInWatchedPage(movie) {
+  function handleRemoveInWatchlistPage(movie) {
     if (!router.asPath.includes("my-watchlist")) {
       handleToggleWatchList(movie);
     } else {
@@ -90,25 +91,26 @@ export default function MovieDetail({ movie }) {
     }
   }
 
-  console.log(watchedList.length);
-
   return (
     <>
-      <PushButton name={"Back to search"} route={"/search-results"} />
-      <br />
-      <Image
-        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-        alt={movie.title}
-        width={202.5}
-        height={300}
-      />
-      <br />
+      <section>
+        {" "}
+        <PushButton name={"Back"} route={handlePushButtonRoute(router)} />
+      </section>
+      <section>
+        <Image
+          src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+          alt={movie.title}
+          width={202.5}
+          height={300}
+        />
+      </section>
       <button
         onClick={() => {
-          handleRemoveInWatchedPage(movie);
+          handleRemoveInWatchlistPage(movie);
         }}
       >
-        {JSON.stringify(watchedList).includes(JSON.stringify(movie))
+        {JSON.stringify(watchlist).includes(JSON.stringify(movie))
           ? "Remove from Watchlist"
           : "Add to Watchlist"}
       </button>

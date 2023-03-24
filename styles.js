@@ -10,4 +10,8 @@ export default createGlobalStyle`
     margin: 0;
     font-family: system-ui;
   }
+
+  main {
+    margin-bottom: 100px;
+  }
 `;

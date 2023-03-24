@@ -5,13 +5,13 @@ import { createContext } from "react";
 import useLocalStorageState from "use-local-storage-state";
 
 export const DataContext = createContext();
-export const WatchedContext = createContext();
+export const WatchlistContext = createContext();
 
 export default function App({ Component, pageProps }) {
   const [movies, setMovies] = useLocalStorageState("newMovies", {
     defaultValue: [],
   });
-  const [watchedList, setWatchedList] = useLocalStorageState("newWatched", {
+  const [watchlist, setWatchlist] = useLocalStorageState("newWatchlist", {
     defaultValue: [],
   });
 
@@ -45,14 +45,14 @@ export default function App({ Component, pageProps }) {
 
   function handleToggleWatchList(newMovie) {
     if (
-      !watchedList.some(
+      !watchlist.some(
         (movie) => JSON.stringify(movie) === JSON.stringify(newMovie)
       )
     ) {
-      setWatchedList([...watchedList, newMovie]);
+      setWatchlist([...watchlist, newMovie]);
     } else {
-      setWatchedList(
-        watchedList.filter((watchedMovie) => watchedMovie.id !== newMovie.id)
+      setWatchlist(
+        watchlist.filter((watchMovie) => watchMovie.id !== newMovie.id)
       );
     }
   }
@@ -63,7 +63,7 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>Saheds Movie App</title>
       </Head>
-      <WatchedContext.Provider value={{ handleToggleWatchList, watchedList }}>
+      <WatchlistContext.Provider value={{ handleToggleWatchList, watchlist }}>
         <DataContext.Provider
           value={{
             DataContext,
@@ -73,7 +73,7 @@ export default function App({ Component, pageProps }) {
         >
           <Component {...pageProps} />
         </DataContext.Provider>
-      </WatchedContext.Provider>
+      </WatchlistContext.Provider>
     </>
   );
 }
