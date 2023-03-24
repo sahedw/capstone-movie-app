@@ -3,8 +3,8 @@ import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import setCurrentNavSearchIcon from "../../utils/setCurrentNavSearchIcon";
-import setCurrentNavSearchText from "../../utils/setCurrentNavSearchText";
+import setCurrentNavIcon from "../../utils/setCurrentNavIcon";
+import setCurrentNavText from "../../utils/setCurrentNavText";
 
 const StyledFooter = styled.footer`
   background-color: white;
@@ -64,7 +64,7 @@ export default function Navigation() {
             <StyledListItem>
               <StyledDiv>
                 <StyledImage
-                  src={setCurrentNavSearchIcon(
+                  src={setCurrentNavIcon(
                     router,
                     "/search-results",
                     "/",
@@ -75,10 +75,11 @@ export default function Navigation() {
                   height={25}
                 />
                 <StyledParagraphText
-                  value={setCurrentNavSearchText(
+                  value={setCurrentNavText(
                     router,
                     "/search-results",
-                    "/"
+                    "/my-watchlist",
+                    "search"
                   )}
                 >
                   Search
@@ -90,7 +91,7 @@ export default function Navigation() {
             <StyledListItem>
               <StyledDiv>
                 <StyledImage
-                  src={setCurrentNavSearchIcon(
+                  src={setCurrentNavIcon(
                     router,
                     "/my-watchlist",
                     "/",
@@ -101,7 +102,12 @@ export default function Navigation() {
                   height={25}
                 />
                 <StyledParagraphText
-                  value={setCurrentNavSearchText(router, "/my-watchlist", "/")}
+                  value={setCurrentNavText(
+                    router,
+                    "/my-watchlist",
+                    "/",
+                    "watchlist"
+                  )}
                 >
                   Watchlist
                 </StyledParagraphText>

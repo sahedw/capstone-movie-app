@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import PushButton from "../../components/PushButton";
 import Navigation from "../../components/Navigation";
+import { useRouter } from "next/router";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -15,6 +16,10 @@ const StyledLink = styled(Link)`
 
 export default function MyWatchlistPage() {
   const { watchedList } = useContext(WatchedContext);
+
+  const router = useRouter();
+
+  console.log(router.asPath.toString());
 
   if (watchedList.length === 0)
     return (
