@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { WatchedContext } from "../../pages/_app";
+import { WatchlistContext } from "../../pages/_app";
 import getGenreFrom from "../../utils/getGenreFrom";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import { useState, useEffect } from "react";
@@ -17,7 +17,7 @@ export default function MovieDetail({ movie }) {
   const [movieDetails, setMovieDetails] = useState(null);
   const [watchProvider, setWatchProvider] = useState("");
   const [castActors, setCastActors] = useState("");
-  const { handleToggleWatchList, watchedList } = useContext(WatchedContext);
+  const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
 
   const streamingProvider = watchProvider?.flatrate;
   const shownActors = castActors.slice(0, 4);
@@ -82,7 +82,7 @@ export default function MovieDetail({ movie }) {
 
   const router = useRouter();
 
-  function handleRemoveInWatchedPage(movie) {
+  function handleRemoveInWatchlistPage(movie) {
     if (!router.asPath.includes("my-watchlist")) {
       handleToggleWatchList(movie);
     } else {
@@ -104,10 +104,10 @@ export default function MovieDetail({ movie }) {
       <br />
       <button
         onClick={() => {
-          handleRemoveInWatchedPage(movie);
+          handleRemoveInWatchlistPage(movie);
         }}
       >
-        {JSON.stringify(watchedList).includes(JSON.stringify(movie))
+        {JSON.stringify(watchlist).includes(JSON.stringify(movie))
           ? "Remove from Watchlist"
           : "Add to Watchlist"}
       </button>

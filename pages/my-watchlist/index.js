@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { WatchedContext } from "../_app";
+import { WatchlistContext } from "../_app";
 import Movie from "../../components/Movie";
 import styled from "styled-components";
 import Link from "next/link";
@@ -15,13 +15,13 @@ const StyledLink = styled(Link)`
 `;
 
 export default function MyWatchlistPage() {
-  const { watchedList } = useContext(WatchedContext);
+  const { watchlist } = useContext(WatchlistContext);
 
   const router = useRouter();
 
   console.log(router.asPath.toString());
 
-  if (watchedList.length === 0)
+  if (watchlist.length === 0)
     return (
       <main>
         <h2>Nothing to 👀 here.</h2>
@@ -35,7 +35,7 @@ export default function MyWatchlistPage() {
     <main>
       <h2>My Watchlist:</h2>
       <section>
-        {watchedList.map((movie) => {
+        {watchlist.map((movie) => {
           return (
             <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
               <Movie movie={movie} />
