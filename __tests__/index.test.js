@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import Movie from "../components/Movie";
 import MovieDetail from "../components/MovieDetail";
 import Actors from "../components/Actors";
-import { WatchedContext } from "../pages/_app";
+import { WatchlistContext } from "../pages/_app";
 
 function handleToggleWatchList(newMovie) {
   if (
@@ -11,15 +11,15 @@ function handleToggleWatchList(newMovie) {
       (movie) => JSON.stringify(movie) === JSON.stringify(newMovie)
     )
   ) {
-    setWatchedList([...watchedList, newMovie]);
+    setWatchlist([...watchlist, newMovie]);
   } else {
-    setWatchedList(
-      watchedList.filter((watchedMovie) => watchedMovie.id !== newMovie.id)
+    setWatchlist(
+      watchlist.filter((watchMovie) => watchMovie.id !== newMovie.id)
     );
   }
 }
 
-const watchedList = [];
+const watchlist = [];
 
 jest.mock("next/router", () => ({
   useRouter() {
@@ -77,9 +77,9 @@ test("Should render 'Missing, Genre' because no genre ids are provided", () => {
 
 test("Should render the MovieDetail component with the right heading", () => {
   render(
-    <WatchedContext.Provider value={{ handleToggleWatchList, watchedList }}>
+    <WatchlistContext.Provider value={{ handleToggleWatchList, watchlist }}>
       <MovieDetail movie={fullMovie} />
-    </WatchedContext.Provider>
+    </WatchlistContext.Provider>
   );
   const element = screen.getByRole("heading", { name: "The Batman - 2023" });
   expect(element).toBeInTheDocument();
@@ -87,9 +87,9 @@ test("Should render the MovieDetail component with the right heading", () => {
 
 test("Should render the MovieDetail component with the right plot", () => {
   render(
-    <WatchedContext.Provider value={{ handleToggleWatchList, watchedList }}>
+    <WatchlistContext.Provider value={{ handleToggleWatchList, watchlist }}>
       <MovieDetail movie={fullMovie} />
-    </WatchedContext.Provider>
+    </WatchlistContext.Provider>
   );
   const element = screen.getByText("Plot");
   expect(element).toBeInTheDocument();
@@ -97,9 +97,9 @@ test("Should render the MovieDetail component with the right plot", () => {
 
 test("Should render the MovieDetail component and the availability if not available", () => {
   render(
-    <WatchedContext.Provider value={{ handleToggleWatchList, watchedList }}>
-      <MovieDetail movie={brokenMovie} />
-    </WatchedContext.Provider>
+    <WatchlistContext.Provider value={{ handleToggleWatchList, watchlist }}>
+      <MovieDetail movie={fullMovie} />
+    </WatchlistContext.Provider>
   );
   const element = screen.getByText(
     "Not available for streaming with a flatrate"
