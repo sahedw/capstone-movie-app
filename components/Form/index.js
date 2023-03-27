@@ -18,6 +18,14 @@ const StyledInput = styled.input`
   height: 30px;
   border: lightgray solid;
   border-radius: 10px;
+
+  :focus {
+    background-color: e8a2a2;
+    opacity: 0.4;
+    border: none;
+    outline: 2px solid red;
+    border-radius: 5px;
+  }
 `;
 
 const StyledIcon = styled(Image)`
