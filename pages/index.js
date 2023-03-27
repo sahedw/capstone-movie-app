@@ -18,6 +18,11 @@ export default function Home() {
     height: 60px;
   `;
 
+  const StyledLine = styled.hr`
+    width: 140px;
+    border-top: 1px solid lightgrey;
+  `;
+
   return (
     <>
       <main>
@@ -30,6 +35,7 @@ export default function Home() {
         <StyledSectionForm>
           <Form onSubmit={handleFormSubmit} movies={movies} />
         </StyledSectionForm>
+        <StyledLine />
       </main>
       <Navigation />
     </>
