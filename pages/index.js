@@ -14,7 +14,7 @@ const StyledSectionForm = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60px;
+  height: 40px;
 `;
 
 const StyledMoviePick = styled.section`
@@ -31,7 +31,7 @@ const StyledHeader = styled.h2`
 `;
 
 const StyledLine = styled.hr`
-  margin-top: 40px;
+  margin-top: 20px;
   width: 140px;
   border-top: 1px solid lightgrey;
 `;
@@ -62,6 +62,15 @@ export default function Home() {
     fetchData();
   }, []);
 
+  const suggestionText = ["How about this?", "Interesting choice, right?"];
+
+  function getRandomSuggestionText() {
+    const randomSuggestionText = Math.floor(
+      Math.random() * suggestionText.length
+    );
+    return randomSuggestionText;
+  }
+
   return (
     <>
       <main>
@@ -77,14 +86,16 @@ export default function Home() {
         <StyledLine />
         {watchlist.length > 0 ? (
           <StyledMoviePick>
-            <StyledHeader>How about this?</StyledHeader>
+            <StyledHeader>
+              {suggestionText[getRandomSuggestionText()]}
+            </StyledHeader>
             <Movie movie={watchlist[randomIndexFromWatchlist]} />
           </StyledMoviePick>
         ) : (
           <StyledNoMoviePick>
-            <h1>You must be fun at parties.</h1>
+            <h1>You must be fun at parties 😪</h1>
             <p>
-              Here we will suggest you random movies from your watchlist to
+              Here we WOULD 😒 suggest you random movies from your watchlist to
               watch.{" "}
             </p>
             <p>How about adding some movies?</p>
