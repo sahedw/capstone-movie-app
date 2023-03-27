@@ -2,16 +2,21 @@ import Form from "../components/Form";
 import { useContext } from "react";
 import { DataContext } from "./_app";
 import Navigation from "../components/Navigation";
-import { useRouter } from "next/router";
+import styled from "styled-components";
 
 export default function Home() {
   const { handleFormSubmit, movies } = useContext(DataContext);
-  const router = useRouter();
-  console.log(router.asPath.toString().length);
+
+  const StyledSection = styled.section``;
+
   return (
     <>
       <main>
-        <Form onSubmit={handleFormSubmit} movies={movies} />
+        <p>Welcome back!</p>
+        <p>Grab your 🍿 and lets watch a movie!</p>
+        <StyledSection>
+          <Form onSubmit={handleFormSubmit} movies={movies} />
+        </StyledSection>
       </main>
       <Navigation />
     </>

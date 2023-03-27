@@ -33,7 +33,7 @@ jest.mock("next/router", () => ({
 
 test("Renders the correct label for my input in the form component", () => {
   render(<Form />);
-  const element = screen.getByLabelText("Search a movie:");
+  const element = screen.getByLabelText("Search:");
   expect(element).toBeInTheDocument();
 });
 
