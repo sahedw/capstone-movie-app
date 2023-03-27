@@ -17,7 +17,21 @@ const StyledSectionForm = styled.section`
   height: 60px;
 `;
 
+const StyledMoviePick = styled.section`
+  margin-top: 40px;
+`;
+
+const StyledNoMoviePick = styled.section`
+  padding-left: 30px;
+  width: 350px;
+`;
+
+const StyledHeader = styled.h2`
+  padding-left: 30px;
+`;
+
 const StyledLine = styled.hr`
+  margin-top: 40px;
   width: 140px;
   border-top: 1px solid lightgrey;
 `;
@@ -61,7 +75,21 @@ export default function Home() {
           <Form onSubmit={handleFormSubmit} movies={movies} />
         </StyledSectionForm>
         <StyledLine />
-        <Movie movie={watchlist[randomIndexFromWatchlist]} />
+        {watchlist.length > 0 ? (
+          <StyledMoviePick>
+            <StyledHeader>How about this?</StyledHeader>
+            <Movie movie={watchlist[randomIndexFromWatchlist]} />
+          </StyledMoviePick>
+        ) : (
+          <StyledNoMoviePick>
+            <h1>You must be fun at parties.</h1>
+            <p>
+              Here we will suggest you random movies from your watchlist to
+              watch.{" "}
+            </p>
+            <p>How about adding some movies?</p>
+          </StyledNoMoviePick>
+        )}
       </main>
       <Navigation />
     </>
