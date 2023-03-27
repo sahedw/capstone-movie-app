@@ -3,9 +3,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import Image from "next/image";
 
-const StyledSection = styled.section`
-  width: 100%;
-`;
+const StyledSection = styled.section``;
 
 const StyledForm = styled.form`
   position: relative;
@@ -29,7 +27,7 @@ const StyledButton = styled.button`
   position: absolute;
   background-color: transparent;
   border: none;
-  top: 25px;
+  top: 5px;
   left: 220px;
 `;
 
@@ -45,7 +43,6 @@ export default function Form({ onSubmit }) {
     <>
       <StyledSection>
         <StyledForm onSubmit={handleOnSubmit}>
-          <label htmlFor="search">Search:</label>
           <StyledInput
             type="text"
             name="search"
