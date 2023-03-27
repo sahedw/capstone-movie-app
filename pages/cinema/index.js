@@ -20,6 +20,9 @@ const StyledDiv = styled.div`
 
 export default function CinemaPage() {
   const { currentlyInCinemas } = useContext(CinemaContext);
+
+  if (!currentlyInCinemas) return <h1>Loading...</h1>;
+
   return (
     <main>
       <h2>Currently in cinemas:</h2>
