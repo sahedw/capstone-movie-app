@@ -68,6 +68,7 @@ export default function Home() {
   }, []);
 
   const randomMovie = getRandomIndexFromArray(watchlist);
+  console.log(watchlist[getRandomIndexFromArray(watchlist)]);
 
   return (
     <>
@@ -88,7 +89,7 @@ export default function Home() {
               {suggestionText[getRandomIndexFromArray(suggestionText)]}
             </StyledHeader>
             <StyledLink href={`/${watchlist[randomMovie].id}`}>
-              <Movie movie={watchlist[getRandomIndexFromArray(watchlist)]} />
+              <Movie movie={watchlist[randomMovie]} />
             </StyledLink>
           </StyledMoviePick>
         ) : (
