@@ -25,6 +25,13 @@ export default function Home() {
     border-top: 1px solid lightgrey;
   `;
 
+  function handleRandomPick() {
+    const randomMovieNumber = Math.floor(Math.random() * watchlist.length);
+    return randomMovieNumber;
+  }
+
+  const randomIndexFromWatchlist = handleRandomPick();
+
   return (
     <>
       <main>
@@ -38,7 +45,7 @@ export default function Home() {
           <Form onSubmit={handleFormSubmit} movies={movies} />
         </StyledSectionForm>
         <StyledLine />
-        <Movie movie={watchlist[1]} />
+        <Movie movie={watchlist[randomIndexFromWatchlist]} />
       </main>
       <Navigation />
     </>

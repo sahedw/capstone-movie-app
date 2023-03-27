@@ -50,15 +50,15 @@ export default function Movie({ movie }) {
       <StyledSection>
         <StyledDiv>
           <Image
-            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-            alt={movie.title}
+            src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
+            alt={movie?.title}
             width={135}
             height={200}
           />
         </StyledDiv>
         <section>
           <h5>
-            {movie.title} - {movie.release_date.slice(0, 4)}
+            {movie?.title} - {movie?.release_date.slice(0, 4)}
           </h5>
           <p>{getGenreFrom(movie)}</p>
           <p>{calculateRuntimeFrom(runtime)}</p>
