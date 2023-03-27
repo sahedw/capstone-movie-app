@@ -4,8 +4,6 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import getGenreFrom from "../../utils/getGenreFrom";
-import Link from "next/link";
-import { useRouter } from "next/router";
 
 const StyledDiv = styled.div`
   height: 200px;
@@ -18,17 +16,8 @@ const StyledSection = styled.section`
   margin-bottom: 20px;
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
-`;
-
 export default function Movie({ movie }) {
   const [runtime, setRuntime] = useState(0);
-  const router = useRouter();
-
-  console.log(router);
 
   useEffect(() => {
     async function fetchData() {
