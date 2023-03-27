@@ -14,4 +14,5 @@ export default createGlobalStyle`
   main {
     margin-bottom: 100px;
   }
+
 `;

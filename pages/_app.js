@@ -6,6 +6,7 @@ import useLocalStorageState from "use-local-storage-state";
 
 export const DataContext = createContext();
 export const WatchlistContext = createContext();
+export const CinemaContext = createContext();
 
 export default function App({ Component, pageProps }) {
   const [movies, setMovies] = useLocalStorageState("newMovies", {
@@ -14,6 +15,13 @@ export default function App({ Component, pageProps }) {
   const [watchlist, setWatchlist] = useLocalStorageState("newWatchlist", {
     defaultValue: [],
   });
+
+  const [currentlyInCinemas, setCurrentlyInCinemas] = useLocalStorageState(
+    "newCinemas",
+    {
+      defaultValue: [],
+    }
+  );
 
   const [search, setSearch] = useState("");
 
@@ -26,6 +34,25 @@ export default function App({ Component, pageProps }) {
         if (response.ok) {
           const data = await response.json();
           setMovies(data.results);
+        } else {
+          throw new Error("Something went wrong");
+        }
+      } catch (error) {
+        console.log(`Error: ${error.message}`);
+      }
+    }
+    fetchData();
+  }, [url]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setCurrentlyInCinemas(data.results);
         } else {
           throw new Error("Something went wrong");
         }
@@ -63,17 +90,19 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>Saheds Movie App</title>
       </Head>
-      <WatchlistContext.Provider value={{ handleToggleWatchList, watchlist }}>
-        <DataContext.Provider
-          value={{
-            DataContext,
-            handleFormSubmit,
-            movies,
-          }}
-        >
-          <Component {...pageProps} />
-        </DataContext.Provider>
-      </WatchlistContext.Provider>
+      <CinemaContext.Provider value={{ currentlyInCinemas }}>
+        <WatchlistContext.Provider value={{ handleToggleWatchList, watchlist }}>
+          <DataContext.Provider
+            value={{
+              DataContext,
+              handleFormSubmit,
+              movies,
+            }}
+          >
+            <Component {...pageProps} />
+          </DataContext.Provider>
+        </WatchlistContext.Provider>
+      </CinemaContext.Provider>
     </>
   );
 }
