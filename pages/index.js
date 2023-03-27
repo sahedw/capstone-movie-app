@@ -7,23 +7,29 @@ import styled from "styled-components";
 export default function Home() {
   const { handleFormSubmit, movies } = useContext(DataContext);
 
-  const StyledSection = styled.section`
+  const StyledSectionHeader = styled.section`
+    padding-left: 30px;
+  `;
+
+  const StyledSectionForm = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
+    height: 60px;
   `;
 
   return (
     <>
       <main>
-        <section>
-          <p>Welcome back!</p>
-          <p>Grab your 🍿 and lets watch a movie!</p>
-        </section>
-        <StyledSection>
+        <StyledSectionHeader>
+          <h3>Welcome back!</h3>
+          <p>
+            Grab your 🍿 and lets watch a <strong>movie!</strong>{" "}
+          </p>
+        </StyledSectionHeader>
+        <StyledSectionForm>
           <Form onSubmit={handleFormSubmit} movies={movies} />
-        </StyledSection>
+        </StyledSectionForm>
       </main>
       <Navigation />
     </>
