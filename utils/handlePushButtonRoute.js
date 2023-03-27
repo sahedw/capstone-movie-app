@@ -3,6 +3,8 @@ export default function handlePushButtonRoute(router) {
     return "/search-results";
   } else if (router.asPath.includes("my-watchlist")) {
     return "/my-watchlist";
+  } else if (router.asPath.includes("cinema")) {
+    return "/cinema";
   } else {
     return null;
   }
