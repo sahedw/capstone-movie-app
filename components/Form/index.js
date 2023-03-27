@@ -4,17 +4,16 @@ import { useRouter } from "next/router";
 export default function Form({ onSubmit }) {
   const router = useRouter();
 
-  function handleChangePage() {
+  function handleOnSubmit(event) {
+    onSubmit(event);
     router.push("/search-results");
   }
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleOnSubmit}>
       <label htmlFor="search">Search a movie:</label>
       <input type="text" name="search" id="search" required />
-      <button type="submit" onClick={handleChangePage}>
-        Submit
-      </button>
+      <button>Submit</button>
     </form>
   );
 }

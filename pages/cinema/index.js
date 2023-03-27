@@ -11,6 +11,13 @@ const StyledLink = styled(Link)`
   cursor: pointer;
 `;
 
+const StyledDiv = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  grid-row-gap: 10px;
+`;
+
 const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`;
 
 export default function CinemaPage() {
@@ -35,11 +42,13 @@ export default function CinemaPage() {
   return (
     <main>
       <h2>Currently in cinemas:</h2>
-      {currentlyInCinemas.map((movie) => (
-        <StyledLink key={movie.id} href={`search-results/${movie.id}`}>
-          <MovieGrid movie={movie} />
-        </StyledLink>
-      ))}
+      <StyledDiv>
+        {currentlyInCinemas.map((movie) => (
+          <StyledLink key={movie.id} href={`search-results/${movie.id}`}>
+            <MovieGrid movie={movie} />
+          </StyledLink>
+        ))}
+      </StyledDiv>
       <Navigation />
     </main>
   );
