@@ -17,6 +17,9 @@ const StyledForm = styled.form`
 const StyledInput = styled.input`
   padding-right: 25px;
   width: 250px;
+  height: 30px;
+  border: lightgray solid;
+  border-radius: 10px;
 `;
 
 const StyledIcon = styled(Image)`
@@ -26,7 +29,7 @@ const StyledButton = styled.button`
   position: absolute;
   background-color: transparent;
   border: none;
-  top: 21px;
+  top: 25px;
   left: 220px;
 `;
 
@@ -47,6 +50,7 @@ export default function Form({ onSubmit }) {
             type="text"
             name="search"
             id="search"
+            placeholder="Search..."
             required
           ></StyledInput>
           <StyledButton>
