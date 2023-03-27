@@ -1,11 +1,13 @@
 import Form from "../components/Form";
 import { useContext } from "react";
-import { DataContext } from "./_app";
+import { DataContext, WatchlistContext } from "./_app";
 import Navigation from "../components/Navigation";
 import styled from "styled-components";
+import Movie from "../components/Movie";
 
 export default function Home() {
   const { handleFormSubmit, movies } = useContext(DataContext);
+  const { watchlist } = useContext(WatchlistContext);
 
   const StyledSectionHeader = styled.section`
     padding-left: 30px;
@@ -36,6 +38,7 @@ export default function Home() {
           <Form onSubmit={handleFormSubmit} movies={movies} />
         </StyledSectionForm>
         <StyledLine />
+        <Movie movie={watchlist[1]} />
       </main>
       <Navigation />
     </>
