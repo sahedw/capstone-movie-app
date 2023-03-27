@@ -16,6 +16,10 @@ const StyledSection = styled.section`
   margin-bottom: 20px;
 `;
 
+const StyledImage = styled(Image)`
+  border-radius: 15px;
+`;
+
 export default function Movie({ movie }) {
   const [runtime, setRuntime] = useState(0);
 
@@ -42,7 +46,7 @@ export default function Movie({ movie }) {
     <>
       <StyledSection>
         <StyledDiv>
-          <Image
+          <StyledImage
             src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
             alt={movie?.title}
             width={135}
