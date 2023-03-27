@@ -4,7 +4,8 @@ import { DataContext, WatchlistContext } from "./_app";
 import Navigation from "../components/Navigation";
 import styled from "styled-components";
 import Movie from "../components/Movie";
-import getRandomWatchlistPick from "../utils/getRandomWatchlistPick";
+import getRandomPick from "../utils/getRandomPick";
+import { suggestionText } from "./api/suggestionText";
 
 const StyledSectionHeader = styled.section`
   padding-left: 30px;
@@ -41,8 +42,6 @@ export default function Home() {
   const { watchlist } = useContext(WatchlistContext);
   const [runtime, setRuntime] = useState(0);
 
-  const randomIndexFromWatchlist = getRandomWatchlistPick(watchlist);
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -62,15 +61,6 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const suggestionText = ["How about this?", "Interesting choice, right?"];
-
-  function getRandomSuggestionText() {
-    const randomSuggestionText = Math.floor(
-      Math.random() * suggestionText.length
-    );
-    return randomSuggestionText;
-  }
-
   return (
     <>
       <main>
@@ -87,9 +77,9 @@ export default function Home() {
         {watchlist.length > 0 ? (
           <StyledMoviePick>
             <StyledHeader>
-              {suggestionText[getRandomSuggestionText()]}
+              {suggestionText[getRandomPick(suggestionText)]}
             </StyledHeader>
-            <Movie movie={watchlist[randomIndexFromWatchlist]} />
+            <Movie movie={watchlist[getRandomPick(watchlist)]} />
           </StyledMoviePick>
         ) : (
           <StyledNoMoviePick>
