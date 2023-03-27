@@ -16,6 +16,11 @@ const StyledSection = styled.section`
   margin-bottom: 20px;
 `;
 
+const StyledSectionText = styled.section`
+  width: 200px;
+  margin-left: 20px;
+`;
+
 const StyledImage = styled(Image)`
   border-radius: 15px;
 `;
@@ -53,13 +58,13 @@ export default function Movie({ movie }) {
             height={200}
           />
         </StyledDiv>
-        <section>
-          <h5>
-            {movie?.title} - {movie?.release_date.slice(0, 4)}
-          </h5>
+        <StyledSectionText>
+          <h4>
+            {movie?.title} - <em>{movie?.release_date.slice(0, 4)}</em>
+          </h4>
           <p>{getGenreFrom(movie)}</p>
           {runtime ? <p>{calculateRuntimeFrom(runtime)}</p> : <p>Loading...</p>}
-        </section>
+        </StyledSectionText>
       </StyledSection>
     </>
   );
