@@ -82,15 +82,15 @@ export default function MovieDetail({ movie }) {
 
   const router = useRouter();
 
-  console.log(movie.id.toString().length);
-  console.log(router.asPath.toString().length - 1);
-
   function handleRemoveInWatchlistPage(movie) {
-    if (!router.asPath.includes("my-watchlist")) {
-      handleToggleWatchList(movie);
-    } else {
+    if (router.asPath.includes("my-watchlist")) {
       handleToggleWatchList(movie);
       router.push("/my-watchlist");
+    } else if (movie.id.toString().length === router.asPath.length - 1) {
+      handleToggleWatchList(movie);
+      router.push("/");
+    } else {
+      handleToggleWatchList(movie);
     }
   }
 
