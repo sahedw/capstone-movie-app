@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import getGenreFrom from "../../utils/getGenreFrom";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const StyledDiv = styled.div`
   height: 200px;
@@ -25,6 +26,9 @@ const StyledLink = styled(Link)`
 
 export default function Movie({ movie }) {
   const [runtime, setRuntime] = useState(0);
+  const router = useRouter();
+
+  console.log(router);
 
   useEffect(() => {
     async function fetchData() {
@@ -43,7 +47,7 @@ export default function Movie({ movie }) {
       }
     }
     fetchData();
-  }, []);
+  }, [movie?.id]);
 
   return (
     <>
@@ -61,7 +65,7 @@ export default function Movie({ movie }) {
             {movie?.title} - {movie?.release_date.slice(0, 4)}
           </h5>
           <p>{getGenreFrom(movie)}</p>
-          <p>{calculateRuntimeFrom(runtime)}</p>
+          {runtime ? <p>{calculateRuntimeFrom(runtime)}</p> : <p>Loading...</p>}
         </section>
       </StyledSection>
     </>
