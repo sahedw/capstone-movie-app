@@ -4,8 +4,9 @@ import { DataContext, WatchlistContext } from "./_app";
 import Navigation from "../components/Navigation";
 import styled from "styled-components";
 import Movie from "../components/Movie";
-import getRandomPick from "../utils/getRandomPick";
+import getRandomIndexFromArray from "../utils/getRandomIndexFromArray";
 import { suggestionText } from "./api/suggestionText";
+import Link from "next/link";
 
 const StyledSectionHeader = styled.section`
   padding-left: 30px;
@@ -29,6 +30,11 @@ const StyledNoMoviePick = styled.section`
 
 const StyledHeader = styled.h2`
   padding-left: 30px;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `;
 
 const StyledLine = styled.hr`
@@ -61,6 +67,8 @@ export default function Home() {
     fetchData();
   }, []);
 
+  const randomMovie = getRandomIndexFromArray(watchlist);
+
   return (
     <>
       <main>
@@ -77,9 +85,11 @@ export default function Home() {
         {watchlist.length > 0 ? (
           <StyledMoviePick>
             <StyledHeader>
-              {suggestionText[getRandomPick(suggestionText)]}
+              {suggestionText[getRandomIndexFromArray(suggestionText)]}
             </StyledHeader>
-            <Movie movie={watchlist[getRandomPick(watchlist)]} />
+            <StyledLink href={`/${watchlist[randomMovie].id}`}>
+              <Movie movie={watchlist[getRandomIndexFromArray(watchlist)]} />
+            </StyledLink>
           </StyledMoviePick>
         ) : (
           <StyledNoMoviePick>

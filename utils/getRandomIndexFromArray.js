@@ -1,4 +1,4 @@
-export default function getRandomPick(dataSet) {
+export default function getRandomIndexFromArray(dataSet) {
   const randomIndex = Math.floor(Math.random() * dataSet?.length);
   return randomIndex;
 }
