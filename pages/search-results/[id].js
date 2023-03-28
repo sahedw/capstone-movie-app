@@ -18,7 +18,7 @@ export default function MovieDetailPage() {
   if (!currentMovie)
     return (
       <main>
-        <BackButton name={"Back to Home"} route={"/"} />
+        <BackButton />
         <h1>{`We're quite sorry about this!`}</h1>
         <p>{`The movie id ${router.query.id} seems to be not in out database.`}</p>
         <Navigation />

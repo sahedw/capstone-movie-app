@@ -107,11 +107,13 @@ export default function MovieDetail({ movie }) {
     }
   }
 
+  console.log(watched);
+
   return (
     <>
       <section>
         {" "}
-        <PushButton name={"Back"} route={handlePushButtonRoute(router)} />
+        <PushButton />
       </section>
       <section>
         <Image

@@ -22,7 +22,6 @@ export default function MyWatchlistPage() {
       <main>
         <h2>Nothing to 👀 here.</h2>
         <p>Why dont you add some? </p>
-        <PushButton name={"Back to Home"} route={"/"} />
         <Navigation />
       </main>
     );

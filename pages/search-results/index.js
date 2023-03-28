@@ -16,7 +16,7 @@ export default function SearchResultsPage() {
   const { movies } = useContext(DataContext);
   return (
     <main>
-      <PushButton name={"Back to Home"} route={"/"} />
+      <PushButton />
       <h2>Your search results:</h2>
       {movies.map((movie) => (
         <StyledLink key={movie.id} href={`search-results/${movie.id}`}>
