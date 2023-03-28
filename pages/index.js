@@ -128,9 +128,11 @@ export default function Home() {
           </StyledNoMoviePick>
         )}
         <StyledLine />
-        <section></section>
+        <section>
+          <MovieSneakPeek movies={cutTrendingArray} />
+        </section>
       </main>
-      <MovieSneakPeek />
+
       <Navigation />
     </>
   );
