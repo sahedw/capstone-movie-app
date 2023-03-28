@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { WatchlistContext } from "../../pages/_app";
+import { WatchlistContext, WatchedContext } from "../../pages/_app";
 import getGenreFrom from "../../utils/getGenreFrom";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import { useState, useEffect } from "react";
@@ -18,6 +18,7 @@ export default function MovieDetail({ movie }) {
   const [watchProvider, setWatchProvider] = useState("");
   const [castActors, setCastActors] = useState("");
   const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
+  const { watched, handleToggleWatched } = useContext(WatchedContext);
 
   const streamingProvider = watchProvider?.flatrate;
   const shownActors = castActors.slice(0, 4);
@@ -94,6 +95,18 @@ export default function MovieDetail({ movie }) {
     }
   }
 
+  function handleRemoveInWatchedPage(movie) {
+    if (router.asPath.includes("my-watchlist")) {
+      handleToggleWatched(movie);
+      router.push("/my-watchlist");
+    } else if (movie.id.toString().length === router.asPath.length - 1) {
+      handleToggleWatched(movie);
+      router.push("/");
+    } else {
+      handleToggleWatched(movie);
+    }
+  }
+
   return (
     <>
       <section>
@@ -118,7 +131,15 @@ export default function MovieDetail({ movie }) {
           ? "Remove from Watchlist"
           : "Add to Watchlist"}
       </button>
-      <button>Add to Watched</button>
+      <button
+        onClick={() => {
+          handleRemoveInWatchedPage(movie);
+        }}
+      >
+        {JSON.stringify(watched).includes(JSON.stringify(movie))
+          ? "Remove from Watched"
+          : "Add to Watched"}
+      </button>
       {/* Currently votes from the community of the api. In the 
         future trying to use the IMDB vote. */}
       <p>{getPopularityDecimal(movieDetails?.vote_average)}/10 Rating</p>

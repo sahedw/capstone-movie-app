@@ -8,12 +8,16 @@ export const DataContext = createContext();
 export const WatchlistContext = createContext();
 export const CinemaContext = createContext();
 export const TrendingContext = createContext();
+export const WatchedContext = createContext();
 
 export default function App({ Component, pageProps }) {
   const [movies, setMovies] = useLocalStorageState("newMovies", {
     defaultValue: [],
   });
   const [watchlist, setWatchlist] = useLocalStorageState("newWatchlist", {
+    defaultValue: [],
+  });
+  const [watched, setWatched] = useLocalStorageState("newWatched", {
     defaultValue: [],
   });
 
@@ -108,6 +112,20 @@ export default function App({ Component, pageProps }) {
     }
   }
 
+  function handleToggleWatched(newMovie) {
+    if (
+      !watched.some(
+        (movie) => JSON.stringify(movie) === JSON.stringify(newMovie)
+      )
+    ) {
+      setWatched([...watched, newMovie]);
+    } else {
+      setWatched(
+        watched.filter((watchedMovie) => watchedMovie.id !== newMovie.id)
+      );
+    }
+  }
+
   function handleTrendingSort(boolean) {
     setDayTrending(boolean);
   }
@@ -118,25 +136,27 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>Saheds Movie App</title>
       </Head>
-      <TrendingContext.Provider
-        value={{ dayTrending, trendingMovies, handleTrendingSort }}
-      >
-        <CinemaContext.Provider value={{ currentlyInCinemas }}>
-          <WatchlistContext.Provider
-            value={{ handleToggleWatchList, watchlist }}
-          >
-            <DataContext.Provider
-              value={{
-                DataContext,
-                handleFormSubmit,
-                movies,
-              }}
+      <WatchedContext.Provider value={{ watched, handleToggleWatched }}>
+        <TrendingContext.Provider
+          value={{ dayTrending, trendingMovies, handleTrendingSort }}
+        >
+          <CinemaContext.Provider value={{ currentlyInCinemas }}>
+            <WatchlistContext.Provider
+              value={{ handleToggleWatchList, watchlist }}
             >
-              <Component {...pageProps} />
-            </DataContext.Provider>
-          </WatchlistContext.Provider>
-        </CinemaContext.Provider>
-      </TrendingContext.Provider>
+              <DataContext.Provider
+                value={{
+                  DataContext,
+                  handleFormSubmit,
+                  movies,
+                }}
+              >
+                <Component {...pageProps} />
+              </DataContext.Provider>
+            </WatchlistContext.Provider>
+          </CinemaContext.Provider>
+        </TrendingContext.Provider>
+      </WatchedContext.Provider>
     </>
   );
 }
