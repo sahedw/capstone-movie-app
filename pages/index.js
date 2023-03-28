@@ -7,6 +7,7 @@ import Movie from "../components/Movie";
 import getRandomIndexFromArray from "../utils/getRandomIndexFromArray";
 import { suggestionText } from "./api/suggestionText";
 import Link from "next/link";
+import MovieSneakPeek from "../components/MovieSneakPeek";
 
 const StyledSectionHeader = styled.section`
   padding-left: 30px;
@@ -129,6 +130,7 @@ export default function Home() {
         <StyledLine />
         <section></section>
       </main>
+      <MovieSneakPeek />
       <Navigation />
     </>
   );
