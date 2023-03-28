@@ -118,6 +118,7 @@ export default function MovieDetail({ movie }) {
           ? "Remove from Watchlist"
           : "Add to Watchlist"}
       </button>
+      <button>Add to Watched</button>
       {/* Currently votes from the community of the api. In the 
         future trying to use the IMDB vote. */}
       <p>{getPopularityDecimal(movieDetails?.vote_average)}/10 Rating</p>
