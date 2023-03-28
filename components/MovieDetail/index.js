@@ -10,6 +10,21 @@ import showWatchProviders from "../../utils/showWatchProviders";
 import Actors from "../Actors";
 import { useContext } from "react";
 import { useRouter } from "next/router";
+import styled from "styled-components";
+
+const StyledSectionHeader = styled.section`
+  display: flex;
+`;
+
+const StyledSectionButtons = styled.section`
+  display: flex;
+`;
+
+const StyledButton = styled.button`
+  padding: 0;
+  background-color: transparent;
+  border: none;
+`;
 
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
@@ -95,52 +110,85 @@ export default function MovieDetail({ movie }) {
   }
 
   function handleRemoveInWatchedPage(movie) {
-    if (router.asPath.includes("my-watchlist")) {
+    if (router.asPath.includes("my-watched")) {
       handleToggleWatched(movie);
       router.push("/my-watchlist");
-    } else if (movie.id.toString().length === router.asPath.length - 1) {
-      handleToggleWatched(movie);
-      router.push("/");
     } else {
       handleToggleWatched(movie);
     }
   }
 
-  console.log(watched);
-
   return (
     <>
-      <section>
+      <StyledSectionHeader>
         {" "}
         <PushButton />
-      </section>
+        <h3>Movie Details</h3>
+      </StyledSectionHeader>
       <section>
-        <Image
-          src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-          alt={movie.title}
-          width={202.5}
-          height={300}
-        />
+        <section>
+          <Image
+            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+            alt={movie.title}
+            width={202.5}
+            height={300}
+          />
+        </section>
+        <StyledSectionButtons>
+          <StyledButton
+            onClick={() => {
+              handleRemoveInWatchlistPage(movie);
+            }}
+          >
+            {JSON.stringify(watchlist).includes(JSON.stringify(movie)) ? (
+              <>
+                <Image
+                  alt={"in-watchlist"}
+                  src={"/in-watchlist.png"}
+                  width={40}
+                  height={40}
+                />{" "}
+              </>
+            ) : (
+              <>
+                <Image
+                  alt={"not-in-watchlist"}
+                  src={"/not-in-watchlist.png"}
+                  width={40}
+                  height={40}
+                />
+              </>
+            )}
+          </StyledButton>
+
+          <StyledButton
+            onClick={() => {
+              handleRemoveInWatchedPage(movie);
+            }}
+          >
+            {JSON.stringify(watched).includes(JSON.stringify(movie)) ? (
+              <>
+                <Image
+                  alt={"in-watched"}
+                  src={"/in-watched.png"}
+                  width={40}
+                  height={40}
+                />
+              </>
+            ) : (
+              <>
+                <Image
+                  alt={"not-in-watched"}
+                  src={"/not-in-watched.png"}
+                  width={40}
+                  height={40}
+                />
+              </>
+            )}
+          </StyledButton>
+        </StyledSectionButtons>
       </section>
 
-      <button
-        onClick={() => {
-          handleRemoveInWatchlistPage(movie);
-        }}
-      >
-        {JSON.stringify(watchlist).includes(JSON.stringify(movie))
-          ? "Remove from Watchlist"
-          : "Add to Watchlist"}
-      </button>
-      <button
-        onClick={() => {
-          handleRemoveInWatchedPage(movie);
-        }}
-      >
-        {JSON.stringify(watched).includes(JSON.stringify(movie))
-          ? "Remove from Watched"
-          : "Add to Watched"}
-      </button>
       {/* Currently votes from the community of the api. In the 
         future trying to use the IMDB vote. */}
       <p>{getPopularityDecimal(movieDetails?.vote_average)}/10 Rating</p>
