@@ -47,6 +47,7 @@ export default function Home() {
   const { handleFormSubmit, movies } = useContext(DataContext);
   const { watchlist } = useContext(WatchlistContext);
   const [runtime, setRuntime] = useState(0);
+  const [trendingMovies, setTrendingMovies] = useState([]);
 
   const randomMovie = getRandomIndexFromArray(watchlist);
 
