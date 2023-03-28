@@ -24,8 +24,8 @@ export default function MovieSneakPeek({ movies }) {
             key={movie.id}
             alt={movie.title}
             src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-            width={120}
-            height={175}
+            width={100}
+            height={150}
           />
         );
       })}

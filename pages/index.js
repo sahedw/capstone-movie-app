@@ -44,6 +44,44 @@ const StyledLine = styled.hr`
   border-top: 1px solid lightgrey;
 `;
 
+const StyledSectionTrending = styled.section`
+  padding-right: 30px;
+  padding-left: 30px;
+`;
+
+const StyledSectionSortBy = styled.section`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const StyledButtonDay = styled.button`
+  border: none;
+  background-color: transparent;
+
+  :enabled {
+    color: black;
+  }
+
+  :disabled {
+    color: #f97b7b;
+    text-decoration: underline;
+  }
+`;
+
+const StyledButtonWeek = styled.button`
+  border: none;
+  background-color: transparent;
+
+  :enabled {
+    color: black;
+  }
+
+  :disabled {
+    color: #f97b7b;
+    text-decoration: underline;
+  }
+`;
+
 export default function Home() {
   const { handleFormSubmit, movies } = useContext(DataContext);
   const { watchlist } = useContext(WatchlistContext);
@@ -126,26 +164,30 @@ export default function Home() {
           </StyledNoMoviePick>
         )}
         <StyledLine />
-        <section>
-          <StyledHeader>Trending movies:</StyledHeader>
-          <button
-            onClick={() => {
-              setDayTrending(true);
-            }}
-            disabled={dayTrending ? true : false}
-          >
-            Day
-          </button>
-          <button
-            onClick={() => {
-              setDayTrending(false);
-            }}
-            disabled={dayTrending ? false : true}
-          >
-            Week
-          </button>
+        <StyledSectionTrending>
+          <h2>Trending movies:</h2>
+          <StyledSectionSortBy>
+            <h5>Sort by:</h5>
+            <StyledButtonDay
+              onClick={() => {
+                setDayTrending(true);
+              }}
+              disabled={dayTrending ? true : false}
+            >
+              Day
+            </StyledButtonDay>
+            <StyledButtonWeek
+              onClick={() => {
+                setDayTrending(false);
+              }}
+              disabled={dayTrending ? false : true}
+            >
+              Week
+            </StyledButtonWeek>
+          </StyledSectionSortBy>
+
           <MovieSneakPeek movies={cutTrendingArray} />
-        </section>
+        </StyledSectionTrending>
       </main>
 
       <Navigation />
