@@ -21,6 +21,10 @@ const StyledSectionText = styled.section`
   margin-left: 20px;
 `;
 
+const StyledParagraph = styled.p`
+  color: gray;
+`;
+
 const StyledImage = styled(Image)`
   border-radius: 15px;
 `;
@@ -62,8 +66,12 @@ export default function Movie({ movie }) {
           <h4>
             {movie?.title} - <em>{movie?.release_date.slice(0, 4)}</em>
           </h4>
-          <p>{getGenreFrom(movie)}</p>
-          {runtime ? <p>{calculateRuntimeFrom(runtime)}</p> : <p>Loading...</p>}
+          <StyledParagraph>{getGenreFrom(movie)}</StyledParagraph>
+          {runtime ? (
+            <StyledParagraph>{calculateRuntimeFrom(runtime)}</StyledParagraph>
+          ) : (
+            <p>Loading...</p>
+          )}
         </StyledSectionText>
       </StyledSection>
     </>
