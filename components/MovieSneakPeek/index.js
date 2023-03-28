@@ -14,6 +14,7 @@ const StyledDiv = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
   margin-top: 10px;
+  grid-row-gap: 15px;
 `;
 
 export default function MovieSneakPeek({ movies }) {

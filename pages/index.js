@@ -96,7 +96,7 @@ export default function Home() {
   const [runtime, setRuntime] = useState(0);
 
   const randomMovie = getRandomIndexFromArray(watchlist);
-  const cutTrendingArray = trendingMovies.slice(0, 3);
+  const cutTrendingArray = trendingMovies.slice(0, 9);
 
   useEffect(() => {
     async function fetchData() {
