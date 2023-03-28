@@ -49,9 +49,9 @@ const StyledSectionTrending = styled.section`
   padding-left: 30px;
 `;
 
-const StyledSectionSortBy = styled.section`
-  display: flex;
-  justify-content: flex-end;
+const StyledParagraphSortBy = styled.p`
+  margin-left: 6px;
+  margin-bottom: 0;
 `;
 
 const StyledButtonDay = styled.button`
@@ -166,8 +166,8 @@ export default function Home() {
         <StyledLine />
         <StyledSectionTrending>
           <h2>Trending movies:</h2>
-          <StyledSectionSortBy>
-            <h5>Sort by:</h5>
+          <section>
+            <StyledParagraphSortBy>Sort by:</StyledParagraphSortBy>
             <StyledButtonDay
               onClick={() => {
                 setDayTrending(true);
@@ -184,7 +184,7 @@ export default function Home() {
             >
               Week
             </StyledButtonWeek>
-          </StyledSectionSortBy>
+          </section>
 
           <MovieSneakPeek movies={cutTrendingArray} />
         </StyledSectionTrending>

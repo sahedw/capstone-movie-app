@@ -12,7 +12,7 @@ const StyledDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
-  margin-top: 40px;
+  margin-top: 20px;
 `;
 
 export default function MovieSneakPeek({ movies }) {
