@@ -48,6 +48,8 @@ export default function Home() {
   const { watchlist } = useContext(WatchlistContext);
   const [runtime, setRuntime] = useState(0);
 
+  const randomMovie = getRandomIndexFromArray(watchlist);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -66,9 +68,6 @@ export default function Home() {
     }
     fetchData();
   }, []);
-
-  const randomMovie = getRandomIndexFromArray(watchlist);
-  console.log(watchlist[getRandomIndexFromArray(watchlist)]);
 
   return (
     <>
@@ -102,6 +101,8 @@ export default function Home() {
             <p>How about adding some movies?</p>
           </StyledNoMoviePick>
         )}
+        <StyledLine />
+        <section></section>
       </main>
       <Navigation />
     </>
