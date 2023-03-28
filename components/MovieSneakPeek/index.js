@@ -5,13 +5,13 @@ import styled from "styled-components";
 const StyledImage = styled(Image)`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  border-radius: 10px;
 `;
 
 const StyledDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
-  grid-row-gap: 10px;
   margin-top: 40px;
 `;
 

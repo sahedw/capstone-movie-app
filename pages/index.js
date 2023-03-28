@@ -49,8 +49,10 @@ export default function Home() {
   const { watchlist } = useContext(WatchlistContext);
   const [runtime, setRuntime] = useState(0);
   const [trendingMovies, setTrendingMovies] = useState([]);
+  const [dayTrending, setDayTrending] = useState(true);
 
   const randomMovie = getRandomIndexFromArray(watchlist);
+  const cutTrendingArray = trendingMovies.slice(0, 3);
 
   useEffect(() => {
     async function fetchData() {
@@ -71,14 +73,13 @@ export default function Home() {
     fetchData();
   }, []);
 
-  //https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.NEXT_PUBLIC_API_KEY}
-
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-        );
+        const url = `https://api.themoviedb.org/3/trending/movie/${
+          dayTrending ? "day" : "week"
+        }?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+        const response = await fetch(url);
         if (response.ok) {
           const data = await response.json();
           setTrendingMovies(data.results);
@@ -90,10 +91,7 @@ export default function Home() {
       }
     }
     fetchData();
-  }, []);
-
-  const cutTrendingArray = trendingMovies.slice(0, 3);
-  console.log(cutTrendingArray);
+  }, [dayTrending]);
 
   return (
     <>
@@ -129,6 +127,23 @@ export default function Home() {
         )}
         <StyledLine />
         <section>
+          <StyledHeader>Trending movies:</StyledHeader>
+          <button
+            onClick={() => {
+              setDayTrending(true);
+            }}
+            disabled={dayTrending ? true : false}
+          >
+            Day
+          </button>
+          <button
+            onClick={() => {
+              setDayTrending(false);
+            }}
+            disabled={dayTrending ? false : true}
+          >
+            Week
+          </button>
           <MovieSneakPeek movies={cutTrendingArray} />
         </section>
       </main>
