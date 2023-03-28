@@ -83,11 +83,14 @@ export default function MovieDetail({ movie }) {
   const router = useRouter();
 
   function handleRemoveInWatchlistPage(movie) {
-    if (!router.asPath.includes("my-watchlist")) {
-      handleToggleWatchList(movie);
-    } else {
+    if (router.asPath.includes("my-watchlist")) {
       handleToggleWatchList(movie);
       router.push("/my-watchlist");
+    } else if (movie.id.toString().length === router.asPath.length - 1) {
+      handleToggleWatchList(movie);
+      router.push("/");
+    } else {
+      handleToggleWatchList(movie);
     }
   }
 
@@ -105,6 +108,7 @@ export default function MovieDetail({ movie }) {
           height={300}
         />
       </section>
+
       <button
         onClick={() => {
           handleRemoveInWatchlistPage(movie);

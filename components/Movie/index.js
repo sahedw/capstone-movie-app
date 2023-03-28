@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import getGenreFrom from "../../utils/getGenreFrom";
-import Link from "next/link";
 
 const StyledDiv = styled.div`
   height: 200px;
@@ -17,10 +16,13 @@ const StyledSection = styled.section`
   margin-bottom: 20px;
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
+const StyledSectionText = styled.section`
+  width: 200px;
+  margin-left: 20px;
+`;
+
+const StyledImage = styled(Image)`
+  border-radius: 15px;
 `;
 
 export default function Movie({ movie }) {
@@ -43,26 +45,26 @@ export default function Movie({ movie }) {
       }
     }
     fetchData();
-  }, []);
+  }, [movie?.id]);
 
   return (
     <>
       <StyledSection>
         <StyledDiv>
-          <Image
-            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-            alt={movie.title}
+          <StyledImage
+            src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
+            alt={movie?.title}
             width={135}
             height={200}
           />
         </StyledDiv>
-        <section>
-          <h5>
-            {movie.title} - {movie.release_date.slice(0, 4)}
-          </h5>
+        <StyledSectionText>
+          <h4>
+            {movie?.title} - <em>{movie?.release_date.slice(0, 4)}</em>
+          </h4>
           <p>{getGenreFrom(movie)}</p>
-          <p>{calculateRuntimeFrom(runtime)}</p>
-        </section>
+          {runtime ? <p>{calculateRuntimeFrom(runtime)}</p> : <p>Loading...</p>}
+        </StyledSectionText>
       </StyledSection>
     </>
   );
