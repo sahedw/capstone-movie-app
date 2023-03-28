@@ -70,6 +70,30 @@ export default function Home() {
     fetchData();
   }, []);
 
+  //https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.NEXT_PUBLIC_API_KEY}
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setTrendingMovies(data.results);
+        } else {
+          throw new Error("Something went wrong");
+        }
+      } catch (error) {
+        console.log(`Error: ${error.message}`);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const cutTrendingArray = trendingMovies.slice(0, 3);
+  console.log(cutTrendingArray);
+
   return (
     <>
       <main>
