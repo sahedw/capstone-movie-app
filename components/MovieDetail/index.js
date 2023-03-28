@@ -10,7 +10,6 @@ import showWatchProviders from "../../utils/showWatchProviders";
 import Actors from "../Actors";
 import { useContext } from "react";
 import { useRouter } from "next/router";
-import handlePushButtonRoute from "../../utils/handlePushButtonRoute";
 
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
