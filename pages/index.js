@@ -1,15 +1,20 @@
 import Form from "../components/Form";
 import { useContext, useState, useEffect } from "react";
-import { DataContext, WatchlistContext } from "./_app";
+import { DataContext, WatchlistContext, TrendingContext } from "./_app";
 import Navigation from "../components/Navigation";
 import styled from "styled-components";
 import Movie from "../components/Movie";
 import getRandomIndexFromArray from "../utils/getRandomIndexFromArray";
 import { suggestionText } from "./api/suggestionText";
 import Link from "next/link";
+import MovieSneakPeek from "../components/MovieSneakPeek";
 
 const StyledSectionHeader = styled.section`
   padding-left: 30px;
+`;
+
+const StyledTrendingHeader = styled.h4`
+  margin-bottom: 0;
 `;
 
 const StyledSectionForm = styled.section`
@@ -28,7 +33,7 @@ const StyledNoMoviePick = styled.section`
   width: 350px;
 `;
 
-const StyledHeader = styled.h2`
+const StyledHeader = styled.h4`
   padding-left: 30px;
 `;
 
@@ -38,15 +43,60 @@ const StyledLink = styled(Link)`
 `;
 
 const StyledLine = styled.hr`
-  margin-top: 20px;
+  margin-top: 40px;
   width: 140px;
   border-top: 1px solid lightgrey;
+`;
+
+const StyledSectionTrending = styled.section`
+  margin-top: 40px;
+  padding-right: 30px;
+  padding-left: 30px;
+`;
+
+const StyledSectionTrendingFlex = styled.p`
+  display: flex;
+  justify-content: flex-start;
+`;
+
+const StyledButtonDay = styled.button`
+  padding-left: 0;
+  border: none;
+  background-color: transparent;
+
+  :enabled {
+    color: black;
+  }
+
+  :disabled {
+    color: #f97b7b;
+  }
+`;
+
+const StyledButtonWeek = styled.button`
+  padding-left: 0;
+  border: none;
+  background-color: transparent;
+
+  :enabled {
+    color: black;
+  }
+
+  :disabled {
+    color: #f97b7b;
+  }
 `;
 
 export default function Home() {
   const { handleFormSubmit, movies } = useContext(DataContext);
   const { watchlist } = useContext(WatchlistContext);
+  const { dayTrending, trendingMovies, handleTrendingSort } =
+    useContext(TrendingContext);
+
   const [runtime, setRuntime] = useState(0);
+
+  const randomMovie = getRandomIndexFromArray(watchlist);
+  const cutTrendingArray = trendingMovies.slice(0, 9);
 
   useEffect(() => {
     async function fetchData() {
@@ -67,14 +117,11 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const randomMovie = getRandomIndexFromArray(watchlist);
-  console.log(watchlist[getRandomIndexFromArray(watchlist)]);
-
   return (
     <>
       <main>
         <StyledSectionHeader>
-          <h3>Welcome back!</h3>
+          <h1>Welcome back!</h1>
           <p>
             Grab your 🍿 and lets watch a <strong>movie!</strong>{" "}
           </p>
@@ -102,6 +149,29 @@ export default function Home() {
             <p>How about adding some movies?</p>
           </StyledNoMoviePick>
         )}
+        <StyledLine />
+        <StyledSectionTrending>
+          <StyledTrendingHeader>Trending movies:</StyledTrendingHeader>
+          <StyledSectionTrendingFlex>
+            <StyledButtonDay
+              onClick={() => {
+                handleTrendingSort(true);
+              }}
+              disabled={dayTrending ? true : false}
+            >
+              Day
+            </StyledButtonDay>
+            <StyledButtonWeek
+              onClick={() => {
+                handleTrendingSort(false);
+              }}
+              disabled={dayTrending ? false : true}
+            >
+              Week
+            </StyledButtonWeek>
+          </StyledSectionTrendingFlex>
+          <MovieSneakPeek movies={cutTrendingArray} />
+        </StyledSectionTrending>
       </main>
       <Navigation />
     </>

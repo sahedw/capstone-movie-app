@@ -5,6 +5,7 @@ import MovieDetail from "../components/MovieDetail";
 import Actors from "../components/Actors";
 import { WatchlistContext } from "../pages/_app";
 import MovieGrid from "../components/MovieGrid";
+import MovieSneakPeek from "../components/MovieSneakPeek";
 
 function handleToggleWatchList(newMovie) {
   if (
@@ -123,6 +124,12 @@ test("Should render the Actors component alt text for missing portrait", () => {
 });
 
 test("Should render an image in the moviegrid component", () => {
+  render(<MovieGrid movie={fullMovie} />);
+  const element = screen.getByRole("img");
+  expect(element).toBeInTheDocument();
+});
+
+test("Should render text for empty watchlist in homepage", () => {
   render(<MovieGrid movie={fullMovie} />);
   const element = screen.getByRole("img");
   expect(element).toBeInTheDocument();

@@ -18,6 +18,7 @@ const StyledInput = styled.input`
   height: 30px;
   border: lightgray solid;
   border-radius: 10px;
+  background-color: #f7f7f7;
 
   :focus {
     background-color: e8a2a2;

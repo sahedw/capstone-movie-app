@@ -17,10 +17,6 @@ const StyledLink = styled(Link)`
 export default function MyWatchlistPage() {
   const { watchlist } = useContext(WatchlistContext);
 
-  const router = useRouter();
-
-  console.log(router.asPath.toString());
-
   if (watchlist.length === 0)
     return (
       <main>

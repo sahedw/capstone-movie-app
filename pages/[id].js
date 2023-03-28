@@ -1,18 +1,35 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
-import { WatchlistContext } from "./_app";
+import { WatchlistContext, TrendingContext } from "./_app";
 import PushButton from "../components/PushButton";
 import Navigation from "../components/Navigation";
 import MovieDetail from "../components/MovieDetail";
 
 export default function MovieDetailPage() {
   const { watchlist } = useContext(WatchlistContext);
+  const { trendingMovies } = useContext(TrendingContext);
 
   const router = useRouter();
 
-  const currentMovie = watchlist.find(
+  function handleDetailHomePage() {
+    if (watchlist.find((movie) => movie.id.toString() === router.query.id)) {
+      return watchlist.find((movie) => movie.id.toString() === router.query.id);
+    } else if (
+      trendingMovies.find((movie) => movie.id.toString() === router.query.id)
+    ) {
+      return trendingMovies.find(
+        (movie) => movie.id.toString() === router.query.id
+      );
+    } else {
+      return null;
+    }
+  }
+
+  const currentMovie = handleDetailHomePage();
+
+  /*  const currentMovie = watchlist.find(
     (movie) => movie.id.toString() === router.query.id
-  );
+  ); */
 
   if (!currentMovie)
     return (
