@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styled from "styled-components";
+import Link from "next/link";
 
 const StyledImage = styled(Image)`
   display: grid;
@@ -20,13 +21,14 @@ export default function MovieSneakPeek({ movies }) {
     <StyledDiv>
       {movies.map((movie) => {
         return (
-          <StyledImage
-            key={movie.id}
-            alt={movie.title}
-            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-            width={100}
-            height={150}
-          />
+          <Link href={`/${movie.id}`} key={movie.id}>
+            <StyledImage
+              alt={movie.title}
+              src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+              width={100}
+              height={150}
+            />
+          </Link>
         );
       })}
     </StyledDiv>

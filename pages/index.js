@@ -1,6 +1,6 @@
 import Form from "../components/Form";
 import { useContext, useState, useEffect } from "react";
-import { DataContext, WatchlistContext } from "./_app";
+import { DataContext, WatchlistContext, TrendingContext } from "./_app";
 import Navigation from "../components/Navigation";
 import styled from "styled-components";
 import Movie from "../components/Movie";
@@ -54,13 +54,6 @@ const StyledSectionTrending = styled.section`
   padding-left: 30px;
 `;
 
-const StyledParagraphSortBy = styled.p`
-  margin-left: 6px;
-  margin-bottom: 0;
-  margin-top: 0;
-  margin-right: 5px;
-`;
-
 const StyledSectionTrendingFlex = styled.p`
   display: flex;
   justify-content: flex-end;
@@ -76,7 +69,6 @@ const StyledButtonDay = styled.button`
 
   :disabled {
     color: #f97b7b;
-    text-decoration: wavy underline;
   }
 `;
 
@@ -90,16 +82,16 @@ const StyledButtonWeek = styled.button`
 
   :disabled {
     color: #f97b7b;
-    text-decoration: wavy underline;
   }
 `;
 
 export default function Home() {
   const { handleFormSubmit, movies } = useContext(DataContext);
   const { watchlist } = useContext(WatchlistContext);
+  const { dayTrending, trendingMovies, handleTrendingSort } =
+    useContext(TrendingContext);
+
   const [runtime, setRuntime] = useState(0);
-  const [trendingMovies, setTrendingMovies] = useState([]);
-  const [dayTrending, setDayTrending] = useState(true);
 
   const randomMovie = getRandomIndexFromArray(watchlist);
   const cutTrendingArray = trendingMovies.slice(0, 3);
@@ -122,26 +114,6 @@ export default function Home() {
     }
     fetchData();
   }, []);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const url = `https://api.themoviedb.org/3/trending/movie/${
-          dayTrending ? "day" : "week"
-        }?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
-        const response = await fetch(url);
-        if (response.ok) {
-          const data = await response.json();
-          setTrendingMovies(data.results);
-        } else {
-          throw new Error("Something went wrong");
-        }
-      } catch (error) {
-        console.log(`Error: ${error.message}`);
-      }
-    }
-    fetchData();
-  }, [dayTrending]);
 
   return (
     <>
@@ -179,11 +151,9 @@ export default function Home() {
         <StyledSectionTrending>
           <StyledTrendingHeader>Trending movies:</StyledTrendingHeader>
           <StyledSectionTrendingFlex>
-            <StyledParagraphSortBy>Sort by:</StyledParagraphSortBy>
-
             <StyledButtonDay
               onClick={() => {
-                setDayTrending(true);
+                handleTrendingSort(true);
               }}
               disabled={dayTrending ? true : false}
             >
@@ -191,14 +161,13 @@ export default function Home() {
             </StyledButtonDay>
             <StyledButtonWeek
               onClick={() => {
-                setDayTrending(false);
+                handleTrendingSort(false);
               }}
               disabled={dayTrending ? false : true}
             >
               Week
             </StyledButtonWeek>
           </StyledSectionTrendingFlex>
-
           <MovieSneakPeek movies={cutTrendingArray} />
         </StyledSectionTrending>
       </main>

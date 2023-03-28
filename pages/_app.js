@@ -7,6 +7,7 @@ import useLocalStorageState from "use-local-storage-state";
 export const DataContext = createContext();
 export const WatchlistContext = createContext();
 export const CinemaContext = createContext();
+export const TrendingContext = createContext();
 
 export default function App({ Component, pageProps }) {
   const [movies, setMovies] = useLocalStorageState("newMovies", {
@@ -22,6 +23,9 @@ export default function App({ Component, pageProps }) {
       defaultValue: [],
     }
   );
+
+  const [trendingMovies, setTrendingMovies] = useState([]);
+  const [dayTrending, setDayTrending] = useState(true);
 
   const [search, setSearch] = useState("");
 
@@ -63,6 +67,26 @@ export default function App({ Component, pageProps }) {
     fetchData();
   }, [url]);
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const url = `https://api.themoviedb.org/3/trending/movie/${
+          dayTrending ? "day" : "week"
+        }?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+        const response = await fetch(url);
+        if (response.ok) {
+          const data = await response.json();
+          setTrendingMovies(data.results);
+        } else {
+          throw new Error("Something went wrong");
+        }
+      } catch (error) {
+        console.log(`Error: ${error.message}`);
+      }
+    }
+    fetchData();
+  }, [dayTrending]);
+
   function handleFormSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -84,25 +108,35 @@ export default function App({ Component, pageProps }) {
     }
   }
 
+  function handleTrendingSort(boolean) {
+    setDayTrending(boolean);
+  }
+
   return (
     <>
       <GlobalStyle />
       <Head>
         <title>Saheds Movie App</title>
       </Head>
-      <CinemaContext.Provider value={{ currentlyInCinemas }}>
-        <WatchlistContext.Provider value={{ handleToggleWatchList, watchlist }}>
-          <DataContext.Provider
-            value={{
-              DataContext,
-              handleFormSubmit,
-              movies,
-            }}
+      <TrendingContext.Provider
+        value={{ dayTrending, trendingMovies, handleTrendingSort }}
+      >
+        <CinemaContext.Provider value={{ currentlyInCinemas }}>
+          <WatchlistContext.Provider
+            value={{ handleToggleWatchList, watchlist }}
           >
-            <Component {...pageProps} />
-          </DataContext.Provider>
-        </WatchlistContext.Provider>
-      </CinemaContext.Provider>
+            <DataContext.Provider
+              value={{
+                DataContext,
+                handleFormSubmit,
+                movies,
+              }}
+            >
+              <Component {...pageProps} />
+            </DataContext.Provider>
+          </WatchlistContext.Provider>
+        </CinemaContext.Provider>
+      </TrendingContext.Provider>
     </>
   );
 }
