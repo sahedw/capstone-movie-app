@@ -56,10 +56,11 @@ const StyledSectionTrending = styled.section`
 
 const StyledSectionTrendingFlex = styled.p`
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 `;
 
 const StyledButtonDay = styled.button`
+  padding-left: 0;
   border: none;
   background-color: transparent;
 
@@ -73,6 +74,7 @@ const StyledButtonDay = styled.button`
 `;
 
 const StyledButtonWeek = styled.button`
+  padding-left: 0;
   border: none;
   background-color: transparent;
 
