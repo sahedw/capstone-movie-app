@@ -13,6 +13,10 @@ const StyledSectionHeader = styled.section`
   padding-left: 30px;
 `;
 
+const StyledTrendingHeader = styled.h4`
+  margin-bottom: 0;
+`;
+
 const StyledSectionForm = styled.section`
   display: flex;
   justify-content: center;
@@ -29,7 +33,7 @@ const StyledNoMoviePick = styled.section`
   width: 350px;
 `;
 
-const StyledHeader = styled.h2`
+const StyledHeader = styled.h4`
   padding-left: 30px;
 `;
 
@@ -45,6 +49,7 @@ const StyledLine = styled.hr`
 `;
 
 const StyledSectionTrending = styled.section`
+  margin-top: 40px;
   padding-right: 30px;
   padding-left: 30px;
 `;
@@ -53,6 +58,7 @@ const StyledParagraphSortBy = styled.p`
   margin-left: 6px;
   margin-bottom: 0;
   margin-top: 0;
+  margin-right: 5px;
 `;
 
 const StyledSectionTrendingFlex = styled.p`
@@ -141,7 +147,7 @@ export default function Home() {
     <>
       <main>
         <StyledSectionHeader>
-          <h3>Welcome back!</h3>
+          <h1>Welcome back!</h1>
           <p>
             Grab your 🍿 and lets watch a <strong>movie!</strong>{" "}
           </p>
@@ -171,35 +177,31 @@ export default function Home() {
         )}
         <StyledLine />
         <StyledSectionTrending>
-          <h2>Trending movies:</h2>
+          <StyledTrendingHeader>Trending movies:</StyledTrendingHeader>
           <StyledSectionTrendingFlex>
-            <section>
-              <StyledParagraphSortBy>Sort by:</StyledParagraphSortBy>
-              <section>
-                <StyledButtonDay
-                  onClick={() => {
-                    setDayTrending(true);
-                  }}
-                  disabled={dayTrending ? true : false}
-                >
-                  Day
-                </StyledButtonDay>
-                <StyledButtonWeek
-                  onClick={() => {
-                    setDayTrending(false);
-                  }}
-                  disabled={dayTrending ? false : true}
-                >
-                  Week
-                </StyledButtonWeek>
-              </section>
-            </section>
+            <StyledParagraphSortBy>Sort by:</StyledParagraphSortBy>
+
+            <StyledButtonDay
+              onClick={() => {
+                setDayTrending(true);
+              }}
+              disabled={dayTrending ? true : false}
+            >
+              Day
+            </StyledButtonDay>
+            <StyledButtonWeek
+              onClick={() => {
+                setDayTrending(false);
+              }}
+              disabled={dayTrending ? false : true}
+            >
+              Week
+            </StyledButtonWeek>
           </StyledSectionTrendingFlex>
 
           <MovieSneakPeek movies={cutTrendingArray} />
         </StyledSectionTrending>
       </main>
-
       <Navigation />
     </>
   );
