@@ -14,6 +14,7 @@ import styled from "styled-components";
 
 const StyledSectionHeader = styled.section`
   display: flex;
+  justify-content: center;
 `;
 
 const StyledSectionButtons = styled.section`
@@ -21,7 +22,7 @@ const StyledSectionButtons = styled.section`
 `;
 
 const StyledButton = styled.button`
-  padding: 0;
+  padding: 10px;
   background-color: transparent;
   border: none;
 `;
@@ -120,9 +121,9 @@ export default function MovieDetail({ movie }) {
 
   return (
     <>
+      <PushButton />
       <StyledSectionHeader>
         {" "}
-        <PushButton />
         <h3>Movie Details</h3>
       </StyledSectionHeader>
       <section>
@@ -154,8 +155,8 @@ export default function MovieDetail({ movie }) {
                 <Image
                   alt={"not-in-watchlist"}
                   src={"/not-in-watchlist.png"}
-                  width={40}
-                  height={40}
+                  width={39}
+                  height={39}
                 />
               </>
             )}
