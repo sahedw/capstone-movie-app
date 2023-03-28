@@ -18,7 +18,7 @@ export default function MovieDetailPage() {
   if (!currentMovie)
     return (
       <main>
-        <PushButton name={"Back to Home"} route={"/"} />
+        <PushButton />
         <h1>{`We're quite sorry about this!`}</h1>
         <p>{`The movie id '${router.query.id}' seems to be not in cinema currently.`}</p>
         <Navigation />

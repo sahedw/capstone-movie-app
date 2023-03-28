@@ -1,10 +1,10 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-export default function PushButton({ name, route }) {
+export default function PushButton() {
   const router = useRouter();
   function handleChangePage() {
-    router.push(`${route}`);
+    router.back();
   }
-  return <button onClick={handleChangePage}>{name}</button>;
+  return <button onClick={handleChangePage}>Back</button>;
 }

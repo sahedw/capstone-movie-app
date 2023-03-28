@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { WatchlistContext } from "../../pages/_app";
+import { WatchlistContext, WatchedContext } from "../../pages/_app";
 import getGenreFrom from "../../utils/getGenreFrom";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import { useState, useEffect } from "react";
@@ -10,7 +10,22 @@ import showWatchProviders from "../../utils/showWatchProviders";
 import Actors from "../Actors";
 import { useContext } from "react";
 import { useRouter } from "next/router";
-import handlePushButtonRoute from "../../utils/handlePushButtonRoute";
+import styled from "styled-components";
+
+const StyledSectionHeader = styled.section`
+  display: flex;
+  justify-content: center;
+`;
+
+const StyledSectionButtons = styled.section`
+  display: flex;
+`;
+
+const StyledButton = styled.button`
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+`;
 
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
@@ -18,6 +33,7 @@ export default function MovieDetail({ movie }) {
   const [watchProvider, setWatchProvider] = useState("");
   const [castActors, setCastActors] = useState("");
   const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
+  const { watched, handleToggleWatched } = useContext(WatchedContext);
 
   const streamingProvider = watchProvider?.flatrate;
   const shownActors = castActors.slice(0, 4);
@@ -94,30 +110,86 @@ export default function MovieDetail({ movie }) {
     }
   }
 
+  function handleRemoveInWatchedPage(movie) {
+    if (router.asPath.includes("my-watched")) {
+      handleToggleWatched(movie);
+      router.push("/my-watchlist");
+    } else {
+      handleToggleWatched(movie);
+    }
+  }
+
   return (
     <>
-      <section>
+      <PushButton />
+      <StyledSectionHeader>
         {" "}
-        <PushButton name={"Back"} route={handlePushButtonRoute(router)} />
-      </section>
+        <h3>Movie Details</h3>
+      </StyledSectionHeader>
       <section>
-        <Image
-          src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-          alt={movie.title}
-          width={202.5}
-          height={300}
-        />
+        <section>
+          <Image
+            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+            alt={movie.title}
+            width={202.5}
+            height={300}
+          />
+        </section>
+        <StyledSectionButtons>
+          <StyledButton
+            onClick={() => {
+              handleRemoveInWatchlistPage(movie);
+            }}
+          >
+            {JSON.stringify(watchlist).includes(JSON.stringify(movie)) ? (
+              <>
+                <Image
+                  alt={"in-watchlist"}
+                  src={"/in-watchlist.png"}
+                  width={40}
+                  height={40}
+                />{" "}
+              </>
+            ) : (
+              <>
+                <Image
+                  alt={"not-in-watchlist"}
+                  src={"/not-in-watchlist.png"}
+                  width={39}
+                  height={39}
+                />
+              </>
+            )}
+          </StyledButton>
+
+          <StyledButton
+            onClick={() => {
+              handleRemoveInWatchedPage(movie);
+            }}
+          >
+            {JSON.stringify(watched).includes(JSON.stringify(movie)) ? (
+              <>
+                <Image
+                  alt={"in-watched"}
+                  src={"/in-watched.png"}
+                  width={40}
+                  height={40}
+                />
+              </>
+            ) : (
+              <>
+                <Image
+                  alt={"not-in-watched"}
+                  src={"/not-in-watched.png"}
+                  width={40}
+                  height={40}
+                />
+              </>
+            )}
+          </StyledButton>
+        </StyledSectionButtons>
       </section>
 
-      <button
-        onClick={() => {
-          handleRemoveInWatchlistPage(movie);
-        }}
-      >
-        {JSON.stringify(watchlist).includes(JSON.stringify(movie))
-          ? "Remove from Watchlist"
-          : "Add to Watchlist"}
-      </button>
       {/* Currently votes from the community of the api. In the 
         future trying to use the IMDB vote. */}
       <p>{getPopularityDecimal(movieDetails?.vote_average)}/10 Rating</p>
