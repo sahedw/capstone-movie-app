@@ -45,6 +45,10 @@ export default function MovieDetail({ movie }) {
 
   const streamingProvider = watchProvider?.flatrate;
   const shownActors = castActors.slice(0, 4);
+  const router = useRouter();
+  const trailer = youtubeKey?.results?.find(
+    (videoObject) => videoObject.type === "Trailer"
+  );
 
   useEffect(() => {
     async function fetchData() {
@@ -122,12 +126,6 @@ export default function MovieDetail({ movie }) {
     }
     fetchData();
   }, []);
-
-  const router = useRouter();
-
-  const trailer = youtubeKey?.results?.find(
-    (videoObject) => videoObject.type === "Trailer"
-  );
 
   function handleRemoveInWatchlistPage(movie) {
     if (router.asPath.includes("my-watchlist")) {
