@@ -121,7 +121,7 @@ export default function Home() {
     <>
       <main>
         <StyledSectionHeader>
-          <h1>Welcome back!</h1>
+          <h1>Welcome back 👋🏼</h1>
           <p>
             Grab your 🍿 and lets watch a <strong>movie!</strong>{" "}
           </p>
