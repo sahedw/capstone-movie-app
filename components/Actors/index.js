@@ -16,8 +16,6 @@ const StyledName = styled.p`
 export default function Actors({ actors }) {
   if (!actors) return <p>Loading cast...</p>;
 
-  console.log();
-
   return (
     <StyledList>
       {actors?.map((actor) => {

@@ -27,10 +27,6 @@ export default function MovieDetailPage() {
 
   const currentMovie = handleDetailHomePage();
 
-  /*  const currentMovie = watchlist.find(
-    (movie) => movie.id.toString() === router.query.id
-  ); */
-
   if (!currentMovie)
     return (
       <main>

@@ -4,9 +4,7 @@ import { WatchlistContext } from "../_app";
 import Movie from "../../components/Movie";
 import styled from "styled-components";
 import Link from "next/link";
-import PushButton from "../../components/PushButton";
 import Navigation from "../../components/Navigation";
-import { useRouter } from "next/router";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
