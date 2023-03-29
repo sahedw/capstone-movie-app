@@ -11,6 +11,7 @@ import Actors from "../Actors";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import ReactPlayer from "react-player";
 
 const StyledSectionHeader = styled.section`
   display: flex;
