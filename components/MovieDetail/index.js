@@ -40,6 +40,12 @@ export default function MovieDetail({ movie }) {
   const streamingProvider = watchProvider?.flatrate;
   const shownActors = castActors.slice(0, 4);
 
+  function displayTrailer() {
+    setShowTrailer(!showTrailer);
+  }
+
+  console.log(showTrailer);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -192,16 +198,21 @@ export default function MovieDetail({ movie }) {
         </StyledSectionButtons>
       </section>
       <section>
-        <ReactPlayer
-          controls={true}
-          volume={0.2}
-          width={300}
-          height={200}
-          url={
-            "https://www.youtube.com/watch?v=_64S_ixM5Ng&ab_channel=WarnerBros.DE"
-          }
-        />
+        {showTrailer ? (
+          <ReactPlayer
+            controls={true}
+            volume={0.2}
+            width={300}
+            height={200}
+            url={
+              "https://www.youtube.com/watch?v=_64S_ixM5Ng&ab_channel=WarnerBros.DE"
+            }
+          />
+        ) : null}
       </section>
+      <button onClick={displayTrailer}>
+        {showTrailer ? "Hide Trailer" : "Show Trailer"}
+      </button>
       {/* Currently votes from the community of the api. In the 
         future trying to use the IMDB vote. */}
       <p>{getPopularityDecimal(movieDetails?.vote_average)}/10 Rating</p>
