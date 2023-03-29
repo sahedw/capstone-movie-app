@@ -27,7 +27,7 @@ export default function MyWatchedPage() {
 
   return (
     <main>
-      <h2>My Watched movies:</h2>
+      <h2>My Watched:</h2>
       <section>
         {watched.map((movie) => {
           return (

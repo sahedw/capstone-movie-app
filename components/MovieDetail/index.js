@@ -113,7 +113,7 @@ export default function MovieDetail({ movie }) {
   function handleRemoveInWatchedPage(movie) {
     if (router.asPath.includes("my-watched")) {
       handleToggleWatched(movie);
-      router.push("/my-watchlist");
+      router.push("/my-watched");
     } else {
       handleToggleWatched(movie);
     }
