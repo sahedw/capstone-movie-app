@@ -28,7 +28,7 @@ export default function MyWatchlistPage() {
 
   return (
     <main>
-      <h2>My Watchlist:</h2>
+      <h2>My Watchlist ({watchlist.length}):</h2>
       <section>
         {watchlist.map((movie) => {
           return (
