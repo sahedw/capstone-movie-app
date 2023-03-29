@@ -114,6 +114,28 @@ export default function Navigation() {
               </StyledDiv>
             </StyledListItem>
           </StyledLink>
+          <StyledLink href={"/my-watched"}>
+            <StyledListItem>
+              <StyledDiv>
+                <StyledImage
+                  src={setCurrentNavIcon(router, "/my-watched", "/", "watched")}
+                  alt="icon"
+                  width={25}
+                  height={25}
+                />
+                <StyledParagraphText
+                  value={setCurrentNavText(
+                    router,
+                    "/my-watched",
+                    "/",
+                    "watched"
+                  )}
+                >
+                  Watched
+                </StyledParagraphText>
+              </StyledDiv>
+            </StyledListItem>
+          </StyledLink>
           <StyledLink href={"/cinema"}>
             <StyledListItem>
               <StyledDiv>
