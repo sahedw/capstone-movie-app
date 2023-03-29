@@ -38,6 +38,7 @@ export default function MovieDetail({ movie }) {
   const [movieDetails, setMovieDetails] = useState(null);
   const [watchProvider, setWatchProvider] = useState("");
   const [castActors, setCastActors] = useState("");
+  const [youtubeKey, setYoutubeKey] = useState("");
   const [showTrailer, setShowTrailer] = useState(false);
   const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
   const { watched, handleToggleWatched } = useContext(WatchedContext);
@@ -103,7 +104,30 @@ export default function MovieDetail({ movie }) {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setYoutubeKey(data);
+        } else {
+          throw new Error("Something went wrong");
+        }
+      } catch (error) {
+        console.log(`Error: ${error.message}`);
+      }
+    }
+    fetchData();
+  }, []);
+
   const router = useRouter();
+
+  const trailer = youtubeKey?.results?.find(
+    (videoObject) => videoObject.type === "Trailer"
+  );
 
   function handleRemoveInWatchlistPage(movie) {
     if (router.asPath.includes("my-watchlist")) {
@@ -210,9 +234,7 @@ export default function MovieDetail({ movie }) {
             volume={0.2}
             width={300}
             height={200}
-            url={
-              "https://www.youtube.com/watch?v=_64S_ixM5Ng&ab_channel=WarnerBros.DE"
-            }
+            url={`https://www.youtube.com/watch?v=${trailer.key}`}
           />
         ) : null}
       </section>
