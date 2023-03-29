@@ -33,6 +33,7 @@ export default function MovieDetail({ movie }) {
   const [movieDetails, setMovieDetails] = useState(null);
   const [watchProvider, setWatchProvider] = useState("");
   const [castActors, setCastActors] = useState("");
+  const [showTrailer, setShowTrailer] = useState(false);
   const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
   const { watched, handleToggleWatched } = useContext(WatchedContext);
 
