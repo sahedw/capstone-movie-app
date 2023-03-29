@@ -14,6 +14,12 @@ const StyledSection = styled.section`
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+  transition: 0.3s ease-out;
+
+  :hover {
+    transition: 0.3s ease-in-out;
+    transform: translateY(-10px);
+  }
 `;
 
 const StyledSectionText = styled.section`
