@@ -28,6 +28,11 @@ const StyledButton = styled.button`
   border: none;
 `;
 
+const StyledShowTrailerButton = styled.button`
+  background-color: transparent;
+  border: none;
+`;
+
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
   const [movieDetails, setMovieDetails] = useState(null);
@@ -39,12 +44,6 @@ export default function MovieDetail({ movie }) {
 
   const streamingProvider = watchProvider?.flatrate;
   const shownActors = castActors.slice(0, 4);
-
-  function displayTrailer() {
-    setShowTrailer(!showTrailer);
-  }
-
-  console.log(showTrailer);
 
   useEffect(() => {
     async function fetchData() {
@@ -127,6 +126,10 @@ export default function MovieDetail({ movie }) {
     }
   }
 
+  function displayTrailer() {
+    setShowTrailer(!showTrailer);
+  }
+
   return (
     <>
       <PushButton />
@@ -197,6 +200,9 @@ export default function MovieDetail({ movie }) {
           </StyledButton>
         </StyledSectionButtons>
       </section>
+      <StyledShowTrailerButton onClick={displayTrailer}>
+        {showTrailer ? "Hide the trailer" : "Watch the trailer"}
+      </StyledShowTrailerButton>
       <section>
         {showTrailer ? (
           <ReactPlayer
@@ -210,9 +216,7 @@ export default function MovieDetail({ movie }) {
           />
         ) : null}
       </section>
-      <button onClick={displayTrailer}>
-        {showTrailer ? "Hide Trailer" : "Show Trailer"}
-      </button>
+
       {/* Currently votes from the community of the api. In the 
         future trying to use the IMDB vote. */}
       <p>{getPopularityDecimal(movieDetails?.vote_average)}/10 Rating</p>
