@@ -190,7 +190,17 @@ export default function MovieDetail({ movie }) {
           </StyledButton>
         </StyledSectionButtons>
       </section>
-
+      <section>
+        <ReactPlayer
+          controls={true}
+          volume={0.2}
+          width={300}
+          height={200}
+          url={
+            "https://www.youtube.com/watch?v=_64S_ixM5Ng&ab_channel=WarnerBros.DE"
+          }
+        />
+      </section>
       {/* Currently votes from the community of the api. In the 
         future trying to use the IMDB vote. */}
       <p>{getPopularityDecimal(movieDetails?.vote_average)}/10 Rating</p>
