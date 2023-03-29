@@ -1,10 +1,9 @@
 import React from "react";
 import { useContext } from "react";
-import { WatchlistContext } from "../_app";
+import { WatchedContext } from "../_app";
 import Movie from "../../components/Movie";
 import styled from "styled-components";
 import Link from "next/link";
-import PushButton from "../../components/PushButton";
 import Navigation from "../../components/Navigation";
 import { useRouter } from "next/router";
 
@@ -14,10 +13,10 @@ const StyledLink = styled(Link)`
   cursor: pointer;
 `;
 
-export default function MyWatchlistPage() {
-  const { watchlist } = useContext(WatchlistContext);
+export default function MyWatchedPage() {
+  const { watched } = useContext(WatchedContext);
 
-  if (watchlist.length === 0)
+  if (watched.length === 0)
     return (
       <main>
         <h2>Nothing to 👀 here.</h2>
@@ -28,11 +27,11 @@ export default function MyWatchlistPage() {
 
   return (
     <main>
-      <h2>My Watchlist ({watchlist.length}):</h2>
+      <h2>My Watched ({watched.length}):</h2>
       <section>
-        {watchlist.map((movie) => {
+        {watched.map((movie) => {
           return (
-            <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
+            <StyledLink key={movie.id} href={`my-watched/${movie.id}`}>
               <Movie movie={movie} />
             </StyledLink>
           );
