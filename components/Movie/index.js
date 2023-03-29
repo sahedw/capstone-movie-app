@@ -17,7 +17,6 @@ const StyledSection = styled.section`
   transition: 0.3s ease-out;
 
   :hover {
-    transition: 0.3s ease-in-out;
     transform: translateY(-10px);
   }
 `;
