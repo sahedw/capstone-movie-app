@@ -8,6 +8,7 @@ import getRandomIndexFromArray from "../utils/getRandomIndexFromArray";
 import { suggestionText } from "./api/suggestionText";
 import Link from "next/link";
 import MovieSneakPeek from "../components/MovieSneakPeek";
+import { useFetch } from "../hooks/useFetch";
 
 const StyledSectionHeader = styled.section`
   padding-left: 30px;
@@ -60,7 +61,7 @@ const StyledSectionTrendingFlex = styled.p`
 `;
 
 const StyledButtonDay = styled.button`
-  padding-left: 0;
+  padding-left: 5px;
   border: none;
   background-color: transparent;
 
@@ -74,7 +75,7 @@ const StyledButtonDay = styled.button`
 `;
 
 const StyledButtonWeek = styled.button`
-  padding-left: 0;
+  padding-left: 5px;
   border: none;
   background-color: transparent;
 

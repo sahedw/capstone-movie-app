@@ -3,6 +3,8 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import { createContext } from "react";
 import useLocalStorageState from "use-local-storage-state";
+import { useLocalStorageFetch } from "../hooks/useLocalStorageFetch";
+import { useFetch } from "../hooks/useFetch";
 
 export const DataContext = createContext();
 export const WatchlistContext = createContext();
@@ -11,9 +13,6 @@ export const TrendingContext = createContext();
 export const WatchedContext = createContext();
 
 export default function App({ Component, pageProps }) {
-  const [movies, setMovies] = useLocalStorageState("newMovies", {
-    defaultValue: [],
-  });
   const [watchlist, setWatchlist] = useLocalStorageState("newWatchlist", {
     defaultValue: [],
   });
@@ -21,75 +20,31 @@ export default function App({ Component, pageProps }) {
     defaultValue: [],
   });
 
-  const [currentlyInCinemas, setCurrentlyInCinemas] = useLocalStorageState(
-    "newCinemas",
-    {
-      defaultValue: [],
-    }
-  );
-
-  const [trendingMovies, setTrendingMovies] = useState([]);
   const [dayTrending, setDayTrending] = useState(true);
 
   const [search, setSearch] = useState("");
 
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}`;
+  const movies = useLocalStorageFetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}`,
+    "newMovies",
+    [],
+    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}`
+  );
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(url);
-        if (response.ok) {
-          const data = await response.json();
-          setMovies(data.results);
-        } else {
-          throw new Error("Something went wrong");
-        }
-      } catch (error) {
-        console.log(`Error: ${error.message}`);
-      }
-    }
-    fetchData();
-  }, [url]);
+  const currentlyInCinemas = useLocalStorageFetch(
+    `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`,
+    "newCinema",
+    [],
+    `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
+  );
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setCurrentlyInCinemas(data.results);
-        } else {
-          throw new Error("Something went wrong");
-        }
-      } catch (error) {
-        console.log(`Error: ${error.message}`);
-      }
-    }
-    fetchData();
-  }, [url]);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const url = `https://api.themoviedb.org/3/trending/movie/${
-          dayTrending ? "day" : "week"
-        }?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
-        const response = await fetch(url);
-        if (response.ok) {
-          const data = await response.json();
-          setTrendingMovies(data.results);
-        } else {
-          throw new Error("Something went wrong");
-        }
-      } catch (error) {
-        console.log(`Error: ${error.message}`);
-      }
-    }
-    fetchData();
-  }, [dayTrending]);
+  const trendingMovies = useFetch(
+    `https://api.themoviedb.org/3/trending/movie/${
+      dayTrending ? "day" : "week"
+    }?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+    [],
+    dayTrending
+  );
 
   function handleFormSubmit(event) {
     event.preventDefault();

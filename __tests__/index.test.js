@@ -121,12 +121,6 @@ test("Should render the MovieDetail component and the availability if not availa
   expect(element).toBeInTheDocument();
 });
 
-/* test("Should render the MovieDetail component and the stream providers", () => {
-  render(<MovieDetail movie={fullMovie} />);
-  const element = screen.getByText("Netflix");
-  expect(element).toBeInTheDocument();
-}); */
-
 test("Should render the Actors component with actor name", () => {
   render(<Actors actors={fullMovie.actors} />);
   const actorOne = screen.getByText("John Doe");
