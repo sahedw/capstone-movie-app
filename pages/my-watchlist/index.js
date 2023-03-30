@@ -7,6 +7,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import Navigation from "../../components/Navigation";
+import useLocalStorageState from "use-local-storage-state";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -15,7 +16,9 @@ const StyledLink = styled(Link)`
 `;
 
 export default function MyWatchlistPage() {
-  const [listLayout, setListLayout] = useState(true);
+  const [listLayout, setListLayout] = useLocalStorageState("newLayout", {
+    defaultValue: true,
+  });
   const { watchlist } = useContext(WatchlistContext);
 
   function setLayoutType(boolean) {
@@ -50,24 +53,27 @@ export default function MyWatchlistPage() {
       >
         Grid
       </button>
-      <section>
-        {watchlist.map((movie) => {
-          return (
-            <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
-              <Movie movie={movie} />
-            </StyledLink>
-          );
-        })}
-      </section>
-      <section>
-        {watchlist.map((movie) => {
-          return (
-            <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
-              <MovieGrid movie={movie} />
-            </StyledLink>
-          );
-        })}
-      </section>
+      {listLayout ? (
+        <section>
+          {watchlist.map((movie) => {
+            return (
+              <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
+                <Movie movie={movie} />
+              </StyledLink>
+            );
+          })}
+        </section>
+      ) : (
+        <section>
+          {watchlist.map((movie) => {
+            return (
+              <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
+                <MovieGrid movie={movie} />
+              </StyledLink>
+            );
+          })}
+        </section>
+      )}
       <Navigation />
     </main>
   );
