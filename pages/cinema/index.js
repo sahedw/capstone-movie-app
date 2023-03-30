@@ -18,6 +18,11 @@ const StyledDiv = styled.div`
   grid-row-gap: 10px;
 `;
 
+const StyledSection = styled.section`
+  padding-left: 15px;
+  padding-right: 15px;
+`;
+
 export default function CinemaPage() {
   const { currentlyInCinemas } = useContext(CinemaContext);
 
@@ -25,14 +30,16 @@ export default function CinemaPage() {
 
   return (
     <main>
-      <h2>Currently in cinemas:</h2>
-      <StyledDiv>
-        {currentlyInCinemas.map((movie) => (
-          <StyledLink key={movie.id} href={`cinema/${movie.id}`}>
-            <MovieGrid movie={movie} />
-          </StyledLink>
-        ))}
-      </StyledDiv>
+      <StyledSection>
+        <h2>Currently in cinemas:</h2>
+        <StyledDiv>
+          {currentlyInCinemas.map((movie) => (
+            <StyledLink key={movie.id} href={`cinema/${movie.id}`}>
+              <MovieGrid movie={movie} />
+            </StyledLink>
+          ))}
+        </StyledDiv>
+      </StyledSection>
       <Navigation />
     </main>
   );

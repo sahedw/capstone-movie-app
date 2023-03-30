@@ -30,12 +30,11 @@ const StyledMoviePick = styled.section`
 `;
 
 const StyledNoMoviePick = styled.section`
-  padding-left: 30px;
   width: 350px;
 `;
 
 const StyledHeader = styled.h4`
-  padding-left: 30px;
+  padding-left: 15px;
 `;
 
 const StyledLink = styled(Link)`
@@ -51,8 +50,8 @@ const StyledLine = styled.hr`
 
 const StyledSectionTrending = styled.section`
   margin-top: 40px;
-  padding-right: 30px;
-  padding-left: 30px;
+  padding-right: 15px;
+  padding-left: 15px;
 `;
 
 const StyledSectionTrendingFlex = styled.p`

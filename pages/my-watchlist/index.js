@@ -15,6 +15,44 @@ const StyledLink = styled(Link)`
   cursor: pointer;
 `;
 
+const StyledButtonList = styled.button`
+  border: none;
+  background-color: transparent;
+
+  :enabled {
+    color: black;
+  }
+
+  :disabled {
+    color: #f97b7b;
+  }
+`;
+
+const StyledButtonGrid = styled.button`
+  border: none;
+  background-color: transparent;
+
+  :enabled {
+    color: black;
+  }
+
+  :disabled {
+    color: #f97b7b;
+  }
+`;
+
+const StyledDiv = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  grid-row-gap: 5px;
+`;
+
+const StyledSection = styled.section`
+  padding-left: 15px;
+  padding-right: 15px;
+`;
+
 export default function MyWatchlistPage() {
   const [listLayout, setListLayout] = useLocalStorageState("newLayout", {
     defaultValue: true,
@@ -36,44 +74,46 @@ export default function MyWatchlistPage() {
 
   return (
     <main>
-      <h2>My Watchlist ({watchlist.length}):</h2>
-      <button
-        onClick={() => {
-          setLayoutType(true);
-        }}
-        disabled={listLayout ? true : false}
-      >
-        List
-      </button>
-      <button
-        onClick={() => {
-          setLayoutType(false);
-        }}
-        disabled={listLayout ? false : true}
-      >
-        Grid
-      </button>
-      {listLayout ? (
-        <section>
-          {watchlist.map((movie) => {
-            return (
-              <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
-                <Movie movie={movie} />
-              </StyledLink>
-            );
-          })}
-        </section>
-      ) : (
-        <section>
-          {watchlist.map((movie) => {
-            return (
-              <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
-                <MovieGrid movie={movie} />
-              </StyledLink>
-            );
-          })}
-        </section>
-      )}
+      <StyledSection>
+        <h2>My Watchlist ({watchlist.length}):</h2>
+        <StyledButtonList
+          onClick={() => {
+            setLayoutType(true);
+          }}
+          disabled={listLayout ? true : false}
+        >
+          List
+        </StyledButtonList>
+        <StyledButtonGrid
+          onClick={() => {
+            setLayoutType(false);
+          }}
+          disabled={listLayout ? false : true}
+        >
+          Grid
+        </StyledButtonGrid>
+        {listLayout ? (
+          <section>
+            {watchlist.map((movie) => {
+              return (
+                <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
+                  <Movie movie={movie} />
+                </StyledLink>
+              );
+            })}
+          </section>
+        ) : (
+          <StyledDiv>
+            {watchlist.map((movie) => {
+              return (
+                <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
+                  <MovieGrid movie={movie} />
+                </StyledLink>
+              );
+            })}
+          </StyledDiv>
+        )}
+      </StyledSection>
       <Navigation />
     </main>
   );

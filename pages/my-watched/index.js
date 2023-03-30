@@ -12,6 +12,11 @@ const StyledLink = styled(Link)`
   cursor: pointer;
 `;
 
+const StyledSection = styled.section`
+  padding-left: 15px;
+  padding-right: 15px;
+`;
+
 export default function MyWatchedPage() {
   const { watched } = useContext(WatchedContext);
 
@@ -26,16 +31,18 @@ export default function MyWatchedPage() {
 
   return (
     <main>
-      <h2>My Watched ({watched.length}):</h2>
-      <section>
-        {watched.map((movie) => {
-          return (
-            <StyledLink key={movie.id} href={`my-watched/${movie.id}`}>
-              <Movie movie={movie} />
-            </StyledLink>
-          );
-        })}
-      </section>
+      <StyledSection>
+        <h2>My Watched ({watched.length}):</h2>
+        <section>
+          {watched.map((movie) => {
+            return (
+              <StyledLink key={movie.id} href={`my-watched/${movie.id}`}>
+                <Movie movie={movie} />
+              </StyledLink>
+            );
+          })}
+        </section>
+      </StyledSection>
       <Navigation />
     </main>
   );
