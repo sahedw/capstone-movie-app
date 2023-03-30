@@ -60,7 +60,7 @@ const StyledSectionTrendingFlex = styled.p`
 `;
 
 const StyledButtonDay = styled.button`
-  padding-left: 0;
+  padding-left: 5px;
   border: none;
   background-color: transparent;
 
@@ -74,7 +74,7 @@ const StyledButtonDay = styled.button`
 `;
 
 const StyledButtonWeek = styled.button`
-  padding-left: 0;
+  padding-left: 5px;
   border: none;
   background-color: transparent;
 
