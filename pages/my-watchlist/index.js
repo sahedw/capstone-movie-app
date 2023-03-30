@@ -2,6 +2,8 @@ import React from "react";
 import { useContext } from "react";
 import { WatchlistContext } from "../_app";
 import Movie from "../../components/Movie";
+import MovieGrid from "../../components/MovieGrid";
+
 import styled from "styled-components";
 import Link from "next/link";
 import Navigation from "../../components/Navigation";
@@ -32,6 +34,15 @@ export default function MyWatchlistPage() {
           return (
             <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
               <Movie movie={movie} />
+            </StyledLink>
+          );
+        })}
+      </section>
+      <section>
+        {watchlist.map((movie) => {
+          return (
+            <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
+              <MovieGrid movie={movie} />
             </StyledLink>
           );
         })}
