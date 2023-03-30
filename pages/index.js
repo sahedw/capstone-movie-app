@@ -11,7 +11,14 @@ import MovieSneakPeek from "../components/MovieSneakPeek";
 import Image from "next/image";
 
 const StyledSectionHeader = styled.section`
+  position: relative;
   padding-left: 15px;
+`;
+
+const StyledSettingsIcon = styled(Image)`
+  position: absolute;
+  top: 0;
+  right: 15px;
 `;
 
 const StyledTrendingHeader = styled.h4`
@@ -129,11 +136,17 @@ export default function Home() {
   return (
     <>
       <main>
-        <section>
-          <Image />
-        </section>
         <StyledSectionHeader>
           <h1>Welcome back 👋🏼</h1>
+          <Link href={"/settings"}>
+            <StyledSettingsIcon
+              src={"/settings.png"}
+              alt="settings-icon"
+              width={25}
+              height={25}
+            />
+          </Link>
+
           <p>
             Grab your 🍿 and lets watch a <strong>movie!</strong>{" "}
           </p>
