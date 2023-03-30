@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 
-export function useLocalStorageFetch(url, key, defaultValue, dependency) {
+export function useLocalStorageFetch(url, key, initialValue, dependency) {
   const [data, setData] = useLocalStorageState(key, {
-    defaultValue: defaultValue,
+    defaultValue: initialValue,
   });
 
   useEffect(() => {
