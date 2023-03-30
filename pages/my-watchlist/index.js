@@ -46,11 +46,16 @@ const StyledDiv = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
   grid-row-gap: 5px;
+  margin-top: 15px;
 `;
 
 const StyledSection = styled.section`
   padding-left: 15px;
   padding-right: 15px;
+`;
+
+const StyledSectionList = styled.section`
+  margin-top: 15px;
 `;
 
 export default function MyWatchlistPage() {
@@ -93,7 +98,7 @@ export default function MyWatchlistPage() {
           Grid
         </StyledButtonGrid>
         {listLayout ? (
-          <section>
+          <StyledSectionList>
             {watchlist.map((movie) => {
               return (
                 <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
@@ -101,7 +106,7 @@ export default function MyWatchlistPage() {
                 </StyledLink>
               );
             })}
-          </section>
+          </StyledSectionList>
         ) : (
           <StyledDiv>
             {watchlist.map((movie) => {

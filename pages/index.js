@@ -11,7 +11,7 @@ import MovieSneakPeek from "../components/MovieSneakPeek";
 import { useFetch } from "../hooks/useFetch";
 
 const StyledSectionHeader = styled.section`
-  padding-left: 30px;
+  padding-left: 15px;
 `;
 
 const StyledTrendingHeader = styled.h4`
