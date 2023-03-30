@@ -53,8 +53,6 @@ export default function MovieDetail({ movie }) {
   const streamingProviderBuy = watchProvider?.buy;
   const streamingProviderRent = watchProvider?.rent;
 
-  console.log(watchProvider);
-
   useEffect(() => {
     async function fetchData() {
       try {
