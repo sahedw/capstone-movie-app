@@ -115,9 +115,7 @@ test("Should render the MovieDetail component and the availability if not availa
       </WatchlistContext.Provider>
     </WatchedContext.Provider>
   );
-  const element = screen.getByText(
-    "Not available for streaming with a flatrate"
-  );
+  const element = screen.getByText("Flatrate: Not available");
   expect(element).toBeInTheDocument();
 });
 
