@@ -55,8 +55,9 @@ const StyledSectionTrending = styled.section`
 `;
 
 const StyledSectionTrendingFlex = styled.p`
+  margin-top: 0;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
 `;
 
 const StyledButtonDay = styled.button`

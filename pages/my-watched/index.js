@@ -53,6 +53,15 @@ const StyledSection = styled.section`
   padding-right: 15px;
 `;
 
+const StyledSectionButtonsFlex = styled.section`
+  width: 100%;
+`;
+
+const StyledSectionButtons = styled.section`
+  display: flex;
+  justify-content: flex-end;
+`;
+
 const StyledSectionList = styled.section`
   margin-top: 15px;
 `;
@@ -80,22 +89,26 @@ export default function MyWatchedPage() {
     <main>
       <StyledSection>
         <h2>My Watched movies ({watched.length}):</h2>
-        <StyledButtonList
-          onClick={() => {
-            setLayoutType(true);
-          }}
-          disabled={listLayout ? true : false}
-        >
-          List
-        </StyledButtonList>
-        <StyledButtonGrid
-          onClick={() => {
-            setLayoutType(false);
-          }}
-          disabled={listLayout ? false : true}
-        >
-          Grid
-        </StyledButtonGrid>
+        <StyledSectionButtonsFlex>
+          <StyledSectionButtons>
+            <StyledButtonList
+              onClick={() => {
+                setLayoutType(true);
+              }}
+              disabled={listLayout ? true : false}
+            >
+              List
+            </StyledButtonList>
+            <StyledButtonGrid
+              onClick={() => {
+                setLayoutType(false);
+              }}
+              disabled={listLayout ? false : true}
+            >
+              Grid
+            </StyledButtonGrid>
+          </StyledSectionButtons>
+        </StyledSectionButtonsFlex>
         {listLayout ? (
           <StyledSectionList>
             {watched.map((movie) => {
