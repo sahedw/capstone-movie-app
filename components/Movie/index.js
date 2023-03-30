@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import getGenreFrom from "../../utils/getGenreFrom";
+import { useFetch } from "../../hooks/useFetch";
 
 const StyledDiv = styled.div`
   height: 200px;

@@ -12,6 +12,7 @@ import { useContext } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
+import { useFetch } from "../../hooks/useFetch";
 
 const StyledSectionHeader = styled.section`
   display: flex;
@@ -43,12 +44,12 @@ export default function MovieDetail({ movie }) {
   const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
   const { watched, handleToggleWatched } = useContext(WatchedContext);
 
-  const streamingProvider = watchProvider?.flatrate;
   const shownActors = castActors.slice(0, 4);
   const router = useRouter();
   const trailer = youtubeKey?.results?.find(
     (videoObject) => videoObject.type === "Trailer"
   );
+  const streamingProvider = watchProvider?.flatrate;
 
   useEffect(() => {
     async function fetchData() {

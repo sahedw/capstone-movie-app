@@ -8,6 +8,7 @@ import getRandomIndexFromArray from "../utils/getRandomIndexFromArray";
 import { suggestionText } from "./api/suggestionText";
 import Link from "next/link";
 import MovieSneakPeek from "../components/MovieSneakPeek";
+import { useFetch } from "../hooks/useFetch";
 
 const StyledSectionHeader = styled.section`
   padding-left: 30px;
