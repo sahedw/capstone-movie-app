@@ -16,8 +16,8 @@ export default function MovieGrid({ movie }) {
     <StyledImage
       src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
       alt={movie.title}
-      width={120}
-      height={175}
+      width={100}
+      height={145}
     />
   );
 }

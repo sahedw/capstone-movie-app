@@ -8,7 +8,7 @@ import { useFetch } from "../../hooks/useFetch";
 
 const StyledDiv = styled.div`
   height: 200px;
-  width: 135px;
+  width: 120px;
 `;
 
 const StyledSection = styled.section`
@@ -25,6 +25,7 @@ const StyledSection = styled.section`
 const StyledSectionText = styled.section`
   width: 200px;
   margin-left: 20px;
+  padding-left: 10px;
 `;
 
 const StyledParagraph = styled.p`

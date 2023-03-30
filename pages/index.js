@@ -1,5 +1,5 @@
 import Form from "../components/Form";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useMemo } from "react";
 import { DataContext, WatchlistContext, TrendingContext } from "./_app";
 import Navigation from "../components/Navigation";
 import styled from "styled-components";
@@ -11,7 +11,7 @@ import MovieSneakPeek from "../components/MovieSneakPeek";
 import { useFetch } from "../hooks/useFetch";
 
 const StyledSectionHeader = styled.section`
-  padding-left: 30px;
+  padding-left: 15px;
 `;
 
 const StyledTrendingHeader = styled.h4`
@@ -30,12 +30,11 @@ const StyledMoviePick = styled.section`
 `;
 
 const StyledNoMoviePick = styled.section`
-  padding-left: 30px;
   width: 350px;
 `;
 
 const StyledHeader = styled.h4`
-  padding-left: 30px;
+  padding-left: 15px;
 `;
 
 const StyledLink = styled(Link)`
@@ -51,13 +50,14 @@ const StyledLine = styled.hr`
 
 const StyledSectionTrending = styled.section`
   margin-top: 40px;
-  padding-right: 30px;
-  padding-left: 30px;
+  padding-right: 15px;
+  padding-left: 15px;
 `;
 
 const StyledSectionTrendingFlex = styled.p`
+  margin-top: 0;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
 `;
 
 const StyledButtonDay = styled.button`
@@ -96,7 +96,15 @@ export default function Home() {
 
   const [runtime, setRuntime] = useState(0);
 
-  const randomMovie = getRandomIndexFromArray(watchlist);
+  const randomMovie = useMemo(
+    () => getRandomIndexFromArray(watchlist),
+    [watchlist]
+  );
+  const randomText = useMemo(
+    () => suggestionText[getRandomIndexFromArray(suggestionText)],
+    [watchlist]
+  );
+
   const cutTrendingArray = trendingMovies.slice(0, 9);
 
   useEffect(() => {
@@ -133,9 +141,7 @@ export default function Home() {
         <StyledLine />
         {watchlist.length > 0 ? (
           <StyledMoviePick>
-            <StyledHeader>
-              {suggestionText[getRandomIndexFromArray(suggestionText)]}
-            </StyledHeader>
+            <StyledHeader>{randomText}</StyledHeader>
             <StyledLink href={`/${watchlist[randomMovie].id}`}>
               <Movie movie={watchlist[randomMovie]} />
             </StyledLink>
