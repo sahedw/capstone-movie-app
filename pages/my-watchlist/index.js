@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { WatchlistContext } from "../_app";
 import Movie from "../../components/Movie";
 import MovieGrid from "../../components/MovieGrid";
-import { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import Navigation from "../../components/Navigation";
