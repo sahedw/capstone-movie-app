@@ -8,7 +8,7 @@ import getRandomIndexFromArray from "../utils/getRandomIndexFromArray";
 import { suggestionText } from "./api/suggestionText";
 import Link from "next/link";
 import MovieSneakPeek from "../components/MovieSneakPeek";
-import { useFetch } from "../hooks/useFetch";
+import Image from "next/image";
 
 const StyledSectionHeader = styled.section`
   padding-left: 15px;
@@ -129,6 +129,9 @@ export default function Home() {
   return (
     <>
       <main>
+        <section>
+          <Image />
+        </section>
         <StyledSectionHeader>
           <h1>Welcome back 👋🏼</h1>
           <p>
