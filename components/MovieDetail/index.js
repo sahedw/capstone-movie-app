@@ -49,7 +49,11 @@ export default function MovieDetail({ movie }) {
   const trailer = youtubeKey?.results?.find(
     (videoObject) => videoObject.type === "Trailer"
   );
-  const streamingProvider = watchProvider?.flatrate;
+  const streamingProviderFlatrate = watchProvider?.flatrate;
+  const streamingProviderBuy = watchProvider?.buy;
+  const streamingProviderRent = watchProvider?.rent;
+
+  console.log(watchProvider);
 
   useEffect(() => {
     async function fetchData() {
@@ -251,7 +255,10 @@ export default function MovieDetail({ movie }) {
       The api also is able to show where its rentable or buyable.
       For future features also display these informations */}
       <Actors actors={shownActors} />
-      <p>{`${showWatchProviders(streamingProvider)}`}</p>
+      <h3>Availability:</h3>
+      <p>Flatrate: {`${showWatchProviders(streamingProviderFlatrate)}`}</p>
+      <p>Renting: {`${showWatchProviders(streamingProviderRent)}`}</p>
+      <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>
     </>
   );
 }
