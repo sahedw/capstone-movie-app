@@ -1,5 +1,5 @@
 import Form from "../components/Form";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useMemo } from "react";
 import { DataContext, WatchlistContext, TrendingContext } from "./_app";
 import Navigation from "../components/Navigation";
 import styled from "styled-components";
@@ -96,7 +96,15 @@ export default function Home() {
 
   const [runtime, setRuntime] = useState(0);
 
-  const randomMovie = getRandomIndexFromArray(watchlist);
+  const randomMovie = useMemo(
+    () => getRandomIndexFromArray(watchlist),
+    [watchlist]
+  );
+  const randomText = useMemo(
+    () => suggestionText[getRandomIndexFromArray(suggestionText)],
+    [watchlist]
+  );
+
   const cutTrendingArray = trendingMovies.slice(0, 9);
 
   useEffect(() => {
@@ -133,9 +141,7 @@ export default function Home() {
         <StyledLine />
         {watchlist.length > 0 ? (
           <StyledMoviePick>
-            <StyledHeader>
-              {suggestionText[getRandomIndexFromArray(suggestionText)]}
-            </StyledHeader>
+            <StyledHeader>{randomText}</StyledHeader>
             <StyledLink href={`/${watchlist[randomMovie].id}`}>
               <Movie movie={watchlist[randomMovie]} />
             </StyledLink>
