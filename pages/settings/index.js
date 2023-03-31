@@ -6,7 +6,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation";
 import useLocalStorageState from "use-local-storage-state";
-import { Tooltip } from "react-tooltip";
+// import { Tooltip } from "react-tooltip";
 
 const StyledSectionTopic = styled.section`
   display: flex;
@@ -29,8 +29,6 @@ export default function SettingsPage() {
   const { getAvailabilitySeletion, availabilityOption, themeToggler, theme } =
     useContext(DataContext);
 
-  console.log(Tooltip);
-
   return (
     <main>
       <PushButton />
@@ -44,10 +42,10 @@ export default function SettingsPage() {
             </button>
           </StyledSectionTopic>
           <StyledSectionTopic>
-            <Tooltip id="my-tooltip" />
+            {/* <Tooltip id="my-tooltip" /> */}
             <h4
-              data-tooltip-id="my-tooltip"
-              data-tooltip-content="select the availability options in the movie details"
+            /*  data-tooltip-id="my-tooltip"
+              data-tooltip-content="select the availability options in the movie details" */
             >
               Availability:
             </h4>
