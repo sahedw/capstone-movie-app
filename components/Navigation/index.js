@@ -9,12 +9,12 @@ import { DataContext } from "../../pages/_app";
 import { useContext } from "react";
 
 const StyledFooter = styled.footer`
-  background-color: white;
+  background-color: ${(props) => props.theme.navigation};
   position: fixed;
   width: 100%;
   height: 80px;
   bottom: -1px;
-  border-top: 1px solid lightgrey;
+  border-top: 1px solid grey;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 `;

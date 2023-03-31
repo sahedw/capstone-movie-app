@@ -96,7 +96,7 @@ export default function App({ Component, pageProps }) {
     setAvailabilityOption(event.target.value);
   }
 
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
 
   function themeToggler() {
     theme === "light" ? setTheme("dark") : setTheme("light");

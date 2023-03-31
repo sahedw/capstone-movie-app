@@ -73,7 +73,7 @@ const StyledButtonDay = styled.button`
   background-color: transparent;
 
   :enabled {
-    color: black;
+    color: ${(props) => props.theme.fontColor};
   }
 
   :disabled {
@@ -87,7 +87,7 @@ const StyledButtonWeek = styled.button`
   background-color: transparent;
 
   :enabled {
-    color: black;
+    color: ${(props) => props.theme.fontColor};
   }
 
   :disabled {
@@ -96,7 +96,7 @@ const StyledButtonWeek = styled.button`
 `;
 
 export default function Home() {
-  const { handleFormSubmit, movies } = useContext(DataContext);
+  const { handleFormSubmit, movies, theme } = useContext(DataContext);
   const { watchlist } = useContext(WatchlistContext);
   const { dayTrending, trendingMovies, handleTrendingSort } =
     useContext(TrendingContext);
@@ -177,6 +177,7 @@ export default function Home() {
           <StyledTrendingHeader>Trending movies:</StyledTrendingHeader>
           <StyledSectionTrendingFlex>
             <StyledButtonDay
+              color={theme}
               onClick={() => {
                 handleTrendingSort(true);
               }}

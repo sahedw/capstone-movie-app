@@ -37,7 +37,7 @@ export default function SettingsPage() {
           <StyledSectionTopic>
             <h4>Dark Mode:</h4>
             <button onClick={themeToggler}>
-              {theme === "light" ? "On" : "Off"}
+              {theme === "light" ? "Off" : "On"}
             </button>
           </StyledSectionTopic>
           <StyledSectionTopic>

@@ -35,6 +35,7 @@ const StyledButton = styled.button`
 
 const StyledShowTrailerButton = styled.button`
   background-color: transparent;
+  color: ${(props) => props.theme.fontColor};
   border: none;
 `;
 
@@ -45,7 +46,7 @@ export default function MovieDetail({ movie }) {
   const [castActors, setCastActors] = useState("");
   const [youtubeKey, setYoutubeKey] = useState("");
   const [showTrailer, setShowTrailer] = useState(false);
-  const { availabilityOption } = useContext(DataContext);
+  const { availabilityOption, theme } = useContext(DataContext);
   const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
   const { watched, handleToggleWatched } = useContext(WatchedContext);
 
@@ -160,6 +161,14 @@ export default function MovieDetail({ movie }) {
     setShowTrailer(!showTrailer);
   }
 
+  function getIconForTheme(theme) {
+    if (theme === "dark") {
+      return `-${theme}`;
+    } else {
+      return "";
+    }
+  }
+
   return (
     <>
       <PushButton />
@@ -186,7 +195,7 @@ export default function MovieDetail({ movie }) {
               <>
                 <Image
                   alt={"in-watchlist"}
-                  src={"/in-watchlist.png"}
+                  src={`/in-watchlist${getIconForTheme(theme)}.png`}
                   width={40}
                   height={40}
                 />{" "}
@@ -195,7 +204,7 @@ export default function MovieDetail({ movie }) {
               <>
                 <Image
                   alt={"not-in-watchlist"}
-                  src={"/not-in-watchlist.png"}
+                  src={`/not-in-watchlist${getIconForTheme(theme)}.png`}
                   width={39}
                   height={39}
                 />
@@ -212,7 +221,7 @@ export default function MovieDetail({ movie }) {
               <>
                 <Image
                   alt={"in-watched"}
-                  src={"/in-watched.png"}
+                  src={`/in-watched${getIconForTheme(theme)}.png`}
                   width={40}
                   height={40}
                 />
@@ -221,7 +230,7 @@ export default function MovieDetail({ movie }) {
               <>
                 <Image
                   alt={"not-in-watched"}
-                  src={"/not-in-watched.png"}
+                  src={`/not-in-watched${getIconForTheme(theme)}.png`}
                   width={40}
                   height={40}
                 />
@@ -230,7 +239,7 @@ export default function MovieDetail({ movie }) {
           </StyledButton>
         </StyledSectionButtons>
       </section>
-      <StyledShowTrailerButton onClick={displayTrailer}>
+      <StyledShowTrailerButton color={theme} onClick={displayTrailer}>
         {showTrailer ? "Hide the trailer" : "Watch the trailer"}
       </StyledShowTrailerButton>
       <section>

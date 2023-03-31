@@ -23,11 +23,13 @@ export const GlobalStyles = createGlobalStyle`
 export const lightTheme = {
   body: "white",
   fontColor: "black",
+  navigation: "white",
 };
 
 export const darkTheme = {
   body: "#212121",
   fontColor: "#f5f5f5",
+  navigation: "#8c8d8d",
 };
 
 /* background-color: #212121;
