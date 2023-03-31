@@ -16,7 +16,7 @@ import { useContext } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
-import { useFetch } from "../../hooks/useFetch";
+import getIconForTheme from "../../utils/getIconForTheme";
 
 const StyledSectionHeader = styled.section`
   display: flex;
@@ -159,14 +159,6 @@ export default function MovieDetail({ movie }) {
 
   function displayTrailer() {
     setShowTrailer(!showTrailer);
-  }
-
-  function getIconForTheme(theme) {
-    if (theme === "dark") {
-      return `-${theme}`;
-    } else {
-      return "";
-    }
   }
 
   return (

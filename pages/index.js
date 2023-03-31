@@ -9,6 +9,7 @@ import { suggestionText } from "./api/suggestionText";
 import Link from "next/link";
 import MovieSneakPeek from "../components/MovieSneakPeek";
 import Image from "next/image";
+import getIconForTheme from "../utils/getIconForTheme";
 
 const StyledSectionHeader = styled.section`
   position: relative;
@@ -140,7 +141,7 @@ export default function Home() {
           <h1>Welcome back 👋🏼</h1>
           <Link href={"/settings"}>
             <StyledSettingsIcon
-              src={"/settings.png"}
+              src={`/settings${getIconForTheme(theme)}.png`}
               alt="settings-icon"
               width={25}
               height={25}
