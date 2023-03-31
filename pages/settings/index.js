@@ -6,6 +6,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation";
 import useLocalStorageState from "use-local-storage-state";
+import { Tooltip } from "react-tooltip";
 
 const StyledSectionTopic = styled.section`
   display: flex;
@@ -41,7 +42,13 @@ export default function SettingsPage() {
             </button>
           </StyledSectionTopic>
           <StyledSectionTopic>
-            <h4>Availability:</h4>
+            <Tooltip id="my-tooltip" />
+            <h4
+              data-tooltip-id="my-tooltip"
+              data-tooltip-content="select the availability options in the movie details"
+            >
+              Availability:
+            </h4>
             <select
               onChange={getAvailabilitySeletion}
               defaultValue={availabilityOption}
