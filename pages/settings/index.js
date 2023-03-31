@@ -29,6 +29,11 @@ export default function SettingsPage() {
   const { getAvailabilitySeletion, availabilityOption, themeToggler, theme } =
     useContext(DataContext);
 
+  console.log(getAvailabilitySeletion);
+  console.log(availabilityOption);
+  console.log(themeToggler);
+  console.log(theme);
+
   return (
     <main>
       <PushButton />
