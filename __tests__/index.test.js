@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import Movie from "../components/Movie";
 import MovieDetail from "../components/MovieDetail";
 import Actors from "../components/Actors";
-import { WatchlistContext, WatchedContext } from "../pages/_app";
+import { WatchlistContext, WatchedContext, DataContext } from "../pages/_app";
 import MovieGrid from "../components/MovieGrid";
 
 function handleToggleWatchList(newMovie) {
@@ -66,30 +66,47 @@ const brokenMovie = {
 };
 
 test("Should render the Movie components heading", () => {
-  render(<Movie key={fullMovie.id} movie={fullMovie} />);
+  render(
+    <DataContext.Provider value={{ availabilityOption, theme }}>
+      <Movie key={fullMovie.id} movie={fullMovie} />
+    </DataContext.Provider>
+  );
   const element = screen.getByRole("heading", { name: "The Batman - 2023" });
   expect(element).toBeInTheDocument();
 });
 
 test("Should render the Movie components genres", () => {
-  render(<Movie key={fullMovie.id} movie={fullMovie} />);
+  render(
+    <DataContext.Provider value={{ availabilityOption, theme }}>
+      <Movie key={fullMovie.id} movie={fullMovie} />
+    </DataContext.Provider>
+  );
   const genres = screen.getByText("Adventure, Drama");
   expect(genres).toBeInTheDocument();
 });
 
 test("Should render 'Missing, Genre' because no genre ids are provided", () => {
-  render(<Movie key={brokenMovie.id} movie={brokenMovie} />);
+  render(
+    <DataContext.Provider value={{ availabilityOption, theme }}>
+      <Movie key={brokenMovie.id} movie={brokenMovie} />
+    </DataContext.Provider>
+  );
   const genres = screen.getByText("Missing, Genre");
   expect(genres).toBeInTheDocument();
 });
 
+const availabilityOption = "rent";
+const theme = "light";
+
 test("Should render the MovieDetail component with the right heading", () => {
   render(
-    <WatchedContext.Provider value={{ handleToggleWatched, watched }}>
-      <WatchlistContext.Provider value={{ handleToggleWatchList, watchlist }}>
-        <MovieDetail movie={fullMovie} />
-      </WatchlistContext.Provider>
-    </WatchedContext.Provider>
+    <DataContext.Provider value={{ availabilityOption, theme }}>
+      <WatchedContext.Provider value={{ handleToggleWatched, watched }}>
+        <WatchlistContext.Provider value={{ handleToggleWatchList, watchlist }}>
+          <MovieDetail movie={fullMovie} />
+        </WatchlistContext.Provider>
+      </WatchedContext.Provider>
+    </DataContext.Provider>
   );
   const element = screen.getByRole("heading", { name: "The Batman - 2023" });
   expect(element).toBeInTheDocument();
@@ -97,11 +114,13 @@ test("Should render the MovieDetail component with the right heading", () => {
 
 test("Should render the MovieDetail component with the right plot", () => {
   render(
-    <WatchedContext.Provider value={{ handleToggleWatched, watched }}>
-      <WatchlistContext.Provider value={{ handleToggleWatchList, watchlist }}>
-        <MovieDetail movie={fullMovie} />
-      </WatchlistContext.Provider>
-    </WatchedContext.Provider>
+    <DataContext.Provider value={{ availabilityOption, theme }}>
+      <WatchedContext.Provider value={{ handleToggleWatched, watched }}>
+        <WatchlistContext.Provider value={{ handleToggleWatchList, watchlist }}>
+          <MovieDetail movie={fullMovie} />
+        </WatchlistContext.Provider>
+      </WatchedContext.Provider>
+    </DataContext.Provider>
   );
   const element = screen.getByText("Plot");
   expect(element).toBeInTheDocument();
@@ -109,13 +128,15 @@ test("Should render the MovieDetail component with the right plot", () => {
 
 test("Should render the MovieDetail component and the availability if not available", () => {
   render(
-    <WatchedContext.Provider value={{ handleToggleWatched, watched }}>
-      <WatchlistContext.Provider value={{ handleToggleWatchList, watchlist }}>
-        <MovieDetail movie={fullMovie} />
-      </WatchlistContext.Provider>
-    </WatchedContext.Provider>
+    <DataContext.Provider value={{ availabilityOption, theme }}>
+      <WatchedContext.Provider value={{ handleToggleWatched, watched }}>
+        <WatchlistContext.Provider value={{ handleToggleWatchList, watchlist }}>
+          <MovieDetail movie={fullMovie} />
+        </WatchlistContext.Provider>
+      </WatchedContext.Provider>
+    </DataContext.Provider>
   );
-  const element = screen.getByText("Flatrate: Not available");
+  const element = screen.getByText("Renting: Not available");
   expect(element).toBeInTheDocument();
 });
 

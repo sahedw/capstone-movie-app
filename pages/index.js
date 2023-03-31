@@ -8,10 +8,19 @@ import getRandomIndexFromArray from "../utils/getRandomIndexFromArray";
 import { suggestionText } from "./api/suggestionText";
 import Link from "next/link";
 import MovieSneakPeek from "../components/MovieSneakPeek";
-import { useFetch } from "../hooks/useFetch";
+import Image from "next/image";
+import getIconForTheme from "../utils/getIconForTheme";
+import "react-tooltip/dist/react-tooltip.css";
 
 const StyledSectionHeader = styled.section`
+  position: relative;
   padding-left: 15px;
+`;
+
+const StyledSettingsIcon = styled(Image)`
+  position: absolute;
+  top: 0;
+  right: 15px;
 `;
 
 const StyledTrendingHeader = styled.h4`
@@ -66,7 +75,7 @@ const StyledButtonDay = styled.button`
   background-color: transparent;
 
   :enabled {
-    color: black;
+    color: ${(props) => props.theme.fontColor};
   }
 
   :disabled {
@@ -80,7 +89,7 @@ const StyledButtonWeek = styled.button`
   background-color: transparent;
 
   :enabled {
-    color: black;
+    color: ${(props) => props.theme.fontColor};
   }
 
   :disabled {
@@ -89,7 +98,7 @@ const StyledButtonWeek = styled.button`
 `;
 
 export default function Home() {
-  const { handleFormSubmit, movies } = useContext(DataContext);
+  const { handleFormSubmit, movies, theme } = useContext(DataContext);
   const { watchlist } = useContext(WatchlistContext);
   const { dayTrending, trendingMovies, handleTrendingSort } =
     useContext(TrendingContext);
@@ -131,6 +140,15 @@ export default function Home() {
       <main>
         <StyledSectionHeader>
           <h1>Welcome back 👋🏼</h1>
+          <Link href={"/settings"}>
+            <StyledSettingsIcon
+              src={`/settings${getIconForTheme(theme)}.png`}
+              alt="settings-icon"
+              width={25}
+              height={25}
+            />
+          </Link>
+
           <p>
             Grab your 🍿 and lets watch a <strong>movie!</strong>{" "}
           </p>
@@ -161,6 +179,7 @@ export default function Home() {
           <StyledTrendingHeader>Trending movies:</StyledTrendingHeader>
           <StyledSectionTrendingFlex>
             <StyledButtonDay
+              color={theme}
               onClick={() => {
                 handleTrendingSort(true);
               }}

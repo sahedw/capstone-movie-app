@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { WatchlistContext } from "../_app";
+import { WatchlistContext, DataContext } from "../_app";
 import Movie from "../../components/Movie";
 import MovieGrid from "../../components/MovieGrid";
 import styled from "styled-components";
@@ -19,7 +19,7 @@ const StyledButtonList = styled.button`
   background-color: transparent;
 
   :enabled {
-    color: black;
+    color: ${(props) => props.theme.fontColor};
   }
 
   :disabled {
@@ -32,7 +32,7 @@ const StyledButtonGrid = styled.button`
   background-color: transparent;
 
   :enabled {
-    color: black;
+    color: ${(props) => props.theme.fontColor};
   }
 
   :disabled {
@@ -71,6 +71,7 @@ export default function MyWatchlistPage() {
     defaultValue: true,
   });
   const { watchlist } = useContext(WatchlistContext);
+  const { theme } = useContext(DataContext);
 
   function setLayoutType(boolean) {
     setListLayout(boolean);
@@ -92,6 +93,7 @@ export default function MyWatchlistPage() {
         <StyledSectionButtonsFlex>
           <StyledSectionButtons>
             <StyledButtonList
+              color={theme}
               onClick={() => {
                 setLayoutType(true);
               }}
@@ -100,6 +102,7 @@ export default function MyWatchlistPage() {
               List
             </StyledButtonList>
             <StyledButtonGrid
+              color={theme}
               onClick={() => {
                 setLayoutType(false);
               }}

@@ -1,6 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import { WatchlistContext, WatchedContext } from "../../pages/_app";
+import {
+  WatchlistContext,
+  WatchedContext,
+  DataContext,
+} from "../../pages/_app";
 import getGenreFrom from "../../utils/getGenreFrom";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import { useState, useEffect } from "react";
@@ -12,7 +16,7 @@ import { useContext } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
-import { useFetch } from "../../hooks/useFetch";
+import getIconForTheme from "../../utils/getIconForTheme";
 
 const StyledSectionHeader = styled.section`
   display: flex;
@@ -31,6 +35,7 @@ const StyledButton = styled.button`
 
 const StyledShowTrailerButton = styled.button`
   background-color: transparent;
+  color: ${(props) => props.theme.fontColor};
   border: none;
 `;
 
@@ -41,6 +46,7 @@ export default function MovieDetail({ movie }) {
   const [castActors, setCastActors] = useState("");
   const [youtubeKey, setYoutubeKey] = useState("");
   const [showTrailer, setShowTrailer] = useState(false);
+  const { availabilityOption, theme } = useContext(DataContext);
   const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
   const { watched, handleToggleWatched } = useContext(WatchedContext);
 
@@ -181,7 +187,7 @@ export default function MovieDetail({ movie }) {
               <>
                 <Image
                   alt={"in-watchlist"}
-                  src={"/in-watchlist.png"}
+                  src={`/in-watchlist${getIconForTheme(theme)}.png`}
                   width={40}
                   height={40}
                 />{" "}
@@ -190,7 +196,7 @@ export default function MovieDetail({ movie }) {
               <>
                 <Image
                   alt={"not-in-watchlist"}
-                  src={"/not-in-watchlist.png"}
+                  src={`/not-in-watchlist${getIconForTheme(theme)}.png`}
                   width={39}
                   height={39}
                 />
@@ -207,7 +213,7 @@ export default function MovieDetail({ movie }) {
               <>
                 <Image
                   alt={"in-watched"}
-                  src={"/in-watched.png"}
+                  src={`/in-watched${getIconForTheme(theme)}.png`}
                   width={40}
                   height={40}
                 />
@@ -216,7 +222,7 @@ export default function MovieDetail({ movie }) {
               <>
                 <Image
                   alt={"not-in-watched"}
-                  src={"/not-in-watched.png"}
+                  src={`/not-in-watched${getIconForTheme(theme)}.png`}
                   width={40}
                   height={40}
                 />
@@ -225,7 +231,7 @@ export default function MovieDetail({ movie }) {
           </StyledButton>
         </StyledSectionButtons>
       </section>
-      <StyledShowTrailerButton onClick={displayTrailer}>
+      <StyledShowTrailerButton color={theme} onClick={displayTrailer}>
         {showTrailer ? "Hide the trailer" : "Watch the trailer"}
       </StyledShowTrailerButton>
       <section>
@@ -254,9 +260,24 @@ export default function MovieDetail({ movie }) {
       For future features also display these informations */}
       <Actors actors={shownActors} />
       <h3>Availability:</h3>
-      <p>Flatrate: {`${showWatchProviders(streamingProviderFlatrate)}`}</p>
-      <p>Renting: {`${showWatchProviders(streamingProviderRent)}`}</p>
-      <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>
+      {availabilityOption === "all" && (
+        <>
+          {" "}
+          <p>Flatrate: {`${showWatchProviders(streamingProviderFlatrate)}`}</p>
+          <p>Renting: {`${showWatchProviders(streamingProviderRent)}`}</p>
+          <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>{" "}
+        </>
+      )}
+      {availabilityOption === "flatrate" && (
+        <p>Flatrate: {`${showWatchProviders(streamingProviderFlatrate)}`}</p>
+      )}
+      {availabilityOption === "rent" && (
+        <p>Renting: {`${showWatchProviders(streamingProviderRent)}`}</p>
+      )}
+
+      {availabilityOption === "purchase" && (
+        <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>
+      )}
     </>
   );
 }

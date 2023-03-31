@@ -5,14 +5,16 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import setCurrentNavIcon from "../../utils/setCurrentNavIcon";
 import setCurrentNavText from "../../utils/setCurrentNavText";
+import { DataContext } from "../../pages/_app";
+import { useContext } from "react";
 
 const StyledFooter = styled.footer`
-  background-color: white;
+  background-color: ${(props) => props.theme.navigation};
   position: fixed;
   width: 100%;
   height: 80px;
-  bottom: 0;
-  border-top: 1px solid lightgrey;
+  bottom: -1px;
+  border-top: 1px solid grey;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 `;
@@ -54,10 +56,11 @@ const StyledParagraphText = styled.p`
 `;
 
 export default function Navigation() {
+  const { theme } = useContext(DataContext);
   const router = useRouter();
 
   return (
-    <StyledFooter>
+    <StyledFooter color={theme}>
       <StyledNavBar>
         <StyledList>
           <StyledLink href={"/"}>
