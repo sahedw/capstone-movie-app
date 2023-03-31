@@ -88,7 +88,7 @@ export default function App({ Component, pageProps }) {
 
   const [availabilityOption, setAvailabilityOption] = useLocalStorageState(
     "newAvailability",
-    { defaultValue: "" }
+    { defaultValue: "all" }
   );
 
   function getAvailabilitySeletion(event) {
