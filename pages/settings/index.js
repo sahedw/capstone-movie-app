@@ -25,7 +25,7 @@ const StyledSectionOverall = styled.section`
 `;
 
 export default function SettingsPage() {
-  const { getAvailabilitySeletion, availabilityOption } =
+  const { getAvailabilitySeletion, availabilityOption, themeToggler, theme } =
     useContext(DataContext);
 
   return (
@@ -36,7 +36,9 @@ export default function SettingsPage() {
         <StyledSectionSettings>
           <StyledSectionTopic>
             <h4>Dark Mode:</h4>
-            <button>Turn On</button>
+            <button onClick={themeToggler}>
+              {theme === "light" ? "On" : "Off"}
+            </button>
           </StyledSectionTopic>
           <StyledSectionTopic>
             <h4>Availability:</h4>

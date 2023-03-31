@@ -1,10 +1,11 @@
-import GlobalStyle from "../styles";
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import { createContext } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { useLocalStorageFetch } from "../hooks/useLocalStorageFetch";
 import { useFetch } from "../hooks/useFetch";
+import { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme, GlobalStyles } from "../styles";
 
 export const DataContext = createContext();
 export const WatchlistContext = createContext();
@@ -95,36 +96,45 @@ export default function App({ Component, pageProps }) {
     setAvailabilityOption(event.target.value);
   }
 
+  const [theme, setTheme] = useState("dark");
+
+  function themeToggler() {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  }
+
   return (
     <>
-      <GlobalStyle />
       <Head>
         <title>Saheds Movie App</title>
       </Head>
-      <WatchedContext.Provider value={{ watched, handleToggleWatched }}>
-        <TrendingContext.Provider
-          value={{ dayTrending, trendingMovies, handleTrendingSort }}
-        >
-          <CinemaContext.Provider value={{ currentlyInCinemas }}>
-            <WatchlistContext.Provider
-              value={{ handleToggleWatchList, watchlist }}
-            >
-              <DataContext.Provider
-                value={{
-                  getAvailabilitySeletion,
-                  availabilityOption,
-
-                  DataContext,
-                  handleFormSubmit,
-                  movies,
-                }}
+      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+        <GlobalStyles />
+        <WatchedContext.Provider value={{ watched, handleToggleWatched }}>
+          <TrendingContext.Provider
+            value={{ dayTrending, trendingMovies, handleTrendingSort }}
+          >
+            <CinemaContext.Provider value={{ currentlyInCinemas }}>
+              <WatchlistContext.Provider
+                value={{ handleToggleWatchList, watchlist }}
               >
-                <Component {...pageProps} />
-              </DataContext.Provider>
-            </WatchlistContext.Provider>
-          </CinemaContext.Provider>
-        </TrendingContext.Provider>
-      </WatchedContext.Provider>
+                <DataContext.Provider
+                  value={{
+                    getAvailabilitySeletion,
+                    availabilityOption,
+                    themeToggler,
+                    theme,
+                    DataContext,
+                    handleFormSubmit,
+                    movies,
+                  }}
+                >
+                  <Component {...pageProps} />
+                </DataContext.Provider>
+              </WatchlistContext.Provider>
+            </CinemaContext.Provider>
+          </TrendingContext.Provider>
+        </WatchedContext.Provider>
+      </ThemeProvider>
     </>
   );
 }

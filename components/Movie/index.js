@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import getGenreFrom from "../../utils/getGenreFrom";
 import { useFetch } from "../../hooks/useFetch";
+import { DataContext } from "../../pages/_app";
+import { useContext } from "react";
 
 const StyledDiv = styled.div`
   height: 200px;
@@ -36,7 +38,12 @@ const StyledImage = styled(Image)`
   border-radius: 15px;
 `;
 
+const StyledHeader = styled.h4`
+  color: ${(props) => props.theme.fontColor};
+`;
+
 export default function Movie({ movie }) {
+  const { theme } = useContext(DataContext);
   const [runtime, setRuntime] = useState(0);
 
   useEffect(() => {
@@ -70,9 +77,9 @@ export default function Movie({ movie }) {
           />
         </StyledDiv>
         <StyledSectionText>
-          <h4>
+          <StyledHeader color={theme}>
             {movie?.title} - <em>{movie?.release_date.slice(0, 4)}</em>
-          </h4>
+          </StyledHeader>
           <StyledParagraph>{getGenreFrom(movie)}</StyledParagraph>
           {runtime ? (
             <StyledParagraph>{calculateRuntimeFrom(runtime)}</StyledParagraph>
