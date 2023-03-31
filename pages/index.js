@@ -10,7 +10,6 @@ import Link from "next/link";
 import MovieSneakPeek from "../components/MovieSneakPeek";
 import Image from "next/image";
 import getIconForTheme from "../utils/getIconForTheme";
-import "react-tooltip/dist/react-tooltip.css";
 
 const StyledSectionHeader = styled.section`
   position: relative;
