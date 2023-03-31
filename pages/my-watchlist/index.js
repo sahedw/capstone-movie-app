@@ -67,14 +67,17 @@ const StyledSectionList = styled.section`
 `;
 
 export default function MyWatchlistPage() {
-  const [listLayout, setListLayout] = useLocalStorageState("newLayout", {
-    defaultValue: true,
-  });
+  const [listLayoutWatchlist, setListLayoutWatchlist] = useLocalStorageState(
+    "newLayoutWatchlist",
+    {
+      defaultValue: true,
+    }
+  );
   const { watchlist } = useContext(WatchlistContext);
   const { theme } = useContext(DataContext);
 
   function setLayoutType(boolean) {
-    setListLayout(boolean);
+    setListLayoutWatchlist(boolean);
   }
 
   if (watchlist.length === 0)
@@ -97,7 +100,7 @@ export default function MyWatchlistPage() {
               onClick={() => {
                 setLayoutType(true);
               }}
-              disabled={listLayout ? true : false}
+              disabled={listLayoutWatchlist ? true : false}
             >
               List
             </StyledButtonList>
@@ -106,13 +109,13 @@ export default function MyWatchlistPage() {
               onClick={() => {
                 setLayoutType(false);
               }}
-              disabled={listLayout ? false : true}
+              disabled={listLayoutWatchlist ? false : true}
             >
               Grid
             </StyledButtonGrid>
           </StyledSectionButtons>
         </StyledSectionButtonsFlex>
-        {listLayout ? (
+        {listLayoutWatchlist ? (
           <StyledSectionList>
             {watchlist.map((movie) => {
               return (

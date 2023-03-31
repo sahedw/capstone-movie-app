@@ -67,14 +67,17 @@ const StyledSectionList = styled.section`
 `;
 
 export default function MyWatchedPage() {
-  const [listLayout, setListLayout] = useLocalStorageState("newLayout", {
-    defaultValue: true,
-  });
+  const [listLayoutWatched, setListLayoutWatched] = useLocalStorageState(
+    "newLayoutWatched",
+    {
+      defaultValue: true,
+    }
+  );
   const { watched } = useContext(WatchedContext);
   const { theme } = useContext(DataContext);
 
   function setLayoutType(boolean) {
-    setListLayout(boolean);
+    setListLayoutWatched(boolean);
   }
 
   if (watched.length === 0)
@@ -97,7 +100,7 @@ export default function MyWatchedPage() {
               onClick={() => {
                 setLayoutType(true);
               }}
-              disabled={listLayout ? true : false}
+              disabled={listLayoutWatched ? true : false}
             >
               List
             </StyledButtonList>
@@ -106,13 +109,13 @@ export default function MyWatchedPage() {
               onClick={() => {
                 setLayoutType(false);
               }}
-              disabled={listLayout ? false : true}
+              disabled={listLayoutWatched ? false : true}
             >
               Grid
             </StyledButtonGrid>
           </StyledSectionButtons>
         </StyledSectionButtonsFlex>
-        {listLayout ? (
+        {listLayoutWatched ? (
           <StyledSectionList>
             {watched.map((movie) => {
               return (
