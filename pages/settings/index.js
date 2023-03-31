@@ -7,10 +7,21 @@ import styled from "styled-components";
 import Navigation from "../../components/Navigation";
 import useLocalStorageState from "use-local-storage-state";
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
+const StyledSectionTopic = styled.section`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+const StyledSectionSettings = styled.section`
+  width: 300px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`;
+const StyledSectionOverall = styled.section`
+  display: flex;
+  justify-content: center;
 `;
 
 export default function SettingsPage() {
@@ -21,24 +32,26 @@ export default function SettingsPage() {
     <main>
       <PushButton />
       <h2>Settings:</h2>
-      <section>
-        <section>
-          <h4>Dark Mode:</h4>
-          <button>Turn On</button>
-        </section>
-        <section>
-          <h4>Availability:</h4>
-          <select
-            onChange={getAvailabilitySeletion}
-            defaultValue={availabilityOption}
-          >
-            <option value="all">All</option>
-            <option value="flatrate">Flatrate</option>
-            <option value="rent">Rent</option>
-            <option value="purchase">Purchase</option>
-          </select>
-        </section>
-      </section>
+      <StyledSectionOverall>
+        <StyledSectionSettings>
+          <StyledSectionTopic>
+            <h4>Dark Mode:</h4>
+            <button>Turn On</button>
+          </StyledSectionTopic>
+          <StyledSectionTopic>
+            <h4>Availability:</h4>
+            <select
+              onChange={getAvailabilitySeletion}
+              defaultValue={availabilityOption}
+            >
+              <option value="all">All</option>
+              <option value="flatrate">Flatrate</option>
+              <option value="rent">Rent</option>
+              <option value="purchase">Purchase</option>
+            </select>
+          </StyledSectionTopic>
+        </StyledSectionSettings>
+      </StyledSectionOverall>
     </main>
   );
 }
