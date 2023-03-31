@@ -1,6 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import { WatchlistContext, WatchedContext } from "../../pages/_app";
+import {
+  WatchlistContext,
+  WatchedContext,
+  DataContext,
+} from "../../pages/_app";
 import getGenreFrom from "../../utils/getGenreFrom";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import { useState, useEffect } from "react";
@@ -41,6 +45,7 @@ export default function MovieDetail({ movie }) {
   const [castActors, setCastActors] = useState("");
   const [youtubeKey, setYoutubeKey] = useState("");
   const [showTrailer, setShowTrailer] = useState(false);
+  const { availabilityOption } = useContext(DataContext);
   const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
   const { watched, handleToggleWatched } = useContext(WatchedContext);
 
@@ -254,9 +259,24 @@ export default function MovieDetail({ movie }) {
       For future features also display these informations */}
       <Actors actors={shownActors} />
       <h3>Availability:</h3>
-      <p>Flatrate: {`${showWatchProviders(streamingProviderFlatrate)}`}</p>
-      <p>Renting: {`${showWatchProviders(streamingProviderRent)}`}</p>
-      <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>
+      {availabilityOption === "all" && (
+        <>
+          {" "}
+          <p>Flatrate: {`${showWatchProviders(streamingProviderFlatrate)}`}</p>
+          <p>Renting: {`${showWatchProviders(streamingProviderRent)}`}</p>
+          <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>{" "}
+        </>
+      )}
+      {availabilityOption === "flatrate" && (
+        <p>Flatrate: {`${showWatchProviders(streamingProviderFlatrate)}`}</p>
+      )}
+      {availabilityOption === "rent" && (
+        <p>Renting: {`${showWatchProviders(streamingProviderRent)}`}</p>
+      )}
+
+      {availabilityOption === "purchase" && (
+        <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>
+      )}
     </>
   );
 }

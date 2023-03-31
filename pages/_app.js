@@ -85,6 +85,16 @@ export default function App({ Component, pageProps }) {
     setDayTrending(boolean);
   }
 
+  const [availabilityOption, setAvailabilityOption] = useLocalStorageState(
+    "newAvailability",
+    { defaultValue: "" }
+  );
+
+  function getAvailabilitySeletion(event) {
+    event.preventDefault();
+    setAvailabilityOption(event.target.value);
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -101,6 +111,9 @@ export default function App({ Component, pageProps }) {
             >
               <DataContext.Provider
                 value={{
+                  getAvailabilitySeletion,
+                  availabilityOption,
+
                   DataContext,
                   handleFormSubmit,
                   movies,
