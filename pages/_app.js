@@ -20,10 +20,13 @@ export default function App({ Component, pageProps }) {
   const [watched, setWatched] = useLocalStorageState("newWatched", {
     defaultValue: [],
   });
-
+  const [availabilityOption, setAvailabilityOption] = useLocalStorageState(
+    "newAvailability",
+    { defaultValue: "all" }
+  );
   const [dayTrending, setDayTrending] = useState(true);
-
   const [search, setSearch] = useState("");
+  const [theme, setTheme] = useState("light");
 
   const movies = useLocalStorageFetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}`,
@@ -45,6 +48,11 @@ export default function App({ Component, pageProps }) {
     }?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
     [],
     dayTrending
+  );
+
+  const upcomingMovies = useFetch(
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`,
+    []
   );
 
   function handleFormSubmit(event) {
@@ -86,17 +94,10 @@ export default function App({ Component, pageProps }) {
     setDayTrending(boolean);
   }
 
-  const [availabilityOption, setAvailabilityOption] = useLocalStorageState(
-    "newAvailability",
-    { defaultValue: "all" }
-  );
-
   function getAvailabilitySeletion(event) {
     event.preventDefault();
     setAvailabilityOption(event.target.value);
   }
-
-  const [theme, setTheme] = useState("light");
 
   function themeToggler() {
     theme === "light" ? setTheme("dark") : setTheme("light");
@@ -113,7 +114,9 @@ export default function App({ Component, pageProps }) {
           <TrendingContext.Provider
             value={{ dayTrending, trendingMovies, handleTrendingSort }}
           >
-            <CinemaContext.Provider value={{ currentlyInCinemas }}>
+            <CinemaContext.Provider
+              value={{ currentlyInCinemas, upcomingMovies }}
+            >
               <WatchlistContext.Provider
                 value={{ handleToggleWatchList, watchlist }}
               >

@@ -7,13 +7,27 @@ import PushButton from "../../components/PushButton";
 import Navigation from "../../components/Navigation";
 
 export default function MovieDetailPage() {
-  const { currentlyInCinemas } = useContext(CinemaContext);
+  const { currentlyInCinemas, upcomingMovies } = useContext(CinemaContext);
 
   const router = useRouter();
 
-  const currentMovie = currentlyInCinemas.find(
-    (movie) => movie.id.toString() === router.query.id
-  );
+  function getCinemaMovie() {
+    if (
+      currentlyInCinemas.find(
+        (movie) => movie.id.toString() === router.query.id
+      )
+    ) {
+      const inCinemaMovie = currentlyInCinemas.find(
+        (movie) => movie.id.toString() === router.query.id
+      );
+      return (
+        inCinemaMovie ||
+        upcomingMovies.find((movie) => movie.id.toString() === router.query.id)
+      );
+    }
+  }
+
+  const currentMovie = getCinemaMovie();
 
   if (!currentMovie)
     return (
