@@ -99,7 +99,7 @@ export default function App({ Component, pageProps }) {
     setAvailabilityOption(event.target.value);
   }
 
-  function themeToggler(theme) {
+  function themeToggler() {
     theme === "light" ? setTheme("dark") : setTheme("light");
   }
 
