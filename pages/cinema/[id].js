@@ -17,12 +17,12 @@ export default function MovieDetailPage() {
         (movie) => movie.id.toString() === router.query.id
       )
     ) {
-      return currentlyInCinemas.find(
+      const inCinemaMovie = currentlyInCinemas.find(
         (movie) => movie.id.toString() === router.query.id
       );
-    } else {
-      return upcomingMovies.find(
-        (movie) => movie.id.toString() === router.query.id
+      return (
+        inCinemaMovie ||
+        upcomingMovies.find((movie) => movie.id.toString() === router.query.id)
       );
     }
   }
