@@ -4,6 +4,7 @@ import {
   WatchlistContext,
   WatchedContext,
   DataContext,
+  TrendingContext,
 } from "../../pages/_app";
 import getGenreFrom from "../../utils/getGenreFrom";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
@@ -49,6 +50,7 @@ export default function MovieDetail({ movie }) {
   const { availabilityOption, theme } = useContext(DataContext);
   const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
   const { watched, handleToggleWatched } = useContext(WatchedContext);
+  const { trendingMovies } = useContext(TrendingContext);
 
   const shownActors = castActors.slice(0, 4);
   const router = useRouter();
@@ -140,6 +142,10 @@ export default function MovieDetail({ movie }) {
     if (router.asPath.includes("my-watchlist")) {
       handleToggleWatchList(movie);
       router.push("/my-watchlist");
+    } else if (
+      trendingMovies.find((trendingMovie) => trendingMovie.id === movie.id)
+    ) {
+      handleToggleWatchList(movie);
     } else if (movie.id.toString().length === router.asPath.length - 1) {
       handleToggleWatchList(movie);
       router.push("/");

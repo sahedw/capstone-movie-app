@@ -22,13 +22,14 @@ export default function MovieSneakPeek({ movies }) {
     <StyledDiv>
       {movies.map((movie) => {
         return (
-          <StyledImage
-            key={movie.id}
-            alt={movie.title}
-            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-            width={100}
-            height={150}
-          />
+          <Link key={movie.id} href={`/${movie.id}`}>
+            <StyledImage
+              alt={movie.title}
+              src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+              width={100}
+              height={150}
+            />
+          </Link>
         );
       })}
     </StyledDiv>
