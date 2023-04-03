@@ -60,11 +60,15 @@ const StyledButtonGrid = styled.button`
 `;
 
 export default function CinemaPage() {
-  const { currentlyInCinemas } = useContext(CinemaContext);
+  const { currentlyInCinemas, upcomingMovies } = useContext(CinemaContext);
   const { theme } = useContext(DataContext);
   const [showPlayingInCinema, setShowPlayingInCinema] = useState(true);
 
   if (!currentlyInCinemas) return <h1>Loading...</h1>;
+
+  function setDisplayedMovies(boolean) {
+    setShowPlayingInCinema(boolean);
+  }
 
   return (
     <main>
@@ -75,7 +79,7 @@ export default function CinemaPage() {
             <StyledButtonList
               color={theme}
               onClick={() => {
-                setLayoutType(true);
+                setDisplayedMovies(true);
               }}
               disabled={showPlayingInCinema ? true : false}
             >
@@ -84,7 +88,7 @@ export default function CinemaPage() {
             <StyledButtonGrid
               color={theme}
               onClick={() => {
-                setLayoutType(false);
+                setDisplayedMovies(false);
               }}
               disabled={showPlayingInCinema ? false : true}
             >
@@ -92,13 +96,23 @@ export default function CinemaPage() {
             </StyledButtonGrid>
           </StyledSectionButtons>
         </StyledSectionButtonsFlex>
-        <StyledDiv>
-          {currentlyInCinemas.map((movie) => (
-            <StyledLink key={movie.id} href={`cinema/${movie.id}`}>
-              <MovieGrid movie={movie} />
-            </StyledLink>
-          ))}
-        </StyledDiv>
+        {showPlayingInCinema ? (
+          <StyledDiv>
+            {currentlyInCinemas.map((movie) => (
+              <StyledLink key={movie.id} href={`cinema/${movie.id}`}>
+                <MovieGrid movie={movie} />
+              </StyledLink>
+            ))}
+          </StyledDiv>
+        ) : (
+          <StyledDiv>
+            {upcomingMovies.map((movie) => (
+              <StyledLink key={movie.id} href={`cinema/${movie.id}`}>
+                <MovieGrid movie={movie} />
+              </StyledLink>
+            ))}
+          </StyledDiv>
+        )}
       </StyledSection>
       <Navigation />
     </main>

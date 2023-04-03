@@ -102,6 +102,13 @@ export default function App({ Component, pageProps }) {
     theme === "light" ? setTheme("dark") : setTheme("light");
   }
 
+  const upcomingMovies = useFetch(
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`,
+    []
+  );
+
+  console.log(upcomingMovies);
+
   return (
     <>
       <Head>
@@ -113,7 +120,9 @@ export default function App({ Component, pageProps }) {
           <TrendingContext.Provider
             value={{ dayTrending, trendingMovies, handleTrendingSort }}
           >
-            <CinemaContext.Provider value={{ currentlyInCinemas }}>
+            <CinemaContext.Provider
+              value={{ currentlyInCinemas, upcomingMovies }}
+            >
               <WatchlistContext.Provider
                 value={{ handleToggleWatchList, watchlist }}
               >
