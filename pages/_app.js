@@ -135,6 +135,9 @@ export default function App({ Component, pageProps }) {
               >
                 <DataContext.Provider
                   value={{
+                    resultsPage,
+                    handleNextPage,
+                    handlePrevPage,
                     getAvailabilitySeletion,
                     availabilityOption,
                     themeToggler,
