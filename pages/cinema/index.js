@@ -26,6 +26,7 @@ const StyledSection = styled.section`
 
 const StyledSectionButtonsFlex = styled.section`
   width: 100%;
+  margin-bottom: 15px;
 `;
 
 const StyledSectionButtons = styled.section`
