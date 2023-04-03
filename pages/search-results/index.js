@@ -14,6 +14,16 @@ const StyledLink = styled(Link)`
 
 export default function SearchResultsPage() {
   const { movies } = useContext(DataContext);
+
+  if (movies.length === 0)
+    return (
+      <>
+        <PushButton />
+        <h2>Whoops, something seems wrong</h2>
+        <p>Please go back and try searching again</p>
+      </>
+    );
+
   return (
     <main>
       <PushButton />
