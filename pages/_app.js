@@ -27,12 +27,15 @@ export default function App({ Component, pageProps }) {
   const [dayTrending, setDayTrending] = useState(true);
   const [search, setSearch] = useState("");
   const [theme, setTheme] = useState("light");
+  const [resultsPage, setResultsPage] = useState(1);
+
+  //&page=${resultsPage}
 
   const movies = useLocalStorageFetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}`,
+    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}&page=${resultsPage}`,
     "newMovies",
     [],
-    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}`
+    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}&page=${resultsPage}`
   );
 
   const currentlyInCinemas = useLocalStorageFetch(

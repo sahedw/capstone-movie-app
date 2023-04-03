@@ -39,6 +39,11 @@ export default function SearchResultsPage() {
           <Movie movie={movie} />
         </StyledLink>
       ))}
+      <section>
+        {" "}
+        <button>Previous Page</button>
+        <button>Next Page</button>
+      </section>
       <Navigation />
     </main>
   );
