@@ -28,6 +28,12 @@ export default function SearchResultsPage() {
     <main>
       <PushButton />
       <h2>Your search results:</h2>
+      <section>
+        {" "}
+        <button>Previous Page</button>
+        <button>Next Page</button>
+      </section>
+
       {movies.map((movie) => (
         <StyledLink key={movie.id} href={`search-results/${movie.id}`}>
           <Movie movie={movie} />
