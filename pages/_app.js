@@ -106,6 +106,16 @@ export default function App({ Component, pageProps }) {
     theme === "light" ? setTheme("dark") : setTheme("light");
   }
 
+  function handleNextPage() {
+    setResultsPage(resultsPage + 1);
+  }
+
+  function handlePrevPage() {
+    if (resultsPage > 1) {
+      setResultsPage(resultsPage - 1);
+    }
+  }
+
   return (
     <>
       <Head>
