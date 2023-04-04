@@ -56,8 +56,18 @@ export default function SearchResultsPage() {
       ))}
       <section>
         {" "}
-        <button>Previous Page</button>
-        <button>Next Page</button>
+        <button
+          onClick={handlePrevPage}
+          disabled={resultsPage === 1 ? true : false}
+        >
+          Previous Page
+        </button>
+        <button
+          onClick={handleNextPage}
+          disabled={resultsPage === totalSearchPages ? true : false}
+        >
+          Next Page
+        </button>
       </section>
       <Navigation />
     </main>
