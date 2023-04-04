@@ -149,7 +149,7 @@ export default function Home() {
           </Link>
 
           <p>
-            Grab your 🍿 and lets watch a <strong>movie!</strong>{" "}
+            Grab your 🍿 and let us watch a <strong>movie!</strong>{" "}
           </p>
         </StyledSectionHeader>
         <StyledSectionForm>
