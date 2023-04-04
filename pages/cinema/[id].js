@@ -13,7 +13,7 @@ export default function MovieDetailPage() {
 
   function getCinemaMovie() {
     if (
-      currentlyInCinemas.find(
+      currentlyInCinemas?.find(
         (movie) => movie.id.toString() === router.query.id
       )
     ) {
