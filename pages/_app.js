@@ -31,19 +31,23 @@ export default function App({ Component, pageProps }) {
 
   //&page=${resultsPage}
 
-  const movies = useLocalStorageFetch(
+  const moviesData = useLocalStorageFetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}&page=${resultsPage}`,
     "newMovies",
     [],
     `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}&page=${resultsPage}`
   );
 
-  const currentlyInCinemas = useLocalStorageFetch(
+  const movies = moviesData.results;
+
+  const currentlyInCinemaData = useLocalStorageFetch(
     `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`,
     "newCinema",
     [],
     `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
   );
+
+  const currentlyInCinemas = currentlyInCinemaData.results;
 
   const trendingMovies = useFetch(
     `https://api.themoviedb.org/3/trending/movie/${

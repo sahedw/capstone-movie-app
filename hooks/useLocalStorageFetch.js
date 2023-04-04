@@ -12,7 +12,7 @@ export function useLocalStorageFetch(url, key, initialValue, dependency) {
         const response = await fetch(url);
         if (response.ok) {
           const data = await response.json();
-          setData(data.results);
+          setData(data);
         } else {
           throw new Error("Something went wrong");
         }
