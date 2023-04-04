@@ -14,6 +14,8 @@ const StyledButton = styled.button`
   background-color: transparent;
   border: none;
   font-size: 15px;
+  padding-left: 15px;
+  padding-top: 15px;
 `;
 
 export default function PushButton() {

@@ -26,7 +26,8 @@ const StyledSectionHeader = styled.section`
 `;
 
 const StyledHeaderMovieDetails = styled.h4`
-  margin: 10px;
+  margin: 15px;
+  margin-top: 0;
 `;
 
 const StyledSectionButtons = styled.section`
@@ -57,6 +58,7 @@ const StyledSectionPoster = styled.section`
 `;
 
 const StyledSectionQuickOverview = styled.section`
+  margin: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -236,59 +238,6 @@ export default function MovieDetail({ movie }) {
             height={300}
           />
         </StyledSectionPoster>
-        <StyledSectionButtons>
-          <StyledButton
-            onClick={() => {
-              handleRemoveInWatchlistPage(movie);
-            }}
-          >
-            {JSON.stringify(watchlist).includes(JSON.stringify(movie)) ? (
-              <>
-                <Image
-                  alt={"in-watchlist"}
-                  src={`/in-watchlist${getIconForTheme(theme)}.png`}
-                  width={40}
-                  height={40}
-                />{" "}
-              </>
-            ) : (
-              <>
-                <Image
-                  alt={"not-in-watchlist"}
-                  src={`/not-in-watchlist${getIconForTheme(theme)}.png`}
-                  width={39}
-                  height={39}
-                />
-              </>
-            )}
-          </StyledButton>
-
-          <StyledButton
-            onClick={() => {
-              handleRemoveInWatchedPage(movie);
-            }}
-          >
-            {JSON.stringify(watched).includes(JSON.stringify(movie)) ? (
-              <>
-                <Image
-                  alt={"in-watched"}
-                  src={`/in-watched${getIconForTheme(theme)}.png`}
-                  width={40}
-                  height={40}
-                />
-              </>
-            ) : (
-              <>
-                <Image
-                  alt={"not-in-watched"}
-                  src={`/not-in-watched${getIconForTheme(theme)}.png`}
-                  width={40}
-                  height={40}
-                />
-              </>
-            )}
-          </StyledButton>
-        </StyledSectionButtons>
       </section>
       <StyledSectionQuickOverview>
         <StyledMovieTitle>{movie.title}</StyledMovieTitle>
@@ -340,6 +289,59 @@ export default function MovieDetail({ movie }) {
       {availabilityOption === "purchase" && (
         <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>
       )}
+      <StyledSectionButtons>
+        <StyledButton
+          onClick={() => {
+            handleRemoveInWatchlistPage(movie);
+          }}
+        >
+          {JSON.stringify(watchlist).includes(JSON.stringify(movie)) ? (
+            <>
+              <Image
+                alt={"in-watchlist"}
+                src={`/in-watchlist${getIconForTheme(theme)}.png`}
+                width={40}
+                height={40}
+              />{" "}
+            </>
+          ) : (
+            <>
+              <Image
+                alt={"not-in-watchlist"}
+                src={`/not-in-watchlist${getIconForTheme(theme)}.png`}
+                width={39}
+                height={39}
+              />
+            </>
+          )}
+        </StyledButton>
+
+        <StyledButton
+          onClick={() => {
+            handleRemoveInWatchedPage(movie);
+          }}
+        >
+          {JSON.stringify(watched).includes(JSON.stringify(movie)) ? (
+            <>
+              <Image
+                alt={"in-watched"}
+                src={`/in-watched${getIconForTheme(theme)}.png`}
+                width={40}
+                height={40}
+              />
+            </>
+          ) : (
+            <>
+              <Image
+                alt={"not-in-watched"}
+                src={`/not-in-watched${getIconForTheme(theme)}.png`}
+                width={40}
+                height={40}
+              />
+            </>
+          )}
+        </StyledButton>
+      </StyledSectionButtons>
     </>
   );
 }
