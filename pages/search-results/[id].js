@@ -5,6 +5,7 @@ import { DataContext } from "../_app";
 import { useRouter } from "next/router";
 import BackButton from "../../components/PushButton";
 import Navigation from "../../components/Navigation";
+import MovieDetailFooter from "../../components/MovieDetailFooter";
 
 export default function MovieDetailPage() {
   const { movies } = useContext(DataContext);
@@ -28,7 +29,8 @@ export default function MovieDetailPage() {
   return (
     <main>
       <MovieDetail movie={currentMovie} />
-      <Navigation />
+      {/* <Navigation /> */}
+      <MovieDetailFooter movie={currentMovie} />
     </main>
   );
 }
