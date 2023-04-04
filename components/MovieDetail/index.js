@@ -40,6 +40,29 @@ const StyledShowTrailerButton = styled.button`
   border: none;
 `;
 
+const StyledPoster = styled(Image)`
+  border-radius: 30px;
+`;
+
+const StyledSectionPoster = styled.section`
+  display: flex;
+  justify-content: center;
+`;
+
+const StyledSectionQuickOverview = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const StyledMovieTitle = styled.h3`
+  margin: 5px;
+`;
+
+const StyledMovieSubtitles = styled.p`
+  margin: 5px;
+`;
+
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
   const [movieDetails, setMovieDetails] = useState(null);
@@ -172,17 +195,17 @@ export default function MovieDetail({ movie }) {
       <PushButton />
       <StyledSectionHeader>
         {" "}
-        <h3>Movie Details</h3>
+        <h4>Movie Details</h4>
       </StyledSectionHeader>
       <section>
-        <section>
-          <Image
+        <StyledSectionPoster>
+          <StyledPoster
             src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
             alt={movie.title}
             width={202.5}
             height={300}
           />
-        </section>
+        </StyledSectionPoster>
         <StyledSectionButtons>
           <StyledButton
             onClick={() => {
@@ -237,6 +260,16 @@ export default function MovieDetail({ movie }) {
           </StyledButton>
         </StyledSectionButtons>
       </section>
+      <StyledSectionQuickOverview>
+        <StyledMovieTitle>{movie.title}</StyledMovieTitle>
+        <StyledMovieSubtitles>
+          {getPopularityDecimal(movieDetails?.vote_average)}/10 Rating
+        </StyledMovieSubtitles>
+        <StyledMovieSubtitles>
+          {getGenreFrom(movie)} - {movie.release_date.slice(0, 4)} -{" "}
+          {calculateRuntimeFrom(runtime)}
+        </StyledMovieSubtitles>
+      </StyledSectionQuickOverview>
       <StyledShowTrailerButton color={theme} onClick={displayTrailer}>
         {showTrailer ? "Hide the trailer" : "Watch the trailer"}
       </StyledShowTrailerButton>
@@ -254,18 +287,13 @@ export default function MovieDetail({ movie }) {
 
       {/* Currently votes from the community of the api. In the 
         future trying to use the IMDB vote. */}
-      <p>{getPopularityDecimal(movieDetails?.vote_average)}/10 Rating</p>
-      <p>{getGenreFrom(movie)}</p>
-      <h2>
-        {movie.title} - {movie.release_date.slice(0, 4)}
-      </h2>
-      <p>{calculateRuntimeFrom(runtime)}</p>
+      <h4>Synopsis:</h4>
       <p>{movie.overview}</p>
       {/* Currently only able to show where a movie can be streamed with a flatrate.
       The api also is able to show where its rentable or buyable.
       For future features also display these informations */}
       <Actors actors={shownActors} />
-      <h3>Availability:</h3>
+      <h4>Availability:</h4>
       {availabilityOption === "all" && (
         <>
           {" "}
