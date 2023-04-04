@@ -21,7 +21,12 @@ import getIconForTheme from "../../utils/getIconForTheme";
 
 const StyledSectionHeader = styled.section`
   display: flex;
+  align-items: center;
   justify-content: center;
+`;
+
+const StyledHeaderMovieDetails = styled.h4`
+  margin: 10px;
 `;
 
 const StyledSectionButtons = styled.section`
@@ -38,6 +43,8 @@ const StyledShowTrailerButton = styled.button`
   background-color: transparent;
   color: ${(props) => props.theme.fontColor};
   border: none;
+  margin-bottom: 15px;
+  cursor: pointer;
 `;
 
 const StyledPoster = styled(Image)`
@@ -61,6 +68,30 @@ const StyledMovieTitle = styled.h3`
 
 const StyledMovieSubtitles = styled.p`
   margin: 5px;
+`;
+
+const StyledSectionSynopsis = styled.section`
+  padding-left: 15px;
+  padding-right: 15px;
+
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
+const StyledHeaderSynopsis = styled.h4`
+  align-self: flex-start;
+  margin: 0;
+`;
+
+const StyledTrailer = styled(ReactPlayer)`
+  margin-bottom: 15px;
+  align-self: flex-start;
+`;
+
+const StyledSectionTrailer = styled.section`
+  align-self: center;
 `;
 
 export default function MovieDetail({ movie }) {
@@ -194,8 +225,7 @@ export default function MovieDetail({ movie }) {
     <>
       <PushButton />
       <StyledSectionHeader>
-        {" "}
-        <h4>Movie Details</h4>
+        <StyledHeaderMovieDetails>Movie Details</StyledHeaderMovieDetails>
       </StyledSectionHeader>
       <section>
         <StyledSectionPoster>
@@ -270,28 +300,26 @@ export default function MovieDetail({ movie }) {
           {calculateRuntimeFrom(runtime)}
         </StyledMovieSubtitles>
       </StyledSectionQuickOverview>
-      <StyledShowTrailerButton color={theme} onClick={displayTrailer}>
-        {showTrailer ? "Hide the trailer" : "Watch the trailer"}
-      </StyledShowTrailerButton>
-      <section>
-        {showTrailer ? (
-          <ReactPlayer
-            controls={true}
-            volume={0.2}
-            width={300}
-            height={200}
-            url={`https://www.youtube.com/watch?v=${trailer.key}`}
-          />
-        ) : null}
-      </section>
+      <StyledSectionSynopsis>
+        {" "}
+        <StyledShowTrailerButton color={theme} onClick={displayTrailer}>
+          {showTrailer ? "Hide the trailer" : "Watch the trailer"}
+        </StyledShowTrailerButton>
+        <StyledSectionTrailer>
+          {showTrailer ? (
+            <StyledTrailer
+              controls={true}
+              volume={0.2}
+              width={300}
+              height={200}
+              url={`https://www.youtube.com/watch?v=${trailer.key}`}
+            />
+          ) : null}
+        </StyledSectionTrailer>
+        <StyledHeaderSynopsis>Synopsis:</StyledHeaderSynopsis>
+        <p>{movie.overview}</p>
+      </StyledSectionSynopsis>
 
-      {/* Currently votes from the community of the api. In the 
-        future trying to use the IMDB vote. */}
-      <h4>Synopsis:</h4>
-      <p>{movie.overview}</p>
-      {/* Currently only able to show where a movie can be streamed with a flatrate.
-      The api also is able to show where its rentable or buyable.
-      For future features also display these informations */}
       <Actors actors={shownActors} />
       <h4>Availability:</h4>
       {availabilityOption === "all" && (
