@@ -50,7 +50,7 @@ export default function Movie({ movie }) {
     async function fetchData() {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US`
+          `/api/themoviedb/movie/${movie.id}?&language=eng-US`
         );
         if (response.ok) {
           const data = await response.json();

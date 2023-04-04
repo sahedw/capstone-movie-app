@@ -11,7 +11,7 @@ export default function MovieDetailPage() {
 
   const router = useRouter();
 
-  const currentMovie = movies.find(
+  const currentMovie = movies?.find(
     (movie) => movie.id.toString() === router.query.id
   );
 

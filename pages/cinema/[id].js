@@ -12,19 +12,13 @@ export default function MovieDetailPage() {
   const router = useRouter();
 
   function getCinemaMovie() {
-    if (
-      currentlyInCinemas.find(
-        (movie) => movie.id.toString() === router.query.id
-      )
-    ) {
-      const inCinemaMovie = currentlyInCinemas.find(
-        (movie) => movie.id.toString() === router.query.id
-      );
-      return (
-        inCinemaMovie ||
-        upcomingMovies.find((movie) => movie.id.toString() === router.query.id)
-      );
-    }
+    const inCinemaMovie = currentlyInCinemas?.find(
+      (movie) => movie.id.toString() === router.query.id
+    );
+    return (
+      inCinemaMovie ||
+      upcomingMovies?.find((movie) => movie.id.toString() === router.query.id)
+    );
   }
 
   const currentMovie = getCinemaMovie();

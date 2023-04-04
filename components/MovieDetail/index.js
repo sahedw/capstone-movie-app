@@ -65,7 +65,7 @@ export default function MovieDetail({ movie }) {
     async function fetchData() {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US`
+          `/api/themoviedb/movie/${movie.id}?&language=eng-US`
         );
         if (response.ok) {
           const data = await response.json();
@@ -85,7 +85,7 @@ export default function MovieDetail({ movie }) {
     async function fetchData() {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${movie.id}/watch/providers?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+          `/api/themoviedb/movie/${movie.id}/watch/providers?`
         );
         if (response.ok) {
           const data = await response.json();
@@ -104,7 +104,7 @@ export default function MovieDetail({ movie }) {
     async function fetchData() {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+          `/api/themoviedb/movie/${movie.id}/credits?`
         );
         if (response.ok) {
           const data = await response.json();
@@ -123,7 +123,7 @@ export default function MovieDetail({ movie }) {
     async function fetchData() {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`
+          `/api/themoviedb/movie/${movie.id}/videos?&language=en-US`
         );
         if (response.ok) {
           const data = await response.json();

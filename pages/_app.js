@@ -27,31 +27,37 @@ export default function App({ Component, pageProps }) {
   const [dayTrending, setDayTrending] = useState(true);
   const [search, setSearch] = useState("");
   const [theme, setTheme] = useState("light");
+  const [resultsPage, setResultsPage] = useState(1);
 
-  const movies = useLocalStorageFetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}`,
+  const moviesData = useLocalStorageFetch(
+    `/api/themoviedb/search/movie?&language=eng-US&query=${search}&page=${resultsPage}`,
     "newMovies",
     [],
-    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}`
+    `/api/themoviedb/search/movie?&language=eng-US&query=${search}&page=${resultsPage}`
   );
 
-  const currentlyInCinemas = useLocalStorageFetch(
-    `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`,
+  const totalSearchPages = moviesData.total_pages;
+  const totalSearchResults = moviesData.total_results;
+
+  const movies = moviesData.results;
+
+  const currentlyInCinemaData = useLocalStorageFetch(
+    `/api/themoviedb/movie/now_playing?`,
     "newCinema",
     [],
-    `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
+    `/api/themoviedb/movie/now_playing?`
   );
 
+  const currentlyInCinemas = currentlyInCinemaData.results;
+
   const trendingMovies = useFetch(
-    `https://api.themoviedb.org/3/trending/movie/${
-      dayTrending ? "day" : "week"
-    }?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+    `/api/themoviedb/trending/movie/${dayTrending ? "day" : "week"}`,
     [],
     dayTrending
   );
 
   const upcomingMovies = useFetch(
-    `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`,
+    `/api/themoviedb/movie/upcoming?&language=en-US&page=1`,
     []
   );
 
@@ -103,6 +109,18 @@ export default function App({ Component, pageProps }) {
     theme === "light" ? setTheme("dark") : setTheme("light");
   }
 
+  function handleNextPage() {
+    setResultsPage(resultsPage + 1);
+  }
+
+  function handlePrevPage() {
+    if (resultsPage > 1) {
+      setResultsPage((previous) => previous - 1);
+    } else {
+      return null;
+    }
+  }
+
   return (
     <>
       <Head>
@@ -122,6 +140,12 @@ export default function App({ Component, pageProps }) {
               >
                 <DataContext.Provider
                   value={{
+                    search,
+                    resultsPage,
+                    totalSearchResults,
+                    totalSearchPages,
+                    handleNextPage,
+                    handlePrevPage,
                     getAvailabilitySeletion,
                     availabilityOption,
                     themeToggler,
