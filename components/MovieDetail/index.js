@@ -64,18 +64,22 @@ const StyledSectionQuickOverview = styled.section`
   align-items: center;
 `;
 
-const StyledMovieTitle = styled.h3`
+const StyledMovieTitle = styled.h2`
   margin: 5px;
 `;
 
 const StyledMovieSubtitles = styled.p`
+  color: grey;
   margin: 5px;
+`;
+
+const StyledSynopsisText = styled.p`
+  color: grey;
 `;
 
 const StyledSectionSynopsis = styled.section`
   padding-left: 15px;
   padding-right: 15px;
-
   margin-top: 15px;
   display: flex;
   flex-direction: column;
@@ -94,6 +98,10 @@ const StyledTrailer = styled(ReactPlayer)`
 
 const StyledSectionTrailer = styled.section`
   align-self: center;
+`;
+
+const StyledSectionAvailability = styled.section`
+  padding-left: 15px;
 `;
 
 export default function MovieDetail({ movie }) {
@@ -266,29 +274,36 @@ export default function MovieDetail({ movie }) {
           ) : null}
         </StyledSectionTrailer>
         <StyledHeaderSynopsis>Synopsis:</StyledHeaderSynopsis>
-        <p>{movie.overview}</p>
+        <StyledSynopsisText>{movie.overview}</StyledSynopsisText>
       </StyledSectionSynopsis>
 
       <Actors actors={shownActors} />
-      <h4>Availability:</h4>
-      {availabilityOption === "all" && (
-        <>
-          {" "}
+      <StyledSectionAvailability>
+        <h4>Availability:</h4>
+        {availabilityOption === "all" && (
+          <>
+            {" "}
+            <p>
+              Flatrate: {`${showWatchProviders(streamingProviderFlatrate)}`}
+            </p>
+            <p>Renting: {`${showWatchProviders(streamingProviderRent)}`}</p>
+            <p>
+              Purchase: {`${showWatchProviders(streamingProviderBuy)}`}
+            </p>{" "}
+          </>
+        )}
+        {availabilityOption === "flatrate" && (
           <p>Flatrate: {`${showWatchProviders(streamingProviderFlatrate)}`}</p>
+        )}
+        {availabilityOption === "rent" && (
           <p>Renting: {`${showWatchProviders(streamingProviderRent)}`}</p>
-          <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>{" "}
-        </>
-      )}
-      {availabilityOption === "flatrate" && (
-        <p>Flatrate: {`${showWatchProviders(streamingProviderFlatrate)}`}</p>
-      )}
-      {availabilityOption === "rent" && (
-        <p>Renting: {`${showWatchProviders(streamingProviderRent)}`}</p>
-      )}
+        )}
 
-      {availabilityOption === "purchase" && (
-        <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>
-      )}
+        {availabilityOption === "purchase" && (
+          <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>
+        )}
+      </StyledSectionAvailability>
+
       <StyledSectionButtons>
         <StyledButton
           onClick={() => {

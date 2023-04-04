@@ -14,6 +14,7 @@ const StyledName = styled.p`
   font-size: 1rem;
   text-align: center;
   margin-bottom: 0;
+  color: gray;
 `;
 
 const StyledListItem = styled.li`
