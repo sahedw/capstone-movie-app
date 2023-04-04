@@ -30,10 +30,10 @@ export default function App({ Component, pageProps }) {
   const [resultsPage, setResultsPage] = useState(1);
 
   const moviesData = useLocalStorageFetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}&page=${resultsPage}`,
+    `/api/themoviedb/search/movie?&language=eng-US&query=${search}&page=${resultsPage}`,
     "newMovies",
     [],
-    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}&page=${resultsPage}`
+    `/api/themoviedb/search/movie?&language=eng-US&query=${search}&page=${resultsPage}`
   );
 
   const totalSearchPages = moviesData.total_pages;
@@ -42,24 +42,22 @@ export default function App({ Component, pageProps }) {
   const movies = moviesData.results;
 
   const currentlyInCinemaData = useLocalStorageFetch(
-    `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`,
+    `/api/themoviedb/movie/now_playing?`,
     "newCinema",
     [],
-    `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
+    `/api/themoviedb/movie/now_playing?`
   );
 
   const currentlyInCinemas = currentlyInCinemaData.results;
 
   const trendingMovies = useFetch(
-    `https://api.themoviedb.org/3/trending/movie/${
-      dayTrending ? "day" : "week"
-    }?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+    `/api/themoviedb/trending/movie/${dayTrending ? "day" : "week"}`,
     [],
     dayTrending
   );
 
   const upcomingMovies = useFetch(
-    `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`,
+    `/api/themoviedb/movie/upcoming?&language=en-US&page=1`,
     []
   );
 
