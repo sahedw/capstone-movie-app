@@ -231,6 +231,8 @@ export default function MovieDetail({ movie }) {
     setShowTrailer(!showTrailer);
   }
 
+  console.log(theme);
+
   return (
     <>
       <PushButton />

@@ -4,8 +4,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import getIconForTheme from "../../utils/getIconForTheme";
 import { useContext } from "react";
-import { ThemeContext } from "styled-components";
-
+import { DataContext } from "../../pages/_app";
 const StyledButton = styled.button`
   display: flex;
   height: 30px;
@@ -16,16 +15,18 @@ const StyledButton = styled.button`
   font-size: 15px;
   padding-left: 15px;
   padding-top: 15px;
+  color: ${(props) => props.theme.fontColor};
 `;
 
 export default function PushButton() {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(DataContext);
   const router = useRouter();
   function handleChangePage() {
     router.back();
   }
+
   return (
-    <StyledButton onClick={handleChangePage}>
+    <StyledButton color={theme} onClick={handleChangePage}>
       <Image
         alt="back button"
         src={`/back${getIconForTheme(theme)}.png`}
