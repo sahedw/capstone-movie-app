@@ -139,6 +139,7 @@ export default function App({ Component, pageProps }) {
               >
                 <DataContext.Provider
                   value={{
+                    search,
                     resultsPage,
                     totalSearchPages,
                     handleNextPage,

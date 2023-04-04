@@ -15,6 +15,7 @@ const StyledLink = styled(Link)`
 export default function SearchResultsPage() {
   const {
     movies,
+    search,
     handleNextPage,
     handlePrevPage,
     resultsPage,
@@ -26,7 +27,8 @@ export default function SearchResultsPage() {
       <>
         <PushButton />
         <h2>Whoops, something seems wrong</h2>
-        <p>Please go back and try searching again</p>
+        <p>{`The movie '${search}' doesn't seem to exist`}</p>
+        <p>{`Please try to go back and search again :)`}</p>
       </>
     );
 
