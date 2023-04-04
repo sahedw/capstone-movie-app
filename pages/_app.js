@@ -29,14 +29,14 @@ export default function App({ Component, pageProps }) {
   const [theme, setTheme] = useState("light");
   const [resultsPage, setResultsPage] = useState(1);
 
-  //&page=${resultsPage}
-
   const moviesData = useLocalStorageFetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}&page=${resultsPage}`,
     "newMovies",
     [],
     `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=eng-US&query=${search}&page=${resultsPage}`
   );
+
+  const totalSearchPages = moviesData.total_pages;
 
   const movies = moviesData.results;
 
@@ -140,6 +140,7 @@ export default function App({ Component, pageProps }) {
                 <DataContext.Provider
                   value={{
                     resultsPage,
+                    totalSearchPages,
                     handleNextPage,
                     handlePrevPage,
                     getAvailabilitySeletion,

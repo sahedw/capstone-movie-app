@@ -13,10 +13,15 @@ const StyledLink = styled(Link)`
 `;
 
 export default function SearchResultsPage() {
-  const { movies, handleNextPage, handlePrevPage, resultsPage } =
-    useContext(DataContext);
+  const {
+    movies,
+    handleNextPage,
+    handlePrevPage,
+    resultsPage,
+    totalSearchPages,
+  } = useContext(DataContext);
 
-  if (movies.length === 0)
+  if (movies?.length === 0)
     return (
       <>
         <PushButton />
@@ -37,9 +42,14 @@ export default function SearchResultsPage() {
         >
           Previous Page
         </button>
-        <button onClick={handleNextPage}>Next Page</button>
+        <button
+          onClick={handleNextPage}
+          disabled={resultsPage === totalSearchPages ? true : false}
+        >
+          Next Page
+        </button>
       </section>
-      {movies.map((movie) => (
+      {movies?.map((movie) => (
         <StyledLink key={movie.id} href={`search-results/${movie.id}`}>
           <Movie movie={movie} />
         </StyledLink>
