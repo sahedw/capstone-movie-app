@@ -20,6 +20,7 @@ export default function SearchResultsPage() {
     handlePrevPage,
     resultsPage,
     totalSearchPages,
+    totalSearchResults,
   } = useContext(DataContext);
 
   if (movies?.length === 0)
@@ -35,7 +36,7 @@ export default function SearchResultsPage() {
   return (
     <main>
       <PushButton />
-      <h2>Your search results:</h2>
+      <h2>{`Your search results (${totalSearchResults}):`}</h2>
       <section>
         {" "}
         <button

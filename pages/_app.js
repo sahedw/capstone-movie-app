@@ -37,6 +37,7 @@ export default function App({ Component, pageProps }) {
   );
 
   const totalSearchPages = moviesData.total_pages;
+  const totalSearchResults = moviesData.total_results;
 
   const movies = moviesData.results;
 
@@ -141,6 +142,7 @@ export default function App({ Component, pageProps }) {
                   value={{
                     search,
                     resultsPage,
+                    totalSearchResults,
                     totalSearchPages,
                     handleNextPage,
                     handlePrevPage,
