@@ -117,7 +117,9 @@ export default function App({ Component, pageProps }) {
 
   function handlePrevPage() {
     if (resultsPage > 1) {
-      setResultsPage(resultsPage - 1);
+      setResultsPage((previous) => previous - 1);
+    } else {
+      return null;
     }
   }
 
