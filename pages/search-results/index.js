@@ -6,6 +6,10 @@ import Link from "next/link";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation";
 
+const StyledHeader = styled.h2`
+  margin-left: 15px;
+`;
+
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
@@ -20,8 +24,19 @@ const StyledSectionButtons = styled.section`
 
 const StyledButtons = styled.button`
   background-color: transparent;
-  border: none;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  border: 1px solid gray;
+  border-radius: 15px;
   color: ${(props) => props.theme.fontColor};
+  :hover {
+    background-color: #f97b7b;
+    color: white;
+    border: none;
+  }
 `;
 
 export default function SearchResultsPage() {
@@ -50,7 +65,7 @@ export default function SearchResultsPage() {
   return (
     <main>
       <PushButton />
-      <h2>{`Your search results (${totalSearchResults}):`}</h2>
+      <StyledHeader>{`Your search results (${totalSearchResults}):`}</StyledHeader>
       <StyledSectionButtons>
         {" "}
         <StyledButtons

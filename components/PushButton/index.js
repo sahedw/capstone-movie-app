@@ -19,14 +19,21 @@ const StyledButton = styled.button`
 `;
 
 export default function PushButton() {
-  const { theme } = useContext(DataContext);
+  const { theme, resetResultsPage } = useContext(DataContext);
   const router = useRouter();
   function handleChangePage() {
     router.back();
   }
 
+  function handleCompleteProcess() {
+    handleChangePage();
+    if (router.asPath.includes("/search-results")) {
+      resetResultsPage();
+    }
+  }
+
   return (
-    <StyledButton color={theme} onClick={handleChangePage}>
+    <StyledButton color={theme} onClick={handleCompleteProcess}>
       <Image
         alt="back button"
         src={`/back${getIconForTheme(theme)}.png`}

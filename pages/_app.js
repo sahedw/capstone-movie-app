@@ -31,6 +31,10 @@ export default function App({ Component, pageProps }) {
   });
   const [resultsPage, setResultsPage] = useState(1);
 
+  function resetResultsPage() {
+    setResultsPage(1);
+  }
+
   const moviesData = useLocalStorageFetch(
     `/api/themoviedb/search/movie?&language=eng-US&query=${search}&page=${resultsPage}`,
     "newMovies",
@@ -144,6 +148,7 @@ export default function App({ Component, pageProps }) {
                   value={{
                     search,
                     resultsPage,
+                    resetResultsPage,
                     totalSearchResults,
                     totalSearchPages,
                     handleNextPage,
