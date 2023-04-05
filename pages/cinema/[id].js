@@ -5,6 +5,7 @@ import { CinemaContext } from "../_app";
 import { useRouter } from "next/router";
 import PushButton from "../../components/PushButton";
 import MovieDetailFooter from "../../components/MovieDetailFooter";
+import Navigation from "../../components/Navigation";
 
 export default function MovieDetailPage() {
   const { currentlyInCinemas, upcomingMovies } = useContext(CinemaContext);

@@ -4,8 +4,8 @@ import { useContext } from "react";
 import { WatchedContext } from "../_app";
 import { useRouter } from "next/router";
 import PushButton from "../../components/PushButton";
-import Navigation from "../../components/Navigation";
 import MovieDetailFooter from "../../components/MovieDetailFooter";
+import Navigation from "../../components/Navigation";
 
 export default function MovieDetailPage() {
   const { watched } = useContext(WatchedContext);

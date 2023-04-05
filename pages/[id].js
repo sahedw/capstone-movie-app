@@ -4,6 +4,7 @@ import { WatchlistContext, TrendingContext } from "./_app";
 import PushButton from "../components/PushButton";
 import Navigation from "../components/Navigation";
 import MovieDetail from "../components/MovieDetail";
+import MovieDetailFooter from "../components/MovieDetailFooter";
 
 export default function MovieDetailPage() {
   const { watchlist } = useContext(WatchlistContext);
@@ -40,7 +41,7 @@ export default function MovieDetailPage() {
   return (
     <main>
       <MovieDetail movie={currentMovie} />
-      <Navigation />
+      <MovieDetailFooter movie={currentMovie} />
     </main>
   );
 }
