@@ -74,7 +74,12 @@ export default function CinemaPage() {
   return (
     <main>
       <StyledSection>
-        <h2>Currently in cinemas:</h2>
+        {showPlayingInCinema ? (
+          <h2>Currently in cinemas:</h2>
+        ) : (
+          <h2>Coming soon:</h2>
+        )}
+
         <StyledSectionButtonsFlex>
           <StyledSectionButtons>
             <StyledButtonList

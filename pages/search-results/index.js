@@ -12,6 +12,18 @@ const StyledLink = styled(Link)`
   cursor: pointer;
 `;
 
+const StyledSectionButtons = styled.section`
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 15px;
+`;
+
+const StyledButtons = styled.button`
+  background-color: transparent;
+  border: none;
+  color: ${(props) => props.theme.fontColor};
+`;
+
 export default function SearchResultsPage() {
   const {
     movies,
@@ -21,6 +33,7 @@ export default function SearchResultsPage() {
     resultsPage,
     totalSearchPages,
     totalSearchResults,
+    theme,
   } = useContext(DataContext);
 
   if (movies?.length === 0)
@@ -30,6 +43,7 @@ export default function SearchResultsPage() {
         <h2>Whoops, something seems wrong</h2>
         <p>{`The movie '${search}' doesn't seem to exist`}</p>
         <p>{`Please try to go back and search again :)`}</p>
+        <Navigation />
       </>
     );
 
@@ -37,41 +51,45 @@ export default function SearchResultsPage() {
     <main>
       <PushButton />
       <h2>{`Your search results (${totalSearchResults}):`}</h2>
-      <section>
+      <StyledSectionButtons>
         {" "}
-        <button
+        <StyledButtons
           onClick={handlePrevPage}
           disabled={resultsPage === 1 ? true : false}
+          color={theme}
         >
-          Previous Page
-        </button>
-        <button
+          Prev
+        </StyledButtons>
+        <StyledButtons
           onClick={handleNextPage}
           disabled={resultsPage === totalSearchPages ? true : false}
+          color={theme}
         >
-          Next Page
-        </button>
-      </section>
+          Next
+        </StyledButtons>
+      </StyledSectionButtons>
       {movies?.map((movie) => (
         <StyledLink key={movie.id} href={`search-results/${movie.id}`}>
           <Movie movie={movie} />
         </StyledLink>
       ))}
-      <section>
+      <StyledSectionButtons>
         {" "}
-        <button
+        <StyledButtons
           onClick={handlePrevPage}
           disabled={resultsPage === 1 ? true : false}
+          color={theme}
         >
-          Previous Page
-        </button>
-        <button
+          Prev
+        </StyledButtons>
+        <StyledButtons
           onClick={handleNextPage}
           disabled={resultsPage === totalSearchPages ? true : false}
+          color={theme}
         >
-          Next Page
-        </button>
-      </section>
+          Next
+        </StyledButtons>
+      </StyledSectionButtons>
       <Navigation />
     </main>
   );
