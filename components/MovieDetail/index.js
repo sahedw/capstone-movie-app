@@ -237,7 +237,7 @@ export default function MovieDetail({ movie }) {
           {getPopularityDecimal(movieDetails?.vote_average)}/10 Rating
         </StyledMovieSubtitles>
         <StyledMovieSubtitles>
-          {getGenreFrom(movie)} • {movie.release_date.slice(0, 4)} •
+          {getGenreFrom(movie)} • {movie.release_date.slice(0, 4)} •{" "}
           {calculateRuntimeFrom(runtime)}
         </StyledMovieSubtitles>
       </StyledSectionQuickOverview>
