@@ -237,12 +237,11 @@ export default function MovieDetail({ movie }) {
           {getPopularityDecimal(movieDetails?.vote_average)}/10 Rating
         </StyledMovieSubtitles>
         <StyledMovieSubtitles>
-          {getGenreFrom(movie)} • {movie.release_date.slice(0, 4)} •{" "}
+          {getGenreFrom(movie)} • {movie.release_date.slice(0, 4)} •
           {calculateRuntimeFrom(runtime)}
         </StyledMovieSubtitles>
       </StyledSectionQuickOverview>
       <StyledSectionSynopsis>
-        {" "}
         <StyledShowTrailerButton color={theme} onClick={displayTrailer}>
           {showTrailer ? "Hide the trailer" : "Watch the trailer"}
         </StyledShowTrailerButton>
@@ -266,20 +265,18 @@ export default function MovieDetail({ movie }) {
         <h4>Availability:</h4>
         {availabilityOption === "all" && (
           <>
-            {" "}
             <StyledAvailabilityHeading>Flatrate</StyledAvailabilityHeading>
             <StyledAvailabilityText>{`${showWatchProviders(
               streamingProviderFlatrate
             )}`}</StyledAvailabilityText>
             <StyledAvailabilityHeading>Renting</StyledAvailabilityHeading>
             <StyledAvailabilityText>
-              {" "}
               {`${showWatchProviders(streamingProviderRent)}`}
             </StyledAvailabilityText>
             <StyledAvailabilityHeading>Purchase </StyledAvailabilityHeading>
             <StyledAvailabilityText>{`${showWatchProviders(
               streamingProviderBuy
-            )}`}</StyledAvailabilityText>{" "}
+            )}`}</StyledAvailabilityText>
           </>
         )}
         {availabilityOption === "flatrate" && (
