@@ -26,7 +26,9 @@ export default function App({ Component, pageProps }) {
   );
   const [dayTrending, setDayTrending] = useState(true);
   const [search, setSearch] = useState("");
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useLocalStorageState("newTheme", {
+    defaultValue: "light",
+  });
   const [resultsPage, setResultsPage] = useState(1);
 
   const moviesData = useLocalStorageFetch(
