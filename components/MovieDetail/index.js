@@ -21,7 +21,13 @@ import getIconForTheme from "../../utils/getIconForTheme";
 
 const StyledSectionHeader = styled.section`
   display: flex;
+  align-items: center;
   justify-content: center;
+`;
+
+const StyledHeaderMovieDetails = styled.h4`
+  margin: 15px;
+  margin-top: 0;
 `;
 
 const StyledSectionButtons = styled.section`
@@ -38,6 +44,73 @@ const StyledShowTrailerButton = styled.button`
   background-color: transparent;
   color: ${(props) => props.theme.fontColor};
   border: none;
+  margin-bottom: 15px;
+  cursor: pointer;
+`;
+
+const StyledPoster = styled(Image)`
+  border-radius: 30px;
+`;
+
+const StyledSectionPoster = styled.section`
+  display: flex;
+  justify-content: center;
+`;
+
+const StyledSectionQuickOverview = styled.section`
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const StyledMovieTitle = styled.h2`
+  margin: 5px;
+`;
+
+const StyledMovieSubtitles = styled.p`
+  color: grey;
+  margin: 5px;
+`;
+
+const StyledSynopsisText = styled.p`
+  color: grey;
+`;
+
+const StyledSectionSynopsis = styled.section`
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
+const StyledHeaderSynopsis = styled.h4`
+  align-self: flex-start;
+  margin: 0;
+`;
+
+const StyledTrailer = styled(ReactPlayer)`
+  margin-bottom: 15px;
+  align-self: flex-start;
+`;
+
+const StyledSectionTrailer = styled.section`
+  align-self: center;
+`;
+
+const StyledSectionAvailability = styled.section`
+  padding-left: 15px;
+`;
+
+const StyledAvailabilityHeading = styled.h4`
+  margin-bottom: 5px;
+`;
+
+const StyledAvailabilityText = styled.p`
+  margin-top: 5px;
+  color: gray;
 `;
 
 export default function MovieDetail({ movie }) {
@@ -138,31 +211,6 @@ export default function MovieDetail({ movie }) {
     fetchData();
   }, []);
 
-  function handleRemoveInWatchlistPage(movie) {
-    if (router.asPath.includes("my-watchlist")) {
-      handleToggleWatchList(movie);
-      router.push("/my-watchlist");
-    } else if (
-      trendingMovies.find((trendingMovie) => trendingMovie.id === movie.id)
-    ) {
-      handleToggleWatchList(movie);
-    } else if (movie.id.toString().length === router.asPath.length - 1) {
-      handleToggleWatchList(movie);
-      router.push("/");
-    } else {
-      handleToggleWatchList(movie);
-    }
-  }
-
-  function handleRemoveInWatchedPage(movie) {
-    if (router.asPath.includes("my-watched")) {
-      handleToggleWatched(movie);
-      router.push("/my-watched");
-    } else {
-      handleToggleWatched(movie);
-    }
-  }
-
   function displayTrailer() {
     setShowTrailer(!showTrailer);
   }
@@ -171,119 +219,77 @@ export default function MovieDetail({ movie }) {
     <>
       <PushButton />
       <StyledSectionHeader>
-        {" "}
-        <h3>Movie Details</h3>
+        <StyledHeaderMovieDetails>Movie Details</StyledHeaderMovieDetails>
       </StyledSectionHeader>
       <section>
-        <section>
-          <Image
+        <StyledSectionPoster>
+          <StyledPoster
             src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
             alt={movie.title}
             width={202.5}
             height={300}
           />
-        </section>
-        <StyledSectionButtons>
-          <StyledButton
-            onClick={() => {
-              handleRemoveInWatchlistPage(movie);
-            }}
-          >
-            {JSON.stringify(watchlist).includes(JSON.stringify(movie)) ? (
-              <>
-                <Image
-                  alt={"in-watchlist"}
-                  src={`/in-watchlist${getIconForTheme(theme)}.png`}
-                  width={40}
-                  height={40}
-                />{" "}
-              </>
-            ) : (
-              <>
-                <Image
-                  alt={"not-in-watchlist"}
-                  src={`/not-in-watchlist${getIconForTheme(theme)}.png`}
-                  width={39}
-                  height={39}
-                />
-              </>
-            )}
-          </StyledButton>
-
-          <StyledButton
-            onClick={() => {
-              handleRemoveInWatchedPage(movie);
-            }}
-          >
-            {JSON.stringify(watched).includes(JSON.stringify(movie)) ? (
-              <>
-                <Image
-                  alt={"in-watched"}
-                  src={`/in-watched${getIconForTheme(theme)}.png`}
-                  width={40}
-                  height={40}
-                />
-              </>
-            ) : (
-              <>
-                <Image
-                  alt={"not-in-watched"}
-                  src={`/not-in-watched${getIconForTheme(theme)}.png`}
-                  width={40}
-                  height={40}
-                />
-              </>
-            )}
-          </StyledButton>
-        </StyledSectionButtons>
+        </StyledSectionPoster>
       </section>
-      <StyledShowTrailerButton color={theme} onClick={displayTrailer}>
-        {showTrailer ? "Hide the trailer" : "Watch the trailer"}
-      </StyledShowTrailerButton>
-      <section>
-        {showTrailer ? (
-          <ReactPlayer
-            controls={true}
-            volume={0.2}
-            width={300}
-            height={200}
-            url={`https://www.youtube.com/watch?v=${trailer.key}`}
-          />
-        ) : null}
-      </section>
+      <StyledSectionQuickOverview>
+        <StyledMovieTitle>{movie.title}</StyledMovieTitle>
+        <StyledMovieSubtitles>
+          {getPopularityDecimal(movieDetails?.vote_average)}/10 Rating
+        </StyledMovieSubtitles>
+        <StyledMovieSubtitles>
+          {getGenreFrom(movie)} • {movie.release_date.slice(0, 4)} •{" "}
+          {calculateRuntimeFrom(runtime)}
+        </StyledMovieSubtitles>
+      </StyledSectionQuickOverview>
+      <StyledSectionSynopsis>
+        <StyledShowTrailerButton color={theme} onClick={displayTrailer}>
+          {showTrailer ? "Hide the trailer" : "Watch the trailer"}
+        </StyledShowTrailerButton>
+        <StyledSectionTrailer>
+          {showTrailer ? (
+            <StyledTrailer
+              controls={true}
+              volume={0.2}
+              width={300}
+              height={200}
+              url={`https://www.youtube.com/watch?v=${trailer.key}`}
+            />
+          ) : null}
+        </StyledSectionTrailer>
+        <StyledHeaderSynopsis>Synopsis:</StyledHeaderSynopsis>
+        <StyledSynopsisText>{movie.overview}</StyledSynopsisText>
+      </StyledSectionSynopsis>
 
-      {/* Currently votes from the community of the api. In the 
-        future trying to use the IMDB vote. */}
-      <p>{getPopularityDecimal(movieDetails?.vote_average)}/10 Rating</p>
-      <p>{getGenreFrom(movie)}</p>
-      <h2>
-        {movie.title} - {movie.release_date.slice(0, 4)}
-      </h2>
-      <p>{calculateRuntimeFrom(runtime)}</p>
-      <p>{movie.overview}</p>
-      {/* Currently only able to show where a movie can be streamed with a flatrate.
-      The api also is able to show where its rentable or buyable.
-      For future features also display these informations */}
       <Actors actors={shownActors} />
-      <h3>Availability:</h3>
-      {availabilityOption === "all" && (
-        <>
-          {" "}
-          <p>Flatrate: {`${showWatchProviders(streamingProviderFlatrate)}`}</p>
-          <p>Renting: {`${showWatchProviders(streamingProviderRent)}`}</p>
-          <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>{" "}
-        </>
-      )}
-      {availabilityOption === "flatrate" && (
-        <p>Flatrate: {`${showWatchProviders(streamingProviderFlatrate)}`}</p>
-      )}
-      {availabilityOption === "rent" && (
-        <p>Renting: {`${showWatchProviders(streamingProviderRent)}`}</p>
-      )}
+      <StyledSectionAvailability>
+        <h4>Availability:</h4>
+        {availabilityOption === "all" && (
+          <>
+            <StyledAvailabilityHeading>Flatrate</StyledAvailabilityHeading>
+            <StyledAvailabilityText>{`${showWatchProviders(
+              streamingProviderFlatrate
+            )}`}</StyledAvailabilityText>
+            <StyledAvailabilityHeading>Renting</StyledAvailabilityHeading>
+            <StyledAvailabilityText>
+              {`${showWatchProviders(streamingProviderRent)}`}
+            </StyledAvailabilityText>
+            <StyledAvailabilityHeading>Purchase </StyledAvailabilityHeading>
+            <StyledAvailabilityText>{`${showWatchProviders(
+              streamingProviderBuy
+            )}`}</StyledAvailabilityText>
+          </>
+        )}
+        {availabilityOption === "flatrate" && (
+          <p>Flatrate {`${showWatchProviders(streamingProviderFlatrate)}`}</p>
+        )}
+        {availabilityOption === "rent" && (
+          <p>Renting {`${showWatchProviders(streamingProviderRent)}`}</p>
+        )}
 
-      {availabilityOption === "purchase" && (
-        <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>
-      )}
+        {availabilityOption === "purchase" && (
+          <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>
+        )}
+      </StyledSectionAvailability>
     </>
   );
 }

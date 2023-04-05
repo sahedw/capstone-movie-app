@@ -130,7 +130,7 @@ test("Should render the MovieDetail component with the right heading", () => {
       </DataContext.Provider>
     </TrendingContext.Provider>
   );
-  const element = screen.getByRole("heading", { name: "The Batman - 2023" });
+  const element = screen.getByRole("heading", { name: "The Batman" });
   expect(element).toBeInTheDocument();
 });
 
@@ -166,7 +166,7 @@ test("Should render the MovieDetail component and the availability if not availa
       </DataContext.Provider>
     </TrendingContext.Provider>
   );
-  const element = screen.getByText("Renting: Not available");
+  const element = screen.getByText("Renting Not available");
   expect(element).toBeInTheDocument();
 });
 
