@@ -130,7 +130,7 @@ test("Should render the MovieDetail component with the right heading", () => {
       </DataContext.Provider>
     </TrendingContext.Provider>
   );
-  const element = screen.getByRole("heading", { name: "The Batman - 2023" });
+  const element = screen.getByRole("heading", { name: "The Batman" });
   expect(element).toBeInTheDocument();
 });
 
