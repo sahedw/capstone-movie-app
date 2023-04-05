@@ -43,13 +43,18 @@ const StyledDiv = styled.div`
 const StyledButton = styled.button`
   position: relative;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 15px;
   align-items: center;
   height: 45px;
   width: 160px;
   border-radius: 20px;
   border: none;
-  background-color: #f97b7b;
+  background-color: ${(props) => props.color};
+
+  :hover {
+    background-color: #f97b7b;
+  }
 `;
 
 const StyledIcon = styled(Image)``;
@@ -98,6 +103,11 @@ export default function MovieDetailFooter({ movie }) {
           <StyledListItem>
             <StyledDiv>
               <StyledButton
+                color={
+                  JSON.stringify(watchlist).includes(JSON.stringify(movie))
+                    ? "#f97b7b"
+                    : "#faa5a5"
+                }
                 onClick={() => {
                   handleRemoveInWatchlistPage(movie);
                 }}
@@ -110,10 +120,7 @@ export default function MovieDetailFooter({ movie }) {
                       width={20}
                       height={20}
                     />{" "}
-                    <StyledIconText color={theme}>
-                      {" "}
-                      from Watchlist
-                    </StyledIconText>
+                    <StyledIconText color={theme}>Watchlist</StyledIconText>
                   </>
                 ) : (
                   <>
@@ -123,7 +130,7 @@ export default function MovieDetailFooter({ movie }) {
                       width={20}
                       height={20}
                     />
-                    <StyledIconText color={theme}> to Watchlist</StyledIconText>
+                    <StyledIconText color={theme}>Watchlist</StyledIconText>
                   </>
                 )}
               </StyledButton>
@@ -132,6 +139,11 @@ export default function MovieDetailFooter({ movie }) {
           <StyledListItem>
             <StyledDiv>
               <StyledButton
+                color={
+                  JSON.stringify(watched).includes(JSON.stringify(movie))
+                    ? "#f97b7b"
+                    : "#faa5a5"
+                }
                 onClick={() => {
                   handleRemoveInWatchedPage(movie);
                 }}
@@ -145,7 +157,7 @@ export default function MovieDetailFooter({ movie }) {
                       height={20}
                     />
 
-                    <StyledIconText color={theme}> from Watched</StyledIconText>
+                    <StyledIconText color={theme}>Watched</StyledIconText>
                   </>
                 ) : (
                   <>
@@ -155,7 +167,7 @@ export default function MovieDetailFooter({ movie }) {
                       width={20}
                       height={20}
                     />
-                    <StyledIconText color={theme}> to Watched</StyledIconText>
+                    <StyledIconText color={theme}>Watched</StyledIconText>
                   </>
                 )}
               </StyledButton>
