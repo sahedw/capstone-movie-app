@@ -166,7 +166,7 @@ test("Should render the MovieDetail component and the availability if not availa
       </DataContext.Provider>
     </TrendingContext.Provider>
   );
-  const element = screen.getByText("Renting: Not available");
+  const element = screen.getByText("Renting Not available");
   expect(element).toBeInTheDocument();
 });
 
