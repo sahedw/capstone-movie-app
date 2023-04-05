@@ -211,31 +211,6 @@ export default function MovieDetail({ movie }) {
     fetchData();
   }, []);
 
-  function handleRemoveInWatchlistPage(movie) {
-    if (router.asPath.includes("my-watchlist")) {
-      handleToggleWatchList(movie);
-      router.push("/my-watchlist");
-    } else if (
-      trendingMovies.find((trendingMovie) => trendingMovie.id === movie.id)
-    ) {
-      handleToggleWatchList(movie);
-    } else if (movie.id.toString().length === router.asPath.length - 1) {
-      handleToggleWatchList(movie);
-      router.push("/");
-    } else {
-      handleToggleWatchList(movie);
-    }
-  }
-
-  function handleRemoveInWatchedPage(movie) {
-    if (router.asPath.includes("my-watched")) {
-      handleToggleWatched(movie);
-      router.push("/my-watched");
-    } else {
-      handleToggleWatched(movie);
-    }
-  }
-
   function displayTrailer() {
     setShowTrailer(!showTrailer);
   }
@@ -262,7 +237,7 @@ export default function MovieDetail({ movie }) {
           {getPopularityDecimal(movieDetails?.vote_average)}/10 Rating
         </StyledMovieSubtitles>
         <StyledMovieSubtitles>
-          {getGenreFrom(movie)} - {movie.release_date.slice(0, 4)} -{" "}
+          {getGenreFrom(movie)} • {movie.release_date.slice(0, 4)} •{" "}
           {calculateRuntimeFrom(runtime)}
         </StyledMovieSubtitles>
       </StyledSectionQuickOverview>
