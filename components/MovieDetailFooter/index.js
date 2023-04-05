@@ -51,10 +51,6 @@ const StyledButton = styled.button`
   border-radius: 20px;
   border: none;
   background-color: ${(props) => props.color};
-
-  :hover {
-    background-color: #f97b7b;
-  }
 `;
 
 const StyledIcon = styled(Image)``;
