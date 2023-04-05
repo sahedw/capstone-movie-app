@@ -24,6 +24,7 @@ export const lightTheme = {
   body: "white",
   fontColor: "black",
   navigation: "white",
+  buttonText: "white",
 };
 
 export const darkTheme = {

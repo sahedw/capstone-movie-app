@@ -13,7 +13,7 @@ import {
 import { useContext } from "react";
 
 const StyledFooter = styled.footer`
-  background-color: ${(props) => props.theme.navigation};
+  background-color: ${(props) => props.theme.body};
   position: fixed;
   width: 100%;
   height: 80px;
@@ -44,23 +44,20 @@ const StyledDiv = styled.div`
 
 const StyledButton = styled.button`
   position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   height: 45px;
   width: 160px;
   border-radius: 20px;
-  border: 1px solid gray;
-  background-color: transparent;
+  border: none;
+  background-color: #f97b7b;
 `;
 
-const StyledIcon = styled(Image)`
-  position: absolute;
-  left: 15px;
-  top: 12px;
-`;
+const StyledIcon = styled(Image)``;
 
 const StyledIconText = styled.p`
-  position: absolute;
-  right: 20px;
-  top: 0px;
+  color: white;
 `;
 
 export default function MovieDetailFooter({ movie }) {
@@ -111,21 +108,24 @@ export default function MovieDetailFooter({ movie }) {
                   <>
                     <StyledIcon
                       alt={"in-watchlist"}
-                      src={`/in-watchlist${getIconForTheme(theme)}.png`}
+                      src={`/in-watchlist.png`}
                       width={20}
                       height={20}
                     />{" "}
-                    <StyledIconText> from Watchlist</StyledIconText>
+                    <StyledIconText color={theme}>
+                      {" "}
+                      from Watchlist
+                    </StyledIconText>
                   </>
                 ) : (
                   <>
                     <StyledIcon
                       alt={"not-in-watchlist"}
-                      src={`/not-in-watchlist${getIconForTheme(theme)}.png`}
+                      src={`/not-in-watchlist.png`}
                       width={20}
                       height={20}
                     />
-                    <StyledIconText> to Watchlist</StyledIconText>
+                    <StyledIconText color={theme}> to Watchlist</StyledIconText>
                   </>
                 )}
               </StyledButton>
@@ -142,22 +142,22 @@ export default function MovieDetailFooter({ movie }) {
                   <>
                     <StyledIcon
                       alt={"in-watched"}
-                      src={`/in-watched${getIconForTheme(theme)}.png`}
+                      src={`/in-watched.png`}
                       width={20}
                       height={20}
                     />
 
-                    <StyledIconText> from Watched</StyledIconText>
+                    <StyledIconText color={theme}> from Watched</StyledIconText>
                   </>
                 ) : (
                   <>
                     <StyledIcon
                       alt={"not-in-watched"}
-                      src={`/not-in-watched${getIconForTheme(theme)}.png`}
+                      src={`/not-in-watched.png`}
                       width={20}
                       height={20}
                     />
-                    <StyledIconText> to Watched</StyledIconText>
+                    <StyledIconText color={theme}> to Watched</StyledIconText>
                   </>
                 )}
               </StyledButton>
