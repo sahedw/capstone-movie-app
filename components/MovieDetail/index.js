@@ -104,6 +104,15 @@ const StyledSectionAvailability = styled.section`
   padding-left: 15px;
 `;
 
+const StyledAvailabilityHeading = styled.h4`
+  margin-bottom: 5px;
+`;
+
+const StyledAvailabilityText = styled.p`
+  margin-top: 5px;
+  color: gray;
+`;
+
 export default function MovieDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
   const [movieDetails, setMovieDetails] = useState(null);
@@ -283,20 +292,26 @@ export default function MovieDetail({ movie }) {
         {availabilityOption === "all" && (
           <>
             {" "}
-            <p>
-              Flatrate: {`${showWatchProviders(streamingProviderFlatrate)}`}
-            </p>
-            <p>Renting: {`${showWatchProviders(streamingProviderRent)}`}</p>
-            <p>
-              Purchase: {`${showWatchProviders(streamingProviderBuy)}`}
-            </p>{" "}
+            <StyledAvailabilityHeading>Flatrate</StyledAvailabilityHeading>
+            <StyledAvailabilityText>{`${showWatchProviders(
+              streamingProviderFlatrate
+            )}`}</StyledAvailabilityText>
+            <StyledAvailabilityHeading>Renting</StyledAvailabilityHeading>
+            <StyledAvailabilityText>
+              {" "}
+              {`${showWatchProviders(streamingProviderRent)}`}
+            </StyledAvailabilityText>
+            <StyledAvailabilityHeading>Purchase </StyledAvailabilityHeading>
+            <StyledAvailabilityText>{`${showWatchProviders(
+              streamingProviderBuy
+            )}`}</StyledAvailabilityText>{" "}
           </>
         )}
         {availabilityOption === "flatrate" && (
-          <p>Flatrate: {`${showWatchProviders(streamingProviderFlatrate)}`}</p>
+          <p>Flatrate {`${showWatchProviders(streamingProviderFlatrate)}`}</p>
         )}
         {availabilityOption === "rent" && (
-          <p>Renting: {`${showWatchProviders(streamingProviderRent)}`}</p>
+          <p>Renting {`${showWatchProviders(streamingProviderRent)}`}</p>
         )}
 
         {availabilityOption === "purchase" && (
