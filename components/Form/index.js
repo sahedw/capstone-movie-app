@@ -5,6 +5,16 @@ import Image from "next/image";
 
 const StyledSection = styled.section``;
 
+const StyledSectionRadioButtons = styled.section`
+  margin-top: 5px;
+  display: flex;
+  gap: 10px;
+`;
+
+const StyledSectionRadio = styled.section`
+  display: flex;
+`;
+
 const StyledForm = styled.form`
   position: relative;
   display: flex;
@@ -13,6 +23,7 @@ const StyledForm = styled.form`
 `;
 
 const StyledInput = styled.input`
+  margin-top: 10px;
   padding-right: 25px;
   width: 250px;
   height: 30px;
@@ -36,7 +47,7 @@ const StyledButton = styled.button`
   position: absolute;
   background-color: transparent;
   border: none;
-  top: 6px;
+  top: 16px;
   left: 220px;
 `;
 
@@ -67,6 +78,22 @@ export default function Form({ onSubmit }) {
               height={15}
             />
           </StyledButton>
+          <StyledSectionRadioButtons>
+            <StyledSectionRadio>
+              <label htmlFor="movies">Movies:</label>
+              <input
+                type="radio"
+                id="movies"
+                name="medium"
+                value="movies"
+                checked
+              />
+            </StyledSectionRadio>
+            <StyledSectionRadio>
+              <label htmlFor="shows">Shows:</label>
+              <input type="radio" id="shows" name="medium" value="shows" />
+            </StyledSectionRadio>
+          </StyledSectionRadioButtons>
         </StyledForm>
       </StyledSection>
     </>
