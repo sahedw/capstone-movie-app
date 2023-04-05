@@ -29,7 +29,6 @@ export default function MovieDetailPage() {
   return (
     <main>
       <MovieDetail movie={currentMovie} />
-      {/* <Navigation /> */}
       <MovieDetailFooter movie={currentMovie} />
     </main>
   );

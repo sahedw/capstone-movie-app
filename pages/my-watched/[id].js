@@ -5,6 +5,7 @@ import { WatchedContext } from "../_app";
 import { useRouter } from "next/router";
 import PushButton from "../../components/PushButton";
 import Navigation from "../../components/Navigation";
+import MovieDetailFooter from "../../components/MovieDetailFooter";
 
 export default function MovieDetailPage() {
   const { watched } = useContext(WatchedContext);
@@ -28,7 +29,7 @@ export default function MovieDetailPage() {
   return (
     <main>
       <MovieDetail movie={currentMovie} />
-      <Navigation />
+      <MovieDetailFooter movie={currentMovie} />
     </main>
   );
 }

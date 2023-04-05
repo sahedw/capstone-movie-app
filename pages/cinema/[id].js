@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { CinemaContext } from "../_app";
 import { useRouter } from "next/router";
 import PushButton from "../../components/PushButton";
-import Navigation from "../../components/Navigation";
+import MovieDetailFooter from "../../components/MovieDetailFooter";
 
 export default function MovieDetailPage() {
   const { currentlyInCinemas, upcomingMovies } = useContext(CinemaContext);
@@ -36,7 +36,7 @@ export default function MovieDetailPage() {
   return (
     <main>
       <MovieDetail movie={currentMovie} />
-      <Navigation />
+      <MovieDetailFooter movie={currentMovie} />
     </main>
   );
 }
