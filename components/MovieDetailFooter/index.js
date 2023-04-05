@@ -19,8 +19,6 @@ const StyledFooter = styled.footer`
   height: 80px;
   bottom: -1px;
   border-top: 1px solid grey;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
 `;
 
 const StyledNavBar = styled.nav``;

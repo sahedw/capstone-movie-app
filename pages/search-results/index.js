@@ -37,6 +37,9 @@ const StyledButtons = styled.button`
     color: white;
     border: none;
   }
+  :disabled {
+    background-color: lightgray;
+  }
 `;
 
 export default function SearchResultsPage() {
