@@ -3,8 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import setCurrentNavIcon from "../../utils/setCurrentNavIcon";
-import setCurrentNavText from "../../utils/setCurrentNavText";
+import getIconForTheme from "../../utils/getIconForTheme";
 import {
   DataContext,
   TrendingContext,
@@ -42,11 +41,11 @@ const StyledDiv = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
+/* display: flex;
+  justify-content: space-around;
+  align-items: center; */
 const StyledButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
   height: 45px;
   width: 160px;
   border-radius: 20px;
@@ -54,11 +53,23 @@ const StyledButton = styled.button`
   background-color: transparent;
 `;
 
+const StyledIcon = styled(Image)`
+  position: absolute;
+  left: 15px;
+  top: 12px;
+`;
+
+const StyledIconText = styled.p`
+  position: absolute;
+  right: 20px;
+  top: 0px;
+`;
+
 export default function MovieDetailFooter({ movie }) {
   const { theme } = useContext(DataContext);
   const { trendingMovies } = useContext(TrendingContext);
   const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
-  const { handleToggleWatched } = useContext(WatchedContext);
+  const { handleToggleWatched, watched } = useContext(WatchedContext);
 
   const router = useRouter();
 
@@ -98,7 +109,27 @@ export default function MovieDetailFooter({ movie }) {
                   handleRemoveInWatchlistPage(movie);
                 }}
               >
-                <p>Add to Watchlist</p>
+                {JSON.stringify(watchlist).includes(JSON.stringify(movie)) ? (
+                  <>
+                    <StyledIcon
+                      alt={"in-watchlist"}
+                      src={`/in-watchlist${getIconForTheme(theme)}.png`}
+                      width={20}
+                      height={20}
+                    />{" "}
+                    <StyledIconText> from Watchlist</StyledIconText>
+                  </>
+                ) : (
+                  <>
+                    <StyledIcon
+                      alt={"not-in-watchlist"}
+                      src={`/not-in-watchlist${getIconForTheme(theme)}.png`}
+                      width={20}
+                      height={20}
+                    />
+                    <StyledIconText> to Watchlist</StyledIconText>
+                  </>
+                )}
               </StyledButton>
             </StyledDiv>
           </StyledListItem>
@@ -109,7 +140,28 @@ export default function MovieDetailFooter({ movie }) {
                   handleRemoveInWatchedPage(movie);
                 }}
               >
-                <p>Add to Watched</p>
+                {JSON.stringify(watched).includes(JSON.stringify(movie)) ? (
+                  <>
+                    <StyledIcon
+                      alt={"in-watched"}
+                      src={`/in-watched${getIconForTheme(theme)}.png`}
+                      width={20}
+                      height={20}
+                    />
+
+                    <StyledIconText> from Watched</StyledIconText>
+                  </>
+                ) : (
+                  <>
+                    <StyledIcon
+                      alt={"not-in-watched"}
+                      src={`/not-in-watched${getIconForTheme(theme)}.png`}
+                      width={20}
+                      height={20}
+                    />
+                    <StyledIconText> to Watched</StyledIconText>
+                  </>
+                )}
               </StyledButton>
             </StyledDiv>
           </StyledListItem>
