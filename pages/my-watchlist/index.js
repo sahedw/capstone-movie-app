@@ -53,6 +53,16 @@ const StyledSection = styled.section`
   padding-right: 15px;
 `;
 
+const StyledSectionEmpty = styled.section`
+  height: 550px;
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const StyledSectionButtonsFlex = styled.section`
   width: 100%;
   margin-bottom: 15px;
@@ -84,8 +94,10 @@ export default function MyWatchlistPage() {
   if (watchlist.length === 0)
     return (
       <main>
-        <h2>Nothing to 👀 here.</h2>
-        <p>Why dont you add some? </p>
+        <StyledSectionEmpty>
+          <h2>Nothing to 👀 here.</h2>
+          <p>Why dont you add some? </p>
+        </StyledSectionEmpty>
         <Navigation />
       </main>
     );

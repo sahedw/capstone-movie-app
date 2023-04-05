@@ -37,8 +37,13 @@ const StyledMoviePick = styled.section`
   margin-top: 40px;
 `;
 
+const StyledNoMoviePickSection = styled.section`
+  display: flex;
+  justify-content: center;
+`;
+
 const StyledNoMoviePick = styled.section`
-  width: 350px;
+  width: 340px;
 `;
 
 const StyledHeader = styled.h4`
@@ -164,14 +169,16 @@ export default function Home() {
             </StyledLink>
           </StyledMoviePick>
         ) : (
-          <StyledNoMoviePick>
-            <h1>You must be fun at parties 😪</h1>
-            <p>
-              Here we WOULD 😒 suggest you random movies from your watchlist to
-              watch.{" "}
-            </p>
-            <p>How about adding some movies?</p>
-          </StyledNoMoviePick>
+          <StyledNoMoviePickSection>
+            <StyledNoMoviePick>
+              <h1>You must be fun at parties 😪</h1>
+              <p>
+                Here we WOULD 😒 suggest you random movies from your watchlist
+                to watch.{" "}
+              </p>
+              <p>How about adding some movies?</p>
+            </StyledNoMoviePick>
+          </StyledNoMoviePickSection>
         )}
         <StyledLine />
         <StyledSectionTrending>

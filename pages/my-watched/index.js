@@ -48,6 +48,16 @@ const StyledDiv = styled.div`
   margin-top: 15px;
 `;
 
+const StyledSectionEmpty = styled.section`
+  height: 550px;
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const StyledSection = styled.section`
   padding-left: 15px;
   padding-right: 15px;
@@ -84,8 +94,10 @@ export default function MyWatchedPage() {
   if (watched.length === 0)
     return (
       <main>
-        <h2>Nothing to 👀 here.</h2>
-        <p>Why dont you add some? </p>
+        <StyledSectionEmpty>
+          <h2>Nothing to 👀 here.</h2>
+          <p>Why dont you add some? </p>
+        </StyledSectionEmpty>
         <Navigation />
       </main>
     );

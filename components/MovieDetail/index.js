@@ -66,6 +66,7 @@ const StyledSectionQuickOverview = styled.section`
 
 const StyledMovieTitle = styled.h2`
   margin: 5px;
+  text-align: center;
 `;
 
 const StyledMovieSubtitles = styled.p`
