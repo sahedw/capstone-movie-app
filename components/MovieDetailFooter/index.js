@@ -41,9 +41,7 @@ const StyledDiv = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-/* display: flex;
-  justify-content: space-around;
-  align-items: center; */
+
 const StyledButton = styled.button`
   position: relative;
   height: 45px;

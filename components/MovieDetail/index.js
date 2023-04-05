@@ -303,60 +303,6 @@ export default function MovieDetail({ movie }) {
           <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>
         )}
       </StyledSectionAvailability>
-
-      <StyledSectionButtons>
-        <StyledButton
-          onClick={() => {
-            handleRemoveInWatchlistPage(movie);
-          }}
-        >
-          {JSON.stringify(watchlist).includes(JSON.stringify(movie)) ? (
-            <>
-              <Image
-                alt={"in-watchlist"}
-                src={`/in-watchlist${getIconForTheme(theme)}.png`}
-                width={40}
-                height={40}
-              />{" "}
-            </>
-          ) : (
-            <>
-              <Image
-                alt={"not-in-watchlist"}
-                src={`/not-in-watchlist${getIconForTheme(theme)}.png`}
-                width={39}
-                height={39}
-              />
-            </>
-          )}
-        </StyledButton>
-
-        <StyledButton
-          onClick={() => {
-            handleRemoveInWatchedPage(movie);
-          }}
-        >
-          {JSON.stringify(watched).includes(JSON.stringify(movie)) ? (
-            <>
-              <Image
-                alt={"in-watched"}
-                src={`/in-watched${getIconForTheme(theme)}.png`}
-                width={40}
-                height={40}
-              />
-            </>
-          ) : (
-            <>
-              <Image
-                alt={"not-in-watched"}
-                src={`/not-in-watched${getIconForTheme(theme)}.png`}
-                width={40}
-                height={40}
-              />
-            </>
-          )}
-        </StyledButton>
-      </StyledSectionButtons>
     </>
   );
 }
