@@ -169,9 +169,6 @@ export default function App({ Component, pageProps }) {
     setMediaTypeMovies(value);
   }
 
-  console.log("new watchlist", watchlistTV);
-  console.log("new watched", watchedTV);
-
   return (
     <>
       <Head>

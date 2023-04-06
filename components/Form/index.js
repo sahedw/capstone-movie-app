@@ -97,7 +97,7 @@ export default function Form({ onSubmit }) {
                 onChange={() => {
                   handleMediaTypeChange("movie");
                 }}
-                defaultChecked
+                required
               />
             </StyledSectionRadio>
             <StyledSectionRadio>

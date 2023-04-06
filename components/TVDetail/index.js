@@ -236,8 +236,10 @@ export default function TVDetail({ movie }) {
           {getPopularityDecimal(movieDetails?.vote_average)}/10 Rating
         </StyledMovieSubtitles>
         <StyledMovieSubtitles>
-          {getGenreFrom(movie)} • {movie.first_air_date?.slice(0, 4)} • ca.{" "}
-          {calculateRuntimeFrom(runtime)} per episode
+          {getGenreFrom(movie)} • {movie.first_air_date?.slice(0, 4)}
+        </StyledMovieSubtitles>
+        <StyledMovieSubtitles>
+          ca. {calculateRuntimeFrom(runtime)} per episode
         </StyledMovieSubtitles>
       </StyledSectionQuickOverview>
       <StyledSectionSynopsis>
