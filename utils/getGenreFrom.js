@@ -7,7 +7,7 @@ export default function getGenreFrom(movie) {
       ", " +
       findGenre(movie?.genre_ids[1])?.name
     );
-  } else if (!movie?.genre_ids[1]) {
+  } else if (movie?.genre_ids[0]) {
     return findGenre(movie?.genre_ids[0])?.name;
   } else {
     return "Missing, Genre";
