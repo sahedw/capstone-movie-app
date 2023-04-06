@@ -78,7 +78,7 @@ export default function Movie({ movie }) {
         </StyledDiv>
         <StyledSectionText>
           <StyledHeader color={theme}>
-            {movie?.title} - <em>{movie?.release_date.slice(0, 4)}</em>
+            {movie?.title} - <em>{movie?.release_date?.slice(0, 4)}</em>
           </StyledHeader>
           <StyledParagraph>{getGenreFrom(movie)}</StyledParagraph>
           {runtime ? (

@@ -2,7 +2,8 @@ import React from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Image from "next/image";
-
+import { useContext } from "react";
+import { MediaContext } from "../../pages/_app";
 const StyledSection = styled.section``;
 
 const StyledSectionRadioButtons = styled.section`
@@ -52,12 +53,15 @@ const StyledButton = styled.button`
 `;
 
 export default function Form({ onSubmit }) {
+  const { handleMediaTypeChange, mediaTypeMovies } = useContext(MediaContext);
   const router = useRouter();
 
   function handleOnSubmit(event) {
     onSubmit(event);
     router.push("/search-results");
   }
+
+  console.log(mediaTypeMovies);
 
   return (
     <>
@@ -84,14 +88,25 @@ export default function Form({ onSubmit }) {
               <input
                 type="radio"
                 id="movies"
-                name="medium"
+                name="media-type"
                 value="movies"
-                checked
+                onChange={() => {
+                  handleMediaTypeChange(true);
+                }}
+                defaultChecked
               />
             </StyledSectionRadio>
             <StyledSectionRadio>
               <label htmlFor="shows">Shows:</label>
-              <input type="radio" id="shows" name="medium" value="shows" />
+              <input
+                type="radio"
+                id="shows"
+                name="media-type"
+                value="shows"
+                onChange={() => {
+                  handleMediaTypeChange(false);
+                }}
+              />
             </StyledSectionRadio>
           </StyledSectionRadioButtons>
         </StyledForm>

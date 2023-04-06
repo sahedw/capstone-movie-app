@@ -12,6 +12,7 @@ export const WatchlistContext = createContext();
 export const CinemaContext = createContext();
 export const TrendingContext = createContext();
 export const WatchedContext = createContext();
+export const MediaContext = createContext();
 
 export default function App({ Component, pageProps }) {
   const [watchlist, setWatchlist] = useLocalStorageState("newWatchlist", {
@@ -30,6 +31,7 @@ export default function App({ Component, pageProps }) {
     defaultValue: "light",
   });
   const [resultsPage, setResultsPage] = useState(1);
+  const [mediaTypeMovies, setMediaTypeMovies] = useState(true);
 
   function resetResultsPage() {
     setResultsPage(1);
@@ -71,6 +73,7 @@ export default function App({ Component, pageProps }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    console.log(data);
     setSearch(data.search);
   }
 
@@ -127,6 +130,10 @@ export default function App({ Component, pageProps }) {
     }
   }
 
+  function handleMediaTypeChange(boolean) {
+    setMediaTypeMovies(boolean);
+  }
+
   return (
     <>
       <Head>
@@ -134,40 +141,44 @@ export default function App({ Component, pageProps }) {
       </Head>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <GlobalStyles />
-        <WatchedContext.Provider value={{ watched, handleToggleWatched }}>
-          <TrendingContext.Provider
-            value={{ dayTrending, trendingMovies, handleTrendingSort }}
-          >
-            <CinemaContext.Provider
-              value={{ currentlyInCinemas, upcomingMovies }}
+        <MediaContext.Provider
+          value={{ handleMediaTypeChange, mediaTypeMovies }}
+        >
+          <WatchedContext.Provider value={{ watched, handleToggleWatched }}>
+            <TrendingContext.Provider
+              value={{ dayTrending, trendingMovies, handleTrendingSort }}
             >
-              <WatchlistContext.Provider
-                value={{ handleToggleWatchList, watchlist }}
+              <CinemaContext.Provider
+                value={{ currentlyInCinemas, upcomingMovies }}
               >
-                <DataContext.Provider
-                  value={{
-                    search,
-                    resultsPage,
-                    resetResultsPage,
-                    totalSearchResults,
-                    totalSearchPages,
-                    handleNextPage,
-                    handlePrevPage,
-                    getAvailabilitySeletion,
-                    availabilityOption,
-                    themeToggler,
-                    theme,
-                    DataContext,
-                    handleFormSubmit,
-                    movies,
-                  }}
+                <WatchlistContext.Provider
+                  value={{ handleToggleWatchList, watchlist }}
                 >
-                  <Component {...pageProps} />
-                </DataContext.Provider>
-              </WatchlistContext.Provider>
-            </CinemaContext.Provider>
-          </TrendingContext.Provider>
-        </WatchedContext.Provider>
+                  <DataContext.Provider
+                    value={{
+                      search,
+                      resultsPage,
+                      resetResultsPage,
+                      totalSearchResults,
+                      totalSearchPages,
+                      handleNextPage,
+                      handlePrevPage,
+                      getAvailabilitySeletion,
+                      availabilityOption,
+                      themeToggler,
+                      theme,
+                      DataContext,
+                      handleFormSubmit,
+                      movies,
+                    }}
+                  >
+                    <Component {...pageProps} />
+                  </DataContext.Provider>
+                </WatchlistContext.Provider>
+              </CinemaContext.Provider>
+            </TrendingContext.Provider>
+          </WatchedContext.Provider>
+        </MediaContext.Provider>
       </ThemeProvider>
     </>
   );
