@@ -131,9 +131,8 @@ export default function Home() {
               height={25}
             />
           </Link>
-
           <p>
-            Grab your 🍿 and let us watch a <strong>movie!</strong>{" "}
+            Grab your 🍿 and let us watch something <strong>cool!</strong>{" "}
           </p>
         </StyledSectionHeader>
         <StyledSectionForm>
