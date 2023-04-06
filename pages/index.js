@@ -107,8 +107,6 @@ export default function Home() {
   const { dayTrending, trendingMovies, handleTrendingSort } =
     useContext(TrendingContext);
 
-  const [runtime, setRuntime] = useState(0);
-
   const randomMovie = useMemo(
     () => getRandomIndexFromArray(watchlist),
     [watchlist]
@@ -119,25 +117,6 @@ export default function Home() {
   );
 
   const cutTrendingArray = trendingMovies.slice(0, 9);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `/api/themoviedb/movie/${movie.id}?&language=eng-US`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setRuntime(data.runtime);
-        } else {
-          throw new Error("Something went wrong");
-        }
-      } catch (error) {
-        console.log(`Error: ${error.message}`);
-      }
-    }
-    fetchData();
-  }, []);
 
   return (
     <>

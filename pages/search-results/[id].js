@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import BackButton from "../../components/PushButton";
 import MovieDetailFooter from "../../components/MovieDetailFooter";
 import Navigation from "../../components/Navigation";
+import TVDetail from "../../components/TVDetail";
 
 export default function MovieDetailPage() {
   const { movies } = useContext(DataContext);
@@ -35,7 +36,7 @@ export default function MovieDetailPage() {
           <MovieDetailFooter movie={currentMovie} />{" "}
         </>
       ) : (
-        <MovieDetail movie={currentMovie} />
+        <TVDetail movie={currentMovie} />
       )}
     </main>
   );
