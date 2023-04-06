@@ -7,6 +7,7 @@ import BackButton from "../../components/PushButton";
 import MovieDetailFooter from "../../components/MovieDetailFooter";
 import Navigation from "../../components/Navigation";
 import TVDetail from "../../components/TVDetail";
+import TVDetailFooter from "../../components/TVDetailFooter";
 
 export default function MovieDetailPage() {
   const { movies } = useContext(DataContext);
@@ -33,10 +34,13 @@ export default function MovieDetailPage() {
       {mediaTypeMovies === "movie" ? (
         <>
           <MovieDetail movie={currentMovie} />
-          <MovieDetailFooter movie={currentMovie} />{" "}
+          <MovieDetailFooter movie={currentMovie} />
         </>
       ) : (
-        <TVDetail movie={currentMovie} />
+        <>
+          <TVDetail movie={currentMovie} />
+          <TVDetailFooter movie={currentMovie} />
+        </>
       )}
     </main>
   );

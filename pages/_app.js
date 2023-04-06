@@ -13,9 +13,13 @@ export const CinemaContext = createContext();
 export const TrendingContext = createContext();
 export const WatchedContext = createContext();
 export const MediaContext = createContext();
+export const WatchlistTVContext = createContext();
 
 export default function App({ Component, pageProps }) {
   const [watchlist, setWatchlist] = useLocalStorageState("newWatchlist", {
+    defaultValue: [],
+  });
+  const [watchlistTV, setWatchlistTV] = useLocalStorageState("newWatchlistTV", {
     defaultValue: [],
   });
   const [watched, setWatched] = useLocalStorageState("newWatched", {
@@ -90,6 +94,20 @@ export default function App({ Component, pageProps }) {
     }
   }
 
+  function handleToggleWatchListTV(newMovie) {
+    if (
+      !watchlistTV.some(
+        (movie) => JSON.stringify(movie) === JSON.stringify(newMovie)
+      )
+    ) {
+      setWatchlistTV([...watchlistTV, newMovie]);
+    } else {
+      setWatchlistTV(
+        watchlistTV.filter((watchMovie) => watchMovie.id !== newMovie.id)
+      );
+    }
+  }
+
   function handleToggleWatched(newMovie) {
     if (
       !watched.some(
@@ -133,6 +151,8 @@ export default function App({ Component, pageProps }) {
     setMediaTypeMovies(value);
   }
 
+  console.log(watchlistTV);
+
   return (
     <>
       <Head>
@@ -140,44 +160,48 @@ export default function App({ Component, pageProps }) {
       </Head>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <GlobalStyles />
-        <MediaContext.Provider
-          value={{ handleMediaTypeChange, mediaTypeMovies }}
+        <WatchlistTVContext.Provider
+          value={{ handleToggleWatchListTV, watchlistTV }}
         >
-          <WatchedContext.Provider value={{ watched, handleToggleWatched }}>
-            <TrendingContext.Provider
-              value={{ dayTrending, trendingMovies, handleTrendingSort }}
-            >
-              <CinemaContext.Provider
-                value={{ currentlyInCinemas, upcomingMovies }}
+          <MediaContext.Provider
+            value={{ handleMediaTypeChange, mediaTypeMovies }}
+          >
+            <WatchedContext.Provider value={{ watched, handleToggleWatched }}>
+              <TrendingContext.Provider
+                value={{ dayTrending, trendingMovies, handleTrendingSort }}
               >
-                <WatchlistContext.Provider
-                  value={{ handleToggleWatchList, watchlist }}
+                <CinemaContext.Provider
+                  value={{ currentlyInCinemas, upcomingMovies }}
                 >
-                  <DataContext.Provider
-                    value={{
-                      search,
-                      resultsPage,
-                      resetResultsPage,
-                      totalSearchResults,
-                      totalSearchPages,
-                      handleNextPage,
-                      handlePrevPage,
-                      getAvailabilitySeletion,
-                      availabilityOption,
-                      themeToggler,
-                      theme,
-                      DataContext,
-                      handleFormSubmit,
-                      movies,
-                    }}
+                  <WatchlistContext.Provider
+                    value={{ handleToggleWatchList, watchlist }}
                   >
-                    <Component {...pageProps} />
-                  </DataContext.Provider>
-                </WatchlistContext.Provider>
-              </CinemaContext.Provider>
-            </TrendingContext.Provider>
-          </WatchedContext.Provider>
-        </MediaContext.Provider>
+                    <DataContext.Provider
+                      value={{
+                        search,
+                        resultsPage,
+                        resetResultsPage,
+                        totalSearchResults,
+                        totalSearchPages,
+                        handleNextPage,
+                        handlePrevPage,
+                        getAvailabilitySeletion,
+                        availabilityOption,
+                        themeToggler,
+                        theme,
+                        DataContext,
+                        handleFormSubmit,
+                        movies,
+                      }}
+                    >
+                      <Component {...pageProps} />
+                    </DataContext.Provider>
+                  </WatchlistContext.Provider>
+                </CinemaContext.Provider>
+              </TrendingContext.Provider>
+            </WatchedContext.Provider>
+          </MediaContext.Provider>
+        </WatchlistTVContext.Provider>
       </ThemeProvider>
     </>
   );
