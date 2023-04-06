@@ -9,7 +9,7 @@ import Navigation from "../../components/Navigation";
 import TVDetail from "../../components/TVDetail";
 import TVDetailFooter from "../../components/TVDetailFooter";
 
-export default function MovieDetailPage() {
+export default function DetailPage() {
   const { watched } = useContext(WatchedContext);
   const { watchedTV } = useContext(WatchedTVContext);
 
