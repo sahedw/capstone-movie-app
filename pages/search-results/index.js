@@ -5,6 +5,7 @@ import { DataContext } from "../_app";
 import Link from "next/link";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation";
+import TV from "../../components/TV";
 
 const StyledHeader = styled.h2`
   margin-left: 15px;
@@ -89,7 +90,7 @@ export default function SearchResultsPage() {
       {movies?.map((movie) => (
         <StyledLink key={movie.id} href={`search-results/${movie.id}`}>
           {/* <Movie movie={movie} /> */}
-          <p>hey</p>
+          <TV movie={movie} />
         </StyledLink>
       ))}
       <StyledSectionButtons>

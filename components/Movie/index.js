@@ -84,7 +84,7 @@ export default function Movie({ movie }) {
           {runtime ? (
             <StyledParagraph>{calculateRuntimeFrom(runtime)}</StyledParagraph>
           ) : (
-            <p>Loading...</p>
+            <p>no data</p>
           )}
         </StyledSectionText>
       </StyledSection>

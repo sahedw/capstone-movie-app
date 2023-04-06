@@ -44,17 +44,17 @@ const StyledHeader = styled.h4`
 
 export default function TV({ movie }) {
   const { theme } = useContext(DataContext);
-  /*  const [runtime, setRuntime] = useState(0);
+  const [runtime, setRuntime] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `/api/themoviedb/movie/${movie.id}?&language=eng-US`
+          `/api/themoviedb/tv/${movie.id}?&language=eng-US`
         );
         if (response.ok) {
           const data = await response.json();
-          setRuntime(data.runtime);
+          setRuntime(data.episode_run_time);
         } else {
           throw new Error("Something went wrong");
         }
@@ -63,7 +63,7 @@ export default function TV({ movie }) {
       }
     }
     fetchData();
-  }, [movie?.id]); */
+  }, [movie?.id]);
 
   return (
     <>
