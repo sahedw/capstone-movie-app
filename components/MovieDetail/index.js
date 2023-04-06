@@ -225,15 +225,15 @@ export default function MovieDetail({ movie }) {
       <section>
         <StyledSectionPoster>
           <StyledPoster
-            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-            alt={movie.title}
+            src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
+            alt={movie?.title}
             width={202.5}
             height={300}
           />
         </StyledSectionPoster>
       </section>
       <StyledSectionQuickOverview>
-        <StyledMovieTitle>{movie.title}</StyledMovieTitle>
+        <StyledMovieTitle>{movie?.title}</StyledMovieTitle>
         <StyledMovieSubtitles>
           {getPopularityDecimal(movieDetails?.vote_average)}/10 Rating
         </StyledMovieSubtitles>
@@ -258,7 +258,7 @@ export default function MovieDetail({ movie }) {
           ) : null}
         </StyledSectionTrailer>
         <StyledHeaderSynopsis>Synopsis:</StyledHeaderSynopsis>
-        <StyledSynopsisText>{movie.overview}</StyledSynopsisText>
+        <StyledSynopsisText>{movie?.overview}</StyledSynopsisText>
       </StyledSectionSynopsis>
 
       <Actors actors={shownActors} />

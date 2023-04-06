@@ -65,8 +65,6 @@ export default function Form({ onSubmit }) {
     router.push("/search-results");
   }
 
-  console.log(mediaTypeMovies);
-
   return (
     <>
       <StyledSection>

@@ -33,6 +33,7 @@ export default function App({ Component, pageProps }) {
     "newAvailability",
     { defaultValue: "all" }
   );
+
   const [dayTrending, setDayTrending] = useState(true);
   const [search, setSearch] = useState("");
   const [theme, setTheme] = useLocalStorageState("newTheme", {

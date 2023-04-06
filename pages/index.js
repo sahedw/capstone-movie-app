@@ -137,7 +137,7 @@ export default function Home() {
           </p>
         </StyledSectionHeader>
         <StyledSectionForm>
-          <Form onSubmit={handleFormSubmit} movies={movies} />
+          <Form onSubmit={handleFormSubmit} />
         </StyledSectionForm>
         <StyledLine />
         {watchlist.length > 0 ? (
