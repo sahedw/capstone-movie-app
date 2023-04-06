@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { DataContext } from "../../pages/_app";
 import getGenreFrom from "../../utils/getGenreFrom";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
@@ -9,24 +8,24 @@ import PushButton from "../PushButton";
 import showWatchProviders from "../../utils/showWatchProviders";
 import Actors from "../Actors";
 import { useContext } from "react";
-import styled from "styled-components";
-import ReactPlayer from "react-player";
-import { DetailHeaderContainer } from "../Styled Components/DetailPage";
-import { DetailPageDescription } from "../Styled Components/DetailPage";
-import { DetailPageDescriptionText } from "../Styled Components/DetailPage";
-import { DetailPosterContainer } from "../Styled Components/DetailPage";
-import { DetailPoster } from "../Styled Components/DetailPage";
-import { DetailHeaderTitle } from "../Styled Components/DetailPage";
-import { DetailHeaderText } from "../Styled Components/DetailPage";
-import { DetailSynopsis } from "../Styled Components/DetailPage";
-import { TrailerButton } from "../Styled Components/DetailPage";
-import { TrailerContainer } from "../Styled Components/DetailPage";
-import { DetailSynopsisHeader } from "../Styled Components/DetailPage";
-import { DetailSynopsisText } from "../Styled Components/DetailPage";
-import { DetailAvailability } from "../Styled Components/DetailPage";
-import { DetailAvailabilityHeading } from "../Styled Components/DetailPage";
-import { DetailAvailabilityText } from "../Styled Components/DetailPage";
-import { Trailer } from "../Styled Components/DetailPage";
+import {
+  DetailHeaderContainer,
+  DetailPosterContainer,
+  DetailHeaderTitle,
+  DetailHeaderText,
+  DetailAvailability,
+  Trailer,
+  DetailAvailabilityText,
+  DetailAvailabilityHeading,
+  TrailerContainer,
+  DetailSynopsisText,
+  DetailSynopsisHeader,
+  TrailerButton,
+  DetailSynopsis,
+  DetailPoster,
+  DetailPageDescriptionText,
+  DetailPageDescription,
+} from "../Styled Components/DetailPage";
 
 export default function TVDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);

@@ -7,12 +7,14 @@ import getGenreFrom from "../../utils/getGenreFrom";
 import { useFetch } from "../../hooks/useFetch";
 import { DataContext } from "../../pages/_app";
 import { useContext } from "react";
-import { OverviewWrapper } from "../Styled Components/QuickOverview";
-import { OverviewPosterContainer } from "../Styled Components/QuickOverview";
-import { OverviewPoster } from "../Styled Components/QuickOverview";
-import { OverviewTextContainer } from "../Styled Components/QuickOverview";
-import { OverviewHeader } from "../Styled Components/QuickOverview";
-import { OverviewText } from "../Styled Components/QuickOverview";
+import {
+  OverviewWrapper,
+  OverviewPosterContainer,
+  OverviewPoster,
+  OverviewTextContainer,
+  OverviewHeader,
+  OverviewText,
+} from "../Styled Components/QuickOverview";
 
 export default function Movie({ movie }) {
   const { theme } = useContext(DataContext);

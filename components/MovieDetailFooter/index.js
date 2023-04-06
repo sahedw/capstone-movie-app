@@ -7,14 +7,16 @@ import {
   WatchedContext,
 } from "../../pages/_app";
 import { useContext } from "react";
-import { DetailFooter } from "../Styled Components/DetailPageFooter";
-import { DetailNavBar } from "../Styled Components/DetailPageFooter";
-import { NavBarList } from "../Styled Components/DetailPageFooter";
-import { NavBarListItem } from "../Styled Components/DetailPageFooter";
-import { DetailNavBarButtonContainer } from "../Styled Components/DetailPageFooter";
-import { NavBarListButton } from "../Styled Components/DetailPageFooter";
-import { NavBarButtonIcon } from "../Styled Components/DetailPageFooter";
-import { NavBarButtonText } from "../Styled Components/DetailPageFooter";
+import {
+  DetailFooter,
+  DetailNavBar,
+  NavBarList,
+  NavBarListButton,
+  NavBarButtonIcon,
+  NavBarButtonText,
+  DetailNavBarButtonContainer,
+  NavBarListItem,
+} from "../Styled Components/DetailPageFooter";
 
 export default function MovieDetailFooter({ movie }) {
   const { theme } = useContext(DataContext);

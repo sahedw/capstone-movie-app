@@ -7,16 +7,18 @@ import Navigation from "../../components/Navigation";
 import useLocalStorageState from "use-local-storage-state";
 import TVGrid from "../../components/TVGrid";
 import TV from "../../components/TV";
-import { ListWrapper } from "../../components/Styled Components/ListPage";
-import { ButtonsFlexContainer } from "../../components/Styled Components/ListPage";
-import { ButtonsContainer } from "../../components/Styled Components/ListPage";
-import { LayoutListButton } from "../../components/Styled Components/ListPage";
-import { LayoutGridButton } from "../../components/Styled Components/ListPage";
-import { MediaHeader } from "../../components/Styled Components/ListPage";
-import { ContentContainerGrid } from "../../components/Styled Components/ListPage";
-import { LinkWrapper } from "../../components/Styled Components/ListPage";
-import { EmptyContentContainer } from "../../components/Styled Components/ListPage";
-import { ContentContainerList } from "../../components/Styled Components/ListPage";
+import {
+  ListWrapper,
+  ContentContainerList,
+  EmptyContentContainer,
+  ButtonsFlexContainer,
+  ButtonsContainer,
+  LayoutListButton,
+  LayoutGridButton,
+  MediaHeader,
+  ContentContainerGrid,
+  LinkWrapper,
+} from "../../components/Styled Components/ListPage";
 
 export default function MyWatchedPage() {
   const [listLayoutWatched, setListLayoutWatched] = useLocalStorageState(
