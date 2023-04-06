@@ -1,12 +1,14 @@
 import React from "react";
 import { useContext } from "react";
-import { WatchlistContext, DataContext } from "../_app";
+import { WatchlistContext, WatchlistTVContext, DataContext } from "../_app";
 import Movie from "../../components/Movie";
 import MovieGrid from "../../components/MovieGrid";
 import styled from "styled-components";
 import Link from "next/link";
 import Navigation from "../../components/Navigation";
 import useLocalStorageState from "use-local-storage-state";
+import TVGrid from "../../components/TVGrid";
+import TV from "../../components/TV";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -77,6 +79,10 @@ const StyledSectionList = styled.section`
   margin-top: 15px;
 `;
 
+const StyledHeaderMediaType = styled.h5`
+  margin-bottom: 5px;
+`;
+
 export default function MyWatchlistPage() {
   const [listLayoutWatchlist, setListLayoutWatchlist] = useLocalStorageState(
     "newLayoutWatchlist",
@@ -85,6 +91,8 @@ export default function MyWatchlistPage() {
     }
   );
   const { watchlist } = useContext(WatchlistContext);
+  const { watchlistTV } = useContext(WatchlistTVContext);
+
   const { theme } = useContext(DataContext);
 
   function setLayoutType(boolean) {
@@ -105,7 +113,7 @@ export default function MyWatchlistPage() {
   return (
     <main>
       <StyledSection>
-        <h2>My Watchlist ({watchlist.length}):</h2>
+        <h2>My Watchlist:</h2>
         <StyledSectionButtonsFlex>
           <StyledSectionButtons>
             <StyledButtonList
@@ -128,6 +136,11 @@ export default function MyWatchlistPage() {
             </StyledButtonGrid>
           </StyledSectionButtons>
         </StyledSectionButtonsFlex>
+
+        <StyledHeaderMediaType>
+          Movies ({watchlist.length})
+        </StyledHeaderMediaType>
+
         {listLayoutWatchlist ? (
           <StyledSectionList>
             {watchlist.map((movie) => {
@@ -144,6 +157,32 @@ export default function MyWatchlistPage() {
               return (
                 <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
                   <MovieGrid movie={movie} />
+                </StyledLink>
+              );
+            })}
+          </StyledDiv>
+        )}
+
+        <StyledHeaderMediaType>
+          Shows ({watchlistTV.length})
+        </StyledHeaderMediaType>
+
+        {listLayoutWatchlist ? (
+          <StyledSectionList>
+            {watchlistTV.map((movie) => {
+              return (
+                <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
+                  <TV movie={movie} />
+                </StyledLink>
+              );
+            })}
+          </StyledSectionList>
+        ) : (
+          <StyledDiv>
+            {watchlistTV.map((movie) => {
+              return (
+                <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
+                  <TVGrid movie={movie} />
                 </StyledLink>
               );
             })}

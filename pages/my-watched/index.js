@@ -1,12 +1,14 @@
 import React from "react";
 import { useContext } from "react";
-import { WatchedContext, DataContext } from "../_app";
+import { WatchedContext, WatchedTVContext, DataContext } from "../_app";
 import Movie from "../../components/Movie";
 import MovieGrid from "../../components/MovieGrid";
 import styled from "styled-components";
 import Link from "next/link";
 import Navigation from "../../components/Navigation";
 import useLocalStorageState from "use-local-storage-state";
+import TVGrid from "../../components/TVGrid";
+import TV from "../../components/TV";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -77,6 +79,10 @@ const StyledSectionList = styled.section`
   margin-top: 15px;
 `;
 
+const StyledHeaderMediaType = styled.h5`
+  margin-bottom: 5px;
+`;
+
 export default function MyWatchedPage() {
   const [listLayoutWatched, setListLayoutWatched] = useLocalStorageState(
     "newLayoutWatched",
@@ -85,6 +91,8 @@ export default function MyWatchedPage() {
     }
   );
   const { watched } = useContext(WatchedContext);
+  const { watchedTV } = useContext(WatchedTVContext);
+
   const { theme } = useContext(DataContext);
 
   function setLayoutType(boolean) {
@@ -128,6 +136,9 @@ export default function MyWatchedPage() {
             </StyledButtonGrid>
           </StyledSectionButtons>
         </StyledSectionButtonsFlex>
+
+        <StyledHeaderMediaType>Movies ({watched.length})</StyledHeaderMediaType>
+
         {listLayoutWatched ? (
           <StyledSectionList>
             {watched.map((movie) => {
@@ -144,6 +155,30 @@ export default function MyWatchedPage() {
               return (
                 <StyledLink key={movie.id} href={`my-watched/${movie.id}`}>
                   <MovieGrid movie={movie} />
+                </StyledLink>
+              );
+            })}
+          </StyledDiv>
+        )}
+        <StyledHeaderMediaType>
+          Shows ({watchedTV.length})
+        </StyledHeaderMediaType>
+        {listLayoutWatched ? (
+          <StyledSectionList>
+            {watchedTV.map((movie) => {
+              return (
+                <StyledLink key={movie.id} href={`my-watched/${movie.id}`}>
+                  <TV movie={movie} />
+                </StyledLink>
+              );
+            })}
+          </StyledSectionList>
+        ) : (
+          <StyledDiv>
+            {watchedTV.map((movie) => {
+              return (
+                <StyledLink key={movie.id} href={`my-watched/${movie.id}`}>
+                  <TVGrid movie={movie} />
                 </StyledLink>
               );
             })}
