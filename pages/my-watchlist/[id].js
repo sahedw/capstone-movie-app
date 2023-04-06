@@ -15,10 +15,6 @@ export default function MovieDetailPage() {
 
   const router = useRouter();
 
-  /*  const currentMovie = watchlist.find(
-    (movie) => movie.id.toString() === router.query.id
-  ); */
-
   const currentMovie =
     watchlist.find((movie) => movie.id.toString() === router.query.id) ||
     watchlistTV.find((movie) => movie.id.toString() === router.query.id);
