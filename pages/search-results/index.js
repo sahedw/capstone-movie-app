@@ -6,17 +6,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation";
 import TV from "../../components/TV";
-
-const StyledSectionEmpty = styled.section`
-  height: 550px;
-  padding-left: 15px;
-  padding-right: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-`;
+import { EmptyContentContainer } from "../../components/Styled Components/ListPage";
 
 const StyledHeader = styled.h2`
   margin-left: 15px;
@@ -71,12 +61,12 @@ export default function SearchResultsPage() {
     return (
       <>
         <PushButton />
-        <StyledSectionEmpty>
+        <EmptyContentContainer>
           <h2>Whoops, something seems wrong</h2>
           <p>{`The movie '${search}' doesn't seem to exist`}</p>
           <p>{`Please try to go back and search again :)`}</p>
           <Navigation />
-        </StyledSectionEmpty>
+        </EmptyContentContainer>
       </>
     );
 

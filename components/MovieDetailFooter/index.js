@@ -1,9 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import getIconForTheme from "../../utils/getIconForTheme";
 import {
   DataContext,
   TrendingContext,
@@ -11,53 +7,14 @@ import {
   WatchedContext,
 } from "../../pages/_app";
 import { useContext } from "react";
-
-const StyledFooter = styled.footer`
-  background-color: ${(props) => props.theme.body};
-  position: fixed;
-  width: 100%;
-  height: 80px;
-  bottom: -1px;
-  border-top: 1px solid grey;
-`;
-
-const StyledNavBar = styled.nav``;
-
-const StyledList = styled.ul`
-  list-style-type: none;
-  display: flex;
-  justify-content: space-around;
-  padding-inline-start: 0;
-`;
-
-const StyledListItem = styled.li`
-  font-size: 10px;
-`;
-
-const StyledDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const StyledButton = styled.button`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  align-items: center;
-  height: 45px;
-  width: 160px;
-  border-radius: 20px;
-  border: none;
-  background-color: ${(props) => props.color};
-`;
-
-const StyledIcon = styled(Image)``;
-
-const StyledIconText = styled.p`
-  color: white;
-`;
+import { DetailFooter } from "../Styled Components/DetailPageFooter";
+import { DetailNavBar } from "../Styled Components/DetailPageFooter";
+import { NavBarList } from "../Styled Components/DetailPageFooter";
+import { NavBarListItem } from "../Styled Components/DetailPageFooter";
+import { DetailNavBarButtonContainer } from "../Styled Components/DetailPageFooter";
+import { NavBarListButton } from "../Styled Components/DetailPageFooter";
+import { NavBarButtonIcon } from "../Styled Components/DetailPageFooter";
+import { NavBarButtonText } from "../Styled Components/DetailPageFooter";
 
 export default function MovieDetailFooter({ movie }) {
   const { theme } = useContext(DataContext);
@@ -93,12 +50,12 @@ export default function MovieDetailFooter({ movie }) {
   }
 
   return (
-    <StyledFooter color={theme}>
-      <StyledNavBar>
-        <StyledList>
-          <StyledListItem>
-            <StyledDiv>
-              <StyledButton
+    <DetailFooter color={theme}>
+      <DetailNavBar>
+        <NavBarList>
+          <NavBarListItem>
+            <DetailNavBarButtonContainer>
+              <NavBarListButton
                 color={
                   JSON.stringify(watchlist).includes(JSON.stringify(movie))
                     ? "#f97b7b"
@@ -110,31 +67,31 @@ export default function MovieDetailFooter({ movie }) {
               >
                 {JSON.stringify(watchlist).includes(JSON.stringify(movie)) ? (
                   <>
-                    <StyledIcon
+                    <NavBarButtonIcon
                       alt={"in-watchlist"}
                       src={`/in-watchlist.png`}
                       width={20}
                       height={20}
                     />{" "}
-                    <StyledIconText color={theme}>Watchlist</StyledIconText>
+                    <NavBarButtonText color={theme}>Watchlist</NavBarButtonText>
                   </>
                 ) : (
                   <>
-                    <StyledIcon
+                    <NavBarButtonIcon
                       alt={"not-in-watchlist"}
                       src={`/not-in-watchlist.png`}
                       width={20}
                       height={20}
                     />
-                    <StyledIconText color={theme}>Watchlist</StyledIconText>
+                    <NavBarButtonText color={theme}>Watchlist</NavBarButtonText>
                   </>
                 )}
-              </StyledButton>
-            </StyledDiv>
-          </StyledListItem>
-          <StyledListItem>
-            <StyledDiv>
-              <StyledButton
+              </NavBarListButton>
+            </DetailNavBarButtonContainer>
+          </NavBarListItem>
+          <NavBarListItem>
+            <DetailNavBarButtonContainer>
+              <NavBarListButton
                 color={
                   JSON.stringify(watched).includes(JSON.stringify(movie))
                     ? "#f97b7b"
@@ -146,31 +103,31 @@ export default function MovieDetailFooter({ movie }) {
               >
                 {JSON.stringify(watched).includes(JSON.stringify(movie)) ? (
                   <>
-                    <StyledIcon
+                    <NavBarButtonIcon
                       alt={"in-watched"}
                       src={`/in-watched.png`}
                       width={20}
                       height={20}
                     />
 
-                    <StyledIconText color={theme}>Watched</StyledIconText>
+                    <NavBarButtonText color={theme}>Watched</NavBarButtonText>
                   </>
                 ) : (
                   <>
-                    <StyledIcon
+                    <NavBarButtonIcon
                       alt={"not-in-watched"}
                       src={`/not-in-watched.png`}
                       width={20}
                       height={20}
                     />
-                    <StyledIconText color={theme}>Watched</StyledIconText>
+                    <NavBarButtonText color={theme}>Watched</NavBarButtonText>
                   </>
                 )}
-              </StyledButton>
-            </StyledDiv>
-          </StyledListItem>
-        </StyledList>
-      </StyledNavBar>
-    </StyledFooter>
+              </NavBarListButton>
+            </DetailNavBarButtonContainer>
+          </NavBarListItem>
+        </NavBarList>
+      </DetailNavBar>
+    </DetailFooter>
   );
 }

@@ -3,85 +3,20 @@ import { useContext } from "react";
 import { WatchedContext, WatchedTVContext, DataContext } from "../_app";
 import Movie from "../../components/Movie";
 import MovieGrid from "../../components/MovieGrid";
-import styled from "styled-components";
-import Link from "next/link";
 import Navigation from "../../components/Navigation";
 import useLocalStorageState from "use-local-storage-state";
 import TVGrid from "../../components/TVGrid";
 import TV from "../../components/TV";
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
-`;
-
-const StyledButtonList = styled.button`
-  border: none;
-  background-color: transparent;
-
-  :enabled {
-    color: ${(props) => props.theme.fontColor};
-  }
-
-  :disabled {
-    color: #f97b7b;
-  }
-`;
-
-const StyledButtonGrid = styled.button`
-  border: none;
-  background-color: transparent;
-
-  :enabled {
-    color: ${(props) => props.theme.fontColor};
-  }
-
-  :disabled {
-    color: #f97b7b;
-  }
-`;
-
-const StyledDiv = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-items: center;
-  grid-row-gap: 5px;
-  margin-top: 15px;
-`;
-
-const StyledSectionEmpty = styled.section`
-  height: 550px;
-  padding-left: 15px;
-  padding-right: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledSection = styled.section`
-  padding-left: 15px;
-  padding-right: 15px;
-`;
-
-const StyledSectionButtonsFlex = styled.section`
-  width: 100%;
-  margin-bottom: 15px;
-`;
-
-const StyledSectionButtons = styled.section`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const StyledSectionList = styled.section`
-  margin-top: 15px;
-`;
-
-const StyledHeaderMediaType = styled.h5`
-  margin-bottom: 5px;
-`;
+import { ListWrapper } from "../../components/Styled Components/ListPage";
+import { ButtonsFlexContainer } from "../../components/Styled Components/ListPage";
+import { ButtonsContainer } from "../../components/Styled Components/ListPage";
+import { LayoutListButton } from "../../components/Styled Components/ListPage";
+import { LayoutGridButton } from "../../components/Styled Components/ListPage";
+import { MediaHeader } from "../../components/Styled Components/ListPage";
+import { ContentContainerGrid } from "../../components/Styled Components/ListPage";
+import { LinkWrapper } from "../../components/Styled Components/ListPage";
+import { EmptyContentContainer } from "../../components/Styled Components/ListPage";
+import { ContentContainerList } from "../../components/Styled Components/ListPage";
 
 export default function MyWatchedPage() {
   const [listLayoutWatched, setListLayoutWatched] = useLocalStorageState(
@@ -102,21 +37,21 @@ export default function MyWatchedPage() {
   if (watched.length === 0)
     return (
       <main>
-        <StyledSectionEmpty>
+        <EmptyContentContainer>
           <h2>Nothing to 👀 here.</h2>
           <p>Why dont you add some? </p>
-        </StyledSectionEmpty>
+        </EmptyContentContainer>
         <Navigation />
       </main>
     );
 
   return (
     <main>
-      <StyledSection>
+      <ListWrapper>
         <h2>My Watched movies ({watched.length}):</h2>
-        <StyledSectionButtonsFlex>
-          <StyledSectionButtons>
-            <StyledButtonList
+        <ButtonsFlexContainer>
+          <ButtonsContainer>
+            <LayoutListButton
               color={theme}
               onClick={() => {
                 setLayoutType(true);
@@ -124,8 +59,8 @@ export default function MyWatchedPage() {
               disabled={listLayoutWatched ? true : false}
             >
               List
-            </StyledButtonList>
-            <StyledButtonGrid
+            </LayoutListButton>
+            <LayoutGridButton
               color={theme}
               onClick={() => {
                 setLayoutType(false);
@@ -133,58 +68,56 @@ export default function MyWatchedPage() {
               disabled={listLayoutWatched ? false : true}
             >
               Grid
-            </StyledButtonGrid>
-          </StyledSectionButtons>
-        </StyledSectionButtonsFlex>
+            </LayoutGridButton>
+          </ButtonsContainer>
+        </ButtonsFlexContainer>
 
-        <StyledHeaderMediaType>Movies ({watched.length})</StyledHeaderMediaType>
+        <MediaHeader>Movies ({watched.length})</MediaHeader>
 
         {listLayoutWatched ? (
-          <StyledSectionList>
+          <ContentContainerList>
             {watched.map((movie) => {
               return (
-                <StyledLink key={movie.id} href={`my-watched/${movie.id}`}>
+                <LinkWrapper key={movie.id} href={`my-watched/${movie.id}`}>
                   <Movie movie={movie} />
-                </StyledLink>
+                </LinkWrapper>
               );
             })}
-          </StyledSectionList>
+          </ContentContainerList>
         ) : (
-          <StyledDiv>
+          <ContentContainerGrid>
             {watched.map((movie) => {
               return (
-                <StyledLink key={movie.id} href={`my-watched/${movie.id}`}>
+                <LinkWrapper key={movie.id} href={`my-watched/${movie.id}`}>
                   <MovieGrid movie={movie} />
-                </StyledLink>
+                </LinkWrapper>
               );
             })}
-          </StyledDiv>
+          </ContentContainerGrid>
         )}
-        <StyledHeaderMediaType>
-          Shows ({watchedTV.length})
-        </StyledHeaderMediaType>
+        <MediaHeader>Shows ({watchedTV.length})</MediaHeader>
         {listLayoutWatched ? (
-          <StyledSectionList>
+          <ContentContainerList>
             {watchedTV.map((movie) => {
               return (
-                <StyledLink key={movie.id} href={`my-watched/${movie.id}`}>
+                <LinkWrapper key={movie.id} href={`my-watched/${movie.id}`}>
                   <TV movie={movie} />
-                </StyledLink>
+                </LinkWrapper>
               );
             })}
-          </StyledSectionList>
+          </ContentContainerList>
         ) : (
-          <StyledDiv>
+          <ContentContainerGrid>
             {watchedTV.map((movie) => {
               return (
-                <StyledLink key={movie.id} href={`my-watched/${movie.id}`}>
+                <LinkWrapper key={movie.id} href={`my-watched/${movie.id}`}>
                   <TVGrid movie={movie} />
-                </StyledLink>
+                </LinkWrapper>
               );
             })}
-          </StyledDiv>
+          </ContentContainerGrid>
         )}
-      </StyledSection>
+      </ListWrapper>
       <Navigation />
     </main>
   );

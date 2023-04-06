@@ -1,11 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import {
-  WatchlistContext,
-  WatchedContext,
-  DataContext,
-  TrendingContext,
-} from "../../pages/_app";
+import { DataContext } from "../../pages/_app";
 import getGenreFrom from "../../utils/getGenreFrom";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import { useState, useEffect } from "react";
@@ -14,105 +9,24 @@ import PushButton from "../PushButton";
 import showWatchProviders from "../../utils/showWatchProviders";
 import Actors from "../Actors";
 import { useContext } from "react";
-import { useRouter } from "next/router";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
-import getIconForTheme from "../../utils/getIconForTheme";
-
-const StyledSectionHeader = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const StyledHeaderMovieDetails = styled.h4`
-  margin: 15px;
-  margin-top: 0;
-`;
-
-const StyledSectionButtons = styled.section`
-  display: flex;
-`;
-
-const StyledButton = styled.button`
-  padding: 10px;
-  background-color: transparent;
-  border: none;
-`;
-
-const StyledShowTrailerButton = styled.button`
-  background-color: transparent;
-  color: ${(props) => props.theme.fontColor};
-  border: none;
-  margin-bottom: 15px;
-  cursor: pointer;
-`;
-
-const StyledPoster = styled(Image)`
-  border-radius: 30px;
-`;
-
-const StyledSectionPoster = styled.section`
-  display: flex;
-  justify-content: center;
-`;
-
-const StyledSectionQuickOverview = styled.section`
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const StyledMovieTitle = styled.h2`
-  margin: 5px;
-  text-align: center;
-`;
-
-const StyledMovieSubtitles = styled.p`
-  color: grey;
-  margin: 5px;
-`;
-
-const StyledSynopsisText = styled.p`
-  color: grey;
-`;
-
-const StyledSectionSynopsis = styled.section`
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-`;
-
-const StyledHeaderSynopsis = styled.h4`
-  align-self: flex-start;
-  margin: 0;
-`;
-
-const StyledTrailer = styled(ReactPlayer)`
-  margin-bottom: 15px;
-  align-self: flex-start;
-`;
-
-const StyledSectionTrailer = styled.section`
-  align-self: center;
-`;
-
-const StyledSectionAvailability = styled.section`
-  padding-left: 15px;
-`;
-
-const StyledAvailabilityHeading = styled.h4`
-  margin-bottom: 5px;
-`;
-
-const StyledAvailabilityText = styled.p`
-  margin-top: 5px;
-  color: gray;
-`;
+import { DetailHeaderContainer } from "../Styled Components/DetailPage";
+import { DetailPageDescription } from "../Styled Components/DetailPage";
+import { DetailPageDescriptionText } from "../Styled Components/DetailPage";
+import { DetailPosterContainer } from "../Styled Components/DetailPage";
+import { DetailPoster } from "../Styled Components/DetailPage";
+import { DetailHeaderTitle } from "../Styled Components/DetailPage";
+import { DetailHeaderText } from "../Styled Components/DetailPage";
+import { DetailSynopsis } from "../Styled Components/DetailPage";
+import { TrailerButton } from "../Styled Components/DetailPage";
+import { TrailerContainer } from "../Styled Components/DetailPage";
+import { DetailSynopsisHeader } from "../Styled Components/DetailPage";
+import { DetailSynopsisText } from "../Styled Components/DetailPage";
+import { DetailAvailability } from "../Styled Components/DetailPage";
+import { DetailAvailabilityHeading } from "../Styled Components/DetailPage";
+import { DetailAvailabilityText } from "../Styled Components/DetailPage";
+import { Trailer } from "../Styled Components/DetailPage";
 
 export default function TVDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
@@ -122,12 +36,8 @@ export default function TVDetail({ movie }) {
   const [youtubeKey, setYoutubeKey] = useState("");
   const [showTrailer, setShowTrailer] = useState(false);
   const { availabilityOption, theme } = useContext(DataContext);
-  const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
-  const { watched, handleToggleWatched } = useContext(WatchedContext);
-  const { trendingMovies } = useContext(TrendingContext);
 
   const shownActors = castActors.slice(0, 4);
-  const router = useRouter();
   const trailer = youtubeKey?.results?.find(
     (videoObject) => videoObject.type === "Trailer"
   );
@@ -217,38 +127,36 @@ export default function TVDetail({ movie }) {
   return (
     <>
       <PushButton />
-      <StyledSectionHeader>
-        <StyledHeaderMovieDetails>Movie Details</StyledHeaderMovieDetails>
-      </StyledSectionHeader>
-      <section>
-        <StyledSectionPoster>
-          <StyledPoster
-            src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-            alt={movie.name}
-            width={202.5}
-            height={300}
-          />
-        </StyledSectionPoster>
-      </section>
-      <StyledSectionQuickOverview>
-        <StyledMovieTitle>{movie.name}</StyledMovieTitle>
-        <StyledMovieSubtitles>
+      <DetailPageDescription>
+        <DetailPageDescriptionText>Movie Details</DetailPageDescriptionText>
+      </DetailPageDescription>
+      <DetailPosterContainer>
+        <DetailPoster
+          src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+          alt={movie.name}
+          width={202.5}
+          height={300}
+        />
+      </DetailPosterContainer>
+      <DetailHeaderContainer>
+        <DetailHeaderTitle>{movie.name}</DetailHeaderTitle>
+        <DetailHeaderText>
           {getPopularityDecimal(movieDetails?.vote_average)}/10 Rating
-        </StyledMovieSubtitles>
-        <StyledMovieSubtitles>
+        </DetailHeaderText>
+        <DetailHeaderText>
           {getGenreFrom(movie)} • {movie.first_air_date?.slice(0, 4)}
-        </StyledMovieSubtitles>
-        <StyledMovieSubtitles>
+        </DetailHeaderText>
+        <DetailHeaderText>
           ca. {calculateRuntimeFrom(runtime)} per episode
-        </StyledMovieSubtitles>
-      </StyledSectionQuickOverview>
-      <StyledSectionSynopsis>
-        <StyledShowTrailerButton color={theme} onClick={displayTrailer}>
+        </DetailHeaderText>
+      </DetailHeaderContainer>
+      <DetailSynopsis>
+        <TrailerButton color={theme} onClick={displayTrailer}>
           {showTrailer ? "Hide the trailer" : "Watch the trailer"}
-        </StyledShowTrailerButton>
-        <StyledSectionTrailer>
+        </TrailerButton>
+        <TrailerContainer>
           {showTrailer ? (
-            <StyledTrailer
+            <Trailer
               controls={true}
               volume={0.2}
               width={300}
@@ -256,28 +164,27 @@ export default function TVDetail({ movie }) {
               url={`https://www.youtube.com/watch?v=${trailer.key}`}
             />
           ) : null}
-        </StyledSectionTrailer>
-        <StyledHeaderSynopsis>Synopsis:</StyledHeaderSynopsis>
-        <StyledSynopsisText>{movie.overview}</StyledSynopsisText>
-      </StyledSectionSynopsis>
-
+        </TrailerContainer>
+        <DetailSynopsisHeader>Synopsis:</DetailSynopsisHeader>
+        <DetailSynopsisText>{movie.overview}</DetailSynopsisText>
+      </DetailSynopsis>
       <Actors actors={shownActors} />
-      <StyledSectionAvailability>
+      <DetailAvailability>
         <h4>Availability:</h4>
         {availabilityOption === "all" && (
           <>
-            <StyledAvailabilityHeading>Flatrate</StyledAvailabilityHeading>
-            <StyledAvailabilityText>{`${showWatchProviders(
+            <DetailAvailabilityHeading>Flatrate</DetailAvailabilityHeading>
+            <DetailAvailabilityText>{`${showWatchProviders(
               streamingProviderFlatrate
-            )}`}</StyledAvailabilityText>
-            <StyledAvailabilityHeading>Renting</StyledAvailabilityHeading>
-            <StyledAvailabilityText>
+            )}`}</DetailAvailabilityText>
+            <DetailAvailabilityHeading>Renting</DetailAvailabilityHeading>
+            <DetailAvailabilityText>
               {`${showWatchProviders(streamingProviderRent)}`}
-            </StyledAvailabilityText>
-            <StyledAvailabilityHeading>Purchase </StyledAvailabilityHeading>
-            <StyledAvailabilityText>{`${showWatchProviders(
+            </DetailAvailabilityText>
+            <DetailAvailabilityHeading>Purchase </DetailAvailabilityHeading>
+            <DetailAvailabilityText>{`${showWatchProviders(
               streamingProviderBuy
-            )}`}</StyledAvailabilityText>
+            )}`}</DetailAvailabilityText>
           </>
         )}
         {availabilityOption === "flatrate" && (
@@ -290,7 +197,7 @@ export default function TVDetail({ movie }) {
         {availabilityOption === "purchase" && (
           <p>Purchase: {`${showWatchProviders(streamingProviderBuy)}`}</p>
         )}
-      </StyledSectionAvailability>
+      </DetailAvailability>
     </>
   );
 }

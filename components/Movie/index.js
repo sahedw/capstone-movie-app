@@ -7,40 +7,12 @@ import getGenreFrom from "../../utils/getGenreFrom";
 import { useFetch } from "../../hooks/useFetch";
 import { DataContext } from "../../pages/_app";
 import { useContext } from "react";
-
-const StyledDiv = styled.div`
-  height: 200px;
-  width: 120px;
-`;
-
-const StyledSection = styled.section`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  transition: 0.3s ease-out;
-
-  :hover {
-    transform: translateY(-10px);
-  }
-`;
-
-const StyledSectionText = styled.section`
-  width: 200px;
-  margin-left: 20px;
-  padding-left: 10px;
-`;
-
-const StyledParagraph = styled.p`
-  color: gray;
-`;
-
-const StyledImage = styled(Image)`
-  border-radius: 15px;
-`;
-
-const StyledHeader = styled.h4`
-  color: ${(props) => props.theme.fontColor};
-`;
+import { OverviewWrapper } from "../Styled Components/QuickOverview";
+import { OverviewPosterContainer } from "../Styled Components/QuickOverview";
+import { OverviewPoster } from "../Styled Components/QuickOverview";
+import { OverviewTextContainer } from "../Styled Components/QuickOverview";
+import { OverviewHeader } from "../Styled Components/QuickOverview";
+import { OverviewText } from "../Styled Components/QuickOverview";
 
 export default function Movie({ movie }) {
   const { theme } = useContext(DataContext);
@@ -67,27 +39,27 @@ export default function Movie({ movie }) {
 
   return (
     <>
-      <StyledSection>
-        <StyledDiv>
-          <StyledImage
+      <OverviewWrapper>
+        <OverviewPosterContainer>
+          <OverviewPoster
             src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
             alt={movie?.title}
             width={135}
             height={200}
           />
-        </StyledDiv>
-        <StyledSectionText>
-          <StyledHeader color={theme}>
+        </OverviewPosterContainer>
+        <OverviewTextContainer>
+          <OverviewHeader color={theme}>
             {movie?.title} - <em>{movie?.release_date?.slice(0, 4)}</em>
-          </StyledHeader>
-          <StyledParagraph>{getGenreFrom(movie)}</StyledParagraph>
+          </OverviewHeader>
+          <OverviewText>{getGenreFrom(movie)}</OverviewText>
           {runtime ? (
-            <StyledParagraph>{calculateRuntimeFrom(runtime)}</StyledParagraph>
+            <OverviewText>{calculateRuntimeFrom(runtime)}</OverviewText>
           ) : (
             <p>no data</p>
           )}
-        </StyledSectionText>
-      </StyledSection>
+        </OverviewTextContainer>
+      </OverviewWrapper>
     </>
   );
 }
