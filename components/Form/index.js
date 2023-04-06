@@ -23,7 +23,7 @@ const StyledForm = styled.form`
   width: 250px;
 `;
 
-const StyledInput = styled.input`
+const StyledInputText = styled.input`
   margin-top: 10px;
   padding-right: 25px;
   width: 250px;
@@ -39,6 +39,10 @@ const StyledInput = styled.input`
     outline: 2px solid red;
     border-radius: 5px;
   }
+`;
+
+const StyledInputRadio = styled.input`
+  accent-color: black;
 `;
 
 const StyledIcon = styled(Image)`
@@ -67,13 +71,13 @@ export default function Form({ onSubmit }) {
     <>
       <StyledSection>
         <StyledForm onSubmit={handleOnSubmit}>
-          <StyledInput
+          <StyledInputText
             type="text"
             name="search"
             id="search"
             placeholder="Search..."
             required
-          ></StyledInput>
+          ></StyledInputText>
           <StyledButton>
             <StyledIcon
               src={require("/icons/search.png")}
@@ -84,27 +88,27 @@ export default function Form({ onSubmit }) {
           </StyledButton>
           <StyledSectionRadioButtons>
             <StyledSectionRadio>
-              <label htmlFor="movies">Movies:</label>
-              <input
+              <label htmlFor="movie">Movies:</label>
+              <StyledInputRadio
                 type="radio"
-                id="movies"
+                id="movie"
                 name="media-type"
-                value="movies"
+                value="movie"
                 onChange={() => {
-                  handleMediaTypeChange(true);
+                  handleMediaTypeChange("movie");
                 }}
                 defaultChecked
               />
             </StyledSectionRadio>
             <StyledSectionRadio>
-              <label htmlFor="shows">Shows:</label>
-              <input
+              <label htmlFor="tv">Shows:</label>
+              <StyledInputRadio
                 type="radio"
-                id="shows"
+                id="tv"
                 name="media-type"
-                value="shows"
+                value="tv"
                 onChange={() => {
-                  handleMediaTypeChange(false);
+                  handleMediaTypeChange("tv");
                 }}
               />
             </StyledSectionRadio>

@@ -88,7 +88,8 @@ export default function SearchResultsPage() {
       </StyledSectionButtons>
       {movies?.map((movie) => (
         <StyledLink key={movie.id} href={`search-results/${movie.id}`}>
-          <Movie movie={movie} />
+          {/* <Movie movie={movie} /> */}
+          <p>hey</p>
         </StyledLink>
       ))}
       <StyledSectionButtons>

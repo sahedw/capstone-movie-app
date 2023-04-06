@@ -31,17 +31,17 @@ export default function App({ Component, pageProps }) {
     defaultValue: "light",
   });
   const [resultsPage, setResultsPage] = useState(1);
-  const [mediaTypeMovies, setMediaTypeMovies] = useState(true);
+  const [mediaTypeMovies, setMediaTypeMovies] = useState("movie");
 
   function resetResultsPage() {
     setResultsPage(1);
   }
 
   const moviesData = useLocalStorageFetch(
-    `/api/themoviedb/search/movie?&language=eng-US&query=${search}&page=${resultsPage}`,
+    `/api/themoviedb/search/${mediaTypeMovies}?&language=eng-US&query=${search}&page=${resultsPage}`,
     "newMovies",
     [],
-    `/api/themoviedb/search/movie?&language=eng-US&query=${search}&page=${resultsPage}`
+    `/api/themoviedb/search/${mediaTypeMovies}?&language=eng-US&query=${search}&page=${resultsPage}`
   );
 
   const totalSearchPages = moviesData.total_pages;
@@ -130,8 +130,8 @@ export default function App({ Component, pageProps }) {
     }
   }
 
-  function handleMediaTypeChange(boolean) {
-    setMediaTypeMovies(boolean);
+  function handleMediaTypeChange(value) {
+    setMediaTypeMovies(value);
   }
 
   return (
