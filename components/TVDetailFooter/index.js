@@ -9,6 +9,7 @@ import {
   TrendingContext,
   WatchlistTVContext,
   WatchedContext,
+  WatchedTVContext,
 } from "../../pages/_app";
 import { useContext } from "react";
 
@@ -64,6 +65,7 @@ export default function TVDetailFooter({ movie }) {
   const { trendingMovies } = useContext(TrendingContext);
   const { handleToggleWatchListTV, watchlistTV } =
     useContext(WatchlistTVContext);
+  const { handleToggleWatchedTV, watchedTV } = useContext(WatchedTVContext);
   const { handleToggleWatched, watched } = useContext(WatchedContext);
 
   const router = useRouter();
@@ -84,12 +86,12 @@ export default function TVDetailFooter({ movie }) {
     }
   }
 
-  function handleRemoveInWatchedPage(movie) {
+  function handleRemoveInWatchedTVPage(movie) {
     if (router.asPath.includes("my-watched")) {
-      handleToggleWatched(movie);
+      handleToggleWatchedTV(movie);
       router.push("/my-watched");
     } else {
-      handleToggleWatched(movie);
+      handleToggleWatchedTV(movie);
     }
   }
 
@@ -137,15 +139,15 @@ export default function TVDetailFooter({ movie }) {
             <StyledDiv>
               <StyledButton
                 color={
-                  JSON.stringify(watched).includes(JSON.stringify(movie))
+                  JSON.stringify(watchedTV).includes(JSON.stringify(movie))
                     ? "#f97b7b"
                     : "#faa5a5"
                 }
                 onClick={() => {
-                  handleRemoveInWatchedPage(movie);
+                  handleRemoveInWatchedTVPage(movie);
                 }}
               >
-                {JSON.stringify(watched).includes(JSON.stringify(movie)) ? (
+                {JSON.stringify(watchedTV).includes(JSON.stringify(movie)) ? (
                   <>
                     <StyledIcon
                       alt={"in-watched"}

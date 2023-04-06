@@ -8,12 +8,13 @@ import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles } from "../styles";
 
 export const DataContext = createContext();
+export const MediaContext = createContext();
 export const WatchlistContext = createContext();
+export const WatchedContext = createContext();
+export const WatchlistTVContext = createContext();
+export const WatchedTVContext = createContext();
 export const CinemaContext = createContext();
 export const TrendingContext = createContext();
-export const WatchedContext = createContext();
-export const MediaContext = createContext();
-export const WatchlistTVContext = createContext();
 
 export default function App({ Component, pageProps }) {
   const [watchlist, setWatchlist] = useLocalStorageState("newWatchlist", {
@@ -23,6 +24,9 @@ export default function App({ Component, pageProps }) {
     defaultValue: [],
   });
   const [watched, setWatched] = useLocalStorageState("newWatched", {
+    defaultValue: [],
+  });
+  const [watchedTV, setWatchedTV] = useLocalStorageState("newWatchedTV", {
     defaultValue: [],
   });
   const [availabilityOption, setAvailabilityOption] = useLocalStorageState(
@@ -122,6 +126,20 @@ export default function App({ Component, pageProps }) {
     }
   }
 
+  function handleToggleWatchedTV(newMovie) {
+    if (
+      !watchedTV.some(
+        (movie) => JSON.stringify(movie) === JSON.stringify(newMovie)
+      )
+    ) {
+      setWatchedTV([...watchedTV, newMovie]);
+    } else {
+      setWatchedTV(
+        watchedTV.filter((watchedMovie) => watchedMovie.id !== newMovie.id)
+      );
+    }
+  }
+
   function handleTrendingSort(boolean) {
     setDayTrending(boolean);
   }
@@ -151,7 +169,8 @@ export default function App({ Component, pageProps }) {
     setMediaTypeMovies(value);
   }
 
-  console.log(watchlistTV);
+  console.log("new watchlist", watchlistTV);
+  console.log("new watched", watchedTV);
 
   return (
     <>
@@ -160,48 +179,50 @@ export default function App({ Component, pageProps }) {
       </Head>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <GlobalStyles />
-        <WatchlistTVContext.Provider
-          value={{ handleToggleWatchListTV, watchlistTV }}
-        >
-          <MediaContext.Provider
-            value={{ handleMediaTypeChange, mediaTypeMovies }}
+        <WatchedTVContext.Provider value={{ handleToggleWatchedTV, watchedTV }}>
+          <WatchlistTVContext.Provider
+            value={{ handleToggleWatchListTV, watchlistTV }}
           >
-            <WatchedContext.Provider value={{ watched, handleToggleWatched }}>
-              <TrendingContext.Provider
-                value={{ dayTrending, trendingMovies, handleTrendingSort }}
-              >
-                <CinemaContext.Provider
-                  value={{ currentlyInCinemas, upcomingMovies }}
+            <MediaContext.Provider
+              value={{ handleMediaTypeChange, mediaTypeMovies }}
+            >
+              <WatchedContext.Provider value={{ watched, handleToggleWatched }}>
+                <TrendingContext.Provider
+                  value={{ dayTrending, trendingMovies, handleTrendingSort }}
                 >
-                  <WatchlistContext.Provider
-                    value={{ handleToggleWatchList, watchlist }}
+                  <CinemaContext.Provider
+                    value={{ currentlyInCinemas, upcomingMovies }}
                   >
-                    <DataContext.Provider
-                      value={{
-                        search,
-                        resultsPage,
-                        resetResultsPage,
-                        totalSearchResults,
-                        totalSearchPages,
-                        handleNextPage,
-                        handlePrevPage,
-                        getAvailabilitySeletion,
-                        availabilityOption,
-                        themeToggler,
-                        theme,
-                        DataContext,
-                        handleFormSubmit,
-                        movies,
-                      }}
+                    <WatchlistContext.Provider
+                      value={{ handleToggleWatchList, watchlist }}
                     >
-                      <Component {...pageProps} />
-                    </DataContext.Provider>
-                  </WatchlistContext.Provider>
-                </CinemaContext.Provider>
-              </TrendingContext.Provider>
-            </WatchedContext.Provider>
-          </MediaContext.Provider>
-        </WatchlistTVContext.Provider>
+                      <DataContext.Provider
+                        value={{
+                          search,
+                          resultsPage,
+                          resetResultsPage,
+                          totalSearchResults,
+                          totalSearchPages,
+                          handleNextPage,
+                          handlePrevPage,
+                          getAvailabilitySeletion,
+                          availabilityOption,
+                          themeToggler,
+                          theme,
+                          DataContext,
+                          handleFormSubmit,
+                          movies,
+                        }}
+                      >
+                        <Component {...pageProps} />
+                      </DataContext.Provider>
+                    </WatchlistContext.Provider>
+                  </CinemaContext.Provider>
+                </TrendingContext.Provider>
+              </WatchedContext.Provider>
+            </MediaContext.Provider>
+          </WatchlistTVContext.Provider>
+        </WatchedTVContext.Provider>
       </ThemeProvider>
     </>
   );
