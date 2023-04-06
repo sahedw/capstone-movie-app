@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Movie from "../../components/Movie";
 import PushButton from "../../components/PushButton";
-import { DataContext } from "../_app";
+import { DataContext, MediaContext } from "../_app";
 import Link from "next/link";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation";
@@ -54,6 +54,7 @@ export default function SearchResultsPage() {
     totalSearchResults,
     theme,
   } = useContext(DataContext);
+  const { mediaTypeMovies } = useContext(MediaContext);
 
   if (movies?.length === 0)
     return (
@@ -89,8 +90,11 @@ export default function SearchResultsPage() {
       </StyledSectionButtons>
       {movies?.map((movie) => (
         <StyledLink key={movie.id} href={`search-results/${movie.id}`}>
-          {/* <Movie movie={movie} /> */}
-          <TV movie={movie} />
+          {mediaTypeMovies === "movie" ? (
+            <Movie movie={movie} />
+          ) : (
+            <TV movie={movie} />
+          )}
         </StyledLink>
       ))}
       <StyledSectionButtons>

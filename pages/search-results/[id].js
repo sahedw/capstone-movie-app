@@ -1,7 +1,7 @@
 import React from "react";
 import MovieDetail from "../../components/MovieDetail";
 import { useContext } from "react";
-import { DataContext } from "../_app";
+import { DataContext, MediaContext } from "../_app";
 import { useRouter } from "next/router";
 import BackButton from "../../components/PushButton";
 import MovieDetailFooter from "../../components/MovieDetailFooter";
@@ -9,6 +9,7 @@ import Navigation from "../../components/Navigation";
 
 export default function MovieDetailPage() {
   const { movies } = useContext(DataContext);
+  const { mediaTypeMovies } = useContext(MediaContext);
 
   const router = useRouter();
 
@@ -28,8 +29,14 @@ export default function MovieDetailPage() {
 
   return (
     <main>
-      <MovieDetail movie={currentMovie} />
-      <MovieDetailFooter movie={currentMovie} />
+      {mediaTypeMovies === "movie" ? (
+        <>
+          <MovieDetail movie={currentMovie} />
+          <MovieDetailFooter movie={currentMovie} />{" "}
+        </>
+      ) : (
+        <MovieDetail movie={currentMovie} />
+      )}
     </main>
   );
 }
