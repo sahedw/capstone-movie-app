@@ -26,17 +26,17 @@ const StyledListItem = styled.li`
 
 export default function Actors({ actors }) {
   if (!actors) return <p>Loading cast...</p>;
-
   return (
     <StyledList>
       {actors?.map((actor) => {
         return (
-          <StyledListItem key={actor.cast_id}>
+          <StyledListItem key={actor?.character}>
             <Image
               src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`}
               alt={actor.name}
               width={70}
               height={100}
+              key={actor.profile_path}
             />
             <StyledName key={actor.name}>{actor.name}</StyledName>
           </StyledListItem>

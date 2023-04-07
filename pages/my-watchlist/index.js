@@ -1,71 +1,24 @@
 import React from "react";
 import { useContext } from "react";
-import { WatchlistContext, DataContext } from "../_app";
+import { WatchlistContext, WatchlistTVContext, DataContext } from "../_app";
 import Movie from "../../components/Movie";
 import MovieGrid from "../../components/MovieGrid";
-import styled from "styled-components";
-import Link from "next/link";
 import Navigation from "../../components/Navigation";
 import useLocalStorageState from "use-local-storage-state";
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
-`;
-
-const StyledButtonList = styled.button`
-  border: none;
-  background-color: transparent;
-
-  :enabled {
-    color: ${(props) => props.theme.fontColor};
-  }
-
-  :disabled {
-    color: #f97b7b;
-  }
-`;
-
-const StyledButtonGrid = styled.button`
-  border: none;
-  background-color: transparent;
-
-  :enabled {
-    color: ${(props) => props.theme.fontColor};
-  }
-
-  :disabled {
-    color: #f97b7b;
-  }
-`;
-
-const StyledDiv = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-items: center;
-  grid-row-gap: 5px;
-  margin-top: 15px;
-`;
-
-const StyledSection = styled.section`
-  padding-left: 15px;
-  padding-right: 15px;
-`;
-
-const StyledSectionButtonsFlex = styled.section`
-  width: 100%;
-  margin-bottom: 15px;
-`;
-
-const StyledSectionButtons = styled.section`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const StyledSectionList = styled.section`
-  margin-top: 15px;
-`;
+import TVGrid from "../../components/TVGrid";
+import TV from "../../components/TV";
+import {
+  ListWrapper,
+  ContentContainerList,
+  EmptyContentContainer,
+  ButtonsFlexContainer,
+  ButtonsContainer,
+  LayoutListButton,
+  LayoutGridButton,
+  MediaHeader,
+  ContentContainerGrid,
+  LinkWrapper,
+} from "../../components/Styled Components/ListPage";
 
 export default function MyWatchlistPage() {
   const [listLayoutWatchlist, setListLayoutWatchlist] = useLocalStorageState(
@@ -75,6 +28,8 @@ export default function MyWatchlistPage() {
     }
   );
   const { watchlist } = useContext(WatchlistContext);
+  const { watchlistTV } = useContext(WatchlistTVContext);
+
   const { theme } = useContext(DataContext);
 
   function setLayoutType(boolean) {
@@ -84,19 +39,21 @@ export default function MyWatchlistPage() {
   if (watchlist.length === 0)
     return (
       <main>
-        <h2>Nothing to 👀 here.</h2>
-        <p>Why dont you add some? </p>
+        <EmptyContentContainer>
+          <h2>Nothing to 👀 here.</h2>
+          <p>Why dont you add some? </p>
+        </EmptyContentContainer>
         <Navigation />
       </main>
     );
 
   return (
     <main>
-      <StyledSection>
-        <h2>My Watchlist ({watchlist.length}):</h2>
-        <StyledSectionButtonsFlex>
-          <StyledSectionButtons>
-            <StyledButtonList
+      <ListWrapper>
+        <h2>My Watchlist:</h2>
+        <ButtonsFlexContainer>
+          <ButtonsContainer>
+            <LayoutListButton
               color={theme}
               onClick={() => {
                 setLayoutType(true);
@@ -104,8 +61,8 @@ export default function MyWatchlistPage() {
               disabled={listLayoutWatchlist ? true : false}
             >
               List
-            </StyledButtonList>
-            <StyledButtonGrid
+            </LayoutListButton>
+            <LayoutGridButton
               color={theme}
               onClick={() => {
                 setLayoutType(false);
@@ -113,31 +70,58 @@ export default function MyWatchlistPage() {
               disabled={listLayoutWatchlist ? false : true}
             >
               Grid
-            </StyledButtonGrid>
-          </StyledSectionButtons>
-        </StyledSectionButtonsFlex>
+            </LayoutGridButton>
+          </ButtonsContainer>
+        </ButtonsFlexContainer>
+
+        <MediaHeader>Movies ({watchlist.length})</MediaHeader>
+
         {listLayoutWatchlist ? (
-          <StyledSectionList>
+          <ContentContainerList>
             {watchlist.map((movie) => {
               return (
-                <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
+                <LinkWrapper key={movie.id} href={`my-watchlist/${movie.id}`}>
                   <Movie movie={movie} />
-                </StyledLink>
+                </LinkWrapper>
               );
             })}
-          </StyledSectionList>
+          </ContentContainerList>
         ) : (
-          <StyledDiv>
+          <ContentContainerGrid>
             {watchlist.map((movie) => {
               return (
-                <StyledLink key={movie.id} href={`my-watchlist/${movie.id}`}>
+                <LinkWrapper key={movie.id} href={`my-watchlist/${movie.id}`}>
                   <MovieGrid movie={movie} />
-                </StyledLink>
+                </LinkWrapper>
               );
             })}
-          </StyledDiv>
+          </ContentContainerGrid>
         )}
-      </StyledSection>
+
+        <MediaHeader>Shows ({watchlistTV.length})</MediaHeader>
+
+        {listLayoutWatchlist ? (
+          <ContentContainerList>
+            {watchlistTV.map((movie) => {
+              return (
+                <LinkWrapper key={movie.id} href={`my-watchlist/${movie.id}`}>
+                  <TV movie={movie} />
+                </LinkWrapper>
+              );
+            })}
+          </ContentContainerList>
+        ) : (
+          <ContentContainerGrid>
+            {watchlistTV.map((movie) => {
+              return (
+                <LinkWrapper key={movie.id} href={`my-watchlist/${movie.id}`}>
+                  <TVGrid movie={movie} />
+                </LinkWrapper>
+              );
+            })}
+          </ContentContainerGrid>
+        )}
+      </ListWrapper>
       <Navigation />
     </main>
   );

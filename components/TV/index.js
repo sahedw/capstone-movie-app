@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import getGenreFrom from "../../utils/getGenreFrom";
-import { useFetch } from "../../hooks/useFetch";
 import { DataContext } from "../../pages/_app";
 import { useContext } from "react";
 import {
@@ -16,7 +15,7 @@ import {
   OverviewText,
 } from "../Styled Components/QuickOverview";
 
-export default function Movie({ movie }) {
+export default function TV({ movie }) {
   const { theme } = useContext(DataContext);
   const [runtime, setRuntime] = useState(0);
 
@@ -24,11 +23,11 @@ export default function Movie({ movie }) {
     async function fetchData() {
       try {
         const response = await fetch(
-          `/api/themoviedb/movie/${movie.id}?&language=eng-US`
+          `/api/themoviedb/tv/${movie.id}?&language=eng-US`
         );
         if (response.ok) {
           const data = await response.json();
-          setRuntime(data.runtime);
+          setRuntime(data.episode_run_time);
         } else {
           throw new Error("Something went wrong");
         }
@@ -45,20 +44,20 @@ export default function Movie({ movie }) {
         <OverviewPosterContainer>
           <OverviewPoster
             src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
-            alt={movie?.title}
+            alt={movie?.name}
             width={135}
             height={200}
           />
         </OverviewPosterContainer>
         <OverviewTextContainer>
           <OverviewHeader color={theme}>
-            {movie?.title} - <em>{movie?.release_date?.slice(0, 4)}</em>
+            {movie?.name} - <em>{movie?.first_air_date?.slice(0, 4)}</em>
           </OverviewHeader>
           <OverviewText>{getGenreFrom(movie)}</OverviewText>
           {runtime ? (
             <OverviewText>{calculateRuntimeFrom(runtime)}</OverviewText>
           ) : (
-            <p>no data</p>
+            <p>Loading...</p>
           )}
         </OverviewTextContainer>
       </OverviewWrapper>

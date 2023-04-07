@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import Movie from "../../components/Movie";
 import PushButton from "../../components/PushButton";
-import { DataContext } from "../_app";
+import { DataContext, MediaContext } from "../_app";
 import Link from "next/link";
 import styled from "styled-components";
 import Navigation from "../../components/Navigation";
+import TV from "../../components/TV";
+import { EmptyContentContainer } from "../../components/Styled Components/ListPage";
 
 const StyledHeader = styled.h2`
   margin-left: 15px;
@@ -53,15 +55,18 @@ export default function SearchResultsPage() {
     totalSearchResults,
     theme,
   } = useContext(DataContext);
+  const { mediaTypeMovies } = useContext(MediaContext);
 
   if (movies?.length === 0)
     return (
       <>
         <PushButton />
-        <h2>Whoops, something seems wrong</h2>
-        <p>{`The movie '${search}' doesn't seem to exist`}</p>
-        <p>{`Please try to go back and search again :)`}</p>
-        <Navigation />
+        <EmptyContentContainer>
+          <h2>Whoops, something seems wrong</h2>
+          <p>{`The movie '${search}' doesn't seem to exist`}</p>
+          <p>{`Please try to go back and search again :)`}</p>
+          <Navigation />
+        </EmptyContentContainer>
       </>
     );
 
@@ -88,7 +93,11 @@ export default function SearchResultsPage() {
       </StyledSectionButtons>
       {movies?.map((movie) => (
         <StyledLink key={movie.id} href={`search-results/${movie.id}`}>
-          <Movie movie={movie} />
+          {mediaTypeMovies === "movie" ? (
+            <Movie movie={movie} />
+          ) : (
+            <TV movie={movie} />
+          )}
         </StyledLink>
       ))}
       <StyledSectionButtons>

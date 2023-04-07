@@ -27,7 +27,7 @@ import {
   DetailPageDescription,
 } from "../Styled Components/DetailPage";
 
-export default function MovieDetail({ movie }) {
+export default function TVDetail({ movie }) {
   const [runtime, setRuntime] = useState(0);
   const [movieDetails, setMovieDetails] = useState(null);
   const [watchProvider, setWatchProvider] = useState("");
@@ -48,11 +48,11 @@ export default function MovieDetail({ movie }) {
     async function fetchData() {
       try {
         const response = await fetch(
-          `/api/themoviedb/movie/${movie.id}?&language=eng-US`
+          `/api/themoviedb/tv/${movie.id}?&language=eng-US`
         );
         if (response.ok) {
           const data = await response.json();
-          setRuntime(data.runtime);
+          setRuntime(data.episode_run_time);
           setMovieDetails(data);
         } else {
           throw new Error("Something went wrong");
@@ -68,7 +68,7 @@ export default function MovieDetail({ movie }) {
     async function fetchData() {
       try {
         const response = await fetch(
-          `/api/themoviedb/movie/${movie.id}/watch/providers?`
+          `/api/themoviedb/tv/${movie.id}/watch/providers?`
         );
         if (response.ok) {
           const data = await response.json();
@@ -86,9 +86,7 @@ export default function MovieDetail({ movie }) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(
-          `/api/themoviedb/movie/${movie.id}/credits?`
-        );
+        const response = await fetch(`/api/themoviedb/tv/${movie.id}/credits?`);
         if (response.ok) {
           const data = await response.json();
           setCastActors(data.cast);
@@ -106,7 +104,7 @@ export default function MovieDetail({ movie }) {
     async function fetchData() {
       try {
         const response = await fetch(
-          `/api/themoviedb/movie/${movie.id}/videos?&language=en-US`
+          `/api/themoviedb/tv/${movie.id}/videos?&language=en-US`
         );
         if (response.ok) {
           const data = await response.json();
@@ -133,20 +131,22 @@ export default function MovieDetail({ movie }) {
       </DetailPageDescription>
       <DetailPosterContainer>
         <DetailPoster
-          src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
-          alt={movie?.title}
+          src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+          alt={movie.name}
           width={202.5}
           height={300}
         />
       </DetailPosterContainer>
       <DetailHeaderContainer>
-        <DetailHeaderTitle>{movie?.title}</DetailHeaderTitle>
+        <DetailHeaderTitle>{movie.name}</DetailHeaderTitle>
         <DetailHeaderText>
           {getPopularityDecimal(movieDetails?.vote_average)}/10 Rating
         </DetailHeaderText>
         <DetailHeaderText>
-          {getGenreFrom(movie)} • {movie.release_date.slice(0, 4)} •{" "}
-          {calculateRuntimeFrom(runtime)}
+          {getGenreFrom(movie)} • {movie.first_air_date?.slice(0, 4)}
+        </DetailHeaderText>
+        <DetailHeaderText>
+          ca. {calculateRuntimeFrom(runtime)} per episode
         </DetailHeaderText>
       </DetailHeaderContainer>
       <DetailSynopsis>
@@ -165,7 +165,7 @@ export default function MovieDetail({ movie }) {
           ) : null}
         </TrailerContainer>
         <DetailSynopsisHeader>Synopsis:</DetailSynopsisHeader>
-        <DetailSynopsisText>{movie?.overview}</DetailSynopsisText>
+        <DetailSynopsisText>{movie.overview}</DetailSynopsisText>
       </DetailSynopsis>
       <Actors actors={shownActors} />
       <DetailAvailability>

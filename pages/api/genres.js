@@ -1,5 +1,9 @@
 const genres = [
   {
+    id: 10759,
+    name: "Action & Adventure",
+  },
+  {
     id: 28,
     name: "Action",
   },
@@ -74,6 +78,34 @@ const genres = [
   {
     id: 37,
     name: "Western",
+  },
+  {
+    id: 10762,
+    name: "Kids",
+  },
+  {
+    id: 10763,
+    name: "News",
+  },
+  {
+    id: 10764,
+    name: "Reality",
+  },
+  {
+    id: 10765,
+    name: "Sci-Fi & Fantasy",
+  },
+  {
+    id: 10766,
+    name: "Soap",
+  },
+  {
+    id: 10767,
+    name: "Talk",
+  },
+  {
+    id: 10768,
+    name: "War $ Politics",
   },
 ];
 

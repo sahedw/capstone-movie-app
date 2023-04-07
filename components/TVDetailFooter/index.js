@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import {
   DataContext,
   TrendingContext,
-  WatchlistContext,
-  WatchedContext,
+  WatchlistTVContext,
+  WatchedTVContext,
 } from "../../pages/_app";
 import { useContext } from "react";
 import {
@@ -18,36 +18,37 @@ import {
   NavBarListItem,
 } from "../Styled Components/DetailPageFooter";
 
-export default function MovieDetailFooter({ movie }) {
+export default function TVDetailFooter({ movie }) {
   const { theme } = useContext(DataContext);
   const { trendingMovies } = useContext(TrendingContext);
-  const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
-  const { handleToggleWatched, watched } = useContext(WatchedContext);
+  const { handleToggleWatchListTV, watchlistTV } =
+    useContext(WatchlistTVContext);
+  const { handleToggleWatchedTV, watchedTV } = useContext(WatchedTVContext);
 
   const router = useRouter();
 
-  function handleRemoveInWatchlistPage(movie) {
+  function handleRemoveInWatchlistTVPage(movie) {
     if (router.asPath.includes("my-watchlist")) {
-      handleToggleWatchList(movie);
+      handleToggleWatchListTV(movie);
       router.push("/my-watchlist");
     } else if (
       trendingMovies.find((trendingMovie) => trendingMovie.id === movie.id)
     ) {
-      handleToggleWatchList(movie);
+      handleToggleWatchListTV(movie);
     } else if (movie.id.toString().length === router.asPath.length - 1) {
-      handleToggleWatchList(movie);
+      handleToggleWatchListTV(movie);
       router.push("/");
     } else {
-      handleToggleWatchList(movie);
+      handleToggleWatchListTV(movie);
     }
   }
 
-  function handleRemoveInWatchedPage(movie) {
+  function handleRemoveInWatchedTVPage(movie) {
     if (router.asPath.includes("my-watched")) {
-      handleToggleWatched(movie);
+      handleToggleWatchedTV(movie);
       router.push("/my-watched");
     } else {
-      handleToggleWatched(movie);
+      handleToggleWatchedTV(movie);
     }
   }
 
@@ -59,15 +60,15 @@ export default function MovieDetailFooter({ movie }) {
             <DetailNavBarButtonContainer>
               <NavBarListButton
                 color={
-                  JSON.stringify(watchlist).includes(JSON.stringify(movie))
+                  JSON.stringify(watchlistTV).includes(JSON.stringify(movie))
                     ? "#f97b7b"
                     : "#faa5a5"
                 }
                 onClick={() => {
-                  handleRemoveInWatchlistPage(movie);
+                  handleRemoveInWatchlistTVPage(movie);
                 }}
               >
-                {JSON.stringify(watchlist).includes(JSON.stringify(movie)) ? (
+                {JSON.stringify(watchlistTV).includes(JSON.stringify(movie)) ? (
                   <>
                     <NavBarButtonIcon
                       alt={"in-watchlist"}
@@ -95,15 +96,15 @@ export default function MovieDetailFooter({ movie }) {
             <DetailNavBarButtonContainer>
               <NavBarListButton
                 color={
-                  JSON.stringify(watched).includes(JSON.stringify(movie))
+                  JSON.stringify(watchedTV).includes(JSON.stringify(movie))
                     ? "#f97b7b"
                     : "#faa5a5"
                 }
                 onClick={() => {
-                  handleRemoveInWatchedPage(movie);
+                  handleRemoveInWatchedTVPage(movie);
                 }}
               >
-                {JSON.stringify(watched).includes(JSON.stringify(movie)) ? (
+                {JSON.stringify(watchedTV).includes(JSON.stringify(movie)) ? (
                   <>
                     <NavBarButtonIcon
                       alt={"in-watched"}
