@@ -145,7 +145,12 @@ export default function Home() {
         <StyledSectionHeader>
           <h1>
             Welcome back{" "}
-            <AnimatedEmoji src={`/wave.png`} width={25} height={25} />
+            <AnimatedEmoji
+              src={`/wave.png`}
+              width={25}
+              height={25}
+              alt="waving-hand-emoji"
+            />
           </h1>
           <Link href={"/settings"}>
             <StyledSettingsIcon
