@@ -6,7 +6,7 @@ import { useLocalStorageFetch } from "../hooks/useLocalStorageFetch";
 import { useFetch } from "../hooks/useFetch";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles } from "../styles";
-import useSWRFetch from "../hooks/useSWRfetch";
+import useSWRFetch from "../hooks/useSWRFetch";
 
 export const DataContext = createContext();
 export const MediaContext = createContext();
