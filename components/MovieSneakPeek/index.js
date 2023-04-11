@@ -3,6 +3,10 @@ import Image from "next/image";
 import styled from "styled-components";
 import Link from "next/link";
 import { LoadingSpinner } from "../Styled Components/LoadingSpinner";
+import {
+  EmptyContentContainer,
+  EmptyWatchedContainer,
+} from "../Styled Components/ListPage";
 
 const StyledImage = styled(Image)`
   display: grid;
@@ -19,7 +23,12 @@ const StyledDiv = styled.div`
 `;
 
 export default function MovieSneakPeek({ movies }) {
-  if (!movies) return <LoadingSpinner />;
+  if (!movies)
+    return (
+      <EmptyWatchedContainer>
+        <LoadingSpinner />
+      </EmptyWatchedContainer>
+    );
 
   return (
     <StyledDiv>
