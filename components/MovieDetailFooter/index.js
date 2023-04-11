@@ -18,7 +18,7 @@ import {
   DetailNavBarButtonContainer,
   NavBarListItem,
 } from "../Styled Components/DetailPageFooter";
-import { LoadingSpinner } from "../Styled Components/LoadingSpinner";
+import { LoadingSpinnerButton } from "../Styled Components/LoadingSpinner";
 
 export default function MovieDetailFooter({ movie }) {
   const [isButtonLoading, setIsButtonLoading] = useState(false);
@@ -81,7 +81,7 @@ export default function MovieDetailFooter({ movie }) {
                 disabled={isButtonLoading}
               >
                 {isButtonLoading ? (
-                  <LoadingSpinner />
+                  <LoadingSpinnerButton />
                 ) : (
                   <>
                     {JSON.stringify(watchlist).includes(

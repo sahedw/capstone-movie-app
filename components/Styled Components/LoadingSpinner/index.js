@@ -33,3 +33,14 @@ export const LoadingSpinner = styled.span`
     animation: ${rotation} 0.5s linear infinite reverse;
   }
 `;
+
+export const LoadingSpinnerButton = styled.span`
+  width: 48px;
+  height: 48px;
+  border: 5px solid;
+  border-color: #ff3d00 transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: ${rotation} 1s linear infinite;
+`;
