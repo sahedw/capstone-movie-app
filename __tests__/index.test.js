@@ -9,7 +9,6 @@ import {
   TrendingContext,
 } from "../pages/_app";
 import MovieGrid from "../components/MovieGrid";
-import useSWRFetch from "../hooks/useSWRfetch";
 
 function handleToggleWatchList(newMovie) {
   if (
