@@ -74,6 +74,7 @@ export default function Form({ onSubmit }) {
             name="search"
             id="search"
             placeholder="Search..."
+            maxLength={25}
             required
           ></StyledInputText>
           <StyledButton>
