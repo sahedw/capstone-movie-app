@@ -6,6 +6,7 @@ import { useLocalStorageFetch } from "../hooks/useLocalStorageFetch";
 import { useFetch } from "../hooks/useFetch";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles } from "../styles";
+import useSWRFetch from "../hooks/useSWRfetch";
 
 export const DataContext = createContext();
 export const MediaContext = createContext();
@@ -46,17 +47,25 @@ export default function App({ Component, pageProps }) {
     setResultsPage(1);
   }
 
-  const moviesData = useLocalStorageFetch(
+  /* const moviesData = useLocalStorageFetch(
     `/api/themoviedb/search/${mediaTypeMovies}?&language=eng-US&query=${search}&page=${resultsPage}`,
     "newMovies",
     [],
     `/api/themoviedb/search/${mediaTypeMovies}?&language=eng-US&query=${search}&page=${resultsPage}`
+  ); */
+
+  const {
+    data: moviesData,
+    error,
+    isLoading,
+  } = useSWRFetch(
+    `/api/themoviedb/search/${mediaTypeMovies}?&language=eng-US&query=${search}&page=${resultsPage}`
   );
 
-  const totalSearchPages = moviesData.total_pages;
-  const totalSearchResults = moviesData.total_results;
+  const totalSearchPages = moviesData?.total_pages;
+  const totalSearchResults = moviesData?.total_results;
 
-  const movies = moviesData.results;
+  const movies = moviesData?.results;
 
   const currentlyInCinemaData = useLocalStorageFetch(
     `/api/themoviedb/movie/now_playing?`,
