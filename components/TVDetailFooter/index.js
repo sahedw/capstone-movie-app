@@ -6,7 +6,7 @@ import {
   WatchlistTVContext,
   WatchedTVContext,
 } from "../../pages/_app";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import {
   DetailFooter,
   DetailNavBar,
@@ -17,8 +17,15 @@ import {
   DetailNavBarButtonContainer,
   NavBarListItem,
 } from "../Styled Components/DetailPageFooter";
+import { LoadingSpinnerButton } from "../Styled Components/LoadingSpinner";
+import simulateLoading from "../../utils/simulateLoading";
 
 export default function TVDetailFooter({ movie }) {
+  const [isButtonLoadingWatchlistTV, setIsButtonLoadingWatchlistTV] =
+    useState(false);
+  const [isButtonLoadingWatchedTV, setIsButtonLoadingWatchedTV] =
+    useState(false);
+
   const { theme } = useContext(DataContext);
   const { trendingMovies } = useContext(TrendingContext);
   const { handleToggleWatchListTV, watchlistTV } =
@@ -35,11 +42,13 @@ export default function TVDetailFooter({ movie }) {
       trendingMovies.find((trendingMovie) => trendingMovie.id === movie.id)
     ) {
       handleToggleWatchListTV(movie);
+      simulateLoading(setIsButtonLoadingWatchlistTV);
     } else if (movie.id.toString().length === router.asPath.length - 1) {
       handleToggleWatchListTV(movie);
       router.push("/");
     } else {
       handleToggleWatchListTV(movie);
+      simulateLoading(setIsButtonLoadingWatchlistTV);
     }
   }
 
@@ -49,6 +58,7 @@ export default function TVDetailFooter({ movie }) {
       router.push("/my-watched");
     } else {
       handleToggleWatchedTV(movie);
+      simulateLoading(setIsButtonLoadingWatchedTV);
     }
   }
 
@@ -67,26 +77,40 @@ export default function TVDetailFooter({ movie }) {
                 onClick={() => {
                   handleRemoveInWatchlistTVPage(movie);
                 }}
+                disabled={isButtonLoadingWatchlistTV}
               >
-                {JSON.stringify(watchlistTV).includes(JSON.stringify(movie)) ? (
-                  <>
-                    <NavBarButtonIcon
-                      alt={"in-watchlist"}
-                      src={`/in-watchlist.png`}
-                      width={20}
-                      height={20}
-                    />{" "}
-                    <NavBarButtonText color={theme}>Watchlist</NavBarButtonText>
-                  </>
+                {isButtonLoadingWatchlistTV ? (
+                  <LoadingSpinnerButton />
                 ) : (
                   <>
-                    <NavBarButtonIcon
-                      alt={"not-in-watchlist"}
-                      src={`/not-in-watchlist.png`}
-                      width={20}
-                      height={20}
-                    />
-                    <NavBarButtonText color={theme}>Watchlist</NavBarButtonText>
+                    {" "}
+                    {JSON.stringify(watchlistTV).includes(
+                      JSON.stringify(movie)
+                    ) ? (
+                      <>
+                        <NavBarButtonIcon
+                          alt={"in-watchlist"}
+                          src={`/in-watchlist.png`}
+                          width={20}
+                          height={20}
+                        />{" "}
+                        <NavBarButtonText color={theme}>
+                          Watchlist
+                        </NavBarButtonText>
+                      </>
+                    ) : (
+                      <>
+                        <NavBarButtonIcon
+                          alt={"not-in-watchlist"}
+                          src={`/not-in-watchlist.png`}
+                          width={20}
+                          height={20}
+                        />
+                        <NavBarButtonText color={theme}>
+                          Watchlist
+                        </NavBarButtonText>
+                      </>
+                    )}
                   </>
                 )}
               </NavBarListButton>
@@ -103,27 +127,41 @@ export default function TVDetailFooter({ movie }) {
                 onClick={() => {
                   handleRemoveInWatchedTVPage(movie);
                 }}
+                disabled={isButtonLoadingWatchedTV}
               >
-                {JSON.stringify(watchedTV).includes(JSON.stringify(movie)) ? (
-                  <>
-                    <NavBarButtonIcon
-                      alt={"in-watched"}
-                      src={`/in-watched.png`}
-                      width={20}
-                      height={20}
-                    />
-
-                    <NavBarButtonText color={theme}>Watched</NavBarButtonText>
-                  </>
+                {isButtonLoadingWatchedTV ? (
+                  <LoadingSpinnerButton />
                 ) : (
                   <>
-                    <NavBarButtonIcon
-                      alt={"not-in-watched"}
-                      src={`/not-in-watched.png`}
-                      width={20}
-                      height={20}
-                    />
-                    <NavBarButtonText color={theme}>Watched</NavBarButtonText>
+                    {" "}
+                    {JSON.stringify(watchedTV).includes(
+                      JSON.stringify(movie)
+                    ) ? (
+                      <>
+                        <NavBarButtonIcon
+                          alt={"in-watched"}
+                          src={`/in-watched.png`}
+                          width={20}
+                          height={20}
+                        />
+
+                        <NavBarButtonText color={theme}>
+                          Watched
+                        </NavBarButtonText>
+                      </>
+                    ) : (
+                      <>
+                        <NavBarButtonIcon
+                          alt={"not-in-watched"}
+                          src={`/not-in-watched.png`}
+                          width={20}
+                          height={20}
+                        />
+                        <NavBarButtonText color={theme}>
+                          Watched
+                        </NavBarButtonText>
+                      </>
+                    )}
                   </>
                 )}
               </NavBarListButton>
