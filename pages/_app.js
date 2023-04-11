@@ -69,11 +69,23 @@ export default function App({ Component, pageProps }) {
 
   const currentlyInCinemas = currentlyInCinemaData.results;
 
-  const trendingMovies = useFetch(
+  /* const trendingMovies = useFetch(
     `/api/themoviedb/trending/movie/${dayTrending ? "day" : "week"}`,
     [],
     dayTrending
+  ); */
+  // dwshbdhskbdksbd
+  const {
+    data: trendingMovies,
+    error: trendingMoviesError,
+    isLoading: trendingMoviesIsLoading,
+  } = useSWRFetch(
+    `/api/themoviedb/trending/movie/${dayTrending ? "day" : "week"}`
   );
+
+  console.log(trendingMovies);
+
+  // dsbdhksbdkhbsd
 
   const upcomingMovies = useFetch(
     `/api/themoviedb/movie/upcoming?&language=en-US&page=1`,

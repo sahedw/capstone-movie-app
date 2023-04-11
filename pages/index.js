@@ -10,6 +10,7 @@ import Link from "next/link";
 import MovieSneakPeek from "../components/MovieSneakPeek";
 import Image from "next/image";
 import getIconForTheme from "../utils/getIconForTheme";
+import { LoadingSpinner } from "../components/Styled Components/LoadingSpinner";
 
 const StyledSectionHeader = styled.section`
   position: relative;
@@ -104,8 +105,12 @@ const StyledButtonWeek = styled.button`
 export default function Home() {
   const { handleFormSubmit, movies, theme } = useContext(DataContext);
   const { watchlist } = useContext(WatchlistContext);
-  const { dayTrending, trendingMovies, handleTrendingSort } =
-    useContext(TrendingContext);
+  const {
+    dayTrending,
+    trendingMovies,
+    trendingMoviesIsLoading,
+    handleTrendingSort,
+  } = useContext(TrendingContext);
 
   const randomMovie = useMemo(
     () => getRandomIndexFromArray(watchlist),
@@ -116,7 +121,7 @@ export default function Home() {
     [watchlist]
   );
 
-  const cutTrendingArray = trendingMovies?.slice(0, 9);
+  const cutTrendingArray = trendingMovies?.results?.slice(0, 9);
 
   return (
     <>
@@ -180,7 +185,11 @@ export default function Home() {
               Week
             </StyledButtonWeek>
           </StyledSectionTrendingFlex>
-          <MovieSneakPeek movies={cutTrendingArray} />
+          {trendingMoviesIsLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <MovieSneakPeek movies={cutTrendingArray} />
+          )}
         </StyledSectionTrending>
       </main>
       <Navigation />
