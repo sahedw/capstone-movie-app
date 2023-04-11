@@ -2,7 +2,7 @@ import React from "react";
 import { DataContext } from "../../pages/_app";
 import getGenreFrom from "../../utils/getGenreFrom";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import getPopularityDecimal from "../../utils/getPopularityDecimal";
 import PushButton from "../PushButton";
 import showWatchProviders from "../../utils/showWatchProviders";
@@ -26,98 +26,35 @@ import {
   DetailPageDescriptionText,
   DetailPageDescription,
 } from "../Styled Components/DetailPage";
+import useSWR from "swr";
 
 export default function TVDetail({ movie }) {
-  const [runtime, setRuntime] = useState(0);
-  const [movieDetails, setMovieDetails] = useState(null);
-  const [watchProvider, setWatchProvider] = useState("");
-  const [castActors, setCastActors] = useState("");
-  const [youtubeKey, setYoutubeKey] = useState("");
   const [showTrailer, setShowTrailer] = useState(false);
   const { availabilityOption, theme } = useContext(DataContext);
 
-  const shownActors = castActors.slice(0, 4);
+  const { data: movieDetails } = useSWR(
+    `/api/themoviedb/tv/${movie.id}?&language=eng-US`
+  );
+
+  const { data: watchProvider } = useSWR(
+    `/api/themoviedb/tv/${movie.id}/watch/providers?`
+  );
+
+  const { data: castActors } = useSWR(
+    `/api/themoviedb/tv/${movie.id}/credits?`
+  );
+
+  const { data: youtubeKey } = useSWR(
+    `/api/themoviedb/tv/${movie.id}/videos?&language=en-US`
+  );
+
+  const shownActors = castActors?.cast?.slice(0, 4);
   const trailer = youtubeKey?.results?.find(
     (videoObject) => videoObject.type === "Trailer"
   );
-  const streamingProviderFlatrate = watchProvider?.flatrate;
-  const streamingProviderBuy = watchProvider?.buy;
-  const streamingProviderRent = watchProvider?.rent;
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `/api/themoviedb/tv/${movie.id}?&language=eng-US`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setRuntime(data.episode_run_time);
-          setMovieDetails(data);
-        } else {
-          throw new Error("Something went wrong");
-        }
-      } catch (error) {
-        console.log(`Error: ${error.message}`);
-      }
-    }
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `/api/themoviedb/tv/${movie.id}/watch/providers?`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setWatchProvider(data.results.DE);
-        } else {
-          throw new Error("Something went wrong");
-        }
-      } catch (error) {
-        console.log(`Error: ${error.message}`);
-      }
-    }
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(`/api/themoviedb/tv/${movie.id}/credits?`);
-        if (response.ok) {
-          const data = await response.json();
-          setCastActors(data.cast);
-        } else {
-          throw new Error("Something went wrong");
-        }
-      } catch (error) {
-        console.log(`Error: ${error.message}`);
-      }
-    }
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `/api/themoviedb/tv/${movie.id}/videos?&language=en-US`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setYoutubeKey(data);
-        } else {
-          throw new Error("Something went wrong");
-        }
-      } catch (error) {
-        console.log(`Error: ${error.message}`);
-      }
-    }
-    fetchData();
-  }, []);
+  const streamingProviderFlatrate = watchProvider?.results?.DE?.flatrate;
+  const streamingProviderBuy = watchProvider?.results?.DE?.buy;
+  const streamingProviderRent = watchProvider?.results?.DE?.rent;
 
   function displayTrailer() {
     setShowTrailer(!showTrailer);
@@ -146,7 +83,7 @@ export default function TVDetail({ movie }) {
           {getGenreFrom(movie)} • {movie.first_air_date?.slice(0, 4)}
         </DetailHeaderText>
         <DetailHeaderText>
-          ca. {calculateRuntimeFrom(runtime)} per episode
+          ca. {calculateRuntimeFrom(movieDetails?.episode_run_time)} per episode
         </DetailHeaderText>
       </DetailHeaderContainer>
       <DetailSynopsis>

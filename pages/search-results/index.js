@@ -7,6 +7,7 @@ import styled from "styled-components";
 import Navigation from "../../components/Navigation";
 import TV from "../../components/TV";
 import { EmptyContentContainer } from "../../components/Styled Components/ListPage";
+import { LoadingSpinner } from "../../components/Styled Components/LoadingSpinner";
 
 const StyledHeader = styled.h2`
   margin-left: 15px;
@@ -47,6 +48,8 @@ const StyledButtons = styled.button`
 export default function SearchResultsPage() {
   const {
     movies,
+    moviesError,
+    moviesIsLoading,
     search,
     handleNextPage,
     handlePrevPage,
@@ -56,6 +59,21 @@ export default function SearchResultsPage() {
     theme,
   } = useContext(DataContext);
   const { mediaTypeMovies } = useContext(MediaContext);
+
+  if (moviesError)
+    return (
+      <EmptyContentContainer>
+        <h2>Whoops, something seems wrong</h2>
+        <p>There seems to be an error. Try again.</p>
+      </EmptyContentContainer>
+    );
+
+  if (moviesIsLoading)
+    return (
+      <EmptyContentContainer>
+        <LoadingSpinner />
+      </EmptyContentContainer>
+    );
 
   if (movies?.length === 0)
     return (

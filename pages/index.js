@@ -10,6 +10,7 @@ import Link from "next/link";
 import MovieSneakPeek from "../components/MovieSneakPeek";
 import Image from "next/image";
 import getIconForTheme from "../utils/getIconForTheme";
+import { LoadingSpinner } from "../components/Styled Components/LoadingSpinner";
 
 const StyledSectionHeader = styled.section`
   position: relative;
@@ -116,7 +117,7 @@ export default function Home() {
     [watchlist]
   );
 
-  const cutTrendingArray = trendingMovies.slice(0, 9);
+  const cutTrendingArray = trendingMovies?.slice(0, 9);
 
   return (
     <>
