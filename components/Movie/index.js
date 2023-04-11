@@ -1,6 +1,4 @@
 import React from "react";
-import Image from "next/image";
-import styled from "styled-components";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import getGenreFrom from "../../utils/getGenreFrom";
 import { DataContext } from "../../pages/_app";
