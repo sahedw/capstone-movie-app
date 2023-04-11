@@ -11,7 +11,7 @@ import {
   OverviewHeader,
   OverviewText,
 } from "../Styled Components/QuickOverview";
-import useSWRFetch from "../../hooks/useSWRfetch";
+import useSWRFetch from "../../hooks/useSWRFetch";
 
 export default function TV({ movie }) {
   const { theme } = useContext(DataContext);

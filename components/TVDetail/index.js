@@ -26,7 +26,7 @@ import {
   DetailPageDescriptionText,
   DetailPageDescription,
 } from "../Styled Components/DetailPage";
-import useSWRFetch from "../../hooks/useSWRfetch";
+import useSWRFetch from "../../hooks/useSWRFetch";
 
 export default function TVDetail({ movie }) {
   const [showTrailer, setShowTrailer] = useState(false);
