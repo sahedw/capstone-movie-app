@@ -16,9 +16,9 @@ export default function MovieDetailPage() {
     if (watchlist.find((movie) => movie.id.toString() === router.query.id)) {
       return watchlist.find((movie) => movie.id.toString() === router.query.id);
     } else if (
-      trendingMovies.find((movie) => movie.id.toString() === router.query.id)
+      trendingMovies?.find((movie) => movie.id.toString() === router.query.id)
     ) {
-      return trendingMovies.find(
+      return trendingMovies?.find(
         (movie) => movie.id.toString() === router.query.id
       );
     } else {
