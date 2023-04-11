@@ -10,7 +10,23 @@ import Link from "next/link";
 import MovieSneakPeek from "../components/MovieSneakPeek";
 import Image from "next/image";
 import getIconForTheme from "../utils/getIconForTheme";
-import { LoadingSpinner } from "../components/Styled Components/LoadingSpinner";
+import { keyframes } from "styled-components";
+
+const fadeInFromBottomWithScale = keyframes`
+0% {
+  transform: rotate(50deg);
+}
+25% {
+  transform: rotate(0) translateX(-5px);
+}
+
+75% {
+  transform: rotate(50deg) translateX(0);
+}
+  100% {
+    transform: rotate(0);
+}
+`;
 
 const StyledSectionHeader = styled.section`
   position: relative;
@@ -102,6 +118,10 @@ const StyledButtonWeek = styled.button`
   }
 `;
 
+const AnimatedEmoji = styled(Image)`
+  animation: ${fadeInFromBottomWithScale} 2s ease-in-out;
+`;
+
 export default function Home() {
   const { handleFormSubmit, movies, theme } = useContext(DataContext);
   const { watchlist } = useContext(WatchlistContext);
@@ -123,7 +143,10 @@ export default function Home() {
     <>
       <main>
         <StyledSectionHeader>
-          <h1>Welcome back 👋🏼</h1>
+          <h1>
+            Welcome back{" "}
+            <AnimatedEmoji src={`/wave.png`} width={25} height={25} />
+          </h1>
           <Link href={"/settings"}>
             <StyledSettingsIcon
               src={`/settings${getIconForTheme(theme)}.png`}
