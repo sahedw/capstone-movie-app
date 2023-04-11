@@ -105,12 +105,8 @@ const StyledButtonWeek = styled.button`
 export default function Home() {
   const { handleFormSubmit, movies, theme } = useContext(DataContext);
   const { watchlist } = useContext(WatchlistContext);
-  const {
-    dayTrending,
-    trendingMovies,
-    trendingMoviesIsLoading,
-    handleTrendingSort,
-  } = useContext(TrendingContext);
+  const { dayTrending, trendingMovies, handleTrendingSort } =
+    useContext(TrendingContext);
 
   const randomMovie = useMemo(
     () => getRandomIndexFromArray(watchlist),
@@ -185,11 +181,7 @@ export default function Home() {
               Week
             </StyledButtonWeek>
           </StyledSectionTrendingFlex>
-          {trendingMoviesIsLoading ? (
-            <LoadingSpinner />
-          ) : (
-            <MovieSneakPeek movies={cutTrendingArray} />
-          )}
+          <MovieSneakPeek movies={cutTrendingArray} />
         </StyledSectionTrending>
       </main>
       <Navigation />
