@@ -1,7 +1,4 @@
 import React from "react";
-import Image from "next/image";
-import styled from "styled-components";
-import { useState, useEffect } from "react";
 import calculateRuntimeFrom from "../../utils/calculateRuntimeFrom";
 import getGenreFrom from "../../utils/getGenreFrom";
 import { DataContext } from "../../pages/_app";
@@ -14,29 +11,14 @@ import {
   OverviewHeader,
   OverviewText,
 } from "../Styled Components/QuickOverview";
+import useSWRFetch from "../../hooks/useSWRfetch";
 
 export default function TV({ movie }) {
   const { theme } = useContext(DataContext);
-  const [runtime, setRuntime] = useState(0);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `/api/themoviedb/tv/${movie.id}?&language=eng-US`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setRuntime(data.episode_run_time);
-        } else {
-          throw new Error("Something went wrong");
-        }
-      } catch (error) {
-        console.log(`Error: ${error.message}`);
-      }
-    }
-    fetchData();
-  }, [movie?.id]);
+  const { data } = useSWRFetch(
+    `/api/themoviedb/tv/${movie.id}?&language=eng-US`
+  );
 
   return (
     <>
@@ -54,8 +36,10 @@ export default function TV({ movie }) {
             {movie?.name} - <em>{movie?.first_air_date?.slice(0, 4)}</em>
           </OverviewHeader>
           <OverviewText>{getGenreFrom(movie)}</OverviewText>
-          {runtime ? (
-            <OverviewText>{calculateRuntimeFrom(runtime)}</OverviewText>
+          {data?.episode_run_time ? (
+            <OverviewText>
+              {calculateRuntimeFrom(data?.episode_run_time)}
+            </OverviewText>
           ) : (
             <p>Loading...</p>
           )}

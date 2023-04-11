@@ -47,13 +47,6 @@ export default function App({ Component, pageProps }) {
     setResultsPage(1);
   }
 
-  /* const moviesData = useLocalStorageFetch(
-    `/api/themoviedb/search/${mediaTypeMovies}?&language=eng-US&query=${search}&page=${resultsPage}`,
-    "newMovies",
-    [],
-    `/api/themoviedb/search/${mediaTypeMovies}?&language=eng-US&query=${search}&page=${resultsPage}`
-  ); */
-
   const {
     data: moviesData,
     error: moviesError,

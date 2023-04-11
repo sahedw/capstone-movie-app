@@ -52,9 +52,9 @@ export default function MovieDetail({ movie }) {
   const trailer = youtubeKey?.results?.find(
     (videoObject) => videoObject.type === "Trailer"
   );
-  const streamingProviderFlatrate = watchProvider?.results.DE.flatrate;
-  const streamingProviderBuy = watchProvider?.results.DE.buy;
-  const streamingProviderRent = watchProvider?.results.DE.rent;
+  const streamingProviderFlatrate = watchProvider?.results?.DE?.flatrate;
+  const streamingProviderBuy = watchProvider?.results?.DE?.buy;
+  const streamingProviderRent = watchProvider?.results?.DE?.rent;
 
   function displayTrailer() {
     setShowTrailer(!showTrailer);
