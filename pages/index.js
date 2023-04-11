@@ -116,7 +116,7 @@ export default function Home() {
     [watchlist]
   );
 
-  const cutTrendingArray = trendingMovies.slice(0, 9);
+  const cutTrendingArray = trendingMovies?.slice(0, 9);
 
   return (
     <>

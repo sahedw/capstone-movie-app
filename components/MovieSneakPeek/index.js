@@ -20,7 +20,7 @@ const StyledDiv = styled.div`
 export default function MovieSneakPeek({ movies }) {
   return (
     <StyledDiv>
-      {movies.map((movie) => {
+      {movies?.map((movie) => {
         return (
           <Link key={movie.id} href={`/${movie.id}`}>
             <StyledImage
