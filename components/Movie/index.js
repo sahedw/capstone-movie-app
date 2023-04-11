@@ -11,13 +11,11 @@ import {
   OverviewHeader,
   OverviewText,
 } from "../Styled Components/QuickOverview";
-import useSWRFetch from "../../hooks/useSWRFetch";
+import useSWR from "swr";
 
 export default function Movie({ movie }) {
   const { theme } = useContext(DataContext);
-  const { data } = useSWRFetch(
-    `/api/themoviedb/movie/${movie.id}?&language=eng-US`
-  );
+  const { data } = useSWR(`/api/themoviedb/movie/${movie.id}?&language=eng-US`);
 
   return (
     <>

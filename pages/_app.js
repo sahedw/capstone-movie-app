@@ -6,7 +6,8 @@ import { useLocalStorageFetch } from "../hooks/useLocalStorageFetch";
 import { useFetch } from "../hooks/useFetch";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles } from "../styles";
-import useSWRFetch from "../hooks/useSWRFetch";
+import { SWRConfig } from "swr";
+import useSWR from "swr";
 
 export const DataContext = createContext();
 export const MediaContext = createContext();
@@ -16,6 +17,8 @@ export const WatchlistTVContext = createContext();
 export const WatchedTVContext = createContext();
 export const CinemaContext = createContext();
 export const TrendingContext = createContext();
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function App({ Component, pageProps }) {
   const [watchlist, setWatchlist] = useLocalStorageState("newWatchlist", {
@@ -51,8 +54,9 @@ export default function App({ Component, pageProps }) {
     data: moviesData,
     error: moviesError,
     isLoading: moviesIsLoading,
-  } = useSWRFetch(
-    `/api/themoviedb/search/${mediaTypeMovies}?&language=eng-US&query=${search}&page=${resultsPage}`
+  } = useSWR(
+    `/api/themoviedb/search/${mediaTypeMovies}?&language=eng-US&query=${search}&page=${resultsPage}`,
+    fetcher
   );
 
   const totalSearchPages = moviesData?.total_pages;
@@ -69,23 +73,11 @@ export default function App({ Component, pageProps }) {
 
   const currentlyInCinemas = currentlyInCinemaData.results;
 
-  /* const trendingMovies = useFetch(
+  const trendingMovies = useFetch(
     `/api/themoviedb/trending/movie/${dayTrending ? "day" : "week"}`,
     [],
     dayTrending
-  ); */
-  // dwshbdhskbdksbd
-  const {
-    data: trendingMovies,
-    error: trendingMoviesError,
-    isLoading: trendingMoviesIsLoading,
-  } = useSWRFetch(
-    `/api/themoviedb/trending/movie/${dayTrending ? "day" : "week"}`
   );
-
-  console.log(trendingMovies);
-
-  // dsbdhksbdkhbsd
 
   const upcomingMovies = useFetch(
     `/api/themoviedb/movie/upcoming?&language=en-US&page=1`,
@@ -191,52 +183,58 @@ export default function App({ Component, pageProps }) {
       </Head>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <GlobalStyles />
-        <WatchedTVContext.Provider value={{ handleToggleWatchedTV, watchedTV }}>
-          <WatchlistTVContext.Provider
-            value={{ handleToggleWatchListTV, watchlistTV }}
+        <SWRConfig value={{ fetcher }}>
+          <WatchedTVContext.Provider
+            value={{ handleToggleWatchedTV, watchedTV }}
           >
-            <MediaContext.Provider
-              value={{ handleMediaTypeChange, mediaTypeMovies }}
+            <WatchlistTVContext.Provider
+              value={{ handleToggleWatchListTV, watchlistTV }}
             >
-              <WatchedContext.Provider value={{ watched, handleToggleWatched }}>
-                <TrendingContext.Provider
-                  value={{ dayTrending, trendingMovies, handleTrendingSort }}
+              <MediaContext.Provider
+                value={{ handleMediaTypeChange, mediaTypeMovies }}
+              >
+                <WatchedContext.Provider
+                  value={{ watched, handleToggleWatched }}
                 >
-                  <CinemaContext.Provider
-                    value={{ currentlyInCinemas, upcomingMovies }}
+                  <TrendingContext.Provider
+                    value={{ dayTrending, trendingMovies, handleTrendingSort }}
                   >
-                    <WatchlistContext.Provider
-                      value={{ handleToggleWatchList, watchlist }}
+                    <CinemaContext.Provider
+                      value={{ currentlyInCinemas, upcomingMovies }}
                     >
-                      <DataContext.Provider
-                        value={{
-                          search,
-                          resultsPage,
-                          resetResultsPage,
-                          totalSearchResults,
-                          totalSearchPages,
-                          handleNextPage,
-                          handlePrevPage,
-                          getAvailabilitySeletion,
-                          availabilityOption,
-                          themeToggler,
-                          theme,
-                          DataContext,
-                          handleFormSubmit,
-                          movies,
-                          moviesError,
-                          moviesIsLoading,
-                        }}
+                      <WatchlistContext.Provider
+                        value={{ handleToggleWatchList, watchlist }}
                       >
-                        <Component {...pageProps} />
-                      </DataContext.Provider>
-                    </WatchlistContext.Provider>
-                  </CinemaContext.Provider>
-                </TrendingContext.Provider>
-              </WatchedContext.Provider>
-            </MediaContext.Provider>
-          </WatchlistTVContext.Provider>
-        </WatchedTVContext.Provider>
+                        <DataContext.Provider
+                          value={{
+                            search,
+                            resultsPage,
+                            resetResultsPage,
+                            totalSearchResults,
+                            totalSearchPages,
+                            handleNextPage,
+                            handlePrevPage,
+                            getAvailabilitySeletion,
+                            availabilityOption,
+                            themeToggler,
+                            theme,
+                            DataContext,
+                            handleFormSubmit,
+                            movies,
+                            moviesError,
+                            moviesIsLoading,
+                          }}
+                        >
+                          <Component {...pageProps} />
+                        </DataContext.Provider>
+                      </WatchlistContext.Provider>
+                    </CinemaContext.Provider>
+                  </TrendingContext.Provider>
+                </WatchedContext.Provider>
+              </MediaContext.Provider>
+            </WatchlistTVContext.Provider>
+          </WatchedTVContext.Provider>
+        </SWRConfig>
       </ThemeProvider>
     </>
   );

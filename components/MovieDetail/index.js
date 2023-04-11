@@ -26,25 +26,25 @@ import {
   DetailPageDescriptionText,
   DetailPageDescription,
 } from "../Styled Components/DetailPage";
-import useSWRFetch from "../../hooks/useSWRFetch";
+import useSWR from "swr";
 
 export default function MovieDetail({ movie }) {
   const [showTrailer, setShowTrailer] = useState(false);
   const { availabilityOption, theme } = useContext(DataContext);
 
-  const { data: movieDetails } = useSWRFetch(
+  const { data: movieDetails } = useSWR(
     `/api/themoviedb/movie/${movie.id}?&language=eng-US`
   );
 
-  const { data: watchProvider } = useSWRFetch(
+  const { data: watchProvider } = useSWR(
     `/api/themoviedb/movie/${movie.id}/watch/providers?`
   );
 
-  const { data: castActors } = useSWRFetch(
+  const { data: castActors } = useSWR(
     `/api/themoviedb/movie/${movie.id}/credits?`
   );
 
-  const { data: youtubeKey } = useSWRFetch(
+  const { data: youtubeKey } = useSWR(
     `/api/themoviedb/movie/${movie.id}/videos?&language=en-US`
   );
 
