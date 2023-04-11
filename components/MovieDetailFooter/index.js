@@ -7,6 +7,7 @@ import {
   WatchedContext,
 } from "../../pages/_app";
 import { useContext } from "react";
+import { useState } from "react";
 import {
   DetailFooter,
   DetailNavBar,
@@ -17,14 +18,23 @@ import {
   DetailNavBarButtonContainer,
   NavBarListItem,
 } from "../Styled Components/DetailPageFooter";
+import { LoadingSpinner } from "../Styled Components/LoadingSpinner";
 
 export default function MovieDetailFooter({ movie }) {
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
   const { theme } = useContext(DataContext);
   const { trendingMovies } = useContext(TrendingContext);
   const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
   const { handleToggleWatched, watched } = useContext(WatchedContext);
 
   const router = useRouter();
+
+  function simulateLoading() {
+    setIsButtonLoading(true);
+    setTimeout(() => {
+      setIsButtonLoading(false);
+    }, 1000);
+  }
 
   function handleRemoveInWatchlistPage(movie) {
     if (router.asPath.includes("my-watchlist")) {
@@ -34,11 +44,13 @@ export default function MovieDetailFooter({ movie }) {
       trendingMovies.find((trendingMovie) => trendingMovie.id === movie.id)
     ) {
       handleToggleWatchList(movie);
+      simulateLoading();
     } else if (movie.id.toString().length === router.asPath.length - 1) {
       handleToggleWatchList(movie);
       router.push("/");
     } else {
       handleToggleWatchList(movie);
+      simulateLoading();
     }
   }
 
@@ -66,26 +78,39 @@ export default function MovieDetailFooter({ movie }) {
                 onClick={() => {
                   handleRemoveInWatchlistPage(movie);
                 }}
+                disabled={isButtonLoading}
               >
-                {JSON.stringify(watchlist).includes(JSON.stringify(movie)) ? (
-                  <>
-                    <NavBarButtonIcon
-                      alt={"in-watchlist"}
-                      src={`/in-watchlist.png`}
-                      width={20}
-                      height={20}
-                    />{" "}
-                    <NavBarButtonText color={theme}>Watchlist</NavBarButtonText>
-                  </>
+                {isButtonLoading ? (
+                  <LoadingSpinner />
                 ) : (
                   <>
-                    <NavBarButtonIcon
-                      alt={"not-in-watchlist"}
-                      src={`/not-in-watchlist.png`}
-                      width={20}
-                      height={20}
-                    />
-                    <NavBarButtonText color={theme}>Watchlist</NavBarButtonText>
+                    {JSON.stringify(watchlist).includes(
+                      JSON.stringify(movie)
+                    ) ? (
+                      <>
+                        <NavBarButtonIcon
+                          alt={"in-watchlist"}
+                          src={`/in-watchlist.png`}
+                          width={20}
+                          height={20}
+                        />{" "}
+                        <NavBarButtonText color={theme}>
+                          Watchlist
+                        </NavBarButtonText>
+                      </>
+                    ) : (
+                      <>
+                        <NavBarButtonIcon
+                          alt={"not-in-watchlist"}
+                          src={`/not-in-watchlist.png`}
+                          width={20}
+                          height={20}
+                        />
+                        <NavBarButtonText color={theme}>
+                          Watchlist
+                        </NavBarButtonText>
+                      </>
+                    )}
                   </>
                 )}
               </NavBarListButton>
