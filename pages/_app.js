@@ -56,8 +56,8 @@ export default function App({ Component, pageProps }) {
 
   const {
     data: moviesData,
-    error,
-    isLoading,
+    error: moviesError,
+    isLoading: moviesIsLoading,
   } = useSWRFetch(
     `/api/themoviedb/search/${mediaTypeMovies}?&language=eng-US&query=${search}&page=${resultsPage}`
   );
@@ -219,6 +219,8 @@ export default function App({ Component, pageProps }) {
                           DataContext,
                           handleFormSubmit,
                           movies,
+                          moviesError,
+                          moviesIsLoading,
                         }}
                       >
                         <Component {...pageProps} />

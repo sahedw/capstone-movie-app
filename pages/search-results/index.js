@@ -47,6 +47,8 @@ const StyledButtons = styled.button`
 export default function SearchResultsPage() {
   const {
     movies,
+    moviesError,
+    moviesIsLoading,
     search,
     handleNextPage,
     handlePrevPage,
@@ -56,6 +58,8 @@ export default function SearchResultsPage() {
     theme,
   } = useContext(DataContext);
   const { mediaTypeMovies } = useContext(MediaContext);
+
+  if (moviesIsLoading) return <h1>Loading...</h1>;
 
   if (movies?.length === 0)
     return (
