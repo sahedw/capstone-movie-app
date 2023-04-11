@@ -35,10 +35,10 @@ export const LoadingSpinner = styled.span`
 `;
 
 export const LoadingSpinnerButton = styled.span`
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   border: 5px solid;
-  border-color: #ff3d00 transparent;
+  border-color: white transparent;
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;

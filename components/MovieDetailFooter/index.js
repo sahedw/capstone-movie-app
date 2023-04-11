@@ -19,22 +19,19 @@ import {
   NavBarListItem,
 } from "../Styled Components/DetailPageFooter";
 import { LoadingSpinnerButton } from "../Styled Components/LoadingSpinner";
+import simulateLoading from "../../utils/simulateLoading";
 
 export default function MovieDetailFooter({ movie }) {
-  const [isButtonLoading, setIsButtonLoading] = useState(false);
+  const [isButtonLoadingWatchlist, setIsButtonLoadingWatchlist] =
+    useState(false);
+  const [isButtonLoadingWatched, setIsButtonLoadingWatched] = useState(false);
+
   const { theme } = useContext(DataContext);
   const { trendingMovies } = useContext(TrendingContext);
   const { handleToggleWatchList, watchlist } = useContext(WatchlistContext);
   const { handleToggleWatched, watched } = useContext(WatchedContext);
 
   const router = useRouter();
-
-  function simulateLoading() {
-    setIsButtonLoading(true);
-    setTimeout(() => {
-      setIsButtonLoading(false);
-    }, 1000);
-  }
 
   function handleRemoveInWatchlistPage(movie) {
     if (router.asPath.includes("my-watchlist")) {
@@ -44,13 +41,13 @@ export default function MovieDetailFooter({ movie }) {
       trendingMovies.find((trendingMovie) => trendingMovie.id === movie.id)
     ) {
       handleToggleWatchList(movie);
-      simulateLoading();
+      simulateLoading(setIsButtonLoadingWatchlist);
     } else if (movie.id.toString().length === router.asPath.length - 1) {
       handleToggleWatchList(movie);
       router.push("/");
     } else {
       handleToggleWatchList(movie);
-      simulateLoading();
+      simulateLoading(setIsButtonLoadingWatchlist);
     }
   }
 
@@ -60,6 +57,7 @@ export default function MovieDetailFooter({ movie }) {
       router.push("/my-watched");
     } else {
       handleToggleWatched(movie);
+      simulateLoading(setIsButtonLoadingWatched);
     }
   }
 
@@ -78,9 +76,9 @@ export default function MovieDetailFooter({ movie }) {
                 onClick={() => {
                   handleRemoveInWatchlistPage(movie);
                 }}
-                disabled={isButtonLoading}
+                disabled={isButtonLoadingWatchlist}
               >
-                {isButtonLoading ? (
+                {isButtonLoadingWatchlist ? (
                   <LoadingSpinnerButton />
                 ) : (
                   <>
@@ -127,27 +125,38 @@ export default function MovieDetailFooter({ movie }) {
                 onClick={() => {
                   handleRemoveInWatchedPage(movie);
                 }}
+                disabled={isButtonLoadingWatched}
               >
-                {JSON.stringify(watched).includes(JSON.stringify(movie)) ? (
-                  <>
-                    <NavBarButtonIcon
-                      alt={"in-watched"}
-                      src={`/in-watched.png`}
-                      width={20}
-                      height={20}
-                    />
-
-                    <NavBarButtonText color={theme}>Watched</NavBarButtonText>
-                  </>
+                {isButtonLoadingWatched ? (
+                  <LoadingSpinnerButton />
                 ) : (
                   <>
-                    <NavBarButtonIcon
-                      alt={"not-in-watched"}
-                      src={`/not-in-watched.png`}
-                      width={20}
-                      height={20}
-                    />
-                    <NavBarButtonText color={theme}>Watched</NavBarButtonText>
+                    {JSON.stringify(watched).includes(JSON.stringify(movie)) ? (
+                      <>
+                        <NavBarButtonIcon
+                          alt={"in-watched"}
+                          src={`/in-watched.png`}
+                          width={20}
+                          height={20}
+                        />
+
+                        <NavBarButtonText color={theme}>
+                          Watched
+                        </NavBarButtonText>
+                      </>
+                    ) : (
+                      <>
+                        <NavBarButtonIcon
+                          alt={"not-in-watched"}
+                          src={`/not-in-watched.png`}
+                          width={20}
+                          height={20}
+                        />
+                        <NavBarButtonText color={theme}>
+                          Watched
+                        </NavBarButtonText>
+                      </>
+                    )}
                   </>
                 )}
               </NavBarListButton>
