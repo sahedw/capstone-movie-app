@@ -35,13 +35,8 @@ const StyledButtons = styled.button`
   border: 1px solid gray;
   border-radius: 15px;
   color: ${(props) => props.theme.fontColor};
-  :hover {
-    background-color: #f97b7b;
-    color: white;
-    border: none;
-  }
   :disabled {
-    background-color: lightgray;
+    opacity: 0.3;
   }
 `;
 
