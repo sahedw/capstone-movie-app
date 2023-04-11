@@ -31,7 +31,6 @@ const StyledButtons = styled.button`
   padding-right: 15px;
   padding-top: 5px;
   padding-bottom: 5px;
-
   border: 1px solid gray;
   border-radius: 15px;
   color: ${(props) => props.theme.fontColor};
