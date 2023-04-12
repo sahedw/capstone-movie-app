@@ -102,8 +102,8 @@ const StyledButtonWeek = styled.button`
 `;
 
 const StyledAppName = styled.h1`
-  color: gray;
   font-family: "Normal";
+  color: ${(props) => props.theme.fontColor};
 `;
 
 const StyledHeaderSpan = styled.span`
@@ -112,7 +112,7 @@ const StyledHeaderSpan = styled.span`
 `;
 
 const StyledHeaderSubtitle = styled.p`
-  color: gray;
+  color: ${(props) => props.theme.fontColor};
 `;
 
 export default function Home() {
@@ -136,7 +136,7 @@ export default function Home() {
     <>
       <main>
         <StyledSectionHeader>
-          <StyledAppName>
+          <StyledAppName color={theme}>
             Watched<StyledHeaderSpan>It</StyledHeaderSpan>
           </StyledAppName>
           <Link href={"/settings"}>
@@ -147,7 +147,7 @@ export default function Home() {
               height={25}
             />
           </Link>
-          <StyledHeaderSubtitle>
+          <StyledHeaderSubtitle color={theme}>
             Grab your 🍿 and let us watch something <strong>cool!</strong>{" "}
           </StyledHeaderSubtitle>
         </StyledSectionHeader>

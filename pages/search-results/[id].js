@@ -10,7 +10,7 @@ import TVDetail from "../../components/TVDetail";
 import TVDetailFooter from "../../components/TVDetailFooter";
 import { EmptyContentContainer } from "../../components/Styled Components/ListPage";
 import simulateLoading from "../../utils/simulateLoading";
-import DrumRoll from "../../animations/DrumRoll/DrumRoll";
+import Clipperboard from "../../animations/Clipperboard/Clipperboard";
 
 export default function MovieDetailPage() {
   const [isLoadingResults, setIsLoadingResults] = useState(false);
@@ -24,7 +24,7 @@ export default function MovieDetailPage() {
   );
 
   useEffect(() => {
-    simulateLoading(setIsLoadingResults, 500);
+    simulateLoading(setIsLoadingResults, 1000);
   }, []);
 
   if (!currentMovie)
@@ -44,7 +44,7 @@ export default function MovieDetailPage() {
       {isLoadingResults ? (
         <EmptyContentContainer>
           <div>
-            <DrumRoll />
+            <Clipperboard />
           </div>
         </EmptyContentContainer>
       ) : (

@@ -1,8 +1,8 @@
 import React from "react";
 import Lottie from "react-lottie";
-import animationData from "./139065-drum-roll.json";
+import animationData from "./81986-movie.json";
 
-export default function DrumRoll() {
+export default function Clipperboard() {
   const defaultOptions = {
     loop: true,
     autoplay: true,
