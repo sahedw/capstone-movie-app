@@ -101,6 +101,20 @@ const StyledButtonWeek = styled.button`
   }
 `;
 
+const StyledAppName = styled.h1`
+  color: gray;
+  font-family: "Normal";
+`;
+
+const StyledHeaderSpan = styled.span`
+  color: #f97b7b;
+  font-family: "BIGLetters";
+`;
+
+const StyledHeaderSubtitle = styled.p`
+  color: gray;
+`;
+
 export default function Home() {
   const { handleFormSubmit, movies, theme } = useContext(DataContext);
   const { watchlist } = useContext(WatchlistContext);
@@ -122,7 +136,9 @@ export default function Home() {
     <>
       <main>
         <StyledSectionHeader>
-          <h1>Welcome back 👋🏼</h1>
+          <StyledAppName>
+            Watched<StyledHeaderSpan>It</StyledHeaderSpan>
+          </StyledAppName>
           <Link href={"/settings"}>
             <StyledSettingsIcon
               src={`/settings${getIconForTheme(theme)}.png`}
@@ -131,9 +147,9 @@ export default function Home() {
               height={25}
             />
           </Link>
-          <p>
+          <StyledHeaderSubtitle>
             Grab your 🍿 and let us watch something <strong>cool!</strong>{" "}
-          </p>
+          </StyledHeaderSubtitle>
         </StyledSectionHeader>
         <StyledSectionForm>
           <Form onSubmit={handleFormSubmit} />

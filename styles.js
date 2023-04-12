@@ -11,12 +11,19 @@ export const GlobalStyles = createGlobalStyle`
     font-family: system-ui;
     background-color: ${(props) => props.theme.body};
     color: ${(props) => props.theme.fontColor};
-    
-
   }
 
   main {
     margin-bottom: 100px;
+  }
+
+  @font-face {
+    font-family: 'BIGLetters';
+    src: url('/fonts/BebasNeue-Regular.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'Normal';
+    src: url('/fonts/DoHyeon-Regular.ttf') format('truetype');
   }
 
 `;
