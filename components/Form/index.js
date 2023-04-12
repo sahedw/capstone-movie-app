@@ -4,16 +4,18 @@ import styled from "styled-components";
 import Image from "next/image";
 import { useContext } from "react";
 import { MediaContext } from "../../pages/_app";
+
 const StyledSection = styled.section``;
 
 const StyledSectionRadioButtons = styled.section`
   margin-top: 5px;
   display: flex;
-  gap: 10px;
+  gap: 5px;
 `;
 
 const StyledSectionRadio = styled.section`
   display: flex;
+  margin-left: 15px;
 `;
 
 const StyledForm = styled.form`
@@ -26,6 +28,8 @@ const StyledForm = styled.form`
 const StyledInputText = styled.input`
   margin-top: 10px;
   padding-right: 25px;
+  padding-left: 15px;
+
   width: 250px;
   height: 30px;
   border: lightgray solid;
@@ -56,8 +60,13 @@ const StyledButton = styled.button`
   left: 220px;
 `;
 
+const StyledLabel = styled.label`
+  padding-top: 3px;
+`;
+
 export default function Form({ onSubmit }) {
   const { handleMediaTypeChange, mediaTypeMovies } = useContext(MediaContext);
+
   const router = useRouter();
 
   function handleOnSubmit(event) {
@@ -74,6 +83,7 @@ export default function Form({ onSubmit }) {
             name="search"
             id="search"
             placeholder="Search..."
+            maxLength={25}
             required
           ></StyledInputText>
           <StyledButton>
@@ -86,7 +96,7 @@ export default function Form({ onSubmit }) {
           </StyledButton>
           <StyledSectionRadioButtons>
             <StyledSectionRadio>
-              <label htmlFor="movie">Movies:</label>
+              <StyledLabel htmlFor="movie">Movies:</StyledLabel>
               <StyledInputRadio
                 type="radio"
                 id="movie"
@@ -99,7 +109,7 @@ export default function Form({ onSubmit }) {
               />
             </StyledSectionRadio>
             <StyledSectionRadio>
-              <label htmlFor="tv">Shows:</label>
+              <StyledLabel htmlFor="tv">Shows:</StyledLabel>
               <StyledInputRadio
                 type="radio"
                 id="tv"

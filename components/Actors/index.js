@@ -1,13 +1,25 @@
 import React from "react";
 import Image from "next/image";
 import styled from "styled-components";
+import { keyframes } from "styled-components";
 
+export const fadeInFromBottom = keyframes`
+    0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+`;
 const StyledList = styled.ul`
   list-style-type: none;
   display: flex;
   justify-content: center;
   padding-inline-start: 0;
   gap: 10px;
+  animation: ${fadeInFromBottom} 3s ease-in-out;
 `;
 
 const StyledName = styled.p`
@@ -15,6 +27,7 @@ const StyledName = styled.p`
   text-align: center;
   margin-bottom: 0;
   color: gray;
+  font-family: system-ui;
 `;
 
 const StyledListItem = styled.li`

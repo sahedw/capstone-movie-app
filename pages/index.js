@@ -10,7 +10,6 @@ import Link from "next/link";
 import MovieSneakPeek from "../components/MovieSneakPeek";
 import Image from "next/image";
 import getIconForTheme from "../utils/getIconForTheme";
-import { LoadingSpinner } from "../components/Styled Components/LoadingSpinner";
 
 const StyledSectionHeader = styled.section`
   position: relative;
@@ -102,6 +101,20 @@ const StyledButtonWeek = styled.button`
   }
 `;
 
+const StyledAppName = styled.h1`
+  font-family: "Normal";
+  color: ${(props) => props.theme.fontColor};
+`;
+
+const StyledHeaderSpan = styled.span`
+  color: #f97b7b;
+  font-family: "BIGLetters";
+`;
+
+const StyledHeaderSubtitle = styled.p`
+  color: ${(props) => props.theme.fontColor};
+`;
+
 export default function Home() {
   const { handleFormSubmit, movies, theme } = useContext(DataContext);
   const { watchlist } = useContext(WatchlistContext);
@@ -123,7 +136,9 @@ export default function Home() {
     <>
       <main>
         <StyledSectionHeader>
-          <h1>Welcome back 👋🏼</h1>
+          <StyledAppName color={theme}>
+            Watched<StyledHeaderSpan>It</StyledHeaderSpan>
+          </StyledAppName>
           <Link href={"/settings"}>
             <StyledSettingsIcon
               src={`/settings${getIconForTheme(theme)}.png`}
@@ -132,9 +147,9 @@ export default function Home() {
               height={25}
             />
           </Link>
-          <p>
-            Grab your 🍿 and let us watch something <strong>cool!</strong>{" "}
-          </p>
+          <StyledHeaderSubtitle color={theme}>
+            Grab your 🍿 and and watch it!<strong>cool!</strong>{" "}
+          </StyledHeaderSubtitle>
         </StyledSectionHeader>
         <StyledSectionForm>
           <Form onSubmit={handleFormSubmit} />

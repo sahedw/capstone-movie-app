@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Movie from "../../components/Movie";
 import PushButton from "../../components/PushButton";
 import { DataContext, MediaContext } from "../_app";
@@ -7,7 +7,8 @@ import styled from "styled-components";
 import Navigation from "../../components/Navigation";
 import TV from "../../components/TV";
 import { EmptyContentContainer } from "../../components/Styled Components/ListPage";
-import { LoadingSpinner } from "../../components/Styled Components/LoadingSpinner";
+import SearchLoader from "../../animations/SearchLoader/SearchLoader";
+import simulateLoading from "../../utils/simulateLoading";
 
 const StyledHeader = styled.h2`
   margin-left: 15px;
@@ -31,17 +32,11 @@ const StyledButtons = styled.button`
   padding-right: 15px;
   padding-top: 5px;
   padding-bottom: 5px;
-
   border: 1px solid gray;
   border-radius: 15px;
   color: ${(props) => props.theme.fontColor};
-  :hover {
-    background-color: #f97b7b;
-    color: white;
-    border: none;
-  }
   :disabled {
-    background-color: lightgray;
+    opacity: 0.3;
   }
 `;
 
@@ -49,7 +44,6 @@ export default function SearchResultsPage() {
   const {
     movies,
     moviesError,
-    moviesIsLoading,
     search,
     handleNextPage,
     handlePrevPage,
@@ -59,19 +53,17 @@ export default function SearchResultsPage() {
     theme,
   } = useContext(DataContext);
   const { mediaTypeMovies } = useContext(MediaContext);
+  const [isLoadingResults, setIsLoadingResults] = useState(false);
+
+  useEffect(() => {
+    simulateLoading(setIsLoadingResults, 2000);
+  }, []);
 
   if (moviesError)
     return (
       <EmptyContentContainer>
         <h2>Whoops, something seems wrong</h2>
         <p>There seems to be an error. Try again.</p>
-      </EmptyContentContainer>
-    );
-
-  if (moviesIsLoading)
-    return (
-      <EmptyContentContainer>
-        <LoadingSpinner />
       </EmptyContentContainer>
     );
 
@@ -90,52 +82,62 @@ export default function SearchResultsPage() {
 
   return (
     <main>
-      <PushButton />
-      <StyledHeader>{`Your search results (${totalSearchResults}):`}</StyledHeader>
-      <StyledSectionButtons>
-        {" "}
-        <StyledButtons
-          onClick={handlePrevPage}
-          disabled={resultsPage === 1 ? true : false}
-          color={theme}
-        >
-          Prev
-        </StyledButtons>
-        <StyledButtons
-          onClick={handleNextPage}
-          disabled={resultsPage === totalSearchPages ? true : false}
-          color={theme}
-        >
-          Next
-        </StyledButtons>
-      </StyledSectionButtons>
-      {movies?.map((movie) => (
-        <StyledLink key={movie.id} href={`search-results/${movie.id}`}>
-          {mediaTypeMovies === "movie" ? (
-            <Movie movie={movie} />
-          ) : (
-            <TV movie={movie} />
-          )}
-        </StyledLink>
-      ))}
-      <StyledSectionButtons>
-        {" "}
-        <StyledButtons
-          onClick={handlePrevPage}
-          disabled={resultsPage === 1 ? true : false}
-          color={theme}
-        >
-          Prev
-        </StyledButtons>
-        <StyledButtons
-          onClick={handleNextPage}
-          disabled={resultsPage === totalSearchPages ? true : false}
-          color={theme}
-        >
-          Next
-        </StyledButtons>
-      </StyledSectionButtons>
-      <Navigation />
+      {isLoadingResults ? (
+        <EmptyContentContainer>
+          <div>
+            <SearchLoader />
+          </div>
+        </EmptyContentContainer>
+      ) : (
+        <>
+          <PushButton />
+          <StyledHeader>{`Your search results (${totalSearchResults}):`}</StyledHeader>
+          <StyledSectionButtons>
+            {" "}
+            <StyledButtons
+              onClick={handlePrevPage}
+              disabled={resultsPage === 1 ? true : false}
+              color={theme}
+            >
+              Prev
+            </StyledButtons>
+            <StyledButtons
+              onClick={handleNextPage}
+              disabled={resultsPage === totalSearchPages ? true : false}
+              color={theme}
+            >
+              Next
+            </StyledButtons>
+          </StyledSectionButtons>
+          {movies?.map((movie) => (
+            <StyledLink key={movie.id} href={`search-results/${movie.id}`}>
+              {mediaTypeMovies === "movie" ? (
+                <Movie movie={movie} />
+              ) : (
+                <TV movie={movie} />
+              )}
+            </StyledLink>
+          ))}
+          <StyledSectionButtons>
+            {" "}
+            <StyledButtons
+              onClick={handlePrevPage}
+              disabled={resultsPage === 1 ? true : false}
+              color={theme}
+            >
+              Prev
+            </StyledButtons>
+            <StyledButtons
+              onClick={handleNextPage}
+              disabled={resultsPage === totalSearchPages ? true : false}
+              color={theme}
+            >
+              Next
+            </StyledButtons>
+          </StyledSectionButtons>
+          <Navigation />
+        </>
+      )}
     </main>
   );
 }
