@@ -1,6 +1,6 @@
 import React from "react";
 import MovieDetail from "../../components/MovieDetail";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { DataContext, MediaContext } from "../_app";
 import { useRouter } from "next/router";
 import BackButton from "../../components/PushButton";
@@ -9,8 +9,11 @@ import Navigation from "../../components/Navigation";
 import TVDetail from "../../components/TVDetail";
 import TVDetailFooter from "../../components/TVDetailFooter";
 import { EmptyContentContainer } from "../../components/Styled Components/ListPage";
+import simulateLoading from "../../utils/simulateLoading";
+import DrumRoll from "../../animations/DrumRoll/DrumRoll";
 
 export default function MovieDetailPage() {
+  const [isLoadingResults, setIsLoadingResults] = useState(false);
   const { movies } = useContext(DataContext);
   const { mediaTypeMovies } = useContext(MediaContext);
 
@@ -19,6 +22,10 @@ export default function MovieDetailPage() {
   const currentMovie = movies?.find(
     (movie) => movie.id.toString() === router.query.id
   );
+
+  useEffect(() => {
+    simulateLoading(setIsLoadingResults, 500);
+  }, []);
 
   if (!currentMovie)
     return (
@@ -34,15 +41,25 @@ export default function MovieDetailPage() {
 
   return (
     <main>
-      {mediaTypeMovies === "movie" ? (
-        <>
-          <MovieDetail movie={currentMovie} />
-          <MovieDetailFooter movie={currentMovie} />
-        </>
+      {isLoadingResults ? (
+        <EmptyContentContainer>
+          <div>
+            <DrumRoll />
+          </div>
+        </EmptyContentContainer>
       ) : (
         <>
-          <TVDetail movie={currentMovie} />
-          <TVDetailFooter movie={currentMovie} />
+          {mediaTypeMovies === "movie" ? (
+            <>
+              <MovieDetail movie={currentMovie} />
+              <MovieDetailFooter movie={currentMovie} />
+            </>
+          ) : (
+            <>
+              <TVDetail movie={currentMovie} />
+              <TVDetailFooter movie={currentMovie} />
+            </>
+          )}
         </>
       )}
     </main>

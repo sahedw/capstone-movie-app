@@ -56,7 +56,7 @@ export default function SearchResultsPage() {
   const [isLoadingResults, setIsLoadingResults] = useState(false);
 
   useEffect(() => {
-    simulateLoading(setIsLoadingResults, 1500);
+    simulateLoading(setIsLoadingResults, 2000);
   }, []);
 
   if (moviesError)
