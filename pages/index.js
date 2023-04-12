@@ -148,7 +148,7 @@ export default function Home() {
             />
           </Link>
           <StyledHeaderSubtitle color={theme}>
-            Grab your 🍿 and let us watch something <strong>cool!</strong>{" "}
+            Grab your 🍿 and and watch it!<strong>cool!</strong>{" "}
           </StyledHeaderSubtitle>
         </StyledSectionHeader>
         <StyledSectionForm>
