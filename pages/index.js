@@ -114,6 +114,7 @@ const StyledHeaderSpan = styled.span`
 
 const StyledHeaderSubtitle = styled.p`
   color: ${(props) => props.theme.fontColor};
+  font-family: system-ui;
 `;
 
 export default function Home() {
@@ -167,11 +168,13 @@ export default function Home() {
           <StyledNoMoviePickSection>
             <StyledNoMoviePick>
               <h1>You must be fun at parties 😪</h1>
-              <p>
+              <StyledHeaderSubtitle color={theme}>
                 Here we WOULD 😒 suggest you random movies from your watchlist
                 to watch.{" "}
-              </p>
-              <p>How about adding some movies?</p>
+              </StyledHeaderSubtitle>
+              <StyledHeaderSubtitle color={theme}>
+                How about adding some movies?
+              </StyledHeaderSubtitle>
             </StyledNoMoviePick>
           </StyledNoMoviePickSection>
         )}
