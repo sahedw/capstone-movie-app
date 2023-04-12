@@ -10,11 +10,12 @@ const StyledSection = styled.section``;
 const StyledSectionRadioButtons = styled.section`
   margin-top: 5px;
   display: flex;
-  gap: 10px;
+  gap: 5px;
 `;
 
 const StyledSectionRadio = styled.section`
   display: flex;
+  margin-left: 15px;
 `;
 
 const StyledForm = styled.form`
@@ -27,6 +28,8 @@ const StyledForm = styled.form`
 const StyledInputText = styled.input`
   margin-top: 10px;
   padding-right: 25px;
+  padding-left: 15px;
+
   width: 250px;
   height: 30px;
   border: lightgray solid;
