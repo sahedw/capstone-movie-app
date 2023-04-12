@@ -71,10 +71,12 @@ export const DetailHeaderTitle = styled.h2`
 export const DetailHeaderText = styled.p`
   color: grey;
   margin: 5px;
+  font-family: system-ui;
 `;
 
 export const DetailSynopsisText = styled.p`
   color: grey;
+  font-family: system-ui;
   animation: ${fadeInFromBottom} 3s ease-in-out;
 `;
 
@@ -115,4 +117,5 @@ export const DetailAvailabilityHeading = styled.h4`
 export const DetailAvailabilityText = styled.p`
   margin-top: 5px;
   color: gray;
+  font-family: system-ui;
 `;

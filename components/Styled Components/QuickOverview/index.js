@@ -58,6 +58,7 @@ export const OverviewTextContainer = styled.section`
 
 export const OverviewText = styled.p`
   color: gray;
+  font-family: system-ui;
 `;
 
 export const OverviewPoster = styled(Image)`

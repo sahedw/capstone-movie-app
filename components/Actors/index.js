@@ -27,6 +27,7 @@ const StyledName = styled.p`
   text-align: center;
   margin-bottom: 0;
   color: gray;
+  font-family: system-ui;
 `;
 
 const StyledListItem = styled.li`
