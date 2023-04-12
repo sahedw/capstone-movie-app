@@ -42,13 +42,13 @@ export default function TVDetailFooter({ movie }) {
       trendingMovies.find((trendingMovie) => trendingMovie.id === movie.id)
     ) {
       handleToggleWatchListTV(movie);
-      simulateLoading(setIsButtonLoadingWatchlistTV);
+      simulateLoading(setIsButtonLoadingWatchlistTV, 300);
     } else if (movie.id.toString().length === router.asPath.length - 1) {
       handleToggleWatchListTV(movie);
       router.push("/");
     } else {
       handleToggleWatchListTV(movie);
-      simulateLoading(setIsButtonLoadingWatchlistTV);
+      simulateLoading(setIsButtonLoadingWatchlistTV, 300);
     }
   }
 
@@ -58,7 +58,7 @@ export default function TVDetailFooter({ movie }) {
       router.push("/my-watched");
     } else {
       handleToggleWatchedTV(movie);
-      simulateLoading(setIsButtonLoadingWatchedTV);
+      simulateLoading(setIsButtonLoadingWatchedTV, 300);
     }
   }
 

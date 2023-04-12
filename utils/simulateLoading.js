@@ -1,6 +1,6 @@
-export default function simulateLoading(setter) {
-  setter(true);
+export default function simulateLoading(stateOfSimulation, time) {
+  stateOfSimulation(true);
   setTimeout(() => {
-    setter(false);
-  }, 300);
+    stateOfSimulation(false);
+  }, time);
 }

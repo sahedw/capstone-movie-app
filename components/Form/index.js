@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import { useContext } from "react";
 import { MediaContext } from "../../pages/_app";
+
 const StyledSection = styled.section``;
 
 const StyledSectionRadioButtons = styled.section`
@@ -58,6 +59,7 @@ const StyledButton = styled.button`
 
 export default function Form({ onSubmit }) {
   const { handleMediaTypeChange, mediaTypeMovies } = useContext(MediaContext);
+
   const router = useRouter();
 
   function handleOnSubmit(event) {
