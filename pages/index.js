@@ -14,6 +14,7 @@ import getIconForTheme from "../utils/getIconForTheme";
 const StyledSectionHeader = styled.section`
   position: relative;
   padding-left: 15px;
+  margin-top: 35px;
 `;
 
 const StyledSettingsIcon = styled(Image)`
@@ -113,6 +114,7 @@ const StyledHeaderSpan = styled.span`
 
 const StyledHeaderSubtitle = styled.p`
   color: ${(props) => props.theme.fontColor};
+  font-family: system-ui;
 `;
 
 export default function Home() {
@@ -148,7 +150,7 @@ export default function Home() {
             />
           </Link>
           <StyledHeaderSubtitle color={theme}>
-            Grab your 🍿 and and watch it!<strong>cool!</strong>{" "}
+            Grab your 🍿 and watch something cool!
           </StyledHeaderSubtitle>
         </StyledSectionHeader>
         <StyledSectionForm>
@@ -166,11 +168,13 @@ export default function Home() {
           <StyledNoMoviePickSection>
             <StyledNoMoviePick>
               <h1>You must be fun at parties 😪</h1>
-              <p>
+              <StyledHeaderSubtitle color={theme}>
                 Here we WOULD 😒 suggest you random movies from your watchlist
                 to watch.{" "}
-              </p>
-              <p>How about adding some movies?</p>
+              </StyledHeaderSubtitle>
+              <StyledHeaderSubtitle color={theme}>
+                How about adding some movies?
+              </StyledHeaderSubtitle>
             </StyledNoMoviePick>
           </StyledNoMoviePickSection>
         )}

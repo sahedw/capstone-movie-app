@@ -65,6 +65,7 @@ export const EmptyWatchedContainer = styled.section`
 export const ListWrapper = styled.section`
   padding-left: 15px;
   padding-right: 15px;
+  padding-top: 20px;
 `;
 
 export const ButtonsFlexContainer = styled.section`

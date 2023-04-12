@@ -24,6 +24,10 @@ const StyledSectionOverall = styled.section`
   justify-content: center;
 `;
 
+const StyledHeader = styled.h2`
+  margin-left: 15px;
+`;
+
 export default function SettingsPage() {
   const { getAvailabilitySeletion, availabilityOption, themeToggler, theme } =
     useContext(DataContext);
@@ -31,7 +35,7 @@ export default function SettingsPage() {
   return (
     <main>
       <PushButton />
-      <h2>Settings:</h2>
+      <StyledHeader>Settings:</StyledHeader>
       <StyledSectionOverall>
         <StyledSectionSettings>
           <StyledSectionTopic>

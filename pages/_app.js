@@ -179,7 +179,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Saheds Movie App</title>
+        <title>WatchedIT</title>
       </Head>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <GlobalStyles />

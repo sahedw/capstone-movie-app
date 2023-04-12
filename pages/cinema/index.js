@@ -22,6 +22,7 @@ const StyledDiv = styled.div`
 const StyledSection = styled.section`
   padding-left: 15px;
   padding-right: 15px;
+  padding-top: 20px;
 `;
 
 const StyledSectionButtonsFlex = styled.section`
