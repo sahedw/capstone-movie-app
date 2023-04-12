@@ -8,7 +8,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   body {
     margin: 0;
-    font-family: system-ui;
+    font-family: Normal;
     background-color: ${(props) => props.theme.body};
     color: ${(props) => props.theme.fontColor};
   }

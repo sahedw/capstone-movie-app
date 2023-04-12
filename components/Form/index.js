@@ -57,6 +57,10 @@ const StyledButton = styled.button`
   left: 220px;
 `;
 
+const StyledLabel = styled.label`
+  padding-top: 3px;
+`;
+
 export default function Form({ onSubmit }) {
   const { handleMediaTypeChange, mediaTypeMovies } = useContext(MediaContext);
 
@@ -89,7 +93,7 @@ export default function Form({ onSubmit }) {
           </StyledButton>
           <StyledSectionRadioButtons>
             <StyledSectionRadio>
-              <label htmlFor="movie">Movies:</label>
+              <StyledLabel htmlFor="movie">Movies:</StyledLabel>
               <StyledInputRadio
                 type="radio"
                 id="movie"
@@ -102,7 +106,7 @@ export default function Form({ onSubmit }) {
               />
             </StyledSectionRadio>
             <StyledSectionRadio>
-              <label htmlFor="tv">Shows:</label>
+              <StyledLabel htmlFor="tv">Shows:</StyledLabel>
               <StyledInputRadio
                 type="radio"
                 id="tv"
