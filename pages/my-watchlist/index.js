@@ -36,7 +36,7 @@ export default function MyWatchlistPage() {
     setListLayoutWatchlist(boolean);
   }
 
-  if (watchlist.length === 0)
+  if (watchlist.length === 0 && watchlistTV.length === 0)
     return (
       <main>
         <EmptyContentContainer>

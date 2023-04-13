@@ -36,7 +36,7 @@ export default function MyWatchedPage() {
     setListLayoutWatched(boolean);
   }
 
-  if (watched.length === 0)
+  if (watched.length === 0 && watchedTV.length === 0)
     return (
       <main>
         <EmptyContentContainer>
