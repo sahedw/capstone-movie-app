@@ -50,7 +50,7 @@ export default function MyWatchedPage() {
   return (
     <main>
       <ListWrapper>
-        <h2>My Watched movies ({watched.length}):</h2>
+        <h2>My Watched ({watched.length + watchedTV.length}):</h2>
         <ButtonsFlexContainer>
           <ButtonsContainer>
             <LayoutListButton

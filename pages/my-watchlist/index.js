@@ -50,7 +50,7 @@ export default function MyWatchlistPage() {
   return (
     <main>
       <ListWrapper>
-        <h2>My Watchlist:</h2>
+        <h2>My Watchlist ({watchlist.length + watchlistTV.length}):</h2>
         <ButtonsFlexContainer>
           <ButtonsContainer>
             <LayoutListButton
