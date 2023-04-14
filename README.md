@@ -31,7 +31,6 @@ You can find the hosted version on Vercel: [Demo Version of WatchedIT](https://c
 - React Hooks
 - React Router
 - React Testing Library / Jest
-- Node.js
 - JavaScript
 - Styled Components
 - [The MovieDB API](https://www.themoviedb.org/documentation/api)
