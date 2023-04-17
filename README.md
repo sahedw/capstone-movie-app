@@ -35,6 +35,8 @@ You can find the hosted version on Vercel: [Demo Version of WatchedIT](https://c
 - Styled Components
 - [The MovieDB API](https://www.themoviedb.org/documentation/api)
 - Lottiefiles
+- useSWR
+- ReactPlayer
 - localStorage/use-local-storage-state
 - npm
 - Vercel
